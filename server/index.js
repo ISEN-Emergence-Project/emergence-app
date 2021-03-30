@@ -2,7 +2,9 @@ const express = require('express');
 const path = require('path');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
+
 const dotenv = require("dotenv")
+const Sequelize = require('sequelize')
 
 // Configure .env file support
 dotenv.config()
@@ -25,6 +27,14 @@ if (!isDev && cluster.isMaster) {
 
 } else {
   const app = express();
+  const sequelize = Sequelize(process.env.DATABASE_URL);
+
+  try {
+    await sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
 
   // Priority serve any static files.
   app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
