@@ -28,7 +28,7 @@ Includes a minimal [Node Cluster](https://nodejs.org/docs/latest-v8.x/api/cluste
 
 ## Demo
 
-[Demo deployment](https://cra-node.herokuapp.com/): example API call from the React UI is [fetched with a relative URL](react-ui/src/App.js#L16) that is served by an Express handler in the Node server.
+[Demo deployment](https://cra-node.herokuapp.com/): example API call from the React UI is [fetched with a relative URL](react-ui/src/components/App.js#L16) that is served by an Express handler in the Node server.
 
 
 ## Deploy to Heroku

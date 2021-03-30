@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import logo from '../assets/logo.svg';
+import '../styles/App.css';
 
 function App() {
   const [message, setMessage] = useState(null);
@@ -35,7 +35,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         { process.env.NODE_ENV === 'production' ?
             <p>
-              This is a production build from create-react-app.
+              This is a production build from create-react-app. _{process.env.SECRET}_
             </p>
           : <p>
               Edit <code>src/App.js</code> and save to reload.
