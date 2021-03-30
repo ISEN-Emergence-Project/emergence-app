@@ -27,7 +27,7 @@ if (!isDev && cluster.isMaster) {
 
 } else {
   const app = express();
-  const sequelize = Sequelize(process.env.DATABASE_URL);
+  const sequelize = new Sequelize(process.env.DATABASE_URL);
 
   sequelize
       .authenticate()
