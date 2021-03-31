@@ -29,7 +29,11 @@ if (!isDev && cluster.isMaster) {
     const app = express();
     const sequelize = new Sequelize(
         process.env.DATABASE_URL, {
-            native: true
+            dialect: 'postgres',
+            protocol: 'postgres',
+            dialectOptions: {
+                ssl: true
+            }
         }
     );
 
