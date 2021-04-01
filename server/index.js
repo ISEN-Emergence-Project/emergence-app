@@ -5,8 +5,6 @@ const numCPUs = require('os').cpus().length;
 
 const dotenv = require("dotenv");
 const { Account } = require('utils/database');
-// Include models
-import 'models/Account';
 
 // Configure .env file support
 dotenv.config()
