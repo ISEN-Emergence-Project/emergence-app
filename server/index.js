@@ -4,7 +4,7 @@ const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 
 const dotenv = require("dotenv");
-const { Account } = require('utils/database');
+const { Account } = require('server/utils/database');
 
 // Configure .env file support
 dotenv.config()
