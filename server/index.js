@@ -3,8 +3,10 @@ const path = require('path');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 
-const dotenv = require("dotenv")
-const Sequelize = require('sequelize')
+const dotenv = require("dotenv");
+const Sequelize = require('utils/database');
+// Include models
+import 'models/Account';
 
 // Configure .env file support
 dotenv.config()
@@ -56,6 +58,11 @@ if (!isDev && cluster.isMaster) {
     app.get('/api', function (req, res) {
         res.set('Content-Type', 'application/json');
         res.send('{"message":"Hello from the custom server!"}');
+    });
+
+    app.get('/api/accounts', function (req, res) {
+        res.set('Content-Type', 'application/json');
+        res.send(sequelize.models.Account.findAll());
     });
 
     // All remaining requests return the React app, so it can handle routing.

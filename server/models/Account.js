@@ -65,3 +65,5 @@ Account.init({
     await sequelize.sync();
     // Code here
 })();
+
+models.export(Account)
