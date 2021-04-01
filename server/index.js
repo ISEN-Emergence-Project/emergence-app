@@ -4,7 +4,7 @@ const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 
 const dotenv = require("dotenv");
-const Sequelize = require('utils/database');
+const { Account } = require('utils/database');
 // Include models
 import 'models/Account';
 
@@ -29,27 +29,6 @@ if (!isDev && cluster.isMaster) {
 
 } else {
     const app = express();
-    const sequelize = new Sequelize(
-        process.env.DATABASE_URL, {
-            dialect: 'postgres',
-            protocol: 'postgres',
-            dialectOptions: {
-                ssl: {
-                    require: true,
-                    rejectUnauthorized: false
-                }
-            }
-        }
-    );
-
-    sequelize
-        .authenticate()
-        .then(() => {
-            console.log('Connection has been established successfully.');
-        })
-        .catch(err => {
-            console.error('Unable to connect to the database:', err);
-        });
 
     // Priority serve any static files.
     app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
@@ -62,7 +41,7 @@ if (!isDev && cluster.isMaster) {
 
     app.get('/api/accounts', function (req, res) {
         res.set('Content-Type', 'application/json');
-        res.send(sequelize.models.Account.findAll());
+        Account.findAll().then(accounts => res.json(accounts));
     });
 
     // All remaining requests return the React app, so it can handle routing.
