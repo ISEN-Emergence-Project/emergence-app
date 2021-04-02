@@ -1,5 +1,4 @@
 const accounts = require('express').Router();
-const sequelize = require('../utils/database');
 
 const Account = require('../models/Account');
 
@@ -13,8 +12,6 @@ accounts.get('/', function (req,res) {
 
 accounts.post('/', function (req,res) {
     (async () => {
-        // await sequelize.sync({ force: true });
-        // Code here
         try{
             const newAccount = await Account.create(
                 {

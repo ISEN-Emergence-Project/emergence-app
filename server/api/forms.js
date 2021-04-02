@@ -1,5 +1,4 @@
 const forms = require('express').Router();
-const sequelize = require('../utils/database');
 
 const Form = require('../models/Form');
 
@@ -13,8 +12,6 @@ forms.get('/', function (req,res) {
 
 forms.post('/', function (req,res) {
     (async () => {
-        // await sequelize.sync({ force: true });
-        // Code here
         try{
             const newForm = await Form.create(
                 {

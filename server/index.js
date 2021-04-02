@@ -25,13 +25,13 @@ if (!isDev && cluster.isMaster) {
 
 } else {
     const app = express();
-    const routes = require('./routes');
+    const api = require('./api');
 
     // Priority serve any static files.
     app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
     // Answer all API requests.
-    app.get('/api', routes);
+    app.use('/api', api);
 
     // All remaining requests return the React app, so it can handle routing.
     app.get('*', function(request, response) {
