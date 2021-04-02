@@ -1,15 +1,15 @@
 const { sequelize, Model, DataTypes } = require("../utils/database");
 
-class Form extends Model {}
+class Answer extends Model {}
 
-Form.init({
-    formId: {
+Answer.init({
+    answerId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
     },
-    title: {
+    answer: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -18,13 +18,18 @@ Form.init({
         allowNull: false,
         defaultValue: ''
     },
-    bannerUrl: {
+    fkFormId: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        references: {
+            model: Form,
+            key: formId,
+            deferrable: Deferrable.INITIALLY_DEFERRED
+        }
     }
 }, {
     sequelize,
-    modelName: 'Form'
+    modelName: 'Answer'
 })
 
-module.exports = Form
+module.exports = Answer

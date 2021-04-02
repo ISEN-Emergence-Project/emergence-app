@@ -10,8 +10,8 @@ Account.init({
     accountId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        allowNull: false,
-        field: 'account_id'
+        autoIncrement: true,
+        allowNull: false
     },
     firstname: {
         type: DataTypes.STRING,
@@ -23,16 +23,17 @@ Account.init({
     },
     username: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     email: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     passwordHash: {
         type: DataTypes.STRING,
-        allowNull: false,
-        field: 'password_hash'
+        allowNull: false
     },
     role: {
         type: DataTypes.STRING,
@@ -41,21 +42,21 @@ Account.init({
     isArchived: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
-        allowNull: false,
-        field: 'is_archived'
+        allowNull: false
     },
     resetKey: {
-        type: DataTypes.STRING,
-        field: 'reset_key'
+        type: DataTypes.STRING
     },
     lastConnectedAt: {
-        type: DataTypes.DATE,
-        field: 'last_connected_at'
+        type: DataTypes.DATE
+    },
+    laureatePromo: {
+        type: DataTypes.DATEONLY,
+        defaultValue: sequelize.fn('date_trunc', "'year', now()")
     }
 }, {
     sequelize,
-    modelName: 'Account',
-    tableName: 'accounts'
+    modelName: 'Account'
 })
 
 module.exports = Account
