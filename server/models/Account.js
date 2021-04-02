@@ -1,16 +1,4 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize(
-    process.env.DATABASE_URL, {
-        dialect: 'postgres',
-        protocol: 'postgres',
-        dialectOptions: {
-            ssl: {
-                require: true,
-                rejectUnauthorized: false
-            }
-        }
-    }
-);
+const { sequelize, Model, DataTypes } = require("../utils/database");
 
 class Account extends Model {
     getFullName() {
@@ -20,50 +8,55 @@ class Account extends Model {
 
 Account.init({
     accountId: {
-        type: DataTypes.INT,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
     },
     firstname: {
-        type: DataTypes.String,
+        type: DataTypes.STRING,
         allowNull: false
     },
     lastname: {
-        type: DataTypes.String,
+        type: DataTypes.STRING,
         allowNull: false
     },
     username: {
-        type: DataTypes.String,
-        allowNull: false
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
     },
     email: {
-        type: DataTypes.String,
-        allowNull: false
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
     },
     passwordHash: {
-        type: DataTypes.String,
+        type: DataTypes.STRING,
         allowNull: false
     },
     role: {
-        type: DataTypes.String,
+        type: DataTypes.STRING,
         allowNull: false
     },
     isArchived: {
-        type: DataTypes.Boolean,
+        type: DataTypes.BOOLEAN,
         defaultValue: false,
         allowNull: false
     },
-    resetKey: DataTypes.String,
-    lastConnectedAt: DataTypes.Date
+    resetKey: {
+        type: DataTypes.STRING
+    },
+    lastConnectedAt: {
+        type: DataTypes.DATE
+    },
+    laureatePromo: {
+        type: DataTypes.DATEONLY,
+        allowNull: false
+    }
 }, {
     sequelize,
     modelName: 'Account'
 })
 
-(async () => {
-    await sequelize.sync();
-    // Code here
-})();
-
-models.export(Account)
+module.exports = Account
