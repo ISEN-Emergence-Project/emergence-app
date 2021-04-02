@@ -4,9 +4,14 @@ const Form = require('../models/Form');
 
 forms.get('/', function (req,res) {
     (async () => {
-        const forms = await Form.findAll();
+        try {
+            const forms = await Form.findAll();
 
-        res.send(JSON.stringify({form: forms}));
+            res.send(JSON.stringify({form: forms}));
+        }
+        catch (e) {
+            res.send(e);
+        }
     })();
 })
 

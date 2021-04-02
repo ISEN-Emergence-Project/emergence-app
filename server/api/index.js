@@ -12,7 +12,9 @@ api.use('/forms', formsRouter);
 api.get('*', function (req, res) {
     res.status(200).json({
         "message": "Hello from the custom server!",
-        "route": req.path
+        "originalUrl": req.originalUrl,
+        "url": req.url,
+        "path": req.path,
     });
 });
 

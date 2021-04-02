@@ -4,9 +4,14 @@ const Account = require('../models/Account');
 
 accounts.get('/', function (req,res) {
     (async () => {
-        const accounts = await Account.findAll();
+        try {
+            const accounts = await Account.findAll();
 
-        res.send(JSON.stringify({account: accounts}));
+            res.send(JSON.stringify({account: accounts}));
+        }
+        catch (e) {
+            res.send(e);
+        }
     })();
 })
 
