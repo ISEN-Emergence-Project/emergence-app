@@ -1,5 +1,5 @@
 const Account = require("./Account");
-const { sequelize, Model, DataTypes } = require("../utils/database");
+const { sequelize, Model, DataTypes, Deferrable } = require("../utils/database");
 
 class Answer extends Model {}
 

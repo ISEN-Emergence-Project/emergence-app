@@ -1,4 +1,5 @@
 const { Sequelize, Model, DataTypes } = require('sequelize');
+const Deferrable = require("sequelize/types/lib/deferrable");
 
 // Connexion to database
 const sequelize = new Sequelize(
@@ -34,5 +35,6 @@ sequelize
 module.exports = {
     sequelize,
     Model,
-    DataTypes
+    DataTypes,
+    Deferrable
 }

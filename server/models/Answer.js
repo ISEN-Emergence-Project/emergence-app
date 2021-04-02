@@ -1,7 +1,7 @@
 const Form = require("./Form");
 const Account = require("./Account");
 const Question = require("./Question");
-const { sequelize, Model, DataTypes } = require("../utils/database");
+const { sequelize, Model, DataTypes, Deferrable } = require("../utils/database");
 
 class Answer extends Model {}
 
