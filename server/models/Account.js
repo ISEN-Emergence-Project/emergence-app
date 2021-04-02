@@ -52,7 +52,7 @@ Account.init({
     },
     laureatePromo: {
         type: DataTypes.DATEONLY,
-        defaultValue: sequelize.fn('date_trunc', "'year', now()")
+        allowNull: false
     }
 }, {
     sequelize,
