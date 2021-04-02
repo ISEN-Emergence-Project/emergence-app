@@ -19,7 +19,7 @@ Question.init({
         defaultValue: ''
     },
     fkFormId: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: 'Forms',
