@@ -1,17 +1,15 @@
-const Account = require("./Account");
-const { sequelize, Model, DataTypes, Deferrable } = require("../utils/database");
+const { sequelize, Model, DataTypes } = require("../utils/database");
 
-class Answer extends Model {}
+class Meeting extends Model {}
 
-Answer.init({
+Meeting.init({
     fkGodfatherAccountId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         allowNull: false,
         references: {
-            model: Account,
-            key: 'accountId',
-            deferrable: Deferrable.INITIALLY_DEFERRED
+            model: 'Accounts',
+            key: 'accountId'
         }
     },
     fkLaureateAccountId: {
@@ -19,9 +17,8 @@ Answer.init({
         primaryKey: true,
         allowNull: false,
         references: {
-            model: Account,
-            key: 'accountId',
-            deferrable: Deferrable.INITIALLY_DEFERRED
+            model: 'Accounts',
+            key: 'accountId'
         }
     },
     beginning: {
@@ -40,7 +37,7 @@ Answer.init({
     }
 }, {
     sequelize,
-    modelName: 'Answer'
+    modelName: 'Meeting'
 })
 
-module.exports = Answer
+module.exports = Meeting

@@ -1,7 +1,4 @@
-const Form = require("./Form");
-const Account = require("./Account");
-const Question = require("./Question");
-const { sequelize, Model, DataTypes, Deferrable } = require("../utils/database");
+const { sequelize, Model, DataTypes } = require("../utils/database");
 
 class Answer extends Model {}
 
@@ -11,9 +8,8 @@ Answer.init({
         primaryKey: true,
         allowNull: false,
         references: {
-            model: Account,
-            key: 'accountId',
-            deferrable: Deferrable.INITIALLY_DEFERRED
+            model: 'Accounts',
+            key: 'accountId'
         }
     },
     fkQuestionId: {
@@ -21,9 +17,8 @@ Answer.init({
         primaryKey: true,
         allowNull: false,
         references: {
-            model: Question,
-            key: 'questionId',
-            deferrable: Deferrable.INITIALLY_DEFERRED
+            model: 'Questions',
+            key: 'questionId'
         }
     },
     answer: {

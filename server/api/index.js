@@ -12,6 +12,7 @@ const questionsRouter = require('./question');
 // Handle API routes
 api.use('/accounts', accountsRouter);
 api.use('/answers', answersRouter);
+api.use('/forms', formsRouter);
 api.use('/matches', matchesRouter);
 api.use('/meetings', meetingsRouter);
 api.use('/preselections', preselectionsRouter);
