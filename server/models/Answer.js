@@ -1,5 +1,3 @@
-const Account = require("./Account");
-const Question = require("./Question");
 const { sequelize, Model, DataTypes } = require("../utils/database");
 
 class Answer extends Model {}
@@ -10,7 +8,7 @@ Answer.init({
         primaryKey: true,
         allowNull: false,
         references: {
-            model: Account,
+            model: 'Accounts',
             key: 'accountId'
         }
     },
@@ -19,7 +17,7 @@ Answer.init({
         primaryKey: true,
         allowNull: false,
         references: {
-            model: Question,
+            model: 'Questions',
             key: 'questionId'
         }
     },

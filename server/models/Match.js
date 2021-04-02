@@ -1,4 +1,3 @@
-const Account = require("./Account");
 const { sequelize, Model, DataTypes } = require("../utils/database");
 
 class Match extends Model {}
@@ -9,7 +8,7 @@ Match.init({
         primaryKey: true,
         allowNull: false,
         references: {
-            model: Account,
+            model: 'Accounts',
             key: 'accountId'
         }
     },
@@ -19,7 +18,7 @@ Match.init({
         allowNull: false,
         unique: true,
         references: {
-            model: Account,
+            model: 'Accounts',
             key: 'accountId'
         }
     }

@@ -1,4 +1,3 @@
-const Form = require("./Form");
 const { sequelize, Model, DataTypes } = require("../utils/database");
 
 class Question extends Model {}
@@ -23,7 +22,7 @@ Question.init({
         type: DataTypes.STRING,
         allowNull: false,
         references: {
-            model: Form,
+            model: 'Forms',
             key: 'formId'
         }
     }

@@ -1,4 +1,3 @@
-const Account = require("./Account");
 const { sequelize, Model, DataTypes } = require("../utils/database");
 
 class Preselection extends Model {}
@@ -9,7 +8,7 @@ Preselection.init({
         primaryKey: true,
         allowNull: false,
         references: {
-            model: Account,
+            model: 'Accounts',
             key: 'accountId'
         }
     },
@@ -18,7 +17,7 @@ Preselection.init({
         primaryKey: true,
         allowNull: false,
         references: {
-            model: Account,
+            model: 'Accounts',
             key: 'accountId'
         }
     }
