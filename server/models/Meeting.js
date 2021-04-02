@@ -1,8 +1,8 @@
 const { sequelize, Model, DataTypes } = require("../utils/database");
 
-class Answer extends Model {}
+class Meeting extends Model {}
 
-Answer.init({
+Meeting.init({
     fkGodfatherAccountId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -37,7 +37,7 @@ Answer.init({
     }
 }, {
     sequelize,
-    modelName: 'Answer'
+    modelName: 'Meeting'
 })
 
-module.exports = Answer
+module.exports = Meeting
