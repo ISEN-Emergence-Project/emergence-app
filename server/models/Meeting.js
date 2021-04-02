@@ -1,5 +1,5 @@
 const Account = require("./Account");
-const { sequelize, Model, DataTypes, Deferrable } = require("../utils/database");
+const { sequelize, Model, DataTypes } = require("../utils/database");
 
 class Answer extends Model {}
 
@@ -10,8 +10,7 @@ Answer.init({
         allowNull: false,
         references: {
             model: Account,
-            key: 'accountId',
-            deferrable: Deferrable.INITIALLY_DEFERRED
+            key: 'accountId'
         }
     },
     fkLaureateAccountId: {
@@ -20,8 +19,7 @@ Answer.init({
         allowNull: false,
         references: {
             model: Account,
-            key: 'accountId',
-            deferrable: Deferrable.INITIALLY_DEFERRED
+            key: 'accountId'
         }
     },
     beginning: {

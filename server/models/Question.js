@@ -1,5 +1,5 @@
 const Form = require("./Form");
-const { sequelize, Model, DataTypes, Deferrable } = require("../utils/database");
+const { sequelize, Model, DataTypes } = require("../utils/database");
 
 class Question extends Model {}
 
@@ -24,8 +24,7 @@ Question.init({
         allowNull: false,
         references: {
             model: Form,
-            key: 'formId',
-            deferrable: Deferrable.INITIALLY_DEFERRED
+            key: 'formId'
         }
     }
 }, {
