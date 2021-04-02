@@ -8,36 +8,36 @@ class Account extends Model {
 
 Account.init({
     firstname: {
-        type: DataTypes.String,
+        type: DataTypes.STRING,
         allowNull: false
     },
     lastname: {
-        type: DataTypes.String,
+        type: DataTypes.STRING,
         allowNull: false
     },
     username: {
-        type: DataTypes.String,
+        type: DataTypes.STRING,
         allowNull: false
     },
     email: {
-        type: DataTypes.String,
+        type: DataTypes.STRING,
         allowNull: false
     },
     passwordHash: {
-        type: DataTypes.String,
+        type: DataTypes.STRING,
         allowNull: false
     },
     role: {
-        type: DataTypes.String,
+        type: DataTypes.STRING,
         allowNull: false
     },
     isArchived: {
-        type: DataTypes.Boolean,
+        type: DataTypes.BOOLEAN,
         defaultValue: false,
         allowNull: false
     },
-    resetKey: DataTypes.String,
-    lastConnectedAt: DataTypes.Date
+    resetKey: DataTypes.STRING,
+    lastConnectedAt: DataTypes.DATE
 }, {
     sequelize,
     modelName: 'Account'

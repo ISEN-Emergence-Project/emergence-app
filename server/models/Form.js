@@ -4,12 +4,12 @@ class Form extends Model {}
 
 Form.init({
     title: {
-        type: DataTypes.String,
+        type: DataTypes.STRING,
         allowNull: false
     },
     description: DataTypes.TEXT,
     bannerUrl: {
-        type: DataTypes.String,
+        type: DataTypes.STRING,
         allowNull: false
     }
 }, {
