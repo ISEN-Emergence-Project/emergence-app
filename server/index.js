@@ -4,8 +4,6 @@ const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 
 const dotenv = require("dotenv");
-const { Account } = require('server/utils/database');
-
 // Configure .env file support
 dotenv.config()
 
@@ -27,20 +25,13 @@ if (!isDev && cluster.isMaster) {
 
 } else {
     const app = express();
+    const routes = require('./routes');
 
     // Priority serve any static files.
     app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
-    // Answer API requests.
-    app.get('/api', function (req, res) {
-        res.set('Content-Type', 'application/json');
-        res.send('{"message":"Hello from the custom server!"}');
-    });
-
-    app.get('/api/accounts', function (req, res) {
-        res.set('Content-Type', 'application/json');
-        Account.findAll().then(accounts => res.json(accounts));
-    });
+    // Answer all API requests.
+    app.get('/api', routes);
 
     // All remaining requests return the React app, so it can handle routing.
     app.get('*', function(request, response) {

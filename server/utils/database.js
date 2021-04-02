@@ -1,5 +1,4 @@
-const Sequelize = require('sequelize');
-const AccountModel = require('../models/Account')
+const { Sequelize, Model, DataTypes } = require('sequelize');
 
 // Connexion to database
 const sequelize = new Sequelize(
@@ -26,11 +25,9 @@ sequelize
     });
 
 
-// Import models
-const Account = AccountModel(sequelize, Sequelize)
-
-
 // Export modules
 module.exports = {
-    Account
+    sequelize,
+    Model,
+    DataTypes
 }
