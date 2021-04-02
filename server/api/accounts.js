@@ -20,12 +20,14 @@ accounts.post('/', function (req,res) {
         try{
             const newAccount = await Account.create(
                 {
-                    userName: req.body.userName,
-                    password: req.body.password,
+                    firstname: req.body.firstname,
+                    lastname: req.body.lastname,
+                    username: req.body.username,
                     email: req.body.email,
-                    lastName: req.body.lastName,
-                    firstName: req.body.firstName,
-                    role: req.body.role
+                    passwordHash: req.body.passwordHash,
+                    role: req.body.role,
+                    isArchived: req.body.isArchived,
+                    resetKey: req.body.resetKey
                 }
             );
             res.send(JSON.stringify({response:"Account created"}))
