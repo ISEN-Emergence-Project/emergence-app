@@ -7,12 +7,6 @@ class Account extends Model {
 }
 
 Account.init({
-    accountId: {
-        type: DataTypes.INT,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false
-    },
     firstname: {
         type: DataTypes.String,
         allowNull: false
