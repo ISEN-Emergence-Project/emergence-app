@@ -7,6 +7,12 @@ class Account extends Model {
 }
 
 Account.init({
+    accountId: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        allowNull: false,
+        field: 'account_id'
+    },
     firstname: {
         type: DataTypes.STRING,
         allowNull: false
@@ -25,7 +31,8 @@ Account.init({
     },
     passwordHash: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        field: 'password_hash'
     },
     role: {
         type: DataTypes.STRING,
@@ -34,13 +41,21 @@ Account.init({
     isArchived: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
-        allowNull: false
+        allowNull: false,
+        field: 'is_archived'
     },
-    resetKey: DataTypes.STRING,
-    lastConnectedAt: DataTypes.DATE
+    resetKey: {
+        type: DataTypes.STRING,
+        field: 'reset_key'
+    },
+    lastConnectedAt: {
+        type: DataTypes.DATE,
+        field: 'last_connected_at'
+    }
 }, {
     sequelize,
-    modelName: 'Account'
+    modelName: 'Account',
+    tableName: 'accounts'
 })
 
 module.exports = Account
