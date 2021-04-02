@@ -1,5 +1,4 @@
-const { Sequelize, Model, DataTypes } = require('sequelize');
-const Deferrable = require("sequelize/types/lib/deferrable");
+const { Sequelize, Model, DataTypes, Deferrable } = require('sequelize');
 
 // Connexion to database
 const sequelize = new Sequelize(
