@@ -8,8 +8,7 @@ routes.use('/forms', formsRouter);
 // API root
 routes.get('/', function (req, res) {
     res.set('Content-Type', 'application/json');
-    res.status(200);
-    res.send('{"message":"Hello from the custom server! /"}');
+    res.send('{"message":"Hello from the custom server!"}');
 });
 
 module.exports = routes
