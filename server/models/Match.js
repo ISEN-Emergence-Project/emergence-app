@@ -1,3 +1,4 @@
+const Account = require("./Account");
 const { sequelize, Model, DataTypes } = require("../utils/database");
 
 class Match extends Model {}
