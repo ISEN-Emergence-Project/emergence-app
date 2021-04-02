@@ -24,6 +24,11 @@ sequelize
         console.error('Unable to connect to the database:', err);
     });
 
+sequelize
+    .sync()
+    .then(() => {
+    console.log('All models were synchronized successfully');
+})
 
 // Export modules
 module.exports = {
