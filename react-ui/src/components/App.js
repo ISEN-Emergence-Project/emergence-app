@@ -2,15 +2,15 @@ import React, { useCallback, useEffect, useState, Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 // Import components
-import Navigation from "./Components/Navigation"
-import ApplicantList from "./Components/ApplicantList"
-import Form from"./Components/Form"
-import ManageAccounts from"./Components/ManageAccounts"
-import Rating from"./Components/Rating"
-import ApplicantForm from"./Components/ApplicantForm"
-import Timeline from"./Components/Timeline"
-import PlanningV2 from"./Components/PlanningV2"
-import APITest from"./Components/APITest"
+import Navigation from "./Navigation"
+import ApplicantList from "./ApplicantList"
+import Form from"./Form"
+import ManageAccounts from"./ManageAccounts"
+import Rating from"./Rating"
+import ApplicantForm from"./ApplicantForm"
+import Timeline from"./Timeline"
+import PlanningV2 from"./PlanningV2"
+import APITest from"./APITest"
 
 function App()
 {
