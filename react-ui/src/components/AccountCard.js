@@ -13,13 +13,13 @@ function AccountCard({username,email,password,userType})
         <div className="container d-flex justify-content-center mt-5">
             { clicked ? <div/> : (
                   <div className="card-header text-center col-3 bg-warning">
-                    <span class="badge bg-primary mb-3"> {userType} </span>
+                    <span className="badge bg-primary mb-3"> {userType} </span>
                     <h5>  {username} </h5>
                 <div className="card-body">
                     <p className="card-title text-center ">{email}</p>
                     <p className="card-text text-center">{password}</p>
                 </div>
-                <button className="btn btn-danger btn-sm" onClick={reset}> <i class=" me-2 bi-trash-fill"></i> Supprimer </button></div>
+                <button className="btn btn-danger btn-sm" onClick={reset}> <i className=" me-2 bi-trash-fill"></i> Supprimer </button></div>
             )}
         </div>
     );

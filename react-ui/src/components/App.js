@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState, Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import '../styles/App.css';
 
 // Import components
 import Navigation from "./Navigation"

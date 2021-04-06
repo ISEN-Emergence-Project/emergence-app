@@ -15,12 +15,12 @@ function Card({Name,Firstname,Age,Studies})
     return (
         <div>
              <div className="card">
-                    <div class="card-header text-center">
+                    <div className="card-header text-center">
                         <h5>  {Name + " " + Firstname} </h5>
                     </div>
 
-                    <p class="card-title text-center">{Age}</p>
-                    <p class="card-text text-center">{Studies}</p>
+                    <p className="card-title text-center">{Age}</p>
+                    <p className="card-text text-center">{Studies}</p>
 
                     <div className="d-flex justify-content-end" >
                         <Button onClick={handleShow} className="btn btn-primary mb-3"> <i className="me-2 bi-info-circle-fill"></i> En savoir plus </Button>
@@ -47,7 +47,7 @@ function Card({Name,Firstname,Age,Studies})
                 </Modal.Body>
 
                 <Modal.Footer>
-                <Button variant="btn btn-danger btn-sm" onClick={handleClose}> <i class="me-2 bi-x-square-fill"></i> Fermer</Button>
+                <Button variant="btn btn-danger btn-sm" onClick={handleClose}> <i className="me-2 bi-x-square-fill"></i> Fermer</Button>
 
                 </Modal.Footer>
 

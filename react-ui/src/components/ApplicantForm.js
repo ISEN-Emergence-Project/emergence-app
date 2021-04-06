@@ -107,7 +107,7 @@ class ApplicantForm extends Component
       </div>
 
       <div className="container d-grid gap-2 col-3 mx-auto btn-sm mt-5 mb-3">
-        <button  className="btn btn-primary" type="submit" value="Envoyer vos réponses"> Envoyer vos réponses <i class="ms-4 fs-4 bi-arrow-right-circle-fill"></i> </button>
+        <button  className="btn btn-primary" type="submit" value="Envoyer vos réponses"> Envoyer vos réponses <i className="ms-4 fs-4 bi-arrow-right-circle-fill"></i> </button>
       </div>
       
       <div className="text-center mt-3">
