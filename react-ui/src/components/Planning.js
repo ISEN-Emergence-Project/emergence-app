@@ -1,6 +1,5 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { DragDropContext,Droppable,Draggable   } from 'react-beautiful-dnd';
-import React, { useState } from 'react';
 import PlanningCard from"./PlanningCard"
 import PlanningGrid from"./PlanningGrid"
 

@@ -1,6 +1,6 @@
-import Header from './Header';
-import Footer from "./Footer";
 import React, { Component } from 'react';
+
+import Footer from "./Footer";
 import Field from"./Field"
 
 

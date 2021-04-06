@@ -1,4 +1,4 @@
-import PlanningCard from "./PlanningCard"
+import React from "react";
 
 function PlanningGrid()
 {
