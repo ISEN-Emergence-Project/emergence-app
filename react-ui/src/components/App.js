@@ -39,24 +39,21 @@ function App()
   }, [fetchData]);
 
 
-  render()
-  {
-    return (
+  return (
       <BrowserRouter>
-        <div>
-          <Navigation />
-            <Switch>
-             <Route exact path="/" component={Form}/>
-             <Route  path="/ApplicantList" component={ApplicantList}/>
-             <Route  path="/ManageAccounts" component={ManageAccounts}/>
-             <Route  path="/Rating" component={Rating}/>
-             <Route  path="/ApplicantForm" component={ApplicantForm}/>
-             <Route  path="/Planning" component={PlanningV2}/>
-           </Switch>
-        </div> 
+          <div>
+              <Navigation />
+              <Switch>
+                  <Route exact path="/" component={Form}/>
+                  <Route  path="/ApplicantList" component={ApplicantList}/>
+                  <Route  path="/ManageAccounts" component={ManageAccounts}/>
+                  <Route  path="/Rating" component={Rating}/>
+                  <Route  path="/ApplicantForm" component={ApplicantForm}/>
+                  <Route  path="/Planning" component={Planning}/>
+              </Switch>
+          </div>
       </BrowserRouter>
-    )
-  }
+  );
 }
 
 export default App
