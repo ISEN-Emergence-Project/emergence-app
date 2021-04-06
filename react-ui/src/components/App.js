@@ -8,9 +8,7 @@ import Form from"./Form"
 import ManageAccounts from"./ManageAccounts"
 import Rating from"./Rating"
 import ApplicantForm from"./ApplicantForm"
-import Timeline from"./Timeline"
-import PlanningV2 from"./PlanningV2"
-import APITest from"./APITest"
+import Planning from"./Planning"
 
 function App()
 {
@@ -53,9 +51,7 @@ function App()
              <Route  path="/ManageAccounts" component={ManageAccounts}/>
              <Route  path="/Rating" component={Rating}/>
              <Route  path="/ApplicantForm" component={ApplicantForm}/>
-             <Route  path="/Timeline" component={Timeline}/>
-             <Route  path="/PlanningV2" component={PlanningV2}/>
-             <Route  path="/APITest" component={APITest}/>
+             <Route  path="/Planning" component={PlanningV2}/>
            </Switch>
         </div> 
       </BrowserRouter>
