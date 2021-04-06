@@ -1,9 +1,9 @@
-import PlanningCard from "./PlanningCard"
+import React from "react";
 
 function PlanningGrid()
 {
     return(
-    <table class="table table-bordered">
+    <table className="table table-bordered">
   <thead>
     <tr>
       <th scope="col"> ehjefh</th>

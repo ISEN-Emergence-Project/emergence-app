@@ -34,7 +34,7 @@ function Popup({user,displayUser})
     return(
         
         <div className="container">
-            <Button className="btn btn-success d-grid gap-3 col-2  btn-sm mx-auto mt-5" onClick={handleShow}> <i class="fs-3 bi-plus-circle-fill"></i> Ajouter un compte </Button>
+            <Button className="btn btn-success d-grid gap-3 col-2  btn-sm mx-auto mt-5" onClick={handleShow}> <i className="fs-3 bi-plus-circle-fill"></i> Ajouter un compte </Button>
 
         <Modal size="lg" show={show} onHide={handleClose} onExited={() => displayUser(<AccountCard username= {document.getElementById("id").value} email= {document.getElementById("email").value} password={document.getElementById("passwordInput").value} userType={document.querySelector('input[name="flexRadioDefault"]:checked').value}/>)}>
         <Modal.Header>  
@@ -56,28 +56,28 @@ function Popup({user,displayUser})
             <label className="mt-5" htmlFor="account_type"> Type de compte </label>
 
             <div id ="ok">
-            <div class="form-check mt-3">
-                <input class="form-check-input" type="radio" value = "Admin" onClick={(permission) => setPermission(permission)} name="flexRadioDefault" id="admin"/>
-                <label class="form-check-label"> Administrateur </label>
+            <div className="form-check mt-3">
+                <input className="form-check-input" type="radio" value = "Admin" onClick={(permission) => setPermission(permission)} name="flexRadioDefault" id="admin"/>
+                <label className="form-check-label"> Administrateur </label>
             </div>
 
-            <div class="form-check mt-3">
-                <input class="form-check-input" type="radio" value="Parrain" onClick={(permission) => setPermission(permission)} name="flexRadioDefault" id="godfather" />
+            <div className="form-check mt-3">
+                <input className="form-check-input" type="radio" value="Parrain" onClick={(permission) => setPermission(permission)} name="flexRadioDefault" id="godfather" />
                 
-                <label class="form-check-label"> Parrain </label>
+                <label className="form-check-label"> Parrain </label>
             </div>
 
-            <div class="form-check mt-3">
-                <input class="form-check-input" type="radio" value = "Filleul"  name="flexRadioDefault" id="laureate"/>
-                <label class="form-check-label"> Filleul </label>
+            <div className="form-check mt-3">
+                <input className="form-check-input" type="radio" value = "Filleul"  name="flexRadioDefault" id="laureate"/>
+                <label className="form-check-label"> Filleul </label>
             </div>
         </div>
                 
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="btn btn-danger btn-sm" onClick={handleClose}> <i class="me-2 bi-x-square-fill"></i> Fermer</Button>
-        <Button variant="btn btn-success btn-sm" onClick={handleClose}> <i class="me-2 bi-check-circle"></i> Enregister</Button>
+        <Button variant="btn btn-danger btn-sm" onClick={handleClose}> <i className="me-2 bi-x-square-fill"></i> Fermer</Button>
+        <Button variant="btn btn-success btn-sm" onClick={handleClose}> <i className="me-2 bi-check-circle"></i> Enregister</Button>
 
     </Modal.Footer>
 

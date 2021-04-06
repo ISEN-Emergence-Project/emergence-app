@@ -1,16 +1,15 @@
-import './App.css';
-import React, { useCallback, useEffect, useState } from 'react';
-import Navigation from "./Components/Navigation"
-import ApplicantList from "./Components/ApplicantList"
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { Component } from 'react';
-import Form from"./Components/Form"
-import ManageAccounts from"./Components/ManageAccounts"
-import Rating from"./Components/Rating"
-import ApplicantForm from"./Components/ApplicantForm"
-import Timeline from"./Components/Timeline"
-import PlanningV2 from"./Components/PlanningV2"
-import APITest from"./Components/APITest"
+import React, { useCallback, useEffect, useState, Component } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import '../styles/App.css';
+
+// Import components
+import Navigation from "./Navigation"
+import ApplicantList from "./ApplicantList"
+import Form from"./Form"
+import ManageAccounts from"./ManageAccounts"
+import Rating from"./Rating"
+import ApplicantForm from"./ApplicantForm"
+import Planning from"./Planning"
 
 function App()
 {
@@ -41,26 +40,21 @@ function App()
   }, [fetchData]);
 
 
-  render()
-  {
-    return (
+  return (
       <BrowserRouter>
-        <div>
-          <Navigation />
-            <Switch>
-             <Route exact path="/" component={Form}/>
-             <Route  path="/ApplicantList" component={ApplicantList}/>
-             <Route  path="/ManageAccounts" component={ManageAccounts}/>
-             <Route  path="/Rating" component={Rating}/>
-             <Route  path="/ApplicantForm" component={ApplicantForm}/>
-             <Route  path="/Timeline" component={Timeline}/>
-             <Route  path="/PlanningV2" component={PlanningV2}/>
-             <Route  path="/APITest" component={APITest}/>
-           </Switch>
-        </div> 
+          <div>
+              <Navigation />
+              <Switch>
+                  <Route exact path="/" component={Form}/>
+                  <Route  path="/ApplicantList" component={ApplicantList}/>
+                  <Route  path="/ManageAccounts" component={ManageAccounts}/>
+                  <Route  path="/Rating" component={Rating}/>
+                  <Route  path="/ApplicantForm" component={ApplicantForm}/>
+                  <Route  path="/Planning" component={Planning}/>
+              </Switch>
+          </div>
       </BrowserRouter>
-    )
-  }
+  );
 }
 
 export default App
