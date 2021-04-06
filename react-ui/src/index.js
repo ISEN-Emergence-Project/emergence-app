@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import './styles/index.css';
 import App from './components/App';
 
+// Importing the Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 ReactDOM.render(
   <React.StrictMode>
     <App/>
