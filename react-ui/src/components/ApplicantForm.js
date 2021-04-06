@@ -1,6 +1,6 @@
 import Header from './Header';
 import Footer from "./Footer";
-import { Component } from 'react';
+import React, { Component } from 'react';
 import Field from"./Field"
 
 
