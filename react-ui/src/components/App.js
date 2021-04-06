@@ -1,4 +1,3 @@
-import './App.css';
 import React, { useCallback, useEffect, useState } from 'react';
 import Navigation from "./Components/Navigation"
 import ApplicantList from "./Components/ApplicantList"
