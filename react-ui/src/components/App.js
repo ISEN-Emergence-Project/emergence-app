@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, Component } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+// Import components
 import Navigation from "./Components/Navigation"
 import ApplicantList from "./Components/ApplicantList"
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { Component } from 'react';
 import Form from"./Components/Form"
 import ManageAccounts from"./Components/ManageAccounts"
 import Rating from"./Components/Rating"
