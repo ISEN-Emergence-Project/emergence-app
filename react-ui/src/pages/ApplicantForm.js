@@ -1,9 +1,9 @@
-import Footer from "./FormPage/Footer";
+import {Footer} from "../components/Footer";
 import React, {Component} from 'react';
-import Field from "./FormPage/Field" // On appelle le composant "Field" qui contient un champ pour une question
+import {Field} from "../components/Field" // On appelle le composant "Field" qui contient un champ pour une question
 
 
-class ApplicantForm extends Component 
+export class ApplicantForm extends Component 
 {
   constructor(props)    // On instancie les "variables"
   {
@@ -119,7 +119,3 @@ class ApplicantForm extends Component
 
 
 }
- 
-
-
-export default ApplicantForm

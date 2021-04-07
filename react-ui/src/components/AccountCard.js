@@ -1,6 +1,6 @@
 import React, { Component, useState } from "react";
 
-function AccountCard({username,email,password,userType})
+export function AccountCard({username,email,password,userType})
 {
     const[clicked, handleClick] = useState(false) // pour l'instant le bouton supprimer ne marche pas trop
 
@@ -31,5 +31,3 @@ function AccountCard({username,email,password,userType})
       
     
 } 
-
-export default AccountCard

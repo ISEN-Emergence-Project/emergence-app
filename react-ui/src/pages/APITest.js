@@ -1,6 +1,6 @@
 import React, {Component} from "react"
 
-class APITest extends Component                 // permet de faire un test en appelant l'API
+export class APITest extends Component                 // permet de faire un test en appelant l'API
 {
     state =
         {
@@ -30,5 +30,3 @@ class APITest extends Component                 // permet de faire un test en ap
         }
 
     }
-
-export default APITest

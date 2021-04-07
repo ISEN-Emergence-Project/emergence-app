@@ -1,10 +1,10 @@
 import React from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
-import initialData from "./DataDnD"
-import Column from './Column';          // Système de drag and drop ( que du fonctionnel pas de UI)
+import {initialData} from "../components/DataDnD"
+import {Column} from '../components/Column';          // Système de drag and drop ( que du fonctionnel pas de UI)
 
 
-class PlanningV2 extends React.Component {
+export class PlanningV2 extends React.Component {
   state = initialData;
 
   onDragEnd = result => {
@@ -89,5 +89,3 @@ class PlanningV2 extends React.Component {
     );
   }
 }
-
-export default PlanningV2

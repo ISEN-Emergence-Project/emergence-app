@@ -1,4 +1,4 @@
-const initialData=                      // contient les données pour effectuer le drag and drop
+export const initialData=                      // contient les données pour effectuer le drag and drop
 {
     tasks:
     {
@@ -34,5 +34,3 @@ const initialData=                      // contient les données pour effectuer 
     },
 columnOrder: ["column-1","column-2","column-3"],
 }
-
-export default initialData

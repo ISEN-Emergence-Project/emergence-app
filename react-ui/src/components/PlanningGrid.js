@@ -1,6 +1,6 @@
 import React from "react";
 
-function PlanningGrid()
+export function PlanningGrid()
 {
     return(
     <table className="table table-bordered">
@@ -34,5 +34,3 @@ function PlanningGrid()
 </table>
 
     )}
-
-export default PlanningGrid
