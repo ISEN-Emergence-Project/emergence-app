@@ -45,7 +45,7 @@ class Form extends Component
 
   handleClickEdit()
   {
-    const enteredQuestion = prompt('Modifier la question')
+    const enteredQuestion = prompt('Modifier la question') // permet de lancer une pop-up sans style
     this.setState(
       {
         children:enteredQuestion,                   // quand on clique sur le bouton on passe un bool à true
@@ -145,7 +145,7 @@ class Form extends Component
       </div>
 
       <div className="container mt-5">
-        {this.state.clickedAdd?  <Field onChange= {this.handleChange.bind(this)}> {this.state.question} </Field>:"" }
+        {this.state.clickedAdd?  <Field onChange= {this.handleChange.bind(this)}> {this.state.question} </Field>:"" } {/* Si on clique sur "Ajouter* on affiche le champ avec la question rentré par l'utilisateur*/}
         <button className="btn btn-success btn-sm" onClick={this.handleClickAdd.bind(this)}> <i class=" me-2 bi-plus-circle-fill"></i> Ajouter </button>
 
       </div>

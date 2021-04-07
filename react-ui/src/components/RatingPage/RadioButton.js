@@ -1,4 +1,4 @@
-function RadioButton({value,name})
+function RadioButton({value,name})  // permet de créer des boutons radio
 {
     return <div>
         <div class="ps-5">

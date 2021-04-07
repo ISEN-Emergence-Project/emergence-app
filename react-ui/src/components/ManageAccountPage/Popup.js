@@ -2,7 +2,7 @@ import { Button, Modal } from 'react-bootstrap';
 import React, {useState} from 'react';
 import AccountCard from "./AccountCard"
 
-function Popup({user,displayUser})
+function Popup({user,displayUser})   //Créé la pop-up pour ajouter des comptes
 {
     const [show, setShow] = useState(false);
     const [{password}, setFill] = useState("")
@@ -29,6 +29,12 @@ function Popup({user,displayUser})
             input.type = "password";
         }
     }
+
+    const checkEmail = (email) =>
+    {
+        let input = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return input.test(email)
+    }
     
 
     return(
@@ -36,14 +42,14 @@ function Popup({user,displayUser})
         <div className="container">
             <Button className="btn btn-success d-grid gap-3 col-2  btn-sm mx-auto mt-5" onClick={handleShow}> <i class="fs-3 bi-plus-circle-fill"></i> Ajouter un compte </Button>
 
-        <Modal size="lg" show={show} onHide={handleClose} onExited={() => displayUser(<AccountCard username= {document.getElementById("id").value} email= {document.getElementById("email").value} password={document.getElementById("passwordInput").value} userType={document.querySelector('input[name="flexRadioDefault"]:checked').value}/>)}>
+        <Modal size="lg" show={show} onHide={handleClose}>
         <Modal.Header>  
             <Modal.Title>Ajouter un compte </Modal.Title>
         </Modal.Header>
       <Modal.Body>
             <label htmlFor="id"> Identifiant</label>
                 <input className="form-control mt-3" required onChange={(event) => setFill(event.target.value)}type="text" id="id"/>
-                <div> {password}</div>
+                
 
             <label className="mt-3" htmlFor="email"> Adresse e-mail</label>
                 <input className="form-control mt-3"  required onChange={(event) => setFill(event.target.value)}type="text" id="email"/>
@@ -75,9 +81,10 @@ function Popup({user,displayUser})
                 
       </Modal.Body>
 
-      <Modal.Footer>
-        <Button variant="btn btn-danger btn-sm" onClick={handleClose}> <i class="me-2 bi-x-square-fill"></i> Fermer</Button>
-        <Button variant="btn btn-success btn-sm" onClick={handleClose}> <i class="me-2 bi-check-circle"></i> Enregister</Button>
+      <Modal.Footer>{/* Une fois qu'on a rentré les infos on les affiches avec un document.getElementbyId */}
+        <Button variant="btn btn-success btn-sm" onClick={() => displayUser(<AccountCard username= {document.getElementById("id").value} email= {checkEmail(document.getElementById("email").value)?document.getElementById("email").value:alert("Email invalide")} password={document.getElementById("passwordInput").value} userType={document.querySelector('input[name="flexRadioDefault"]:checked')===null? alert("Veuillez choisir un type de compte"):document.querySelector('input[name="flexRadioDefault"]:checked').value}/>)}> <i class="me-2 bi-check-circle"></i> Enregister</Button>
+        <Button variant="btn btn-danger btn-sm" onClick={handleClose}> <i class="me-2 bi-x-square-fill"></i> Fermer</Button>    
+
 
     </Modal.Footer>
 

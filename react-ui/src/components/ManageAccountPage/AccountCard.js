@@ -2,7 +2,7 @@ import { Component, useState } from "react";
 
 function AccountCard({username,email,password,userType})
 {
-    const[clicked, handleClick] = useState(false) // voir le pb de suppression = faire une classe ? faire du DnD pour les modifications ?
+    const[clicked, handleClick] = useState(false) // pour l'instant le bouton supprimer ne marche pas trop
 
     const reset = () =>
     {
@@ -14,8 +14,8 @@ function AccountCard({username,email,password,userType})
       
         {
         clicked? <div/> :
-          <div className="card-header text-center col-3 bg-warning">  
-            <span class="badge bg-primary mb-3"> {userType} </span>
+          <div className="card-header text-center col-3 bg-warning">  {/* selon le type de user on modifie la couleur du badge*/}
+            <span class={userType === "Admin"? "badge bg-primary":"" || userType === "Parrain"? "badge bg-secondary":"" || userType === "Filleul"? "badge bg-success":""}> {userType} </span>
             <h5>  {username} </h5>
         <div className="card-body">
             <p className="card-title text-center ">{email}</p>

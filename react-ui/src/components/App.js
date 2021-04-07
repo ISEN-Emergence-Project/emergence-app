@@ -1,16 +1,16 @@
 import './App.css';
 import React, { useCallback, useEffect, useState } from 'react';
-import Navigation from "./Components/Navigation"
-import ApplicantList from "./Components/ApplicantList"
+import Navigation from "./components/Navigation"
+import ApplicantList from "./components/ApplicantListPage/ApplicantList"
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Component } from 'react';
-import Form from"./Components/Form"
-import ManageAccounts from"./Components/ManageAccounts"
-import Rating from"./Components/Rating"
-import ApplicantForm from"./Components/ApplicantForm"
-import Timeline from"./Components/Timeline"
-import PlanningV2 from"./Components/PlanningV2"
-import APITest from"./Components/APITest"
+import Form from"./components/FormPage/Form"
+import ManageAccounts from"./components/ManageAccountsPage/ManageAccounts"
+import Rating from"./components/RatingPage/Rating"
+import ApplicantForm from"./components/ApplicantForm"
+import Timeline from"./components/PlanningPage/Timeline"
+import PlanningV2 from"./components/TestDnD/PlanningV2"
+import APITest from"./components/APITest"
 
 function App()
 {

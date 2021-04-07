@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Link } from 'react-router-dom';
 
-class Navigation extends Component
+class Navigation extends Component   // Permet de créer la barre de navigation et d'ajouter les onglets
 {
     render()
     {
@@ -32,7 +32,15 @@ class Navigation extends Component
                         </li>
 
                         <li class="nav-item">
-                        <Link class="nav-link"to="/Planning"> <button className="btn btn-dark btn-sm align-self-center" > Planning </button> </Link>
+                        <Link class="nav-link"to="/Timeline"> <button className="btn btn-dark btn-sm align-self-center" > Timeline </button> </Link>
+                        </li>
+
+                        <li class="nav-item">
+                        <Link class="nav-link"to="/PlanningV2"> <button className="btn btn-dark btn-sm align-self-center" > Planning test </button> </Link>
+                        </li>
+
+                        <li class="nav-item">
+                        <Link class="nav-link"to="/APITest"> <button className="btn btn-dark btn-sm align-self-center" > API test </button> </Link>
                         </li>
                     </ul>
                     </div>

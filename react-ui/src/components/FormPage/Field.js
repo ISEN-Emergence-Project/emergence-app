@@ -1,7 +1,7 @@
-import Star from "./Star"
+import Star from "./Star"  // permet de répéter l'étoile pour signifier "champ obligatoire"
 
 
-function Field({name, value,onChange,children})           // cration des champs de texte
+function Field({name, value,onChange,children})           // création des champs de texte
 {
     return <div>
       <label htmlFor={name}> {children} <Star></Star> </label>

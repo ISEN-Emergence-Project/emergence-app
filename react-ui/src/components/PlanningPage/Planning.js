@@ -1,10 +1,9 @@
-import { Component } from "react";
 import { DragDropContext,Droppable,Draggable   } from 'react-beautiful-dnd';
 import React, { useState } from 'react';
 import PlanningCard from"./PlanningCard"
-import PlanningGrid from"./PlanningGrid"
 
-const finalSpaceCharacters = [
+
+const finalSpaceCharacters = [              // Essai d'un drag and drop (pas important pour l'instant)
     {
       id: 'gary',
       name: 'Gary Goodspeed',
@@ -37,7 +36,8 @@ function Planning()
         updateCharacters(items);
       }
 
-        return <DragDropContext  onDragEnd={handleOnDragEnd}>
+        return <div>
+        <DragDropContext  onDragEnd={handleOnDragEnd}>
             
             <Droppable droppableId="characters">
                 {(provided) =>(
@@ -63,6 +63,7 @@ function Planning()
              
             
                 </DragDropContext>
+      </div>
     }
 
 

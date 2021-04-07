@@ -1,10 +1,7 @@
 import { Button, Modal} from 'react-bootstrap';
 import React, {useState} from 'react';
 
-
-
-
-function Card({Name,Firstname,Age,Studies})
+function Card({Name,Firstname,Age,Studies})     // utilisé dans ApplicantList
 {
     const [show, setShow] = useState(false);
     const handleClose = () => 
@@ -23,13 +20,13 @@ function Card({Name,Firstname,Age,Studies})
                 <p class="card-title text-center">{Age}</p>
                 <p class="card-text text-center">{Studies}</p>
 
-                <div className="d-flex justify-content-end" >
+                <div className="d-flex justify-content-end" > {/* Si on clique sur le bouton "en savoir plus" on affiche la pop-up */}
                     <Button onClick={handleShow} className="btn btn-primary mb-3"> <i className="me-2 bi-info-circle-fill"></i> En savoir plus </Button>
                 </div>
         </div>
 
         <div className="container">
-            <Modal size="lg" show={show} onHide={handleClose}>
+            <Modal size="lg" show={show} onHide={handleClose}> {/* La pop-up est crée avec la balise Modal (propre à Bootstrap) */}
             <Modal.Header>
                 <Modal.Title> Informations du profil </Modal.Title>
             </Modal.Header>

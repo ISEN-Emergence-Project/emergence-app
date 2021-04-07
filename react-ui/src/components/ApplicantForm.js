@@ -1,12 +1,11 @@
-import Header from './Header';
-import Footer from "./Footer";
+import Footer from "./FormPage/Footer";
 import { Component } from 'react';
-import Field from"./Field"
+import Field from"./FormPage/Field"        // On appelle le composant "Field" qui contient un champ pour une question
 
 
 class ApplicantForm extends Component 
 {
-  constructor(props)
+  constructor(props)    // On instancie les "variables"
   {
     super(props)
     this.state=
