@@ -1,6 +1,16 @@
-import React, { useCallback, useEffect, useState, Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import '../styles/App.css';
+import './App.css';
+import React, { useCallback, useEffect, useState } from 'react';
+import Navigation from "./Navigation"
+import ApplicantList from "./ApplicantListPage/ApplicantList"
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { Component } from 'react';
+import Form from"./FormPage/Form"
+import ManageAccounts from"./ManageAccounts"
+import Rating from"./RatingPage/Rating"
+import ApplicantForm from"./ApplicantForm"
+import Timeline from"./PlanningPage/Timeline"
+import PlanningV2 from"./TestDnD/PlanningV2"
+import APITest from"./APITest"
 
 // Import components
 import Navigation from "./Navigation"
