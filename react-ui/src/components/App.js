@@ -4,12 +4,14 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 // Import components
 import Navigation from "./Navigation"
-import ApplicantList from "./ApplicantList"
-import Form from"./Form"
+import ApplicantList from "./ApplicantListPage/ApplicantList"
+import Form from"./FormPage/Form"
 import ManageAccounts from"./ManageAccounts"
-import Rating from"./Rating"
+import Rating from"./RatingPage/Rating"
 import ApplicantForm from"./ApplicantForm"
-import Planning from"./Planning"
+import Timeline from"./PlanningPage/Timeline"
+import PlanningV2 from"./TestDnD/PlanningV2"
+import APITest from"./APITest"
 
 function App()
 {
@@ -50,7 +52,9 @@ function App()
                   <Route  path="/ManageAccounts" component={ManageAccounts}/>
                   <Route  path="/Rating" component={Rating}/>
                   <Route  path="/ApplicantForm" component={ApplicantForm}/>
-                  <Route  path="/Planning" component={Planning}/>
+                  <Route  path="/Timeline" component={Timeline}/>
+                  <Route  path="/PlanningV2" component={PlanningV2}/>
+                  <Route  path="/APITest" component={APITest}/>
               </Switch>
           </div>
       </BrowserRouter>
