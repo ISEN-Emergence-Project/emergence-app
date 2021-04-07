@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Navigation from "./Navigation"
 import ApplicantList from "./ApplicantListPage/ApplicantList"
 import Form from"./FormPage/Form"
-import ManageAccounts from"./ManageAccounts"
+import ManageAccounts from"./ManageAccountPage/ManageAccounts"
 import Rating from"./RatingPage/Rating"
 import ApplicantForm from"./ApplicantForm"
 import Timeline from"./PlanningPage/Timeline"
