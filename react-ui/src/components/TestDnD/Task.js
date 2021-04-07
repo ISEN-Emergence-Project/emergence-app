@@ -1,5 +1,6 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import {Draggable} from "react-beautiful-dnd"
+
 class Task extends Component        // Correspond à chaque tâche individuelle du Drag and Drop
 {
       render() {

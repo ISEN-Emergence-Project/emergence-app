@@ -1,4 +1,4 @@
-import { Component } from "react"
+import React, { Component } from "react"
 import Task from "./Task"
 import {Droppable} from "react-beautiful-dnd"
 class Column extends Component   // Utilisé pour le drag and drop du Planning

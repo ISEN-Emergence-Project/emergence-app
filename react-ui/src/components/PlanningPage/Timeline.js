@@ -1,3 +1,4 @@
+import React from "react";
 import Planning from"./Planning"
 
 function Timeline()  // Crée le tableau (en cours)

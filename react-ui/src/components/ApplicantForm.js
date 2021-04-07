@@ -1,6 +1,6 @@
 import Footer from "./FormPage/Footer";
-import { Component } from 'react';
-import Field from"./FormPage/Field"        // On appelle le composant "Field" qui contient un champ pour une question
+import React, {Component} from 'react';
+import Field from "./FormPage/Field" // On appelle le composant "Field" qui contient un champ pour une question
 
 
 class ApplicantForm extends Component 

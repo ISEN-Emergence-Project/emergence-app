@@ -1,7 +1,7 @@
 import Header from './Header';
 import Footer from "./Footer";
-import React, { Component } from 'react';
-import Field from"./Field"
+import React, {Component} from 'react';
+import Field from "./Field"
 
 
 class Form extends Component 

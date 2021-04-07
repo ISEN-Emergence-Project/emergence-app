@@ -1,3 +1,5 @@
+import React from "react";
+
 function PlanningCard({godfatherName,laureateName})
 {
     return <div>

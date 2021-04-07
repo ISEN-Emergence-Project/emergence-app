@@ -1,17 +1,17 @@
 import '../styles/App.css';
-import React, { useCallback, useEffect, useState } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import React, {useCallback, useEffect, useState} from 'react';
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
 // Import components
 import Navigation from "./Navigation"
 import ApplicantList from "./ApplicantListPage/ApplicantList"
-import Form from"./FormPage/Form"
-import ManageAccounts from"./ManageAccountPage/ManageAccounts"
-import Rating from"./RatingPage/Rating"
-import ApplicantForm from"./ApplicantForm"
-import Timeline from"./PlanningPage/Timeline"
-import PlanningV2 from"./TestDnD/PlanningV2"
-import APITest from"./APITest"
+import Form from "./FormPage/Form"
+import ManageAccounts from "./ManageAccountPage/ManageAccounts"
+import Rating from "./RatingPage/Rating"
+import ApplicantForm from "./ApplicantForm"
+import Timeline from "./PlanningPage/Timeline"
+import PlanningV2 from "./TestDnD/PlanningV2"
+import APITest from "./APITest"
 
 function App()
 {

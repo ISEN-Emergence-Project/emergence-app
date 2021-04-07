@@ -1,6 +1,5 @@
-import {Component, useState} from "react"
-import {useEffect} from "react"
-import React from "react"
+import React, {Component} from "react"
+
 class APITest extends Component                 // permet de faire un test en appelant l'API
 {
     state =

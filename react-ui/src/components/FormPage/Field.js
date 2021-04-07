@@ -1,3 +1,4 @@
+import React from "react";
 import Star from "./Star"  // permet de répéter l'étoile pour signifier "champ obligatoire"
 
 

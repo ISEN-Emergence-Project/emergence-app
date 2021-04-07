@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import React, {Component} from "react";
+import {Link} from 'react-router-dom';
 
 class Navigation extends Component   // Permet de créer la barre de navigation et d'ajouter les onglets
 {

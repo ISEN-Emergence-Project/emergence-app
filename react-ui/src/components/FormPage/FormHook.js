@@ -1,7 +1,6 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button, Modal } from 'react-bootstrap';
 import Field from"./Field"
-import React from"react"
 
 
 function FormHook({user,displayUser})     // Même form avec avec des hooks au lieu de classes ( n'est pas rendu pour l'instant)
