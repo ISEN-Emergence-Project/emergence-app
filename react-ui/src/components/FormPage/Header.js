@@ -14,7 +14,7 @@ class Header extends Component
 
     handleHeaderClick()
     {
-        const title = prompt("Modifier le titre")
+        const title = prompt("Modifier le titre")                   // permet de modifier l'en-tête
         const subtitle = prompt("Modifier l'introduction")
         this.setState(
             {
@@ -49,7 +49,7 @@ class Header extends Component
             </div>
         }
         </div>
-        <button  className="btn btn-warning btn-sm" onClick={this.handleHeaderClick.bind(this)}><i className="me-2 bi-pencil-fill"></i> Modifier </button>
+        <button  className="btn btn-warning btn-sm" onClick={this.handleHeaderClick.bind(this)}><i className="me-2 bi-pencil-fill"></i> Modifier </button> {/* la balise <i> permet d'insérer des icônes */}
         </div>
     }
 }

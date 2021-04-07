@@ -1,4 +1,4 @@
-import { Button, Modal } from 'react-bootstrap';
+import {Button, Modal} from 'react-bootstrap';
 import React, {useState} from 'react';
 import AccountCard from "./AccountCard"
 

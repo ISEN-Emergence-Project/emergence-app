@@ -1,15 +1,19 @@
-import Footer from "./FormPage/Footer";
-import React, {Component} from 'react';
-import Field from "./FormPage/Field" // On appelle le composant "Field" qui contient un champ pour une question
+import Header from './Header';
+import Footer from "./Footer";
+import React, { Component } from 'react';
+import Field from"./Field"
 
 
-class ApplicantForm extends Component 
+class Form extends Component 
 {
-  constructor(props)    // On instancie les "variables"
+  constructor(props)
   {
     super(props)
     this.state=
       {
+        clickedAdd:false,
+        clickedEdit:false,
+        clickedDelete:false,
         children:"",
         nom:"",
         prenom:"",
@@ -38,19 +42,54 @@ class ApplicantForm extends Component
       })
   }
 
+
+  handleClickEdit()
+  {
+    const enteredQuestion = prompt('Modifier la question') // permet de lancer une pop-up sans style
+    this.setState(
+      {
+        children:enteredQuestion,                   // quand on clique sur le bouton on passe un bool à true
+        clickedEdit:true
+        
+      })
+  }
+
+  handleClickDelete()
+  {
+      this.setState(
+        {
+          clickedDelete:true
+        })
+  }
+
+  handleClickAdd()
+  {
+    const question = prompt('Ajouter le titre de votre question')
+    this.setState(
+      {
+        question:question,
+        clickedAdd:true
+      })
+  }
+
   render()
   {
     return <div>
-            <div  className="card text-center bg-light mt-5">
-                <h1> EMERGENCE - Présentation Individuelle (2020) </h1>  
-                
-                <p> Pas de bonne ou de mauvaise réponses </p>
-                <p> Spontanéïté, Créativité et Sérieux car cela va nous servir pour parler de vous </p>
-                <p className="text-danger"> * Obligatoire</p>
-            </div>
+      <div>
+        <Header/>
+      </div>
 
       <div className="container mt-5">
-        <Field name="nom" value={this.state.nom} onChange= {this.handleChange.bind(this)}>  Nom </Field>   
+        {
+          this.state.clickedDelete? <div/> :    // si on a cliqué on retoune une div nulle sinon le compsant original
+          <div>
+            <Field name="nom" value={this.state.nom} onChange= {this.handleChange.bind(this)}>  {this.state.clickedEdit? this.state.children:"Nom"} </Field>    {/* si on clique sur edit on renvoi la modif sinon le libellé de base*/}
+            <button  className="btn btn-warning btn-sm button" onClick={this.handleClickEdit.bind(this)}>  <i class=" me-2 bi-pencil-fill"></i> Modifier </button>
+           
+            <button className="btn btn-danger btn-sm" onClick={this.handleClickDelete.bind(this)}> <i class=" me-2 bi-trash-fill"></i> Supprimer </button>
+          </div>
+        }
+          
       </div>
 
       <div className="container mt-5">
@@ -105,8 +144,14 @@ class ApplicantForm extends Component
         <Field name="reves" value={this.state.reves} onChange= {this.handleChange.bind(this)}> Vos plus grands espoirs même les plus fous ?  </Field>
       </div>
 
+      <div className="container mt-5">
+        {this.state.clickedAdd?  <Field onChange= {this.handleChange.bind(this)}> {this.state.question} </Field>:"" } {/* Si on clique sur "Ajouter* on affiche le champ avec la question rentré par l'utilisateur*/}
+        <button className="btn btn-success btn-sm" onClick={this.handleClickAdd.bind(this)}> <i class=" me-2 bi-plus-circle-fill"></i> Ajouter </button>
+
+      </div>
+
       <div className="container d-grid gap-2 col-3 mx-auto btn-sm mt-5 mb-3">
-        <button  className="btn btn-primary" type="submit" value="Envoyer vos réponses"> Envoyer vos réponses <i className="ms-4 fs-4 bi-arrow-right-circle-fill"></i> </button>
+        <button  className="btn btn-primary" type="submit" value="Envoyer vos réponses"> Envoyer vos réponses <i class="ms-4 fs-4 bi-arrow-right-circle-fill"></i> </button>
       </div>
       
       <div className="text-center mt-3">
@@ -122,4 +167,4 @@ class ApplicantForm extends Component
  
 
 
-export default ApplicantForm
+export default Form
