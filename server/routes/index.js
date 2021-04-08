@@ -1,38 +1,57 @@
 const router = require('express').Router();
 
 // Include API routes
-const accountsController = require('./accounts');
-const answersController = require('./answers');
-const formsController = require('./forms');
-const matchesController = require('./match');
-const meetingsController = require('./meeting');
-const preselectionsController = require('./preselection');
-const questionsController = require('./question');
+const accountsRouter = require('./private/accounts');
+const answersRouter = require('./private/answers');
+const formsRouter = require('./private/forms');
+const matchesRouter = require('./private/match');
+const meetingsRouter = require('./private/meeting');
+const preselectionsRouter = require('./private/preselection');
+const questionsRouter = require('./private/question');
+
+const loginRouter = require('./public/login');
 
 // Include middlewares
-const authJwt = require('./middlewares/authJwt');
+const authJwt = require('../middlewares/authJwt');
 
-// Handle API routes
 
-// Public routes
-router.post('/login', accountsController.login);
+/* ----------------------- */
+/* ----- API ROUTING ----- */
+/* ----------------------- */
 
-// API Authentication
+
+/* ----- Public API Routes ----- */
+
+router.post('/login', loginRouter);
+
+
+/* ----- Private API Routes ----- */
+
+// API Authentication before accessing private routes
 router.use('/', authJwt);
 
-// Private routes
-router.use('/accounts', accountsController);
-router.use('/answers', answersController);
-router.use('/forms', formsController);
-router.use('/matches', matchesController);
-router.use('/meetings', meetingsController);
-router.use('/preselections', preselectionsController);
-router.use('/questions', questionsController);
+
+// Handle main API routes
+router.use('/accounts', accountsRouter);
+router.use('/answers', answersRouter);
+router.use('/forms', formsRouter);
+router.use('/matches', matchesRouter);
+router.use('/meetings', meetingsRouter);
+router.use('/preselections', preselectionsRouter);
+router.use('/questions', questionsRouter);
+
+
+// Handle root
+router.get('/', function (req, res) {
+    res.status(200).json({
+        "message": "OK"
+    });
+});
 
 // Handle other API routes
 router.get('*', function (req, res) {
-    res.status(200).json({
-        "message": "Hello from the custom server!",
+    res.status(404).json({
+        "message": "Not found",
         "originalUrl": req.originalUrl,
         "url": req.url,
         "path": req.path,

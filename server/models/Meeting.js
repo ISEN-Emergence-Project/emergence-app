@@ -1,8 +1,8 @@
-const { sequelize, Model, DataTypes } = require("../database");
+const { sequelize, Model, DataTypes } = require("../utils/database");
 
-class Match extends Model {}
+class Meeting extends Model {}
 
-Match.init({
+Meeting.init({
     fkGodfatherAccountId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -16,15 +16,28 @@ Match.init({
         type: DataTypes.INTEGER,
         primaryKey: true,
         allowNull: false,
-        unique: true,
         references: {
             model: 'Accounts',
             key: 'accountId'
         }
+    },
+    beginning: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    ending: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    godfatherRating: {
+        type: DataTypes.SMALLINT
+    },
+    laureateRating: {
+        type: DataTypes.SMALLINT
     }
 }, {
     sequelize,
-    modelName: 'Match'
+    modelName: 'Meeting'
 })
 
-module.exports = Match
+module.exports = Meeting
