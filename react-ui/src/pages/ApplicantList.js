@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-import ApplicantCard from"./ApplicantCard"
+import {ApplicantCard} from"../components/ApplicantCard"
 
 
-class ApplicantList extends Component
+export class ApplicantList extends Component
 {
 
     render()
@@ -18,5 +18,3 @@ class ApplicantList extends Component
     }
     
 }
-
-export default ApplicantList

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Button, Modal } from 'react-bootstrap';
-import Field from"./Field"
+import {Field} from"./Field"
 
 
-function FormHook({user,displayUser})     // Même form avec avec des hooks au lieu de classes ( n'est pas rendu pour l'instant)
+export function FormHook({user,displayUser})     // Même form avec avec des hooks au lieu de classes ( n'est pas rendu pour l'instant)
 {
     const [show, setShow] = useState(false);
     const [{prenom,nom}, setFill] = useState("")
@@ -53,5 +53,3 @@ function FormHook({user,displayUser})     // Même form avec avec des hooks au l
 
     </div>
 }
-
-export default FormHook

@@ -1,10 +1,10 @@
-import Header from './Header';
-import Footer from "./Footer";
+import {Header} from '../components/Header';
+import {Footer} from "../components/Footer";
 import React, { Component } from 'react';
-import Field from"./Field"
+import {Field} from"../components/Field"
 
 
-class Form extends Component 
+export class Form extends Component 
 {
   constructor(props)
   {
@@ -164,7 +164,3 @@ class Form extends Component
 
 
 }
- 
-
-
-export default Form

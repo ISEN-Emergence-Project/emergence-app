@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import RadioButton from"./RadioButton"
+import {RadioButton} from"../components//RadioButton"
 
-class Rating extends Component
+export class Rating extends Component
 {
     constructor()
     {
@@ -71,5 +71,3 @@ class Rating extends Component
     </div>
     }
 }
-
-export default Rating

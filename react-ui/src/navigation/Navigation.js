@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Link} from 'react-router-dom';
 
-class Navigation extends Component   // Permet de créer la barre de navigation et d'ajouter les onglets
+export class Navigation extends Component   // Permet de créer la barre de navigation et d'ajouter les onglets
 {
     render()
     {
@@ -50,5 +50,3 @@ class Navigation extends Component   // Permet de créer la barre de navigation 
 
     }
 }
-
-export default Navigation

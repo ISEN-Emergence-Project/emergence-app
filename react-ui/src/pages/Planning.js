@@ -1,8 +1,9 @@
-import React, {useState} from "react";
-import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd';
-import PlanningCard from "./PlanningCard"
+import { DragDropContext,Droppable,Draggable   } from 'react-beautiful-dnd';
+import React, { useState } from 'react';
+import {PlanningCard} from"../components/PlanningCard"
 
-const finalSpaceCharacters = [
+
+const finalSpaceCharacters = [              // Essai d'un drag and drop (pas important pour l'instant)
     {
       id: 'gary',
       name: 'Gary Goodspeed',
@@ -21,7 +22,7 @@ const finalSpaceCharacters = [
     }
   ]
 
-function Planning()
+export function Planning()
 {
     const [characters, updateCharacters] = useState(finalSpaceCharacters);
 
@@ -35,7 +36,8 @@ function Planning()
         updateCharacters(items);
       }
 
-        return <DragDropContext  onDragEnd={handleOnDragEnd}>
+        return <div>
+        <DragDropContext  onDragEnd={handleOnDragEnd}>
             
             <Droppable droppableId="characters">
                 {(provided) =>(
@@ -60,8 +62,6 @@ function Planning()
         </Droppable>
              
             
-                </DragDropContext>
+      </DragDropContext>
+      </div>
     }
-
-
-export default Planning

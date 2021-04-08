@@ -1,19 +1,19 @@
-import '../styles/App.css';
+import './App.css';
 import React, {useCallback, useEffect, useState} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
 // Import components
-import Navigation from "./Navigation"
-import ApplicantList from "./ApplicantListPage/ApplicantList"
-import Form from "./FormPage/Form"
-import ManageAccounts from "./ManageAccountPage/ManageAccounts"
-import Rating from "./RatingPage/Rating"
-import ApplicantForm from "./ApplicantForm"
-import Timeline from "./PlanningPage/Timeline"
-import PlanningV2 from "./TestDnD/PlanningV2"
-import APITest from "./APITest"
+import {Navigation} from "./navigation/Navigation"
+import {ApplicantList} from "./pages/ApplicantList"
+import {Form} from "./pages/Form"
+import {ManageAccounts} from "./pages/ManageAccounts"
+import {Rating} from "./pages/Rating"
+import {ApplicantForm} from "./pages/ApplicantForm"
+import {Timeline} from "./pages/Timeline"
+import {PlanningV2} from "./pages/PlanningV2"
+import {APITest} from "./pages/APITest"
 
-function App()
+export function App()
 {
   const [message, setMessage] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
@@ -60,5 +60,3 @@ function App()
       </BrowserRouter>
   );
 }
-
-export default App

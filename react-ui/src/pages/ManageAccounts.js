@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react"
-import Popup from"./Popup"
+import {Popup} from"../components/Popup"
 
-function ManageAccounts()
+export function ManageAccounts()
 
 {
     const [user, displayUser] = useState([])
@@ -11,5 +11,3 @@ function ManageAccounts()
             {user}
         </div>
 }
-
-export default ManageAccounts

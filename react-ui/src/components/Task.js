@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {Draggable} from "react-beautiful-dnd"
 
-class Task extends Component        // Correspond à chaque tâche individuelle du Drag and Drop
+export class Task extends Component        // Correspond à chaque tâche individuelle du Drag and Drop
 {
       render() {
         return (
@@ -15,4 +15,3 @@ class Task extends Component        // Correspond à chaque tâche individuelle 
         );
       }
     }
-export default Task
