@@ -13,7 +13,7 @@ import {Timeline} from "./pages/Timeline"
 import {PlanningV2} from "./pages/PlanningV2"
 import {APITest} from "./pages/APITest"
 
-export function App()
+export default function App()
 {
   const [message, setMessage] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
