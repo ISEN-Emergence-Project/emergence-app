@@ -1,4 +1,4 @@
-const login = require('express').Router;
+const login = require('express').Router();
 
 const accountController = require('../../controllers/account');
 

@@ -1,4 +1,4 @@
-const logout = require('express').Router;
+const logout = require('express').Router();
 
 const accountController = require('../../controllers/account');
 
