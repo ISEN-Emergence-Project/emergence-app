@@ -1,4 +1,4 @@
-const { sequelize, Model, DataTypes } = require("../utils/database");
+const { sequelize, Model, DataTypes } = require("../db/database");
 
 class Account extends Model {
     getFullName() {
