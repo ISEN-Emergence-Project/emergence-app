@@ -115,4 +115,7 @@ module.exports = {
       })
       .catch((error) => res.status(400).send(error));
   },
+    logout (req, res) {
+      return res.send('Not implemented');
+    }
 };
