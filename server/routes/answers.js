@@ -1,6 +1,6 @@
 const answers = require('express').Router();
 
-const Answer = require('../models/Answer');
+const Answer = require('../db/models/Answer');
 
 answers.get('/', function (req,res) {
     (async () => {

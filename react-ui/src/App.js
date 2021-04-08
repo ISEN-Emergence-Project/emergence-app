@@ -1,4 +1,4 @@
-import './App.css';
+import './styles/App.css';
 import React, {useCallback, useEffect, useState} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
@@ -13,11 +13,11 @@ import {Timeline} from "./pages/Timeline"
 import {PlanningV2} from "./pages/PlanningV2"
 import {APITest} from "./pages/APITest"
 
-export function App()
+export default function App()
 {
   const [message, setMessage] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
-  const [url, setUrl] = useState('/api');
+  const [url, setUrl] = useState('/controllers');
 
   const fetchData = useCallback(() => {
       fetch(url)

@@ -1,6 +1,6 @@
 const matches = require('express').Router();
 
-const Match = require('../models/Match');
+const Match = require('../db/models/Match');
 
 matches.get('/', function (req,res) {
     (async () => {

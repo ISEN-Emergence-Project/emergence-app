@@ -1,4 +1,4 @@
-const { sequelize, Model, DataTypes } = require("../utils/database");
+const { sequelize, Model, DataTypes } = require("../database");
 
 class Preselection extends Model {}
 

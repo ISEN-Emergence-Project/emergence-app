@@ -1,9 +1,9 @@
-const { sequelize, Model, DataTypes } = require("../utils/database");
+const { sequelize, Model, DataTypes } = require("../database");
 
-class Match extends Model {}
+class Answer extends Model {}
 
-Match.init({
-    fkGodfatherAccountId: {
+Answer.init({
+    fkAccountId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         allowNull: false,
@@ -12,19 +12,22 @@ Match.init({
             key: 'accountId'
         }
     },
-    fkLaureateAccountId: {
+    fkQuestionId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         allowNull: false,
-        unique: true,
         references: {
-            model: 'Accounts',
-            key: 'accountId'
+            model: 'Questions',
+            key: 'questionId'
         }
+    },
+    answer: {
+        type: DataTypes.TEXT,
+        allowNull: false
     }
 }, {
     sequelize,
-    modelName: 'Match'
+    modelName: 'Answer'
 })
 
-module.exports = Match
+module.exports = Answer
