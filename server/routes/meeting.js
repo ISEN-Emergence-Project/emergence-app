@@ -1,6 +1,6 @@
 const meetings = require('express').Router();
 
-const Meeting = require('../models/Meeting');
+const Meeting = require('../db/models/Meeting');
 
 meetings.get('/', function (req,res) {
     (async () => {

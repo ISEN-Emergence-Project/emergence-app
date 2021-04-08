@@ -1,6 +1,6 @@
 const accounts = require('express').Router();
 
-const Account = require('../models/Account');
+const Account = require('../db/models/Account');
 
 accounts.get('/', function (req,res) {
     (async () => {

@@ -1,8 +1,8 @@
-const { sequelize, Model, DataTypes } = require("../db/database");
+const { sequelize, Model, DataTypes } = require("../database");
 
-class Match extends Model {}
+class Preselection extends Model {}
 
-Match.init({
+Preselection.init({
     fkGodfatherAccountId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -16,7 +16,6 @@ Match.init({
         type: DataTypes.INTEGER,
         primaryKey: true,
         allowNull: false,
-        unique: true,
         references: {
             model: 'Accounts',
             key: 'accountId'
@@ -24,7 +23,7 @@ Match.init({
     }
 }, {
     sequelize,
-    modelName: 'Match'
+    modelName: 'Preselection'
 })
 
-module.exports = Match
+module.exports = Preselection

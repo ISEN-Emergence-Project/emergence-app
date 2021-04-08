@@ -1,21 +1,21 @@
 const router = require('express').Router();
 
 // Include API routes
-const accountsController = require('../controllers/accounts');
-const answersController = require('../controllers/answers');
-const formsController = require('../controllers/forms');
-const matchesController = require('../controllers/match');
-const meetingsController = require('../controllers/meeting');
-const preselectionsController = require('../controllers/preselection');
-const questionsController = require('../controllers/question');
+const accountsController = require('./accounts');
+const answersController = require('./answers');
+const formsController = require('./forms');
+const matchesController = require('./match');
+const meetingsController = require('./meeting');
+const preselectionsController = require('./preselection');
+const questionsController = require('./question');
 
 // Include middlewares
-const authJwt = require('../middlewares/authJwt');
+const authJwt = require('./middlewares/authJwt');
 
 // Handle API routes
 
 // Public routes
-router.post('/login', );
+router.post('/login', accountsController.login);
 
 // API Authentication
 router.use('/', authJwt);

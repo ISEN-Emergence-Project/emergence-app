@@ -1,8 +1,8 @@
-const { sequelize, Model, DataTypes } = require("../db/database");
+const { sequelize, Model, DataTypes } = require("../database");
 
-class Preselection extends Model {}
+class Meeting extends Model {}
 
-Preselection.init({
+Meeting.init({
     fkGodfatherAccountId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -20,10 +20,24 @@ Preselection.init({
             model: 'Accounts',
             key: 'accountId'
         }
+    },
+    beginning: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    ending: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    godfatherRating: {
+        type: DataTypes.SMALLINT
+    },
+    laureateRating: {
+        type: DataTypes.SMALLINT
     }
 }, {
     sequelize,
-    modelName: 'Preselection'
+    modelName: 'Meeting'
 })
 
-module.exports = Preselection
+module.exports = Meeting
