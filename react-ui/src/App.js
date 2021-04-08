@@ -17,7 +17,7 @@ export default function App()
 {
   const [message, setMessage] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
-  const [url, setUrl] = useState('/controllers');
+  const [url, setUrl] = useState('/api');
 
   const fetchData = useCallback(() => {
       fetch(url)

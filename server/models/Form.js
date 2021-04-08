@@ -1,4 +1,4 @@
-const { sequelize, Model, DataTypes } = require("../database");
+const { sequelize, Model, DataTypes } = require("../utils/database");
 
 class Form extends Model {}
 

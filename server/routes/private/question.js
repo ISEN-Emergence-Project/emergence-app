@@ -1,6 +1,6 @@
 const questions = require('express').Router();
 
-const Question = require('../db/models/Question');
+const Question = require('../../models/Question');
 
 questions.get('/', function (req,res) {
     (async () => {
