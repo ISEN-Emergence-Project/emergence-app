@@ -3,6 +3,7 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const upload = multer();
+const cors = require('../middlewares/cors');
 
 // Include API routes
 const accountsRouter = require('./private/accounts');
@@ -17,6 +18,10 @@ const loginRouter = require('./public/login');
 
 // Include middlewares
 const authJwt = require('../middlewares/authJwt');
+
+
+// Authorize CORS
+router.use(cors);
 
 
 // Parse application/json
