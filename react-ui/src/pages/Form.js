@@ -84,9 +84,9 @@ export class Form extends Component
           this.state.clickedDelete? <div/> :    // si on a cliqué on retoune une div nulle sinon le compsant original
           <div>
             <Field name="nom" value={this.state.nom} onChange= {this.handleChange.bind(this)}>  {this.state.clickedEdit? this.state.children:"Nom"} </Field>    {/* si on clique sur edit on renvoi la modif sinon le libellé de base*/}
-            <button  className="btn btn-warning btn-sm button" onClick={this.handleClickEdit.bind(this)}>  <i class=" me-2 bi-pencil-fill"></i> Modifier </button>
+            <button  className="btn btn-warning btn-sm button" onClick={this.handleClickEdit.bind(this)}>  <i className=" me-2 bi-pencil-fill"></i> Modifier </button>
            
-            <button className="btn btn-danger btn-sm" onClick={this.handleClickDelete.bind(this)}> <i class=" me-2 bi-trash-fill"></i> Supprimer </button>
+            <button className="btn btn-danger btn-sm" onClick={this.handleClickDelete.bind(this)}> <i className=" me-2 bi-trash-fill"></i> Supprimer </button>
           </div>
         }
           
@@ -146,12 +146,12 @@ export class Form extends Component
 
       <div className="container mt-5">
         {this.state.clickedAdd?  <Field onChange= {this.handleChange.bind(this)}> {this.state.question} </Field>:"" } {/* Si on clique sur "Ajouter* on affiche le champ avec la question rentré par l'utilisateur*/}
-        <button className="btn btn-success btn-sm" onClick={this.handleClickAdd.bind(this)}> <i class=" me-2 bi-plus-circle-fill"></i> Ajouter </button>
+        <button className="btn btn-success btn-sm" onClick={this.handleClickAdd.bind(this)}> <i className=" me-2 bi-plus-circle-fill"></i> Ajouter </button>
 
       </div>
 
       <div className="container d-grid gap-2 col-3 mx-auto btn-sm mt-5 mb-3">
-        <button  className="btn btn-primary" type="submit" value="Envoyer vos réponses"> Envoyer vos réponses <i class="ms-4 fs-4 bi-arrow-right-circle-fill"></i> </button>
+        <button  className="btn btn-primary" type="submit" value="Envoyer vos réponses"> Envoyer vos réponses <i className="ms-4 fs-4 bi-arrow-right-circle-fill"></i> </button>
       </div>
       
       <div className="text-center mt-3">

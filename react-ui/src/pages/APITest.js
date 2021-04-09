@@ -1,4 +1,5 @@
 import React, {Component} from "react"
+import { fetchApi } from '../services/api';
 
 export class APITest extends Component                 // permet de faire un test en appelant l'API
 {
@@ -12,11 +13,8 @@ export class APITest extends Component                 // permet de faire un tes
 
         async componentDidMount()
         {
-            const url = "https://api.randomuser.me/"
-            const response = await fetch(url)
-            const data = await response.json()
-            this.setState({person: data.results[0]})
-            console.log(this.state.person)
+            fetchApi('get', '//etn-test.herokuapp.com/api', '', {})
+                .then((res) => console.log(res))
         }
 
         render()

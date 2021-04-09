@@ -4,7 +4,7 @@ import {Planning} from"./Planning"
 export function Timeline()  // Crée le tableau (en cours)
 {
     return <div>
-        <table class="table table-hover table-bordered bg-light">
+        <table className="table table-hover table-bordered bg-light">
             <thead>
                 <tr>
                 <th scope="col"></th>

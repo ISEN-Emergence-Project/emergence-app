@@ -32,7 +32,7 @@ export function Popup({user,displayUser})   //Créé la pop-up pour ajouter des 
 
     const checkEmail = (email) =>
     {
-        let input = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        let input = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return input.test(email)
     }
     
@@ -40,7 +40,7 @@ export function Popup({user,displayUser})   //Créé la pop-up pour ajouter des 
     return(
         
         <div className="container">
-            <Button className="btn btn-success d-grid gap-3 col-2  btn-sm mx-auto mt-5" onClick={handleShow}> <i class="fs-3 bi-plus-circle-fill"></i> Ajouter un compte </Button>
+            <Button className="btn btn-success d-grid gap-3 col-2  btn-sm mx-auto mt-5" onClick={handleShow}> <i className="fs-3 bi-plus-circle-fill"></i> Ajouter un compte </Button>
 
         <Modal size="lg" show={show} onHide={handleClose}>
         <Modal.Header>  
@@ -62,28 +62,28 @@ export function Popup({user,displayUser})   //Créé la pop-up pour ajouter des 
             <label className="mt-5" htmlFor="account_type"> Type de compte </label>
 
             <div id ="ok">
-            <div class="form-check mt-3">
-                <input class="form-check-input" type="radio" value = "Admin" onClick={(permission) => setPermission(permission)} name="flexRadioDefault" id="admin"/>
-                <label class="form-check-label"> Administrateur </label>
+            <div className="form-check mt-3">
+                <input className="form-check-input" type="radio" value = "Admin" onClick={(permission) => setPermission(permission)} name="flexRadioDefault" id="admin"/>
+                <label className="form-check-label"> Administrateur </label>
             </div>
 
-            <div class="form-check mt-3">
-                <input class="form-check-input" type="radio" value="Parrain" onClick={(permission) => setPermission(permission)} name="flexRadioDefault" id="godfather" />
+            <div className="form-check mt-3">
+                <input className="form-check-input" type="radio" value="Parrain" onClick={(permission) => setPermission(permission)} name="flexRadioDefault" id="godfather" />
                 
-                <label class="form-check-label"> Parrain </label>
+                <label className="form-check-label"> Parrain </label>
             </div>
 
-            <div class="form-check mt-3">
-                <input class="form-check-input" type="radio" value = "Filleul"  name="flexRadioDefault" id="laureate"/>
-                <label class="form-check-label"> Filleul </label>
+            <div className="form-check mt-3">
+                <input className="form-check-input" type="radio" value = "Filleul"  name="flexRadioDefault" id="laureate"/>
+                <label className="form-check-label"> Filleul </label>
             </div>
         </div>
                 
       </Modal.Body>
 
       <Modal.Footer>{/* Une fois qu'on a rentré les infos on les affiches avec un document.getElementbyId */}
-        <Button variant="btn btn-success btn-sm" onClick={() => displayUser(<AccountCard username= {document.getElementById("id").value} email= {checkEmail(document.getElementById("email").value)?document.getElementById("email").value:alert("Email invalide")} password={document.getElementById("passwordInput").value} userType={document.querySelector('input[name="flexRadioDefault"]:checked')===null? alert("Veuillez choisir un type de compte"):document.querySelector('input[name="flexRadioDefault"]:checked').value}/>)}> <i class="me-2 bi-check-circle"></i> Enregister</Button>
-        <Button variant="btn btn-danger btn-sm" onClick={handleClose}> <i class="me-2 bi-x-square-fill"></i> Fermer</Button>    
+        <Button variant="btn btn-success btn-sm" onClick={() => displayUser(<AccountCard username= {document.getElementById("id").value} email= {checkEmail(document.getElementById("email").value)?document.getElementById("email").value:alert("Email invalide")} password={document.getElementById("passwordInput").value} userType={document.querySelector('input[name="flexRadioDefault"]:checked')===null? alert("Veuillez choisir un type de compte"):document.querySelector('input[name="flexRadioDefault"]:checked').value}/>)}> <i className="me-2 bi-check-circle"></i> Enregister</Button>
+        <Button variant="btn btn-danger btn-sm" onClick={handleClose}> <i className="me-2 bi-x-square-fill"></i> Fermer</Button>    
 
 
     </Modal.Footer>
