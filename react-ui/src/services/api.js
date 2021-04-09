@@ -6,14 +6,13 @@ const fetchApi = (method, url, body, additional_headers) => {
         return 'Method can only be GET, POST, PUT, DELETE';
     }
 
-    const headers = {
-        'content-type': 'application/json',
-        'x-access-token': localStorage.getItem('api-token'),
-        additional_headers
-    }
     let options = {
         method: method,
-        headers: headers
+        headers: {
+            'content-type': 'application/json',
+            'x-access-token': localStorage.getItem('api-token'),
+            additional_headers
+        }
     };
     options = (method == 'GET') ? options : options = { options, body: JSON.stringify(body) };
 
