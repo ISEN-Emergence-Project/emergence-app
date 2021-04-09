@@ -31,16 +31,16 @@ export class Navigation extends Component   // Permet de créer la barre de navi
                         <Link className="nav-link"to="/ApplicantForm"> <button className="btn btn-dark btn-sm align-self-center" > ApplicantForm </button> </Link>
                         </li>
 
-                        <li class="nav-item">
-                        <Link class="nav-link"to="/Timeline"> <button className="btn btn-dark btn-sm align-self-center" > Timeline </button> </Link>
+                        <li className="nav-item">
+                        <Link className="nav-link"to="/Timeline"> <button className="btn btn-dark btn-sm align-self-center" > Timeline </button> </Link>
                         </li>
 
-                        <li class="nav-item">
-                        <Link class="nav-link"to="/PlanningV2"> <button className="btn btn-dark btn-sm align-self-center" > Planning test </button> </Link>
+                        <li className="nav-item">
+                        <Link className="nav-link"to="/PlanningV2"> <button className="btn btn-dark btn-sm align-self-center" > Planning test </button> </Link>
                         </li>
 
-                        <li class="nav-item">
-                        <Link class="nav-link"to="/APITest"> <button className="btn btn-dark btn-sm align-self-center" > API test </button> </Link>
+                        <li className="nav-item">
+                        <Link className="nav-link"to="/APITest"> <button className="btn btn-dark btn-sm align-self-center" > API test </button> </Link>
                         </li>
                     </ul>
                     </div>

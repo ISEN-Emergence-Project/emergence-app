@@ -1,32 +1,36 @@
-import React, {Component} from "react"
+import React, {Component, useState} from "react"
+import {useEffect} from "react"
 
-export class APITest extends Component                 // permet de faire un test en appelant l'API
+export function APITest(){          // permet de faire un test en appelant l'API
 {
-    state =
-        {
-            loading: true,
-            person:""
-        }
+    const[person,setPerson] = useState("")
    
     
 
-        async componentDidMount()
-        {
-            const url = "https://api.randomuser.me/"
-            const response = await fetch(url)
-            const data = await response.json()
-            this.setState({person: data.results[0]})
-            console.log(this.state.person)
-        }
+        useEffect(() => {
+            const options = {
+                method: "GET",
+                header:
+                {
+                    'content-type': 'application/json',
+                    'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTc5NzQ3ODQsImV4cCI6MTYxODA2MTE4NH0.3RAWQIOfRQLXAFrRkggutvqHJUdElCNQadDrsa_aDu4'
+                }
+            }
+            
+            fetch("https://etn-test.herokuapp.com/api/accounts",{options})
+            .then(res => {
+                console.log(res)
+                
+            })
+            
+        },[]);
 
-        render()
-        {
              
             return(
                 <div>
-                    {!this.state.person? "":<div>{this.state.person.name.first} </div>}  
+                    {<div> {person} </div>}  
                 </div>
             )
-        }
 
     }
+}
