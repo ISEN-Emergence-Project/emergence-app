@@ -6,7 +6,8 @@ authJwt = (req,res,next)=>{
 
     if(!token){
         return res.status(403).send({
-            message: "No token provided!"
+            message: "No token provided !",
+            originalUrl: res.originalUrl
         });
     }
     jwt.verify(token,config.secret,(err,decoded) => {

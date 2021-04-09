@@ -1,4 +1,8 @@
-const router = require('express').Router();
+const express = require('express')
+const router = express.Router();
+const bodyParser = require('body-parser');
+const multer = require('multer');
+const upload = multer();
 
 // Include API routes
 const accountsRouter = require('./private/accounts');
@@ -15,6 +19,18 @@ const loginRouter = require('./public/login');
 const authJwt = require('../middlewares/authJwt');
 
 
+// Parse application/json
+router.use(bodyParser.json());
+
+// Parse application/xwww-
+router.use(bodyParser.urlencoded({ extended: true }));
+//form-urlencoded
+
+// Parse multipart/form-data
+router.use(upload.array());
+router.use(express.static('public'));
+
+
 /* ----------------------- */
 /* ----- API ROUTING ----- */
 /* ----------------------- */
@@ -22,13 +38,13 @@ const authJwt = require('../middlewares/authJwt');
 
 /* ----- Public API Routes ----- */
 
-router.post('/login', loginRouter);
+router.use('/login', loginRouter);
 
 
 /* ----- Private API Routes ----- */
 
 // API Authentication before accessing private routes
-router.use('/', authJwt);
+//router.use('/', authJwt);
 
 
 // Handle main API routes
@@ -49,7 +65,7 @@ router.get('/', function (req, res) {
 });
 
 // Handle other API routes
-router.get('*', function (req, res) {
+router.use('*', function (req, res) {
     res.status(404).json({
         "message": "Not found",
         "originalUrl": req.originalUrl,
