@@ -57,7 +57,7 @@ router.use('/login', loginRouter);
 /* ----- Private API Routes ----- */
 
 // API Authentication before accessing private routes
-//router.use('/', authJwt);
+router.use('/', authJwt);
 
 
 // Handle main API routes
