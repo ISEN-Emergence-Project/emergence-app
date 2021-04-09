@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import fetchApi from '../services/api';
+import { fetchApi } from '../services/api';
 
 export class APITest extends Component                 // permet de faire un test en appelant l'API
 {
