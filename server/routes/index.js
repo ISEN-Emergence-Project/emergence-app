@@ -43,6 +43,14 @@ router.use(express.static('public'));
 
 /* ----- Public API Routes ----- */
 
+// Handle root
+router.get('/', function (req, res) {
+    res.status(200).json({
+        "message": "OK"
+    });
+});
+
+// Handle login
 router.use('/login', loginRouter);
 
 
@@ -60,14 +68,6 @@ router.use('/matches', matchesRouter);
 router.use('/meetings', meetingsRouter);
 router.use('/preselections', preselectionsRouter);
 router.use('/questions', questionsRouter);
-
-
-// Handle root
-router.get('/', function (req, res) {
-    res.status(200).json({
-        "message": "OK"
-    });
-});
 
 // Handle other API routes
 router.use('*', function (req, res) {
