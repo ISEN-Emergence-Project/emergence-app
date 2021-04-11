@@ -1,6 +1,6 @@
 const preselections = require('express').Router();
 
-const Preselection = require('../models/Preselection');
+const Preselection = require('../../models/Preselection');
 
 preselections.get('/', function (req,res) {
     (async () => {
