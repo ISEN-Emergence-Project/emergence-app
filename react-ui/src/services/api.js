@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const hostname = process.env.API_HOSTNAME || 'http://localhost:5000';
+const hostname = process.env.API_HOSTNAME || '';
 
 const connectApi = (username, password) => {
 
@@ -41,7 +41,9 @@ const fetchApi = (method, url, body) => {
         headers: {
             'Content-Type': 'application/json',
             'x-xsrf-token': xsrfToken
-        }
+        },
+        withCredentials: true,
+        xsrfHeaderName: 'x-xsrf-token'
     }
 
     // Execute and return request

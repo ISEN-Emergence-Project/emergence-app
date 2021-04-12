@@ -34,7 +34,7 @@ if (!isDev && cluster.isMaster) {
         methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Origin', 'X-Requested-With', 'Content', 'Accept', 'Content-Type', 'x-xsrf-token'],
         exposedHeaders: ["Set-Cookie"],
-        credentials: 'include',
+        credentials: true,
         optionsSuccessStatus: 200
     };
     app.use(cors(corsOptions));
