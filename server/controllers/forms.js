@@ -1,5 +1,4 @@
-const Form = require('../models').Form;
-const Question = require('../models').Question;
+const { Form, Question } = require('../models');
 
 module.exports = {
   list(req, res) {

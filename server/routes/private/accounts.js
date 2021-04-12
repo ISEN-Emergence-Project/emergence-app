@@ -1,6 +1,6 @@
 const accounts = require('express').Router();
 
-const accountController = require('../../controllers/account');
+const accountController = require('../../controllers/accounts');
 
 // Handle routes
 accounts.get('/', accountController.list);
