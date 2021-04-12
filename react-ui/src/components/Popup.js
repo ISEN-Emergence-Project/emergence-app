@@ -106,7 +106,7 @@ export function Popup({user,displayUser})   //Créé la pop-up pour ajouter des 
                                             checkEmail(document.getElementById("email").value)? document.getElementById("email").value:
                                             alert("Email invalide")
                                         } 
-                                password= {document.getElementById("passwordInput").value} 
+                                promo= {document.getElementById("passwordInput").value} 
                                 userType={
                                             document.querySelector('input[name="flexRadioDefault"]:checked')===null? alert("Veuillez choisir un type de compte"):
                                             document.querySelector('input[name="flexRadioDefault"]:checked').value
