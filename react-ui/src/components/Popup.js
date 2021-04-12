@@ -1,6 +1,7 @@
 import {Button, Modal} from 'react-bootstrap';
 import React, {useState} from 'react';
 import {AccountCard} from "./AccountCard"
+import {useEffect} from "react"
 
 export function Popup({user,displayUser})   //Créé la pop-up pour ajouter des comptes
 {
@@ -16,6 +17,21 @@ export function Popup({user,displayUser})   //Créé la pop-up pour ajouter des 
 
     const [permission, setPermission] = useState("")
  
+    const call = () =>
+    {
+        useEffect(() => {
+            const options = {
+                method: "POST",
+                header:
+                {
+                    'content-type': 'application/json',
+                    'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTgxNDMxNzIsImV4cCI6MTYxODIyOTU3Mn0.5patB5mX43WUUsCHVPnoAbmz-rEnLwyqRLyAJCl_Ss0'
+                }
+            }
+            fetch("https://etn-test.herokuapp.com/api/accounts",{options})   
+            })
+    }
+
 
     const toggleVisibility = () =>
     {
@@ -82,7 +98,26 @@ export function Popup({user,displayUser})   //Créé la pop-up pour ajouter des 
       </Modal.Body>
 
       <Modal.Footer>{/* Une fois qu'on a rentré les infos on les affiches avec un document.getElementbyId */}
-        <Button variant="btn btn-success btn-sm" onClick={() => displayUser(<AccountCard username= {document.getElementById("id").value} email= {checkEmail(document.getElementById("email").value)?document.getElementById("email").value:alert("Email invalide")} password={document.getElementById("passwordInput").value} userType={document.querySelector('input[name="flexRadioDefault"]:checked')===null? alert("Veuillez choisir un type de compte"):document.querySelector('input[name="flexRadioDefault"]:checked').value}/>)}> <i class="me-2 bi-check-circle"></i> Enregister</Button>
+        <Button variant="btn btn-success btn-sm" onClick={() => displayUser(
+            <div>
+                {call}
+                <AccountCard    username= {document.getElementById("id").value} 
+                                email= { 
+                                            checkEmail(document.getElementById("email").value)? document.getElementById("email").value:
+                                            alert("Email invalide")
+                                        } 
+                                password= {document.getElementById("passwordInput").value} 
+                                userType={
+                                            document.querySelector('input[name="flexRadioDefault"]:checked')===null? alert("Veuillez choisir un type de compte"):
+                                            document.querySelector('input[name="flexRadioDefault"]:checked').value
+                                        }
+                />
+                </div>)}> <i class="me-2 bi-check-circle"></i> Enregister</Button>
+            
+
+
+
+
         <Button variant="btn btn-danger btn-sm" onClick={handleClose}> <i class="me-2 bi-x-square-fill"></i> Fermer</Button>    
 
 
