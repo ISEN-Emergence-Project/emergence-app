@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import { fetchApi } from '../services/api';
+import { connectApi, fetchApi } from '../services/api';
 
 export class APITest extends Component                 // permet de faire un test en appelant l'API
 {
@@ -10,9 +10,11 @@ export class APITest extends Component                 // permet de faire un tes
 
     async componentDidMount()
     {
-        fetchApi('get', 'https://etn-test.herokuapp.com/api', '', {})
+        connectApi('emergence', 'test');
+
+        /*fetchApi('get', '/api', '')
             .then((res) => console.log(res))
-            .catch((err) => console.log(err));
+            .catch((err) => console.log(err));*/
     }
 
     render() {
