@@ -53,22 +53,6 @@ router.get('/', function (req, res) {
 // Handle login
 router.use('/login', loginRouter);
 
-
-/* ----- Private API Routes ----- */
-
-// API Authentication before accessing private routes
-router.use('/', authJwt);
-
-
-// Handle main API routes
-router.use('/accounts', accountsRouter);
-router.use('/answers', answersRouter);
-router.use('/forms', formsRouter);
-router.use('/matches', matchesRouter);
-router.use('/meetings', meetingsRouter);
-router.use('/preselections', preselectionsRouter);
-router.use('/questions', questionsRouter);
-
 // Handle other API routes
 router.use('*', function (req, res) {
     res.status(404).json({
@@ -78,5 +62,18 @@ router.use('*', function (req, res) {
         "path": req.path,
     });
 });
+
+
+/* ----- Private API Routes ----- */
+
+// Handle main API routes
+router.use('/accounts', authJwt, accountsRouter);
+router.use('/answers', authJwt, answersRouter);
+router.use('/forms', authJwt, formsRouter);
+router.use('/matches', authJwt, matchesRouter);
+router.use('/meetings', authJwt, meetingsRouter);
+router.use('/preselections', authJwt, preselectionsRouter);
+router.use('/questions', authJwt, questionsRouter);
+
 
 module.exports = router
