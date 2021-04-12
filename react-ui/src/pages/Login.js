@@ -47,3 +47,5 @@ function Login()  {
         </section>
     );
 }
+
+module.exports = Login
