@@ -4,7 +4,7 @@ import {BrowserRouter, Route, Switch } from 'react-router-dom'
 
 // Import components
 import Navigation from "./navigation/Navigation"
-import { APITest, ApplicantList, ApplicantForm, Form, ManageAccounts, PlanningV2, Rating, Timeline } from './pages/'
+import { APITest, ApplicantList, ApplicantForm, Form, ManageAccounts, PlanningV2, Rating, Timeline } from './pages'
 
 export default function App()
 {
