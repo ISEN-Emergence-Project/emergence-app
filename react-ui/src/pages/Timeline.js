@@ -1,5 +1,5 @@
 import React from "react";
-import {Planning} from"./Planning"
+import Planning from"./Planning"
 
 export default function Timeline()  // Crée le tableau (en cours)
 {
