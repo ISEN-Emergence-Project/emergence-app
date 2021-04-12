@@ -3,25 +3,31 @@ const config = require('../config');
 const { Account } = require("../models");
 
 const authJwt = (req, res, next) => {
-    const { headers } = req;
+    const { cookies, headers } = req;
+
+    // Check valid cookies
+    if (!cookies || !cookies.access_token) {
+        return res.status(401).json({ message: 'Missing token in cookies' });
+    }
+    const accessToken = cookies.access_token;
+
     // Check valid headers
-    if (!headers || !headers.authorization) {
-        return res.status(401).json({
-            message: 'Missing Authorization header'
-        });
+    if (!headers || !headers['x-xsrf-token']) {
+        return res.status(401).json({ message: 'Missing XSRF token in headers' });
     }
+    const xsrfToken = headers['x-xsrf-token'];
 
-    const [scheme, token] = headers.authorization.split(' ');
-    // Check valid scheme and token
-    if (!scheme || scheme.toLowerCase() !== 'bearer' || !token) {
-        return res.status(401).json({
-            message: 'Header format is Authorization: Bearer token'
-        });
-    }
+    // JWT verify access token
+    jwt.verify(accessToken, config.accessToken.secret, (err, decoded) => {
 
-    jwt.verify(token, config.accessToken.secret, (err, decoded) => {
+        // Check valid token
         if (err) {
-            return res.status(400).json({ message: 'Invalid token' });
+            return res.status(400).json({ message: 'Invalid token', error: err });
+        }
+
+        // Check if xsrfToken correspond to JWT payload
+        if (xsrfToken !== decoded.xsrfToken) {
+            return res.status(401).json({ message: 'Bad xsrf token' })
         }
 
         Account
@@ -31,9 +37,10 @@ const authJwt = (req, res, next) => {
                 if (!account) {
                     return res.status(401).send({ message: 'Account not found' });
                 }
-                // Save account
+                // Save account in request
                 req.account = account;
 
+                console.log('> Authorized access to: ' + req.originalUrl);
                 return next();
             })
             .catch((err) => res.status(401).json({ message: 'Unauthorized', err }));

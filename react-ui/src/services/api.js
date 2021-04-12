@@ -1,39 +1,51 @@
-const hostname = 'https://localhost:5000'
+const axios = require('axios');
+
+const hostname = process.env.API_HOSTNAME || 'http://localhost:5000';
 
 const connectApi = (username, password) => {
-    fetch(hostname + '/api/login', {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({username, password})
-    }).then(res => console.log(res));
+
+
+    axios
+        .post(hostname + '/api/login', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            username,
+            password
+        })
+        .then(res => {
+            localStorage.setItem('xsrfToken', JSON.stringify(res.data.xsrfToken));
+            return res;
+        })
+        .catch((err) => console.error(err));
 }
 
 const fetchApi = (method, url, body) => {
-    method = method.toUpperCase();
+
+    let xsrfToken = localStorage.getItem('xsrfToken');
+    // Check valid xsrf token
+    if (!xsrfToken) {
+        return console.error('Missing xsrf token. Aborting request.')
+    }
+    xsrfToken = JSON.parse(xsrfToken);
+
+    method = method.toLowerCase();
     // Check valid method
-    if (!method in ['GET', 'POST', 'PUT', 'DELETE']) {
+    if (!method in ['get', 'post', 'put', 'delete']) {
         return 'Method can only be GET, POST, PUT, DELETE';
     }
 
-    const api_access_token = localStorage.getItem('api-access-token');
-    const authorization_header = (api_access_token !== undefined) ? {} : {'Authorization': 'Bearer ' + api_access_token};
-    const req_body = (method === 'GET') ? {} : {body: JSON.stringify(body)};
-
-    let options = {
+    const config = {
         method: method,
-        mode: 'cors',
+        url: hostname + url,
         headers: {
             'Content-Type': 'application/json',
-            authorization_header
-        },
-        req_body
-    };
+            'x-xsrf-token': xsrfToken
+        }
+    }
 
     // Execute and return request
-    return fetch(hostname + url, options);
+    return axios(config);
 }
 
 module.exports = {

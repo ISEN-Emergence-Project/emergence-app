@@ -3,7 +3,7 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const upload = multer();
-const cors = require('../middlewares/cors');
+const cookieParser = require('cookie-parser');
 
 // Include API routes
 const accountsRouter = require('./private/accounts');
@@ -20,16 +20,14 @@ const loginRouter = require('./public/login');
 const authJwt = require('../middlewares/authJwt');
 
 
-// Authorize CORS
-router.use(cors);
-
+// Parse cookies
+router.use(cookieParser());
 
 // Parse application/json
 router.use(bodyParser.json());
 
-// Parse application/xwww-
+// Parse application/xwww-form-urlencoded
 router.use(bodyParser.urlencoded({ extended: true }));
-//form-urlencoded
 
 // Parse multipart/form-data
 router.use(upload.array());
@@ -53,16 +51,6 @@ router.get('/', function (req, res) {
 // Handle login
 router.use('/login', loginRouter);
 
-// Handle other API routes
-router.use('*', function (req, res) {
-    res.status(404).json({
-        "message": "Not found",
-        "originalUrl": req.originalUrl,
-        "url": req.url,
-        "path": req.path,
-    });
-});
-
 
 /* ----- Private API Routes ----- */
 
@@ -74,6 +62,17 @@ router.use('/matches', authJwt, matchesRouter);
 router.use('/meetings', authJwt, meetingsRouter);
 router.use('/preselections', authJwt, preselectionsRouter);
 router.use('/questions', authJwt, questionsRouter);
+
+
+// Handle other API routes, send Not found
+router.use('*', function (req, res) {
+    res.status(404).json({
+        "message": "Not found",
+        "originalUrl": req.originalUrl,
+        "url": req.url,
+        "path": req.path,
+    });
+});
 
 
 module.exports = router

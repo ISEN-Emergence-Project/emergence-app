@@ -36,10 +36,10 @@ export default function App()
       })
   }, [url]);
 
-  useEffect(() => {
+  /*useEffect(() => {
       setIsFetching(true);
       fetchData();
-  }, [fetchData]);
+  }, [fetchData]);*/
 
 
   return (

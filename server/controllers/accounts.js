@@ -6,6 +6,7 @@ const config = require('../config')
 const { Account } = require('../models');
 
 const salt = bcrypt.genSaltSync(10);
+const isDev = process.env.NODE_ENV !== 'production';
 
 /* FUNCTIONS */
 
@@ -39,7 +40,8 @@ const login = (req, res) => {
             // Create JWT tokens
             const accessToken = jwt.sign(
                 {
-                    role: account.role
+                    role: account.role,
+                    xsrfToken
                 },
                 config.accessToken.secret,
                 {
@@ -59,18 +61,18 @@ const login = (req, res) => {
                 .then(() => {
                     res.cookie('access_token', accessToken, {
                         httpOnly: true,
-                        secure: true,
-                        maxAge: config.accessToken.expiresIn,
+                        secure: !isDev,
+                        maxAge: config.accessToken.expiresIn * 1000, // in milliseconds - 24h
                         path: '/'
                     });
 
                     res.cookie('refresh_token', refreshToken, {
                         httpOnly: true,
-                        secure: true,
-                        path: '/api/token'
+                        secure: !isDev,
+                        path: '/'
                     });
 
-                    res.status(200).json({
+                    return res.status(200).json({
                         message: 'Success',
                         username: account.username,
                         accessTokenExpiresIn: config.accessToken.expiresIn,

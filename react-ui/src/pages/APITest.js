@@ -10,11 +10,11 @@ export class APITest extends Component                 // permet de faire un tes
 
     async componentDidMount()
     {
-        connectApi('emergence', 'test');
+        await connectApi('emergence', 'test');
 
-        /*fetchApi('get', '/api', '')
+        await fetchApi('get', '/api/accounts', '')
             .then((res) => console.log(res))
-            .catch((err) => console.log(err));*/
+            .catch((err) => console.log(err));
     }
 
     render() {
