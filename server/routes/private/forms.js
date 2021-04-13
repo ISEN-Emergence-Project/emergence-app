@@ -4,7 +4,7 @@ const formsController = require("../../controllers/forms");
 
 // GET routes
 forms.get('/', formsController.list);
-forms.get('/:id', formsController.getById);
+forms.get('/:id(\d+)', formsController.getById);
 forms.get('/latest', formsController.getLatest);
 forms.get('/latest/questions', formsController.getLatestQuestions);
 
@@ -12,9 +12,9 @@ forms.get('/latest/questions', formsController.getLatestQuestions);
 forms.post('/', formsController.insert);
 
 // PUT routes
-forms.put('/:id', formsController.update);
+forms.put('/:id(\d+)', formsController.update);
 
 // DELETE routes
-forms.delete('/:id', formsController.delete);
+forms.delete('/:id(\d+)', formsController.delete);
 
 module.exports = forms;

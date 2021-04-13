@@ -4,15 +4,15 @@ const preselectionsController = require('../../controllers/preselections');
 
 // GET routes
 preselections.get('/', preselectionsController.list);
-preselections.get('/:id', preselectionsController.getById);
+preselections.get('/:id(\d+)', preselectionsController.getById);
 
 // POST routes
 preselections.post('/', preselectionsController.insert);
 
 // PUT routes
-preselections.put('/:id', preselectionsController.update);
+preselections.put('/:id(\d+)', preselectionsController.update);
 
 // DELETE routes
-preselections.delete('/:id', preselectionsController.delete);
+preselections.delete('/:id(\d+)', preselectionsController.delete);
 
 module.exports = preselections;

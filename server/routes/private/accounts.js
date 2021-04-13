@@ -4,15 +4,15 @@ const accountsController = require('../../controllers/accounts');
 
 // GET routes
 accounts.get('/', accountsController.list);
-accounts.get('/:id', accountsController.getById);
+accounts.get('/:id(\d+)', accountsController.getById);
 
 // POST routes
 accounts.post('/', accountsController.insert);
 
 // PUT routes
-accounts.put('/:id', accountsController.update);
+accounts.put('/:id(\d+)', accountsController.update);
 
 // DELETE routes
-accounts.delete('/:id', accountsController.delete);
+accounts.delete('/:id(\d+)', accountsController.delete);
 
 module.exports = accounts;

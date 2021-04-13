@@ -68,6 +68,7 @@ module.exports = {
     },
 
     getLatest(req, res) {
+        console.log('> Get latest form');
         return Form
             .findAll({
                 limit: 1,
@@ -76,6 +77,10 @@ module.exports = {
             })
             .then((form) => {
                 return res.status(200).json(form[0]);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
             });
     },
 
@@ -95,6 +100,10 @@ module.exports = {
                     .then((questions) => {
                         return res.status(200).json(questions);
                     });
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
             });
     }
 };

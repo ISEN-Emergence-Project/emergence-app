@@ -4,15 +4,15 @@ const questionsController = require('../../controllers/questions');
 
 // GET routes
 questions.get('/', questionsController.list);
-questions.get('/:id', questionsController.getById);
+questions.get('/:id(\d+)', questionsController.getById);
 
 // POST routes
 questions.post('/', questionsController.insert);
 
 // PUT routes
-questions.put('/:id', questionsController.update);
+questions.put('/:id(\d+)', questionsController.update);
 
 // DELETE routes
-questions.delete('/:id', questionsController.delete);
+questions.delete('/:id(\d+)', questionsController.delete);
 
 module.exports = questions;

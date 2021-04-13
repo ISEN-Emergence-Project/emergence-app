@@ -4,15 +4,15 @@ const meetingsController = require('../../controllers/meetings');
 
 // GET routes
 meetings.get('/', meetingsController.list);
-meetings.get('/:id', meetingsController.getById);
+meetings.get('/:id(\d+)', meetingsController.getById);
 
 // POST routes
 meetings.post('/', meetingsController.insert);
 
 // PUT routes
-meetings.put('/:id', meetingsController.update);
+meetings.put('/:id(\d+)', meetingsController.update);
 
 // DELETE routes
-meetings.delete('/:id', meetingsController.delete);
+meetings.delete('/:id(\d+)', meetingsController.delete);
 
 module.exports = meetings;
