@@ -68,7 +68,6 @@ const del = (req, res, Model) => {
 
 module.exports = {
     list,
-    getById,
     insert,
     update,
     delete: del

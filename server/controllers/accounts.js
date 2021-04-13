@@ -1,8 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
-const config = require('../config')
-const commonsController = require('./commons');
+const config = require('../config');
 
 const { Account } = require('../models');
 
