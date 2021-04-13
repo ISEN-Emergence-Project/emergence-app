@@ -21,7 +21,8 @@ module.exports = {
                 res.status(201).json(Form);
             })
             .catch((error) => {
-                res.status(400).json(JSON.stringify(error));
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
             });
     },
 
@@ -37,8 +38,8 @@ module.exports = {
                     formId: req.params.id
                 }
             })
-            .then(([n_lines, form]) => res.status(200).json(form[0]))
-            .catch((error) => res.status(400).json(JSON.stringify(error)));
+            .then(([, form]) => res.status(200).json(form[0]))
+            .catch((error) => console.log(error));
     },
 
     delete (req, res) {
@@ -61,23 +62,30 @@ module.exports = {
                 return res.status(200).json(form[0]);
             })
             .catch((error) => {
-                res.status(400).json(JSON.stringify(error));
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
             });
     },
 
     getLatest(req, res) {
-        Form
+        console.log('> Get latest form');
+        return Form
             .findAll({
                 limit: 1,
+                where: {},
                 order: [['createdAt', 'DESC']]
             })
             .then((form) => {
                 return res.status(200).json(form[0]);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
             });
     },
 
     getLatestQuestions(req, res) {
-        Form
+        return Form
             .findAll({
                 limit: 1,
                 order: [['createdAt', 'DESC']]
@@ -86,12 +94,16 @@ module.exports = {
                 Question
                     .findAll({
                         where: {
-                            formId: latestForm[0].formId
+                            fkFormId: latestForm[0].formId
                         }
                     })
                     .then((questions) => {
                         return res.status(200).json(questions);
                     });
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
             });
     }
 };
