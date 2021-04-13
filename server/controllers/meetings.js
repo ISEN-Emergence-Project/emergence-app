@@ -23,7 +23,8 @@ module.exports = {
                 res.status(201).json(Meeting);
             })
             .catch((error) => {
-                res.status(400).json(JSON.stringify(error));
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
             });
     },
 
@@ -41,8 +42,8 @@ module.exports = {
                     meetingId: req.params.id
                 }
             })
-            .then(([n_lines, meeting]) => res.status(200).json(meeting[0]))
-            .catch((error) => res.status(400).json(JSON.stringify(error)));
+            .then(([, meeting]) => res.status(200).json(meeting[0]))
+            .catch((error) => console.log(error));
     },
 
     delete (req, res) {
@@ -65,7 +66,8 @@ module.exports = {
                 return res.status(200).json(meeting[0]);
             })
             .catch((error) => {
-                res.status(400).json(JSON.stringify(error));
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
             });
     }
 };

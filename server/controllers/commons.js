@@ -20,8 +20,8 @@ module.exports = {
                 return Model
                     .destroy()
                     .then(() => res.status(204).json())
-                    .catch((error) => res.status(400).json(JSON.stringify(error)));
+                    .catch((error) => console.log(error));
             })
-            .catch((error) => res.status(400).json(JSON.stringify(error)));
+            .catch((error) => console.log(error));
     }
 };

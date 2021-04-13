@@ -33,9 +33,7 @@ module.exports = {
             .then((Account) => {
                 res.status(201).json(Account);
             })
-            .catch((error) => {
-                res.status(400).json(JSON.stringify(error));
-            });
+            .catch((error) => console.log(error));
     },
 
     update (req, res) {
@@ -46,7 +44,7 @@ module.exports = {
                 lastname: req.body.lastname,
                 username: req.body.username,
                 email: req.body.email,
-                passwordHash: req.body.passwordHash,
+                passwordHash: hash,
                 role: req.body.role,
                 isArchived: req.body.isArchived,
                 resetKey: req.body.resetKey,
@@ -57,8 +55,12 @@ module.exports = {
                     accountId: req.params.id
                 }
             })
-            .then(([n_lines, account]) => res.status(200).json(account[0]))
-            .catch((error) => res.status(400).json(JSON.stringify(error)));
+            .then(([, account]) => res.status(200).json(account[0]))
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
+                res.status(500).json({ message: 'Internal error' });
+            });
     },
 
     delete (req, res) {
@@ -81,7 +83,8 @@ module.exports = {
                 return res.status(200).json(account[0]);
             })
             .catch((error) => {
-                res.status(400).json(JSON.stringify(error));
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
             });
     },
 
