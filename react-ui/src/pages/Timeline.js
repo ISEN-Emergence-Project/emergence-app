@@ -1,7 +1,7 @@
 import React from "react";
 import Planning from"./Planning"
 
-export default function Timeline()  // Crée le tableau (en cours)
+export function Timeline()  // Crée le tableau (en cours)
 {
     return <div>
         <table className="table table-hover table-bordered bg-light">

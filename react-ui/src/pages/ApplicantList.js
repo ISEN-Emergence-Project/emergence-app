@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import {ApplicantCard} from"../components/ApplicantCard"
 
 
-export default class ApplicantList extends Component
+export class ApplicantList extends Component
 {
 
     render()

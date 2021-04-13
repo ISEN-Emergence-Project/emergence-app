@@ -1,6 +1,6 @@
 import React from "react";
 
-function Login()  {
+export function Login()  {
     return (
         <section className="ftco-section">
             <div className="container">
@@ -47,5 +47,3 @@ function Login()  {
         </section>
     );
 }
-
-export default Login

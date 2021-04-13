@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {Field} from "../components/Field" // On appelle le composant "Field" qui contient un champ pour une question
 
 
-export default class ApplicantForm extends Component 
+export class ApplicantForm extends Component
 {
   constructor(props)    // On instancie les "variables"
   {
