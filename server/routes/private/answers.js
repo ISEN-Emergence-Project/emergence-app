@@ -1,5 +1,8 @@
 const answers = require('express').Router();
 
+const commonsController = require('../../controllers/commons');
+const answerController = require('../../controllers/answer');
+
 const Answer = require('../../models/Answer');
 
 answers.get('/', function (req,res) {

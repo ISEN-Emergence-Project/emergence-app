@@ -12,9 +12,6 @@ accounts.get('/', (req, res) => {
 accounts.get('/:id', (req, res) => {
     return accountsController.getById(req, res, Account);
 });
-accounts.get('/:id', (req, res) => {
-    return accountsController.logout(req, res, Account);
-});
 
 // POST routes
 accounts.post('/', (req, res) => {
