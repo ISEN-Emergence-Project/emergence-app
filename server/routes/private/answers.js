@@ -1,18 +1,18 @@
 const answers = require('express').Router();
 
-const Answer = require('../../models/Answer');
+const answersController = require('../../controllers/answers');
 
-answers.get('/', function (req,res) {
-    (async () => {
-        try {
-            const answers = await Answer.findAll();
+// GET routes
+answers.get('/', answersController.list);
+answers.get('/:id(\d+)', answersController.getById);
 
-            res.send(JSON.stringify({answer: answers}));
-        }
-        catch (e) {
-            res.send(e);
-        }
-    })();
-})
+// POST routes
+answers.post('/', answersController.insert);
+
+// PUT routes
+answers.put('/:id(\d+)', answersController.update);
+
+// DELETE routes
+answers.delete('/:id(\d+)', answersController.delete);
 
 module.exports = answers;

@@ -18,7 +18,7 @@ const sequelize = new Sequelize(
 sequelize
     .authenticate()
     .then(() => {
-        console.log('Sequelize: Connection has been established successfully.');
+        console.log('Sequelize: Connection has been established successfully.\n');
     })
     .catch(err => {
         console.error('Sequelize: Unable to connect to the database:', err);
@@ -27,10 +27,10 @@ sequelize
 sequelize
     .sync()
     .then(() => {
-        console.log('Sequelize: All models were synchronized successfully')
+        console.log('Sequelize: All models were synchronized successfully.\n')
     })
     .catch(err => {
-        console.log('Sequelize: The was an error while synchronizing with database')
+        console.log('Sequelize: The was an error while synchronizing with database.\n');
     })
 
 // Export modules

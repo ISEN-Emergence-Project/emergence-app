@@ -22,7 +22,7 @@ const finalSpaceCharacters = [              // Essai d'un drag and drop (pas imp
     }
   ]
 
-export function Planning()
+export default function Planning()
 {
     const [characters, updateCharacters] = useState(finalSpaceCharacters);
 

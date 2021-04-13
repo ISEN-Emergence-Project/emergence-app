@@ -1,18 +1,18 @@
 const preselections = require('express').Router();
 
-const Preselection = require('../../models/Preselection');
+const preselectionsController = require('../../controllers/preselections');
 
-preselections.get('/', function (req,res) {
-    (async () => {
-        try {
-            const preselections = await Preselection.findAll();
+// GET routes
+preselections.get('/', preselectionsController.list);
+preselections.get('/:id(\d+)', preselectionsController.getById);
 
-            res.send(JSON.stringify({preselection: preselections}));
-        }
-        catch (e) {
-            res.send(e);
-        }
-    })();
-})
+// POST routes
+preselections.post('/', preselectionsController.insert);
+
+// PUT routes
+preselections.put('/:id(\d+)', preselectionsController.update);
+
+// DELETE routes
+preselections.delete('/:id(\d+)', preselectionsController.delete);
 
 module.exports = preselections;

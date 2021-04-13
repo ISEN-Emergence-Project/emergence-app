@@ -59,7 +59,19 @@ export function APITest(){          // permet de faire un test en appelant l'API
                         
                     }               
                 </div>
-            )
+                {
 
+                    loading? <div className="d-flex justify-content-center  mt-4">
+                        <div className="spinner-border text-success" role="status"/>
+                        <span class="visually-hidden ms-5"> Chargement </span>
+                    </div> :
+
+                    <div>
+                        {person.map(pers => <li key={pers.accountId}>{<AccountCard username = {pers.firstname +" "+ pers.lastname} email = {pers.email} promo = {pers.laureatePromo} userType = {pers.role}/>}</li>)}
+                    </div>
+
+                }
+            </div>
+        );
     }
 }
