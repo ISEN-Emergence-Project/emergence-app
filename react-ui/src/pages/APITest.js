@@ -22,12 +22,14 @@ export function APITest(){          // permet de faire un test en appelant l'API
             fetch("https://etn-test.herokuapp.com/api/accounts",{options})
             .then(res => {
                 res.json()
-                .then(res => setPerson(res))
+                .then(res => {
+                    console.log(res)
+                    return setPerson(res)
+                })
                 setLoading(false)
-                
             })
             
-            .catch(error => console.error("There was an error",error))// person[0]/ person[1] ... ->contourne le for
+            .catch(error => console.error("There was an error",error)) 
            
         },[]);
 
@@ -45,7 +47,14 @@ export function APITest(){          // permet de faire un test en appelant l'API
                         </div> :
 
                         <div> 
-                            {person.map(pers => <li key={pers.accountId}>{<AccountCard username = {pers.firstname +" "+ pers.lastname} email = {pers.email} promo = {pers.laureatePromo} userType = {pers.role}/>}</li>)}
+                            {person.map(pers => <li key={pers.accountId}>
+                                {<AccountCard   username = {pers.firstname +" "+ pers.lastname} 
+                                                email = {pers.email} 
+                                                promo = {pers.laureatePromo} 
+                                                userType = {pers.role}/>
+                                }
+                            </li>
+                            )}
                         </div>
                         
                     }               
