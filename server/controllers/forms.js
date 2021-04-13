@@ -94,7 +94,7 @@ module.exports = {
                 Question
                     .findAll({
                         where: {
-                            formId: latestForm[0].formId
+                            fkFormId: latestForm[0].formId
                         }
                     })
                     .then((questions) => {
