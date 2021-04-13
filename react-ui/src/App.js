@@ -4,7 +4,7 @@ import {BrowserRouter, Route, Switch } from 'react-router-dom'
 
 // Import components
 import Navigation from "./navigation/Navigation"
-import APITest from "./pages/APITest"
+import {APITest} from "./pages/APITest"
 import ApplicantList from "./pages/ApplicantList"
 import ApplicantForm from "./pages/ApplicantForm"
 import Form from "./pages/Form"
