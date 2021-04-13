@@ -1,37 +1,19 @@
 const accounts = require('express').Router();
 
-const commonsController = require('../../controllers/commons');
 const accountsController = require('../../controllers/accounts');
 
-const Account = require('../../models/Account');
-
 // GET routes
-accounts.get('/', (req, res) => {
-    return commonsController.list(req, res, Account);
-});
-accounts.get('/:id', (req, res) => {
-    return accountsController.getById(req, res, Account);
-});
-accounts.get('/:id', (req, res) => {
-    return accountsController.logout(req, res, Account);
-});
+accounts.get('/', accountsController.list);
+accounts.get('/:id', accountsController.getById);
 
 // POST routes
-accounts.post('/', (req, res) => {
-    return commonsController.insert(req, res, Account);
-});
-accounts.post('/', (req, res) => {
-    return accountsController.login(req, res, Account);
-});
+accounts.post('/', accountsController.insert);
+accounts.post('/login', accountsController.login);
 
 // PUT routes
-accounts.put('/:id', (req, res) => {
-    return commonsController.update(req, res, Account);
-});
+accounts.put('/:id', accountsController.update);
 
 // DELETE routes
-accounts.delete('/:id', (req, res) => {
-    return commonsController.delete(req, res, Account);
-});
+accounts.delete('/:id', accountsController.delete);
 
 module.exports = accounts;
