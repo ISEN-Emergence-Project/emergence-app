@@ -3,6 +3,9 @@ const config = require('../config');
 const { Account } = require("../models");
 
 const authJwt = (req, res, next) => {
+    // temporary auto accept authorization
+    next()
+
     const { cookies, headers } = req;
 
     // Check valid cookies

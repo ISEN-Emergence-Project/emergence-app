@@ -3,8 +3,6 @@ const axios = require('axios');
 const hostname = process.env.API_HOSTNAME || '';
 
 const connectApi = (username, password) => {
-
-
     axios
         .post(hostname + '/api/login', {
             headers: {
