@@ -28,7 +28,7 @@ module.exports = {
                 passwordHash: hash,
                 role: req.body.role,
                 isArchived: req.body.isArchived,
-                resetKey: req.body.resetKey
+                laureatePromo: req.body.laureatePromo
             })
             .then((Account) => {
                 res.status(201).json(Account);
@@ -39,15 +39,19 @@ module.exports = {
     },
 
     update (req, res) {
+        const hash = bcrypt.hashSync(req.body.password, salt);
         return Account
             .update({
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
                 username: req.body.username,
                 email: req.body.email,
+                passwordHash: req.body.passwordHash,
                 role: req.body.role,
                 isArchived: req.body.isArchived,
-                resetKey: req.body.resetKey
+                resetKey: req.body.resetKey,
+                refreshToken: req.body.refreshToken,
+                laureatePromo: req.body.laureatePromo
             }, {
                 where: {
                     accountId: req.params.id
@@ -55,6 +59,10 @@ module.exports = {
             })
             .then(([n_lines, account]) => res.status(200).json(account[0]))
             .catch((error) => res.status(400).json(JSON.stringify(error)));
+    },
+
+    delete (req, res) {
+        return commonsController.delete(req, res, Account);
     },
 
     getById (req, res) {

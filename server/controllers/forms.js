@@ -1,134 +1,97 @@
 const { Form, Question } = require('../models');
 
-const listLatestQuestions = (req, res) => {
-    Form
-        .findAll({
-            limit: 1,
-            order: [['createdAt', 'DESC']]
-        })
-        .then((latestForm) => {
-            Question
-                .findAll({
-                    where: {
-                        formId: latestForm[0].formId
-                    }
-                })
-                .then((questions) => {
-                    return res.status(200).json('questions: ' + questions);
-                });
-        });
-}
+const commonsController = require('./commons');
 
+/* FUNCTIONS */
 
 module.exports = {
-    list(req, res) {
-        return Form
-            .findAll({
-                include: [{
-                    model: Question,
-                    as: 'questions'
-                }],
-            })
-            .then((forms) => res.status(200).send(forms))
-            .catch((error) => { res.status(400).send(error); });
-    },
-    listLatestQuestions,
-
-    getById(req, res) {
-        return Form
-            .findById(req.params.id, {
-                include: [{
-                    model: Question,
-                    as: 'questions'
-                }],
-            })
-            .then((form) => {
-                if (!form) {
-                    return res.status(404).send({
-                        message: 'Form Not Found',
-                    });
-                }
-                return res.status(200).send(form);
-            })
-            .catch((error) => res.status(400).send(error));
+    list (req, res) {
+        return commonsController.list(req, res, Form);
     },
 
-    add(req, res) {
+    insert (req, res) {
         return Form
             .create({
+                formId: req.body.formId,
                 title: req.body.title,
-                description:req.body.description,
-                banner_url:req.body.banner_url,
+                description: req.body.description,
+                bannerUrl: req.body.bannerUrl
             })
-            .then((form) => res.status(201).send(form))
-            .catch((error) => res.status(400).send(error));
+            .then((Form) => {
+                res.status(201).json(Form);
+            })
+            .catch((error) => {
+                res.status(400).json(JSON.stringify(error));
+            });
     },
 
-    addQuestion(req, res) {
+    update (req, res) {
         return Form
-            .findById(req.body.form_id, {
-                include: [{
-                    model: Question,
-                    as: 'questions'
-                }],
+            .update({
+                formId: req.body.formId,
+                title: req.body.title,
+                description: req.body.description,
+                bannerUrl: req.body.bannerUrl
+            }, {
+                where: {
+                    formId: req.params.id
+                }
+            })
+            .then(([n_lines, form]) => res.status(200).json(form[0]))
+            .catch((error) => res.status(400).json(JSON.stringify(error)));
+    },
+
+    delete (req, res) {
+        return commonsController.delete(req, res, Form);
+    },
+
+    getById (req, res) {
+        return Form
+            .findAll({
+                where: {
+                    formId: req.params.id
+                }
             })
             .then((form) => {
                 if (!form) {
-                    return res.status(404).send({
+                    return res.status(404).json({
                         message: 'Form Not Found',
                     });
                 }
-                Question.findById(req.body.form_id).then((course) => {
-                    if (!course) {
-                        return res.status(404).send({
-                            message: 'Question Not Found',
-                        });
-                    }
-                    form.addQuestion(course);
-                    return res.status(200).send(form);
-                })
+                return res.status(200).json(form[0]);
             })
-            .catch((error) => res.status(400).send(error));
+            .catch((error) => {
+                res.status(400).json(JSON.stringify(error));
+            });
     },
 
-    update(req, res) {
-        return Form
-            .findById(req.params.id, {
-                include: [{
-                    model: Question,
-                    as: 'questions'
-                }],
+    getLatest(req, res) {
+        Form
+            .findAll({
+                limit: 1,
+                order: [['createdAt', 'DESC']]
             })
-            .then(form => {
-                if (!form) {
-                    return res.status(404).send({
-                        message: 'Form Not Found',
-                    });
-                }
-                return form
-                    .update({
-                        title: req.body.title || Question.title,
+            .then((form) => {
+                return res.status(200).json(form[0]);
+            });
+    },
+
+    getLatestQuestions(req, res) {
+        Form
+            .findAll({
+                limit: 1,
+                order: [['createdAt', 'DESC']]
+            })
+            .then((latestForm) => {
+                Question
+                    .findAll({
+                        where: {
+                            formId: latestForm[0].formId
+                        }
                     })
-                    .then(() => res.status(200).send(Form))
-                    .catch((error) => res.status(400).send(error));
-            })
-            .catch((error) => res.status(400).send(error));
-    },
-
-    delete(req, res) {
-        return Form
-            .findById(req.params.id)
-            .then(form => {
-                if (!form) {
-                    return res.status(400).send({
-                        message: 'Form Not Found',
+                    .then((questions) => {
+                        return res.status(200).json(questions);
                     });
-                }
-                return form
-                    .destroy()
-                    .then(() => res.status(204).send())
-                    .catch((error) => res.status(400).send(error));
-            })
-            .catch((error) => res.status(400).send(error));
-    },
+            });
+    }
 };

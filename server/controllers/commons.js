@@ -2,14 +2,14 @@
 
 module.exports = {
     list (req, res, Model) {
-        return Model
+        Model
             .findAll()
             .then((entities) => res.status(200).json(entities))
             .catch((error) => res.status(400).json(error));
     },
 
     delete (req, res, Model) {
-        return Model
+        Model
             .findById(req.params.id)
             .then(entity => {
                 if (!entity) {
