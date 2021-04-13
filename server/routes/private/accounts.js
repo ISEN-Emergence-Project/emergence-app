@@ -10,12 +10,18 @@ accounts.get('/', (req, res) => {
     return commonsController.list(req, res, Account);
 });
 accounts.get('/:id', (req, res) => {
-    return commonsController.getById(req, res, Account);
+    return accountsController.getById(req, res, Account);
+});
+accounts.get('/:id', (req, res) => {
+    return accountsController.logout(req, res, Account);
 });
 
 // POST routes
 accounts.post('/', (req, res) => {
     return commonsController.insert(req, res, Account);
+});
+accounts.post('/', (req, res) => {
+    return accountsController.login(req, res, Account);
 });
 
 // PUT routes

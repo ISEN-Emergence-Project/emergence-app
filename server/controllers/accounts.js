@@ -95,7 +95,28 @@ const logout = (req, res) => {
     return res.json('Not implemented');
 }
 
+const getById = (req, res) => {
+    return Account
+        .findAll({
+            where: {
+                accountId: req.params.id
+            }
+        })
+        .then((account) => {
+            if (!account) {
+                return res.status(404).json({
+                    message: 'Model Not Found',
+                });
+            }
+            return res.status(200).json(account[0]);
+        })
+        .catch((error) => {
+            res.status(400).json(JSON.stringify(error));
+        });
+}
+
 module.exports = {
     login,
-    logout
+    logout,
+    getById
 };

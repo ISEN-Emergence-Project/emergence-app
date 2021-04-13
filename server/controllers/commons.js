@@ -9,22 +9,6 @@ const list = (req, res, Model) => {
         .catch((error) => res.status(400).json(error));
 }
 
-const getById = (req, res, Model) => {
-    return Model
-        .findById(req.params.id)
-        .then((entity) => {
-            if (!entity) {
-                return res.status(404).json({
-                    message: 'Model Not Found',
-                });
-            }
-            return res.status(200).json(entity);
-        })
-        .catch((error) => {
-            res.status(400).json(JSON.stringify(error));
-        });
-}
-
 const insert = (req, res, Model) => {
     const hash = bcrypt.hashSync(req.body.password, salt);
     return Model
