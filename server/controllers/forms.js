@@ -71,6 +71,7 @@ module.exports = {
         return Form
             .findAll({
                 limit: 1,
+                where: {},
                 order: [['createdAt', 'DESC']]
             })
             .then((form) => {
