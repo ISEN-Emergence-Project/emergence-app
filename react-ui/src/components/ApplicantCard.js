@@ -13,15 +13,15 @@ export function ApplicantCard({Name,Firstname,Age,Studies})     // utilisé dans
 
     return <div>
          <div className="card">
-                <div className="card-header text-center">
+                <div class="card-header text-center">
                     <h5>  {Name + " " + Firstname} </h5>
                 </div>
             
-                <p className="card-title text-center">{Age}</p>
-                <p className="card-text text-center">{Studies}</p>
+                <p class="card-title text-center">{Age}</p>
+                <p class="card-text text-center">{Studies}</p>
 
                 <div className="d-flex justify-content-end" > {/* Si on clique sur le bouton "en savoir plus" on affiche la pop-up */}
-                    <Button onClick={handleShow} className="btn btn-primary mb-3"> <i className="me-2 bi-info-circle-fill"></i> En savoir plus </Button>
+                    <Button onClick={handleShow} className="btn btn-primary mb-3"> <i className="me-2 bi-info-circle-fill"></i> Plus </Button>
                 </div>
         </div>
 
@@ -45,7 +45,7 @@ export function ApplicantCard({Name,Firstname,Age,Studies})     // utilisé dans
             </Modal.Body>
 
             <Modal.Footer>
-            <Button variant="btn btn-danger btn-sm" onClick={handleClose}> <i className="me-2 bi-x-square-fill"></i> Fermer</Button>    
+            <Button variant="btn btn-danger btn-sm" onClick={handleClose}> <i class="me-2 bi-x-square-fill"></i> Fermer</Button>    
 
             </Modal.Footer>
 

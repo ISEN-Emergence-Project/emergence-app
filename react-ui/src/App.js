@@ -12,9 +12,13 @@ import {ApplicantForm} from "./pages/ApplicantForm"
 import {Timeline} from "./pages/Timeline"
 import {PlanningV2} from "./pages/PlanningV2"
 import {APITest} from "./pages/APITest"
+import {Login} from "./pages/Login"
 
 export default function App()
 {
+    useEffect(() => {
+        document.title = "Emergence"
+      }, [])
   const [message, setMessage] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
   const [url, setUrl] = useState('/api');
@@ -43,7 +47,9 @@ export default function App()
 
 
   return (
+      
       <BrowserRouter>
+          <title>Emergence</title>
           <div>
               <Navigation />
               <Switch>
@@ -55,6 +61,7 @@ export default function App()
                   <Route  path="/Timeline" component={Timeline}/>
                   <Route  path="/PlanningV2" component={PlanningV2}/>
                   <Route  path="/APITest" component={APITest}/>
+                  <Route  path="/Login" component={Login}/>
               </Switch>
           </div>
       </BrowserRouter>
