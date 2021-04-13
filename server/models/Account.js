@@ -47,6 +47,9 @@ Account.init({
     resetKey: {
         type: DataTypes.STRING
     },
+    refreshToken: {
+        type: DataTypes.STRING
+    },
     lastConnectedAt: {
         type: DataTypes.DATE
     },

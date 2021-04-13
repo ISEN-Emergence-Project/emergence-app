@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import {Field} from"../components/Field"
 
 
-export class Form extends Component 
+export class Form extends Component
 {
   constructor(props)
   {

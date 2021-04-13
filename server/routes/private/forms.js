@@ -1,18 +1,11 @@
 const forms = require('express').Router();
 
-const Form = require('../../models/Form');
+const formsController = require('../../controllers/forms');
 
-forms.get('/', function (req,res) {
-    (async () => {
-        try {
-            const forms = await Form.findAll();
-
-            res.send(JSON.stringify({form: forms}));
-        }
-        catch (e) {
-            res.send(e);
-        }
-    })();
-})
+forms.get('/', formsController.list);
+forms.get('/latest', formsController.list);
+forms.get('/latest/questions', formsController.listLatestQuestions);
+forms.get('/:id', formsController.getById);
+forms.post('/', formsController.add);
 
 module.exports = forms;
