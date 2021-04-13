@@ -42,6 +42,10 @@ export class Navigation extends Component   // Permet de créer la barre de navi
                         <li className="nav-item">
                         <Link className="nav-link"to="/APITest"> <button className="btn btn-dark btn-sm align-self-center" > API test </button> </Link>
                         </li>
+
+                        <li className="nav-item">
+                        <Link className="nav-link"to="/PrettyPlanning"> <button className="btn btn-dark btn-sm align-self-center" > Jolie Planning </button> </Link>
+                        </li>
                     </ul>
                     </div>
                 </div>
