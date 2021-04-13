@@ -22,20 +22,42 @@ export function APITest(){          // permet de faire un test en appelant l'API
             fetch("https://etn-test.herokuapp.com/api/accounts",{options})
             .then(res => {
                 res.json()
-                .then(res => setPerson(res))
+                .then(res => {
+                    console.log(res)
+                    return setPerson(res)
+                })
                 setLoading(false)
-                
             })
             
-            .catch(error => console.error("There was an error",error))// person[0]/ person[1] ... ->contourne le for
+            .catch(error => console.error("There was an error",error)) 
            
         },[]);
 
              
-        return(
-            <div>
-                <div className="container d-flex justify-content-center mt-5">
-                    <button className="btn btn-success"> Ajouter</button>
+            return(
+                <div>
+                    <div className="container d-flex justify-content-center mt-5">
+                        <button className="btn btn-success"> Ajouter</button>
+                    </div>
+                    {
+                       
+                        loading? <div className="d-flex justify-content-center  mt-4"> 
+                            <div className="spinner-border text-success" role="status"/>
+                            <span class="visually-hidden ms-5"> Chargement </span>
+                        </div> :
+
+                        <div> 
+                            {person.map(pers => <li key={pers.accountId}>
+                                {<AccountCard   username = {pers.firstname +" "+ pers.lastname} 
+                                                email = {pers.email} 
+                                                promo = {pers.laureatePromo} 
+                                                userType = {pers.role}/>
+                                }
+                            </li>
+                            )}
+                        </div>
+                        
+                    }               
                 </div>
                 {
 
