@@ -16,21 +16,18 @@ export function Popup({user,displayUser})   //Créé la pop-up pour ajouter des 
     const handleShow = () => setShow(true);
 
     const [permission, setPermission] = useState("")
- 
-    const call = () =>
-    {
-        useEffect(() => {
-            const options = {
-                method: "POST",
-                header:
-                {
-                    'content-type': 'application/json',
-                    'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTgxNDMxNzIsImV4cCI6MTYxODIyOTU3Mn0.5patB5mX43WUUsCHVPnoAbmz-rEnLwyqRLyAJCl_Ss0'
-                }
+
+    useEffect(() => {
+        const options = {
+            method: "POST",
+            header:
+            {
+                'content-type': 'application/json',
+                'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTgxNDMxNzIsImV4cCI6MTYxODIyOTU3Mn0.5patB5mX43WUUsCHVPnoAbmz-rEnLwyqRLyAJCl_Ss0'
             }
-            fetch("https://etn-test.herokuapp.com/api/accounts",{options})   
-            })
-    }
+        }
+        fetch("https://etn-test.herokuapp.com/api/accounts",{options})
+        })
 
 
     const toggleVisibility = () =>
@@ -100,7 +97,6 @@ export function Popup({user,displayUser})   //Créé la pop-up pour ajouter des 
       <Modal.Footer>{/* Une fois qu'on a rentré les infos on les affiches avec un document.getElementbyId */}
         <Button variant="btn btn-success btn-sm" onClick={() => displayUser(
             <div>
-                {call}
                 <AccountCard    username= {document.getElementById("id").value} 
                                 email= { 
                                             checkEmail(document.getElementById("email").value)? document.getElementById("email").value:
