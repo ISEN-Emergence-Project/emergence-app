@@ -9,8 +9,8 @@ const cookieParser = require('cookie-parser');
 const accountsRouter = require('./private/accounts');
 const answersRouter = require('./private/answers');
 const formsRouter = require('./private/forms');
-const matchesRouter = require('./private/match');
-const meetingsRouter = require('./private/meeting');
+const matchesRouter = require('./private/matches');
+const meetingsRouter = require('./private/meetings');
 const preselectionsRouter = require('./private/preselection');
 const questionsRouter = require('./private/question');
 
