@@ -1,18 +1,18 @@
 const questions = require('express').Router();
 
-const Question = require('../../models/Question');
+const questionsController = require('../../controllers/questions');
 
-questions.get('/', function (req,res) {
-    (async () => {
-        try {
-            const questions = await Question.findAll();
+// GET routes
+questions.get('/', questionsController.list);
+questions.get('/:id', questionsController.getById);
 
-            res.send(JSON.stringify({question: questions}));
-        }
-        catch (e) {
-            res.send(e);
-        }
-    })();
-})
+// POST routes
+questions.post('/', questionsController.insert);
+
+// PUT routes
+questions.put('/:id', questionsController.update);
+
+// DELETE routes
+questions.delete('/:id', questionsController.delete);
 
 module.exports = questions;

@@ -1,18 +1,18 @@
 const matches = require('express').Router();
 
-const Match = require('../../models/Match');
+const matchesController = require('../../controllers/matches');
 
-matches.get('/', function (req,res) {
-    (async () => {
-        try {
-            const matches = await Match.findAll();
+// GET routes
+matches.get('/', matchesController.list);
+matches.get('/:id', matchesController.getById);
 
-            res.send(JSON.stringify({match: matches}));
-        }
-        catch (e) {
-            res.send(e);
-        }
-    })();
-})
+// POST routes
+matches.post('/', matchesController.insert);
+
+// PUT routes
+matches.put('/:id', matchesController.update);
+
+// DELETE routes
+matches.delete('/:id', matchesController.delete);
 
 module.exports = matches;

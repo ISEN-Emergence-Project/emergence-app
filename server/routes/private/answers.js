@@ -1,21 +1,18 @@
 const answers = require('express').Router();
 
-const commonsController = require('../../controllers/commons');
-const answerController = require('../../controllers/answer');
+const answersController = require('../../controllers/answers');
 
-const Answer = require('../../models/Answer');
+// GET routes
+answers.get('/', answersController.list);
+answers.get('/:id', answersController.getById);
 
-answers.get('/', function (req,res) {
-    (async () => {
-        try {
-            const answers = await Answer.findAll();
+// POST routes
+answers.post('/', answersController.insert);
 
-            res.send(JSON.stringify({answer: answers}));
-        }
-        catch (e) {
-            res.send(e);
-        }
-    })();
-})
+// PUT routes
+answers.put('/:id', answersController.update);
+
+// DELETE routes
+answers.delete('/:id', answersController.delete);
 
 module.exports = answers;

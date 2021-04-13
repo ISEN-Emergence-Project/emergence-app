@@ -1,18 +1,18 @@
 const meetings = require('express').Router();
 
-const Meeting = require('../../models/Meeting');
+const meetingsController = require('../../controllers/meetings');
 
-meetings.get('/', function (req,res) {
-    (async () => {
-        try {
-            const meetings = await Meeting.findAll();
+// GET routes
+meetings.get('/', meetingsController.list);
+meetings.get('/:id', meetingsController.getById);
 
-            res.send(JSON.stringify({meeting: meetings}));
-        }
-        catch (e) {
-            res.send(e);
-        }
-    })();
-})
+// POST routes
+meetings.post('/', meetingsController.insert);
+
+// PUT routes
+meetings.put('/:id', meetingsController.update);
+
+// DELETE routes
+meetings.delete('/:id', meetingsController.delete);
 
 module.exports = meetings;

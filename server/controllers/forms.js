@@ -66,7 +66,7 @@ module.exports = {
     },
 
     getLatest(req, res) {
-        Form
+        return Form
             .findAll({
                 limit: 1,
                 order: [['createdAt', 'DESC']]
@@ -77,7 +77,7 @@ module.exports = {
     },
 
     getLatestQuestions(req, res) {
-        Form
+        return Form
             .findAll({
                 limit: 1,
                 order: [['createdAt', 'DESC']]

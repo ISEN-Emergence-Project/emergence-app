@@ -8,7 +8,6 @@ accounts.get('/:id', accountsController.getById);
 
 // POST routes
 accounts.post('/', accountsController.insert);
-accounts.post('/login', accountsController.login);
 
 // PUT routes
 accounts.put('/:id', accountsController.update);

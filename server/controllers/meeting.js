@@ -1,13 +1,71 @@
 const { Meeting } = require('../models');
 
-function list(req, res) {
-    return Meeting
-        .findAll()
-        .then((meetings) => res.status(200).json({'meetings': [meetings]}))
-        .catch((error) => res.status(400).json(error));
-}
+const commonsController = require('./commons');
+
+/* FUNCTIONS */
 
 module.exports = {
-    list,
+    list (req, res) {
+        return commonsController.list(req, res, Meeting);
+    },
 
+    insert (req, res) {
+        return Meeting
+            .create({
+                fkGodfatherAccountId: req.body.fkGodfatherAccountId,
+                fkLaureateAccountId: req.body.fkLaureateAccountId,
+                beginning: req.body.beginning,
+                ending: req.body.ending,
+                godfatherRating: req.body.godfatherRating,
+                laureateRating: req.body.laureateRating
+            })
+            .then((Meeting) => {
+                res.status(201).json(Meeting);
+            })
+            .catch((error) => {
+                res.status(400).json(JSON.stringify(error));
+            });
+    },
+
+    update (req, res) {
+        return Meeting
+            .update({
+                fkGodfatherAccountId: req.body.fkGodfatherAccountId,
+                fkLaureateAccountId: req.body.fkLaureateAccountId,
+                beginning: req.body.beginning,
+                ending: req.body.ending,
+                godfatherRating: req.body.godfatherRating,
+                laureateRating: req.body.laureateRating
+            }, {
+                where: {
+                    meetingId: req.params.id
+                }
+            })
+            .then(([n_lines, meeting]) => res.status(200).json(meeting[0]))
+            .catch((error) => res.status(400).json(JSON.stringify(error)));
+    },
+
+    delete (req, res) {
+        return commonsController.delete(req, res, Meeting);
+    },
+
+    getById (req, res) {
+        return Meeting
+            .findAll({
+                where: {
+                    meetingId: req.params.id
+                }
+            })
+            .then((meeting) => {
+                if (!meeting) {
+                    return res.status(404).json({
+                        message: 'Meeting Not Found',
+                    });
+                }
+                return res.status(200).json(meeting[0]);
+            })
+            .catch((error) => {
+                res.status(400).json(JSON.stringify(error));
+            });
+    }
 };
