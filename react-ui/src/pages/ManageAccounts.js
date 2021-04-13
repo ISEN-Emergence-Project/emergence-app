@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react"
 import {Popup} from"../components/Popup"
 
-export function ManageAccounts()
+export default function ManageAccounts()
 
 {
     const [user, displayUser] = useState([])

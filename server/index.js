@@ -3,7 +3,9 @@ const path = require('path');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 
+const cors = require('cors');
 const dotenv = require("dotenv");
+
 // Configure .env file support
 dotenv.config()
 
@@ -26,6 +28,16 @@ if (!isDev && cluster.isMaster) {
 } else {
     const app = express();
     const routes = require('./routes');
+
+    const corsOptions = {
+        origin: '*',
+        methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+        allowedHeaders: ['Origin', 'X-Requested-With', 'Content', 'Accept', 'Content-Type', 'x-xsrf-token'],
+        exposedHeaders: ["Set-Cookie"],
+        credentials: true,
+        optionsSuccessStatus: 200
+    };
+    app.use(cors(corsOptions));
 
     // Priority serve any static files.
     app.use(express.static(path.resolve(__dirname, '../react-ui/build')));

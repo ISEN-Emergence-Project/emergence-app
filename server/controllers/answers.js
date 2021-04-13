@@ -1,6 +1,4 @@
-const Answer = require('../models').Answer;
-const Account = require('../models').Account;
-const Question = require('../models').Question;
+const { Account, Answer } = require('../models');
 
 module.exports = {
   list(req, res) {
