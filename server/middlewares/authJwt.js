@@ -4,7 +4,7 @@ const { Account } = require("../models");
 
 const authJwt = (req, res, next) => {
     // temporary auto accept authorization
-    next()
+    return next()
 
     const { cookies, headers } = req;
 

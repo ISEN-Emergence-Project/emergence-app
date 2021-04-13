@@ -1,72 +1,67 @@
-const { Account, Answer } = require('../models');
+const { Answer } = require('../models');
+
+const commonsController = require('./commons');
+
+/* FUNCTIONS */
 
 module.exports = {
-  list(req, res) {
-    return Answer
-      .findAll()
-      .then((answers) => res.status(200).send(answers))
-      .catch((error) => { res.status(400).send(error); });
-  },
+    list (req, res) {
+        return commonsController.list(req, res, Answer);
+    },
 
-  getById(req, res) {
-    return Answer
-      .findById(req.params.id)
-      .then((answer) => {
-        if (answer) {
-          return res.status(404).send({
-            message: 'Answer Not Found',
-          });
-        }
-        return res.status(200).send(answer);
-      })
-      .catch((error) => res.status(400).send(error));
-  },
-
-  add(req, res) {
-    return Answer
-      .create({
-        account_id: req.body.account_id,
-        question_id: req.body.question_id,
-        answer: req.body.answer,
-      })
-      .then((Answer) => res.status(201).send(Answer))
-      .catch((error) => res.status(400).send(error));
-  },
-
-  update(req, res) {
-    return Answer
-      .findById(req.params.id)
-      .then(Answer => {
-        if (!Answer) {
-          return res.status(404).send({
-            message: 'Answer Not Found',
-          });
-        }
+    insert (req, res) {
         return Answer
-          .update({
-            Answer: req.body.Answer || Account.Answer,
-            description: req.body.description || Account.description,
-          })
-          .then(() => res.status(200).send(Answer))
-          .catch((error) => res.status(400).send(error));
-      })
-      .catch((error) => res.status(400).send(error));
-  },
+            .create({
+                fkAccountId: req.body.fkAccountId,
+                fkQuestionId: req.body.fkQuestionId,
+                answer: req.body.answer
+            })
+            .then((Answer) => {
+                res.status(201).json(Answer);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
+            });
+    },
 
-  delete(req, res) {
-    return Answer
-      .findById(req.params.id)
-      .then(Answer => {
-        if (!Answer) {
-          return res.status(400).send({
-            message: 'Answer Not Found',
-          });
-        }
+    update (req, res) {
         return Answer
-          .destroy()
-          .then(() => res.status(204).send())
-          .catch((error) => res.status(400).send(error));
-      })
-      .catch((error) => res.status(400).send(error));
-  },
+            .update({
+                fkAccountId: req.body.fkAccountId,
+                fkQuestionId: req.body.fkQuestionId,
+                answer: req.body.answer
+            }, {
+                where: {
+                    answerId: req.params.id
+                }
+            })
+            .then(([, answer]) => res.status(200).json(answer[0]))
+            .catch((error) => console.log(error));
+    },
+
+    delete (req, res) {
+        return commonsController.delete(req, res, Answer);
+    },
+
+    getById (req, res) {
+        return Answer
+            .findAll({
+                where: {
+                    answerId: req.params.id
+                }
+            })
+            .then((answer) => {
+                if (!answer) {
+                    return res.status(404).json({
+                        message: 'Answer Not Found',
+                    });
+                }
+                return res.status(200).json(answer[0]);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
+            });
+    }
 };

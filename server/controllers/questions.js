@@ -1,87 +1,67 @@
-const { Answer, Form, Question } = require('../models');
+const { Question } = require('../models');
+
+const commonsController = require('./commons');
+
+/* FUNCTIONS */
 
 module.exports = {
-  list(req, res) {
-    return Question
-      .findAll({
-        include: [{
-          model: Answer,
-          as: 'answers'
-        }],
-      })
-      .then((questions) => res.status(200).send(questions))
-      .catch((error) => { res.status(400).send(error); });
-  },
+    list (req, res) {
+        return commonsController.list(req, res, Question);
+    },
 
-  getById(req, res) {
-    return Question
-      .findById(req.params.id, {
-        include: [{
-          model: Form,
-          as: 'form'
-        }],
-      })
-      .then((question) => {
-        if (!question) {
-          return res.status(404).send({
-            message: 'question Not Found',
-          });
-        }
-        return res.status(200).send(question);
-      })
-      .catch((error) => res.status(400).send(error));
-  },
-
-  add(req, res) {
-    return Question
-      .create({
-        form_id: req.body.form_id,
-        question: req.body.question,
-        description: req.body.description,
-      })
-      .then((question) => res.status(201).send(question))
-      .catch((error) => res.status(400).send(error));
-  },
-
-  update(req, res) {
-    return Question
-      .findById(req.params.id, {
-        include: [{
-          model: Form,
-          as: 'form'
-        }],
-      })
-      .then(question => {
-        if (!question) {
-          return res.status(404).send({
-            message: 'question Not Found',
-          });
-        }
+    insert (req, res) {
         return Question
-          .update({
-            question: req.body.question || Form.question,
-            description: req.body.description || Form.description,
-          })
-          .then(() => res.status(200).send(question))
-          .catch((error) => res.status(400).send(error));
-      })
-      .catch((error) => res.status(400).send(error));
-  },
+            .create({
+                question: req.body.question,
+                description: req.body.description,
+                fkFormId: req.body.fkFormId
+            })
+            .then((Question) => {
+                res.status(201).json(Question);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
+            });
+    },
 
-  delete(req, res) {
-    return Question
-      .findById(req.params.id)
-      .then(question => {
-        if (!question) {
-          return res.status(400).send({
-            message: 'Question Not Found',
-          });
-        }
+    update (req, res) {
         return Question
-          .destroy()
-          .then(() => res.status(204).send())
-          .catch((error) => res.status(400).send(error));
-      })
-      .catch((error) => res.status(400).send(error));
-  },
+            .update({
+                question: req.body.question,
+                description: req.body.description,
+                fkFormId: req.body.fkFormId
+            }, {
+                where: {
+                    questionId: req.params.id
+                }
+            })
+            .then(([, question]) => res.status(200).json(question[0]))
+            .catch((error) => console.log(error));
+    },
+
+    delete (req, res) {
+        return commonsController.delete(req, res, Question);
+    },
+
+    getById (req, res) {
+        return Question
+            .findAll({
+                where: {
+                    questionId: req.params.id
+                }
+            })
+            .then((question) => {
+                if (!question) {
+                    return res.status(404).json({
+                        message: 'Question Not Found',
+                    });
+                }
+                return res.status(200).json(question[0]);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
+            });
+    }
 };

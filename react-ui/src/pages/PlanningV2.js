@@ -4,7 +4,7 @@ import {initialData} from "../components/DataDnD"
 import {Column} from '../components/Column';          // Système de drag and drop ( que du fonctionnel pas de UI)
 
 
-export default class PlanningV2 extends React.Component {
+export class PlanningV2 extends React.Component {
   state = initialData;
 
   onDragEnd = result => {
