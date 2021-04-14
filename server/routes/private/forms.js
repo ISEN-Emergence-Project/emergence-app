@@ -1,18 +1,20 @@
 const forms = require('express').Router();
 
-const Form = require('../../models/Form');
+const formsController = require("../../controllers/forms");
 
-forms.get('/', function (req,res) {
-    (async () => {
-        try {
-            const forms = await Form.findAll();
+// GET routes
+forms.get('/', formsController.list);
+forms.get('/:id(\d+)', formsController.getById);
+forms.get('/latest', formsController.getLatest);
+forms.get('/latest/questions', formsController.getLatestQuestions);
 
-            res.send(JSON.stringify({form: forms}));
-        }
-        catch (e) {
-            res.send(e);
-        }
-    })();
-})
+// POST routes
+forms.post('/', formsController.insert);
+
+// PUT routes
+forms.put('/:id(\d+)', formsController.update);
+
+// DELETE routes
+forms.delete('/:id(\d+)', formsController.delete);
 
 module.exports = forms;

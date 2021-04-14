@@ -1,10 +1,18 @@
 const accounts = require('express').Router();
 
-const accountController = require('../../controllers/account');
+const accountsController = require('../../controllers/accounts');
 
-// Handle routes
-accounts.get('/', accountController.list);
-accounts.get('/:id', accountController.getById);
-accounts.post('/', accountController.add);
+// GET routes
+accounts.get('/', accountsController.list);
+accounts.get('/:id(\d+)', accountsController.getById);
+
+// POST routes
+accounts.post('/', accountsController.insert);
+
+// PUT routes
+accounts.put('/:id(\d+)', accountsController.update);
+
+// DELETE routes
+accounts.delete('/:id(\d+)', accountsController.delete);
 
 module.exports = accounts;

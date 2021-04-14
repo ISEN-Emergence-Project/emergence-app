@@ -21,7 +21,7 @@ export function AccountCard({username,email,password,userType,promo})
             <p className="card-title text-center ">{email}</p>
             <p className="card-text text-center">{promo}</p>
         </div> 
-        <button className="btn btn-danger btn-sm" onClick={reset}> <i class=" me-2 bi-trash-fill"></i> Supprimer </button>
+        <button className="btn btn-danger btn-sm" onClick={reset}> <i className=" me-2 bi-trash-fill"></i> Supprimer </button>
     </div>
         }
         

@@ -16,19 +16,19 @@ export class Navigation extends Component   // Permet de créer la barre de navi
                         </li>
 
                         <li className="nav-item d-flex flex-row">
-                        <Link className="nav-link align-self-center"to="/ApplicantList"> <button className="btn btn-dark btn-sm align-self-center" > ApplicantList </button> </Link>
+                        <Link className="nav-link align-self-center" to="/ApplicantList"> <button className="btn btn-dark btn-sm align-self-center" > ApplicantList </button> </Link>
                         </li>
 
                         <li className="nav-item">
-                        <Link className="nav-link"to="/ManageAccounts"> <button className="btn btn-dark btn-sm align-self-center" > Manage Accounts </button> </Link>
+                        <Link className="nav-link" to="/ManageAccounts"> <button className="btn btn-dark btn-sm align-self-center" > Manage Accounts </button> </Link>
                         </li>
 
                         <li className="nav-item">
-                        <Link className="nav-link"to="/Rating"> <button className="btn btn-dark btn-sm align-self-center" > Ratings </button> </Link>
+                        <Link className="nav-link" to="/Rating"> <button className="btn btn-dark btn-sm align-self-center" > Ratings </button> </Link>
                         </li>
 
                         <li className="nav-item">
-                        <Link className="nav-link"to="/ApplicantForm"> <button className="btn btn-dark btn-sm align-self-center" > ApplicantForm </button> </Link>
+                        <Link className="nav-link" to="/ApplicantForm"> <button className="btn btn-dark btn-sm align-self-center" > ApplicantForm </button> </Link>
                         </li>
 
                         <li className="nav-item">
