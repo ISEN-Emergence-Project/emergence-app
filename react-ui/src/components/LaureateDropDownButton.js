@@ -6,7 +6,6 @@ import {LaureateItem} from "../components/LaureateItem" // voir méthode onSelec
 export function LaureateDropDownButton ()
 {
     const [name,setName] = useState("")
-    const [laureate, displayLaureate] = useState([])
 
 
     const changeName = (e) =>
@@ -17,12 +16,12 @@ export function LaureateDropDownButton ()
     return <div>
 
         <Dropdown onSelect={changeName}className="container"> 
-            <Dropdown.Toggle  className= "btn mt-5" variant="primary">{name}</Dropdown.Toggle>
+            <Dropdown.Toggle className= "btn mt-5" variant="primary">{name === "" ? "laureate":name}</Dropdown.Toggle>
 
             <Dropdown.Menu>
-                <Dropdown.Item eventKey="Michel" > <LaureateItem  name = "Michel" choiceNumber= "3"/> </Dropdown.Item>
-                <Dropdown.Item > <LaureateItem  name = "Jean" choiceNumber = "4" /> </Dropdown.Item>
-                <Dropdown.Item > <LaureateItem  name = "Pierre" choiceNumber = "6"/> </Dropdown.Item>
+                <LaureateItem  name = "Michel" choiceNumber= "3"/>
+                <LaureateItem  name = "Jean" choiceNumber = "4" />
+                <LaureateItem  name = "Pierre" choiceNumber = "6"/>
             </Dropdown.Menu>
         </Dropdown>
     </div>
