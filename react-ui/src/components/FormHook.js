@@ -34,8 +34,8 @@ export function FormHook({user,displayUser})     // Même form avec avec des hoo
           <input className="form-control mt-3" required onChange={(event) => setFill(event.target.value)} type="text" id="question"/>     
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="btn btn-danger btn-sm" onClick={handleClose}> <i class="me-2 bi-x-square-fill"></i> Fermer</Button>
-          <Button variant="btn btn-success btn-sm" onClick={handleClose}> <i class="me-2 bi-check-circle"></i> Enregister</Button>
+          <Button variant="btn btn-danger btn-sm" onClick={handleClose}> <i className="me-2 bi-x-square-fill"></i> Fermer</Button>
+          <Button variant="btn btn-success btn-sm" onClick={handleClose}> <i className="me-2 bi-check-circle"></i> Enregister</Button>
     </Modal.Footer>
       </Modal>
 
