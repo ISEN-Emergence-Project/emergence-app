@@ -17,6 +17,9 @@ import {PrettyPlanning} from "./pages/PrettyPlanning"
 
 export default function App()
 {
+    useEffect(() => {
+        document.title = "Emergence"
+      }, [])
   const [message, setMessage] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
   const [url, setUrl] = useState('/api');
@@ -45,7 +48,9 @@ export default function App()
 
 
   return (
+      
       <BrowserRouter>
+          <title>Emergence</title>
           <div>
               <Navigation />
               <Switch>
