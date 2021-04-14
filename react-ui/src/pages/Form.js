@@ -1,12 +1,14 @@
-import {Header} from '../components/Header';
+import {HeaderHook} from '../components/HeaderHook';
 import {Footer} from "../components/Footer";
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {Field} from"../components/Field"
 import {useEffect} from "react"
 
 
 export function Form() 
 {
+
+  const[form,setForm] = useState([])
   
   // handleChange(event)
   // {
@@ -56,10 +58,10 @@ export function Form()
                 'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTgxNDMxNzIsImV4cCI6MTYxODIyOTU3Mn0.5patB5mX43WUUsCHVPnoAbmz-rEnLwyqRLyAJCl_Ss0'
             }
         }
-        fetch("https://etn-test.herokuapp.com/api/form/questions",{options})
+        fetch("https://etn-test.herokuapp.com/api/forms/latest/questions",{options})
         .then(res => {
-            console.log(res.json())
-            // .then(res => setPerson(res))
+           res.json()
+            .then(res => setForm(res))
             
         })
         
@@ -68,7 +70,17 @@ export function Form()
     },[]);
 
     return <div>
-        <Header/>
+        <HeaderHook/>
+
+      <div>
+
+          {form.map(f => <div className="container mt-3" key={f.questionId}>
+                              {<Field children = {f.question}/>}
+                          </div>
+                          )}
+                      </div>
+
+
       </div>
 
       
