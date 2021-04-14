@@ -1,19 +1,27 @@
-import React from"react"
+import React, { useState } from "react"
 import {Dropdown} from "react-bootstrap"        
-import {LaureateItem} from "../components/LaureateItem"
+import {LaureateItem} from "../components/LaureateItem" // voir méthode onSelect
 
 
-export function LaureateDropDownButton ({name})
+export function LaureateDropDownButton ()
 {
+    const [name,setName] = useState("")
+
+
+    const changeName = (e) =>
+    {
+        
+        setName(e)
+    }
     return <div>
 
-        <Dropdown className="container"> 
-            <Dropdown.Toggle className= " btn mt-5" variant="primary">{name} </Dropdown.Toggle>
+        <Dropdown onSelect={changeName}className="container"> 
+            <Dropdown.Toggle className= "btn mt-5" variant="primary">{name === "" ? "laureate":name}</Dropdown.Toggle>
 
             <Dropdown.Menu>
-                <Dropdown.Item > <LaureateItem  name = "Michel" choiceNumber= "3"/> </Dropdown.Item>
-                <Dropdown.Item > <LaureateItem  name = "Michel" choiceNumber = "4" /> </Dropdown.Item>
-                <Dropdown.Item > <LaureateItem  name = "Michel" choiceNumber = "6"/> </Dropdown.Item>
+                <LaureateItem  name = "Michel" choiceNumber= "3"/>
+                <LaureateItem  name = "Jean" choiceNumber = "4" />
+                <LaureateItem  name = "Pierre" choiceNumber = "6"/>
             </Dropdown.Menu>
         </Dropdown>
     </div>
