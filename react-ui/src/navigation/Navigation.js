@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {Link} from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 
@@ -19,8 +18,8 @@ export class Navigation extends Component   // Permet de créer la barre de navi
                   <Nav.Link href="/Timeline">Timeline</Nav.Link>
                   <Nav.Link href="/PlanningV2">PlanningV2</Nav.Link>
                   <Nav.Link href="/APITest">API</Nav.Link>
-                  <Nav.Link href="/ApplicantForm">Rating</Nav.Link>
-                  <Nav.Link href="/Rating">Rating</Nav.Link>
+                  <Nav.Link href="/Form"> Admin Form </Nav.Link>
+                  <Nav.Link href="/ApplicantForm">ApplicantForm</Nav.Link>
                   <Nav.Link href="/ManageAccounts">ManageAccounts</Nav.Link>
                   <Nav.Link href="/PrettyPlanning">Joli Planning</Nav.Link>
 
