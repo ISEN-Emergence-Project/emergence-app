@@ -1,8 +1,7 @@
+import React, { Component, useEffect } from 'react';
 import {Header} from '../components/Header';
 import {Footer} from "../components/Footer";
-import React, { Component } from 'react';
 import {Field} from"../components/Field"
-import {useEffect} from "react"
 
 
 export function Form() 
