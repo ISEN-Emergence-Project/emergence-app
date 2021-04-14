@@ -4,6 +4,7 @@ import {LaureateDropDownButton} from"../components/LaureateDropDownButton"
 
 export function PrettyPlanning()                // faire un composant pour le dropdown bouton et Pretty planning fait le rendu en appelant les composants
 {
+    
     return <div className="container d-flex flex-direction-row justify-content-between">
         
              
