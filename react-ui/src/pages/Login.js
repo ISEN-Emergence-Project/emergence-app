@@ -1,49 +1,35 @@
 import React from "react";
+import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
 
-export function Login()  {
-    return (
-        <section className="ftco-section">
-            <div className="container">
-                <div className="row justify-content-center">
-                    <div className="col-md-6 text-center mb-5">
-                        <h2 className="heading-section">Emergence App</h2>
-                    </div>
-                </div>
-                <div className="row justify-content-center">
-                    <div className="col-md-7 col-lg-5">
-                        <div className="login-wrap p-4 p-md-5">
-                            <div className="icon d-flex align-items-center justify-content-center">
-                                <span className="fa fa-user-o"/>
-                            </div>
-                            <h3 className="text-center mb-4">Sign In</h3>
-                            <form action="#" className="login-form">
-                                <div className="form-group">
-                                    <input type="text" className="form-control rounded-left" placeholder="Username" required="" />
-                                </div>
-                                <div className="form-group d-flex">
-                                    <input type="password" className="form-control rounded-left" placeholder="Password" required="" />
-                                </div>
-                                <div className="form-group">
-                                    <button type="submit"
-                                            className="form-control btn btn-primary rounded submit px-3">Login
-                                    </button>
-                                </div>
-                                <div className="form-group d-md-flex">
-                                    <div className="w-50">
-                                        <label className="checkbox-wrap checkbox-primary">Remember Me
-                                            <input type="checkbox" checked="" />
-                                            <span className="checkmark" />
-                                        </label>
-                                    </div>
-                                    <div className="w-50 text-md-right">
-                                        <a href="#">Forgot Password</a>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+export function Login(){
+
+
+return (
+<MDBContainer>
+  <MDBRow center>
+    <MDBCol md="5">
+      <form method="POST" action="//etn-test.herokuapp.com/api/account">
+        <p className="h1 text-center mb-4 mt-5">Bienvenue sur le programme Emergence</p>
+        <label htmlFor="defaultFormLoginEmailEx" className="grey-text mt-3">
+          Email
+        </label>
+        <input type="email" id="defaultFormLoginEmailEx" name="username" className="form-control" />
+        <br />
+        <label htmlFor="defaultFormLoginPasswordEx" className="grey-text">
+          Mot de passe
+        </label>
+        <input type="password" id="defaultFormLoginPasswordEx" name="password" className="form-control" />
+        <div className="text-center mt-4">
+          <MDBBtn color="primary" type="submit" rounded>Connexion</MDBBtn>
+        </div>
+      </form>
+
+
+
+      
+    </MDBCol>
+  </MDBRow>
+</MDBContainer>
+);
 }
+
