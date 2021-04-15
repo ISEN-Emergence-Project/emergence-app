@@ -1,6 +1,6 @@
 import React, { Component, useEffect,useState } from 'react';
-import {Field} from"../components/Field"
 import{HeaderHook} from "../components/HeaderHook"
+import {QuestionField} from "../components/QuestionField"
 
 
 export function Form() 
@@ -8,45 +8,8 @@ export function Form()
 
   const[form,setForm] = useState([])
   const [info, displayInfo] = useState([])
+  const [quest, displayQuest] = useState([])
   
-  // handleChange(event)
-  // {
-  //   const name = event.target.name
-  //   this.setState(
-  //     {
-  //       [name]: event.target.value        // les valeurs des libellés sont adaptés selon la variable name
-  //     })
-  // }
-
-
-  // handleClickEdit()
-  // {
-  //   const enteredQuestion = prompt('Modifier la question') // permet de lancer une pop-up sans style
-  //   this.setState(
-  //     {
-  //       children:enteredQuestion,                   // quand on clique sur le bouton on passe un bool à true
-  //       clickedEdit:true
-        
-  //     })
-  // }
-
-  // handleClickDelete()
-  // {
-  //     this.setState(
-  //       {
-  //         clickedDelete:true
-  //       })
-  // }
-
-  // handleClickAdd()
-  // {
-  //   const question = prompt('Ajouter le titre de votre question')
-  //   this.setState(
-  //     {
-  //       question:question,
-  //       clickedAdd:true
-  //     })
-  // }
 
       useEffect(() => {
         const options = {
@@ -73,19 +36,10 @@ export function Form()
         {info}
 
       <div>
-
-          {form.map(f => <div className="container mt-3" key={f.questionId}>
-                              {<Field children = {f.question}/>}
-                          </div>
-                          )}
-                      </div>
-
-
+          <QuestionField quest ={quest} displayQuest = {displayQuest}/>
+          {quest}
       </div>
 
-      
-
-  
-
+      </div>
 
 }
