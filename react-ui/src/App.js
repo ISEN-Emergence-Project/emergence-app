@@ -4,6 +4,7 @@ import {BrowserRouter, Route, Switch } from 'react-router-dom'
 
 // Import components
 import {Navigation} from "./navigation/Navigation"
+import {Home} from "./pages/Home"
 import {APITest} from "./pages/APITest"
 import {ApplicantList} from "./pages/ApplicantList"
 import {ApplicantForm} from "./pages/ApplicantForm"
@@ -48,13 +49,13 @@ export default function App()
 
 
   return (
-      
       <BrowserRouter>
           <title>Emergence</title>
           <div>
               <Navigation />
               <Switch>
-                  <Route exact path="/" component={Login}/>
+                  <Route exact path="/" component={Home}/>
+                  <Route path="/Login" component={Login}/>
                   <Route path="/Form" component={Form}/>
                   <Route path="/ApplicantList" component={ApplicantList}/>
                   <Route path="/ManageAccounts" component={ManageAccounts}/>
