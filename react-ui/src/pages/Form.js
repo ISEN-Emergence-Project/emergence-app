@@ -8,7 +8,6 @@ export function Form()
 
   const[form,setForm] = useState([])
   const [info, displayInfo] = useState([])
-  const [quest, displayQuest] = useState([])
   
 
       useEffect(() => {
@@ -36,8 +35,8 @@ export function Form()
         {info}
 
       <div>
-          <QuestionField quest ={quest} displayQuest = {displayQuest}/>
-          {quest}
+          <QuestionField/>
+          
       </div>
 
       </div>
