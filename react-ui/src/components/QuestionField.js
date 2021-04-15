@@ -46,13 +46,7 @@ export function QuestionField()
 
                 
         </div>
-        <div className="container">     {/* Pour modifier la question (à faire) */}
-            
-
-   </div>
-
 </div>
         
-   
 
 }

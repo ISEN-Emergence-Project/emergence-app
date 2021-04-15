@@ -31,7 +31,7 @@ export function Field({id,questionLabel})           // création des champs de t
     }
     fetch("https://etn-test.herokuapp.com/api/questions/" + id,{options})
     .then(res => {
-       console.log(res.json())
+      res.json()
          .then(res => setEditQuestion(res))
          
      })
@@ -45,7 +45,7 @@ export function Field({id,questionLabel})           // création des champs de t
       <input type="text" required placeholder="Votre réponse" id={id} className="form-control mt-3"/>
       <button onClick={handleShow}>Modifier</button>
 
-      {exit? <Field questionLabel={document.getElementById("question").value}/>:editQuestion}
+      {exit? document.getElementById("question").value:editQuestion.question} {/* requête update , */}
 
 
 
