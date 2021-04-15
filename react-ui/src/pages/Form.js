@@ -1,7 +1,6 @@
-import React, { Component, useEffect } from 'react';
-import {Header} from '../components/Header';
-import {Footer} from "../components/Footer";
+import React, { Component, useEffect,useState } from 'react';
 import {Field} from"../components/Field"
+import{HeaderHook} from "../components/HeaderHook"
 
 
 export function Form() 
