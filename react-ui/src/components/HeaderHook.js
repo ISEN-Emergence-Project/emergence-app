@@ -2,22 +2,22 @@ import { useState } from "react";
 import  React from "react"
 import {useEffect} from "react"
 import {Button, Modal} from 'react-bootstrap';
+import {AccountCard} from "./AccountCard"
 
-export function HeaderHook()         
+
+export function HeaderHook({info,displayInfo})         
 {
     
     const [{password}, setFill] = useState("")
 
     const [header,setHeader] = useState([])
     const [show, setShow] = useState(false);
+    const[exit,setExit] = useState(false)
 
-    const handleClose = () => 
-    {
-        setShow(false)  
+    const handleClose = () =>  setShow(false)  
 
-    }
     const handleShow = () => setShow(true);
-
+    const handleExit = () => setExit(true)
 
 
     useEffect(() => {
@@ -44,12 +44,11 @@ export function HeaderHook()
     return <div>
 
         <div> 
-            <img src={header.bannerUrl} width="100%" height="200px"/>           {/* On récupère les données de l'api */}
+            <img src={header.bannerUrl} width="100%" height="200px"/>           {/* On récupère les données de l'api  ou le texte modifié*/}
                 <div className="card text-center bg-light mt-5">
-                    <h1> {header.title} </h1>
-                    
-                                
-                    <p>{header.description}</p>
+                    {exit? <h1>{document.getElementById("title").value}</h1>:<h1> {header.title} </h1>}
+
+                    {exit? <p>{document.getElementById("description").value}</p>:<p>{header.description}</p>}
                     <p className="text-danger"> * Obligatoire</p>
                 </div>
                 
@@ -65,16 +64,16 @@ export function HeaderHook()
         </Modal.Header>
       <Modal.Body>
             <label htmlFor="titre"> Titre </label>
-                <input className="form-control mt-3" required onChange={(event) => setFill(event.target.value)}type="text" id="title"/>
+                <input  className="form-control mt-3" defaultValue={header.title} required onChange={(event) => setFill(event.target.value)}type="text" id="title"/>
                 
 
             <label className="mt-3" htmlFor="description"> Description </label>
-                <textarea className="form-control mt-3"  required onChange={(event) => setFill(event.target.value)}type="text" id="description"/>
+                <textarea className="form-control mt-3"  defaultValue={header.description} required onChange={(event) => setFill(event.target.value)}type="text" id="description"/>
                 
       </Modal.Body>
 
       <Modal.Footer>{/* Une fois qu'on a rentré les infos on les affiches avec un document.getElementbyId */}
-        <Button variant="btn btn-success btn-sm"> Enregister</Button>
+        <Button variant="btn btn-success btn-sm" onClick={handleExit}> Enregister</Button>
             
         <Button variant="btn btn-danger btn-sm" onClick={handleClose}> <i class="me-2 bi-x-square-fill"></i> Fermer</Button>    
 
