@@ -9,7 +9,7 @@ export class Navigation extends Component   // Permet de créer la barre de navi
     {
         return (
             <Navbar bg="dark" variant="dark">
-                <Navbar.Brand href="#home">Emergence</Navbar.Brand>
+                <Navbar.Brand href="/">Emergence</Navbar.Brand>
                 <Nav className="mr-auto">
 
                   <Nav.Link href="/Login">Login</Nav.Link>
