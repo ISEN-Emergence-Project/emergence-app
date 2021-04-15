@@ -9,6 +9,7 @@ export function Form()
 {
 
   const[form,setForm] = useState([])
+  const [info, displayInfo] = useState([])
   
   // handleChange(event)
   // {
@@ -70,7 +71,8 @@ export function Form()
     },[]);
 
     return <div>
-        <HeaderHook/>
+        <HeaderHook info={info} displayInfo={displayInfo}/>
+        {info}
 
       <div>
 

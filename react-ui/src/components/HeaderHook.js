@@ -2,8 +2,10 @@ import { useState } from "react";
 import  React from "react"
 import {useEffect} from "react"
 import {Button, Modal} from 'react-bootstrap';
+import {AccountCard} from "./AccountCard"
 
-export function HeaderHook()         
+
+export function HeaderHook({info,displayInfo})         
 {
     
     const [{password}, setFill] = useState("")
@@ -17,7 +19,6 @@ export function HeaderHook()
 
     }
     const handleShow = () => setShow(true);
-
 
 
     useEffect(() => {
@@ -74,7 +75,7 @@ export function HeaderHook()
       </Modal.Body>
 
       <Modal.Footer>{/* Une fois qu'on a rentré les infos on les affiches avec un document.getElementbyId */}
-        <Button variant="btn btn-success btn-sm"> Enregister</Button>
+        <Button variant="btn btn-success btn-sm" onClick={() => displayInfo(document.getElementById("title").value)}> Enregister</Button>
             
         <Button variant="btn btn-danger btn-sm" onClick={handleClose}> <i class="me-2 bi-x-square-fill"></i> Fermer</Button>    
 
