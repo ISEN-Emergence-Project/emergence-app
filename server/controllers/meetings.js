@@ -10,14 +10,23 @@ module.exports = {
     },
 
     insert (req, res) {
+        const { fkGodfatherAccountId, fkLaureateAccountId, beginning, ending, godfatherRating, laureateRating } = req.body;
+
+        if (!fkGodfatherAccountId || !fkLaureateAccountId || !beginning || !ending || !godfatherRating || !laureateRating) {
+            res.status(400).json({
+                message: 'Missing required parameters',
+                info: 'Requires: fkGodfatherAccountId, fkLaureateAccountId, beginning, ending, godfatherRating, laureateRating'
+            })
+        }
+        
         return Meeting
             .create({
-                fkGodfatherAccountId: req.body.fkGodfatherAccountId,
-                fkLaureateAccountId: req.body.fkLaureateAccountId,
-                beginning: req.body.beginning,
-                ending: req.body.ending,
-                godfatherRating: req.body.godfatherRating,
-                laureateRating: req.body.laureateRating
+                fkGodfatherAccountId: fkGodfatherAccountId,
+                fkLaureateAccountId: fkLaureateAccountId,
+                beginning: beginning,
+                ending: ending,
+                godfatherRating: godfatherRating,
+                laureateRating: laureateRating
             })
             .then((Meeting) => {
                 res.status(201).json(Meeting);
@@ -29,14 +38,16 @@ module.exports = {
     },
 
     update (req, res) {
+        const { fkGodfatherAccountId, fkLaureateAccountId, beginning, ending, godfatherRating, laureateRating } = req.body;
+
         return Meeting
             .update({
-                fkGodfatherAccountId: req.body.fkGodfatherAccountId,
-                fkLaureateAccountId: req.body.fkLaureateAccountId,
-                beginning: req.body.beginning,
-                ending: req.body.ending,
-                godfatherRating: req.body.godfatherRating,
-                laureateRating: req.body.laureateRating
+                fkGodfatherAccountId: fkGodfatherAccountId,
+                fkLaureateAccountId: fkLaureateAccountId,
+                beginning: beginning,
+                ending: ending,
+                godfatherRating: godfatherRating,
+                laureateRating: laureateRating
             }, {
                 where: {
                     meetingId: req.params.id

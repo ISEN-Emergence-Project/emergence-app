@@ -10,11 +10,20 @@ module.exports = {
     },
 
     insert (req, res) {
+        const { question, description, fkFormId } = req.body;
+
+        if (!question || !description || !fkFormId) {
+            res.status(400).json({
+                message: 'Missing required parameters',
+                info: 'Requires: question, description, fkFormId'
+            })
+        }
+        
         return Question
             .create({
-                question: req.body.question,
-                description: req.body.description,
-                fkFormId: req.body.fkFormId
+                question: question,
+                description: description,
+                fkFormId: fkFormId
             })
             .then((Question) => {
                 res.status(201).json(Question);
@@ -26,11 +35,13 @@ module.exports = {
     },
 
     update (req, res) {
+        const { question, description, fkFormId } = req.body;
+
         return Question
             .update({
-                question: req.body.question,
-                description: req.body.description,
-                fkFormId: req.body.fkFormId
+                question: question,
+                description: description,
+                fkFormId: fkFormId
             }, {
                 where: {
                     questionId: req.params.id

@@ -22,22 +22,22 @@ module.exports = {
 
         if (!firstname || !lastname || !username || !email || !password || !role || !laureatePromo) {
             res.status(400).json({
-                message: 'Missing fields',
-                info: 'Required fields: firstname, lastname, username, email, password, role, laureatePromo'
+                message: 'Missing required parameters',
+                info: 'Requires: firstname, lastname, username, email, password, role, laureatePromo'
             })
         }
 
-        const hash = bcrypt.hashSync(req.body.password, salt);
-        const promo = new Date(parseInt(req.body.laureatePromo),1,1);
+        const hash = bcrypt.hashSync(password, salt);
+        const promo = new Date(parseInt(laureatePromo),1,1);
 
         return Account
             .create({
-                firstname: req.body.firstname,
-                lastname: req.body.lastname,
-                username: req.body.username,
-                email: req.body.email,
+                firstname: firstname,
+                lastname: lastname,
+                username: username,
+                email: email,
                 passwordHash: hash,
-                role: req.body.role,
+                role: role,
                 laureatePromo: promo
             })
             .then((Account) => {
@@ -52,19 +52,21 @@ module.exports = {
     },
 
     update (req, res) {
-        const hash = bcrypt.hashSync(req.body.password, salt);
+        const { firstname, lastname, username, email, password, role, isArchived, resetKey, refreshToken, laureatePromo } = req.body;
+
+        const hash = bcrypt.hashSync(password, salt);
         return Account
             .update({
-                firstname: req.body.firstname,
-                lastname: req.body.lastname,
-                username: req.body.username,
-                email: req.body.email,
+                firstname: firstname,
+                lastname: lastname,
+                username: username,
+                email: email,
                 passwordHash: hash,
-                role: req.body.role,
-                isArchived: req.body.isArchived,
-                resetKey: req.body.resetKey,
-                refreshToken: req.body.refreshToken,
-                laureatePromo: req.body.laureatePromo
+                role: role,
+                isArchived: isArchived,
+                resetKey: resetKey,
+                refreshToken: refreshToken,
+                laureatePromo: laureatePromo
             }, {
                 where: {
                     accountId: req.params.id

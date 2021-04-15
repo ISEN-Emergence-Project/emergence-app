@@ -10,10 +10,19 @@ module.exports = {
     },
 
     insert (req, res) {
+        const { fkGodfatherAccountId, fkLaureateAccountId } = req.body;
+
+        if (!fkGodfatherAccountId || !fkLaureateAccountId) {
+            res.status(400).json({
+                message: 'Missing required parameters',
+                info: 'Requires: fkGodfatherAccountId, fkLaureateAccountId'
+            })
+        }
+
         return Match
             .create({
-                fkGodfatherAccountId: req.body.fkGodfatherAccountId,
-                fkLaureateAccountId: req.body.fkLaureateAccountId
+                fkGodfatherAccountId: fkGodfatherAccountId,
+                fkLaureateAccountId: fkLaureateAccountId
             })
             .then((Match) => {
                 res.status(201).json(Match);
@@ -25,10 +34,12 @@ module.exports = {
     },
 
     update (req, res) {
+        const { fkGodfatherAccountId, fkLaureateAccountId } = req.body;
+
         return Match
             .update({
-                fkGodfatherAccountId: req.body.fkGodfatherAccountId,
-                fkLaureateAccountId: req.body.fkLaureateAccountId
+                fkGodfatherAccountId: fkGodfatherAccountId,
+                fkLaureateAccountId: fkLaureateAccountId
             }, {
                 where: {
                     matchId: req.params.id
