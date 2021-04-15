@@ -1,6 +1,10 @@
 import React, {Component, useState} from "react"
 import {useEffect} from "react"
 import {AccountCard} from "../components/AccountCard"
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import {ApplicantCard} from"../components/ApplicantCards"
 
 export function APITest(){          // permet de faire un test en appelant l'API
 {
@@ -47,10 +51,11 @@ export function APITest(){          // permet de faire un test en appelant l'API
 
                     <div>
                         {person.map(pers => <li key={pers.accountId}>
-                            {<AccountCard   username = {pers.firstname +" "+ pers.lastname}
-                                            email = {pers.email}
-                                            promo = {pers.laureatePromo}
-                                            userType = {pers.role}/>
+                            { <Container>
+                                    <Row>
+                                        <Col><ApplicantCard Name={pers.firstname} Firstname={pers.lastname} Age={pers.email} Studies={pers.laureatePromo} Role={pers.role}/></Col>  
+                                        </Row>
+                                        </Container>
                             }
                         </li>
                         )}

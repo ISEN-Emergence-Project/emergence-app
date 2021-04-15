@@ -5,7 +5,7 @@ import Alert from 'react-bootstrap/Alert'
 
 
 
-export function ApplicantCard({Name,Firstname,Age,Studies}) {
+export function ApplicantCard({Name,Firstname,Age,Studies,Role}) {
     const [show, setShow] = useState(false);
   
     const handleClose = () => setShow(false);
@@ -16,6 +16,9 @@ export function ApplicantCard({Name,Firstname,Age,Studies}) {
         
         <Alert variant="light" onClick={handleShow}>
           <Alert.Heading>{Name + " " + Firstname}</Alert.Heading>
+          <p>
+              {Role}
+          </p>
           <p>
           {Age}
           </p>
