@@ -67,10 +67,11 @@ router.use('/questions', authJwt, questionsRouter);
 // Handle other API routes, send Not found
 router.use('*', function (req, res) {
     res.status(404).json({
-        "message": "Not found",
+        "message": "Route not found",
         "originalUrl": req.originalUrl,
         "url": req.url,
         "path": req.path,
+        "params": req.params
     });
 });
 

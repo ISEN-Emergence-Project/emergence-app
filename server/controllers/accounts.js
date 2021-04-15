@@ -18,7 +18,18 @@ module.exports = {
     },
 
     insert (req, res) {
+        const { firstname, lastname, username, email, password, role, laureatePromo } = req.body;
+
+        if (!firstname || !lastname || !username || !email || !password || !role || !laureatePromo) {
+            res.status(400).json({
+                message: 'Missing fields',
+                info: 'Required fields: firstname, lastname, username, email, password, role, laureatePromo'
+            })
+        }
+
         const hash = bcrypt.hashSync(req.body.password, salt);
+        const promo = new Date(parseInt(req.body.laureatePromo),1,1);
+
         return Account
             .create({
                 firstname: req.body.firstname,
@@ -27,13 +38,17 @@ module.exports = {
                 email: req.body.email,
                 passwordHash: hash,
                 role: req.body.role,
-                isArchived: req.body.isArchived,
-                laureatePromo: req.body.laureatePromo
+                laureatePromo: promo
             })
             .then((Account) => {
                 res.status(201).json(Account);
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log(error);
+                if (error.name === "SequelizeUniqueConstraintError") {
+                    return res.status(400).json(error);
+                }
+            });
     },
 
     update (req, res) {
@@ -58,7 +73,6 @@ module.exports = {
             .then(([, account]) => res.status(200).json(account[0]))
             .catch((error) => {
                 console.log(error);
-                res.status(500).json({ message: 'Internal error' });
                 res.status(500).json({ message: 'Internal error' });
             });
     },
