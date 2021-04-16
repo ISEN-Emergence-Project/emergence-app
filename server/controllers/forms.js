@@ -54,7 +54,24 @@ module.exports = {
     },
 
     delete (req, res) {
-        return commonsController.delete(req, res, Form);
+        Question
+            .findOne({
+                where: {
+                    questionId: req.params.id
+                }
+            })
+            .then(entity => {
+                if (!entity) {
+                    return res.status(400).json({
+                        message: 'Model Not Found',
+                    });
+                }
+                return Question
+                    .destroy()
+                    .then(() => res.status(204).json())
+                    .catch((error) => console.log(error));
+            })
+            .catch((error) => console.log(error));
     },
 
     getById (req, res) {

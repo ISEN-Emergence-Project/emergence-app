@@ -52,7 +52,24 @@ module.exports = {
     },
 
     delete (req, res) {
-        return commonsController.delete(req, res, Answer);
+        Answer
+            .findOne({
+                where: {
+                    answerId: req.params.id
+                }
+            })
+            .then(entity => {
+                if (!entity) {
+                    return res.status(400).json({
+                        message: 'Model Not Found',
+                    });
+                }
+                return Answer
+                    .destroy()
+                    .then(() => res.status(204).json())
+                    .catch((error) => console.log(error));
+            })
+            .catch((error) => console.log(error));
     },
 
     getById (req, res) {

@@ -17,6 +17,17 @@ module.exports = {
         return commonsController.list(req, res, Account);
     },
 
+    listLaureates (req, res) {
+        return Account
+            .findAll({
+                where: {
+                    role: 'laureate'
+                }
+            })
+            .then((entities) => res.status(200).json(entities))
+            .catch((error) => res.status(400).json(error));
+    },
+
     insert (req, res) {
         const { firstname, lastname, username, email, password, role, laureatePromo } = req.body;
 
@@ -85,7 +96,24 @@ module.exports = {
     },
 
     delete (req, res) {
-        return commonsController.delete(req, res, Account);
+        Account
+            .findOne({
+                where: {
+                    accountId: req.params.id
+                }
+            })
+            .then(entity => {
+                if (!entity) {
+                    return res.status(400).json({
+                        message: 'Model Not Found',
+                    });
+                }
+                return Account
+                    .destroy()
+                    .then(() => res.status(204).json())
+                    .catch((error) => console.log(error));
+            })
+            .catch((error) => console.log(error));
     },
 
     getById (req, res) {
