@@ -45,7 +45,8 @@ module.exports = {
             }, {
                 where: {
                     questionId: req.params.id
-                }
+                },
+                returning: true
             })
             .then(([, question]) => res.status(200).json(question[0]))
             .catch((error) => console.log(error));

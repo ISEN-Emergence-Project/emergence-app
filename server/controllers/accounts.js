@@ -54,7 +54,9 @@ module.exports = {
     update (req, res) {
         const { firstname, lastname, username, email, password, role, isArchived, resetKey, refreshToken, laureatePromo } = req.body;
 
-        const hash = bcrypt.hashSync(password, salt);
+        // Create hash, if password not empty
+        const hash = (password) ? bcrypt.hashSync(password, salt) : undefined;
+
         return Account
             .update({
                 firstname: firstname,
@@ -70,7 +72,8 @@ module.exports = {
             }, {
                 where: {
                     accountId: req.params.id
-                }
+                },
+                returning: true
             })
             .then(([, account]) => res.status(200).json(account[0]))
             .catch((error) => {

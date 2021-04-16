@@ -43,7 +43,8 @@ module.exports = {
             }, {
                 where: {
                     matchId: req.params.id
-                }
+                },
+                returning: true
             })
             .then(([, match]) => res.status(200).json(match[0]))
             .catch((error) => console.log(error));
