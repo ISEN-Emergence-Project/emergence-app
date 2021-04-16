@@ -47,6 +47,8 @@ module.exports = {
                 console.log(error);
                 if (error.name === "SequelizeUniqueConstraintError") {
                     return res.status(400).json(error);
+                } else {
+                    return res.status(500).json({ message: 'Internal Error' });
                 }
             });
     },
@@ -171,7 +173,7 @@ module.exports = {
 
                         return res.status(200).json({
                             message: 'Success',
-                            username: account.username,
+                            accountId: account.accountId,
                             accessTokenExpiresIn: config.accessToken.expiresIn,
                             xsrfToken
                         });
