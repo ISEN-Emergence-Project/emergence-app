@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import {ApplicantCard} from"../components/ApplicantCards"
+import {AddAccount} from "../components/AddAccount"
 
 export function APITest(){          // permet de faire un test en appelant l'API
 {
@@ -26,7 +27,6 @@ export function APITest(){          // permet de faire un test en appelant l'API
             .then(res => {
                 res.json()
                 .then(res => {
-                    console.log(res)
                     return setPerson(res)
                 })
                 setLoading(false)
@@ -62,6 +62,7 @@ export function APITest(){          // permet de faire un test en appelant l'API
                     </div>
 
                 }
+                <AddAccount/>
                 </div>
         );
     }

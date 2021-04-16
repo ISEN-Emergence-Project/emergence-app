@@ -29,7 +29,7 @@ export function AddQuestionCall()
 
     <Field questionLabel={fillValue} />
     </div>:""}
-    <Modal size="lg" show={show} onHide={handleClose} onExited={handleExit}>
+    <Modal size="lg" show={show} onHide={handleClose}>
       <Modal.Header>  
           <Modal.Title>Ajouter une question </Modal.Title>
       </Modal.Header>
