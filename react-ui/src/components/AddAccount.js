@@ -7,7 +7,7 @@ import axios from 'axios';
 
 function handleCall()
 {
-                                        // faire requete avec body 
+                                        // remettre la modif avec handleexit
 
         
         axios.post("https://etn-test.herokuapp.com/api/accounts",{  firstname:firstname.value,
@@ -88,7 +88,7 @@ export function AddAccount()   //Créé la pop-up pour ajouter des comptes
                                         }/>
                                         :""}
 
-        <Modal size="lg" show={show} onHide={handleClose}>
+        <Modal size="lg" show={show} onHide={handleClose} onExit={handleCall}>
         <Modal.Header>  
             <Modal.Title>Ajouter un compte </Modal.Title>
         </Modal.Header>
@@ -136,7 +136,7 @@ export function AddAccount()   //Créé la pop-up pour ajouter des comptes
       </Modal.Body>
 
       <Modal.Footer>{/* Une fois qu'on a rentré les infos on les affiches avec un document.getElementbyId */}
-        <Button variant="btn btn-success btn-sm" onClick={handleCall}> Enregistrer</Button>
+        <Button variant="btn btn-success btn-sm" onClick={handleExit}> Enregistrer</Button>
 
         <Button variant="btn btn-danger btn-sm" onClick={handleClose}> <i class="me-2 bi-x-square-fill"></i> Fermer</Button>    
 

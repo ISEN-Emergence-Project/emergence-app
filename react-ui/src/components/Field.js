@@ -3,6 +3,17 @@ import  React from "react"
 import {useEffect} from "react"
 import {Button, Modal} from 'react-bootstrap';
 import {Star} from "./Star"  // permet de répéter l'étoile pour signifier "champ obligatoire"
+import axios from 'axios';
+
+// function EditQuestionCall()
+// {
+//   axios.put("https://etn-test.herokuapp.com/api/questions/4",{ question:fillValue.value}) 
+//           .then(res => {
+//               console.log(res)  
+//            })  
+//   }
+
+
 
 
 export function Field({id,questionLabel})           // création des champs de texte
@@ -15,35 +26,6 @@ export function Field({id,questionLabel})           // création des champs de t
 
   const handleShow = () => setShow(true);
   const handleExit = () => setExit(true)
-  const[data,setData] = useState([])
-
-
- 
-
-
-//  useEffect(() => {
-//   // PUT request using fetch inside useEffect React hook
-//   const putoptions = {
-//       method: 'PUT',
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify({question:fillValue})
-//   };
-//   fetch("https://etn-test.herokuapp.com/api/questions/" + id,putoptions)
-//       .then(res => {
-//         res.json()
-//         .then(data => setData(data.id));
-//       })
-
-// }, []);
-
-
- 
-
-
-
-
-
-
 
 
     return <div>
@@ -57,7 +39,7 @@ export function Field({id,questionLabel})           // création des champs de t
 
 
       
-      <Modal size="lg" show={show} onHide={handleClose} onExited={handleExit}>
+      <Modal size="lg" show={show} onHide={handleClose}>
         <Modal.Header>  
             <Modal.Title>Modifier la question </Modal.Title>
         </Modal.Header>
