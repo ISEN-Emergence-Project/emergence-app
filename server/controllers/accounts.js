@@ -110,11 +110,11 @@ module.exports = {
     },
 
     login (req, res) {
-        const { username, password } = req.body;
+        const { email, password } = req.body;
 
         // Check required parameters
-        if (!username) {
-            return res.status(400).json({ message: 'missing_required_parameter', info: 'username' });
+        if (!email) {
+            return res.status(400).json({ message: 'missing_required_parameter', info: 'email' });
         }
         if (!password) {
             return res.status(400).json({ message: 'missing_required_parameter', info: 'password' });
@@ -123,14 +123,14 @@ module.exports = {
         const xsrfToken = crypto.randomBytes(64).toString('hex');
 
         Account
-            .findOne({ where: { username: req.body.username } })
+            .findOne({ where: { email } })
             .then((account) => {
                 // Check if account exist
                 if (!account){
                     return res.status(403).json({ message: 'Account not found' });
                 }
 
-                const checkPassword = bcrypt.compareSync(req.body.password, account.passwordHash);
+                const checkPassword = bcrypt.compareSync(password, account.passwordHash);
                 // Check if password match hash
                 if (!checkPassword) {
                     return res.status(403).json({ message: 'Wrong password', });
