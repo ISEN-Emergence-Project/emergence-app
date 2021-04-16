@@ -41,11 +41,11 @@ export function Field({id,questionLabel})           // création des champs de t
  },[]);
 
     return <div>
-      <label htmlFor={id}> {questionLabel} <Star></Star> </label>
+      <label htmlFor={id}> {exit? document.getElementById("question").value:questionLabel} <Star></Star> </label>
       <input type="text" required placeholder="Votre réponse" id={id} className="form-control mt-3"/>
       <button onClick={handleShow}>Modifier</button>
 
-      {exit? document.getElementById("question").value:editQuestion.question} {/* requête update , */}
+     {/* requête update , */}
 
 
 
@@ -56,7 +56,7 @@ export function Field({id,questionLabel})           // création des champs de t
         </Modal.Header>
       <Modal.Body>
             <label htmlFor="titre"> Question </label>
-                <input  className="form-control mt-3" defaultValue="o" required onChange={(event) => setFill(event.target.value)}type="text" id="question"/>     
+                <input  className="form-control mt-3" defaultValue="Name" required onChange={(event) => setFill(event.target.value)}type="text" id="question"/>     
       </Modal.Body>
 
       <Modal.Footer>{/* Une fois qu'on a rentré les infos on les affiches avec un document.getElementbyId */}
