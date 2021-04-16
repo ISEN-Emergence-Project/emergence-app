@@ -10,19 +10,37 @@ export function Preselection() {
             .catch((err) => console.log(err));
     })
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        console.log(e);
+    }
+
     return(
-        <ul>
-            {laureates.map(({ accountId, firstname, lastname }) => {
-                return (
-                    <li key={accountId}>
-                        <div className='col-6'>
+        <div className='container'>
+            <form className="row py-4" onSubmit={handleSubmit}>
+                {laureates.map(({ accountId, firstname, lastname }) => {
+                    return (
+                        <div className='col-6 py-2' key={accountId}>
                             <div className="card">
-                                {firstname} {lastname}
+                                <div className="card-body">
+                                    <div className="row">
+                                        <div className="col">
+                                            {firstname} {lastname}
+                                        </div>
+                                        <div className="col text-right">
+                                            <input type='checkbox' name={accountId} />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </li>
-                )
-            })}
-        </ul>
+                    )
+                })}
+                <div className="col text-center py-4">
+                    <button className='btn btn-primary btn-block' type='submit'>Valider</button>
+                </div>
+            </form>
+        </div>
     );
 }
