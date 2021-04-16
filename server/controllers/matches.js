@@ -56,7 +56,7 @@ module.exports = {
 
     getById (req, res) {
         return Match
-            .findAll({
+            .findOne({
                 where: {
                     matchId: req.params.id
                 }

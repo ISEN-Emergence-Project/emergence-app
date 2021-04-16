@@ -62,7 +62,7 @@ module.exports = {
 
     getById (req, res) {
         return Question
-            .findAll({
+            .findOne({
                 where: {
                     questionId: req.params.id
                 }

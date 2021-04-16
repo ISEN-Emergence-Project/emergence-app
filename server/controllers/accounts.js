@@ -90,7 +90,7 @@ module.exports = {
 
     getById (req, res) {
         return Account
-            .findAll({
+            .findOne({
                 where: {
                     accountId: req.params.id
                 }
@@ -111,7 +111,7 @@ module.exports = {
 
     getByAccessToken (req, res) {
         return Account
-            .findAll({
+            .findOne({
                 where: {
                     refreshToken: req.params.token
                 }

@@ -63,7 +63,7 @@ module.exports = {
 
     getById (req, res) {
         return Meeting
-            .findAll({
+            .findOne({
                 where: {
                     meetingId: req.params.id
                 }

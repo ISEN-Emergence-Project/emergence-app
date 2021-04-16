@@ -59,7 +59,7 @@ module.exports = {
 
     getById (req, res) {
         return Form
-            .findAll({
+            .findOne({
                 where: {
                     formId: req.params.id
                 }
@@ -83,7 +83,6 @@ module.exports = {
         return Form
             .findAll({
                 limit: 1,
-                where: {},
                 order: [['createdAt', 'DESC']]
             })
             .then((form) => {

@@ -55,7 +55,7 @@ module.exports = {
 
     getById (req, res) {
         return Preselection
-            .findAll({
+            .findOne({
                 where: {
                     preselectionId: req.params.id
                 }
