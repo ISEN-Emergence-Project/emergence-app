@@ -19,6 +19,7 @@ export function Navigation({ user }) {
                         <Nav.Link href="/ApplicantForm">ApplicantForm</Nav.Link>
                         <Nav.Link href="/ManageAccounts">ManageAccounts</Nav.Link>
                         <Nav.Link href="/PrettyPlanning">Joli Planning</Nav.Link>
+                        <Nav.Link href="/Logout">Logout</Nav.Link>
                     </React.Fragment>
                 ) : null }
             </Nav>

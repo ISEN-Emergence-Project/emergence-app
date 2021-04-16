@@ -4,6 +4,18 @@ import {Container} from 'react-bootstrap';
 const axios = require('axios');
 
 export function Home() {
+    const [ user, setUser ] = useState({});
+
+    useEffect(() => {
+        const savedToken = sessionStorage.getItem('accessToken');
+        console.log(savedToken)
+
+        axios.get('//etn-test.herokuapp.com/api/accounts/'.concat(savedToken))
+            .then((res) => {
+                setUser(res.data)
+            })
+            .catch((err) => console.log(err));
+    })
 
     return (
         <Container className='title py-4'>

@@ -16,11 +16,16 @@ import {PlanningV2} from './pages/PlanningV2'
 import {Rating} from './pages/Rating'
 import {Timeline} from './pages/Timeline'
 import {PrettyPlanning} from './pages/PrettyPlanning'
+import {Logout} from "./pages/Logout";
 
-import useToken from "./services/useToken";
 
 export default function App() {
-    const { token, setToken } = useToken();
+    const savedToken = sessionStorage.getItem('accessToken');
+    const [ token, setToken ] = useState(savedToken ? savedToken : "")
+
+    useEffect(() => {
+        sessionStorage.setItem('accessToken', token)
+    }, [token]);
 
     return (
         <BrowserRouter>
@@ -32,6 +37,9 @@ export default function App() {
                         <React.Fragment>
                             <Route exact path='/'>
                                 <Home />
+                            </Route>
+                            <Route path='/Logout'>
+                                <Logout setToken={setToken} />
                             </Route>
                             <Route path='/Form' component={Form}/>
                             <Route path='/ApplicantList' component={ApplicantList}/>

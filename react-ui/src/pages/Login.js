@@ -1,26 +1,26 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import PropTypes from 'prop-types';
-import { createToast } from "../services/toast";
 
 export function Login({ setToken }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState();
+    const [status, setStatus] = useState();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError();
+        setStatus();
 
         // Try login user
         axios.post("//etn-test.herokuapp.com/api/login", { email, password })
             .then((res) => {
+                setStatus(res.status);
                 setToken(res.data.accessToken);
             })
             .catch((err) => {
                 console.log(err);
                 if (err.response) {
-                    setError(err.response.status);
+                    setStatus(err.response.status);
                 }
             })
     }
@@ -36,11 +36,14 @@ export function Login({ setToken }) {
                 <div className='row justify-content-center'>
                     <div className="col-5 text-center">
                         <form onSubmit={handleSubmit}>
-                            { (error === 403) ? (
+                            { (status === 403) ? (
                                 <div className='alert alert-danger' role='alert'>Email ou mot de passe incorrect</div>
                             ) : null }
-                            { (error && error !== 403) ? (
-                                <div className='alert alert-warning' role='alert'>Erreur lors de la connexion. [{error}]</div>
+                            { (status === 200) ? (
+                                <div className='alert alert-primary' role='alert'>Connexion réussie. Redirection...</div>
+                            ) : null }
+                            { (status === 400) ? (
+                                <div className='alert alert-warning' role='alert'>Erreur lors de la connexion. [{status}]</div>
                             ) : null }
                             <label htmlFor="email" className="grey-text mt-3">Email</label>
                             <input type="email" id="email" className="form-control" onChange={({ target }) => setEmail(target.value)}/>
