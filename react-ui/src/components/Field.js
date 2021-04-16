@@ -9,7 +9,7 @@ export function Field({id,questionLabel})           // création des champs de t
 {
   const [show, setShow] = useState(false);
   const[exit,setExit] = useState(false)
-  const [{password}, setFill] = useState("")
+  const [fillValue, setFill] = useState("")
 
   const handleClose = () =>  setShow(false)  
 
@@ -17,31 +17,40 @@ export function Field({id,questionLabel})           // création des champs de t
   const handleExit = () => setExit(true)
 
   const[editQuestion,setEditQuestion] = useState([])
+  const[data,setData] = useState([])
+
+
+ 
+
+
+ useEffect(() => {
+  // PUT request using fetch inside useEffect React hook
+  const putoptions = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({question:fillValue})
+  };
+  fetch("https://etn-test.herokuapp.com/api/questions/" + id,putoptions)
+      .then(res => {
+        res.json()
+        .then(data => setData(data.id));
+      })
+
+}, []);
+
+
+ 
 
 
 
-  useEffect(() => {
-    const options = {
-        method: "GET",
-        header:
-        {
-            'content-type': 'application/json',
-            'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTgxNDMxNzIsImV4cCI6MTYxODIyOTU3Mn0.5patB5mX43WUUsCHVPnoAbmz-rEnLwyqRLyAJCl_Ss0'
-        }
-    }
-    fetch("https://etn-test.herokuapp.com/api/questions/" + id,{options})
-    .then(res => {
-      res.json()
-         .then(res => setEditQuestion(res))
-         
-     })
-     
-     .catch(error => console.error("There was an error",error)) 
-   
- },[]);
+
+
+
+
 
     return <div>
-      <label htmlFor={id}> {exit? document.getElementById("question").value:questionLabel} <Star></Star> </label>
+     
+      <label htmlFor={id}> {exit? fillValue:questionLabel} <Star></Star> </label>
       <input type="text" required placeholder="Votre réponse" id={id} className="form-control mt-3"/>
       <button onClick={handleShow}>Modifier</button>
 
