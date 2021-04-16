@@ -14,7 +14,7 @@ export function Home() {
                 setUser(res.data)
             })
             .catch((err) => console.log(err));
-    })
+    }, [])
 
     return (
         <Container className='title py-4'>

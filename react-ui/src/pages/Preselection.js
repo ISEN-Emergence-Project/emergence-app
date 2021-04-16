@@ -8,7 +8,7 @@ export function Preselection() {
         axios.get("//etn-test.herokuapp.com/api/accounts/laureates")
             .then((res) => setLaureates(res.data))
             .catch((err) => console.log(err));
-    })
+    }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
