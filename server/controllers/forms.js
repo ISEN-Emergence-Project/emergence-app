@@ -87,7 +87,7 @@ module.exports = {
                         message: 'Form Not Found',
                     });
                 }
-                return res.status(200).json(form[0]);
+                return res.status(200).json(form);
             })
             .catch((error) => {
                 console.log(error);

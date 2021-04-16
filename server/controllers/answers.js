@@ -85,7 +85,7 @@ module.exports = {
                         message: 'Answer Not Found',
                     });
                 }
-                return res.status(200).json(answer[0]);
+                return res.status(200).json(answer);
             })
             .catch((error) => {
                 console.log(error);

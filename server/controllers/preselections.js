@@ -83,7 +83,7 @@ module.exports = {
                         message: 'Preselection Not Found',
                     });
                 }
-                return res.status(200).json(preselection[0]);
+                return res.status(200).json(preselection);
             })
             .catch((error) => {
                 console.log(error);

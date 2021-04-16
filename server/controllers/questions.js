@@ -90,7 +90,7 @@ module.exports = {
                         message: 'Question Not Found',
                     });
                 }
-                return res.status(200).json(question[0]);
+                return res.status(200).json(question);
             })
             .catch((error) => {
                 console.log(error);

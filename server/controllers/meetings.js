@@ -91,7 +91,7 @@ module.exports = {
                         message: 'Meeting Not Found',
                     });
                 }
-                return res.status(200).json(meeting[0]);
+                return res.status(200).json(meeting);
             })
             .catch((error) => {
                 console.log(error);

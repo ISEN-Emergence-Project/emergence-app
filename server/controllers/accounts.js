@@ -129,7 +129,7 @@ module.exports = {
                         message: 'Account Not Found',
                     });
                 }
-                return res.status(200).json(account[0]);
+                return res.status(200).json(account);
             })
             .catch((error) => {
                 console.log(error);
@@ -150,7 +150,8 @@ module.exports = {
                         message: 'Account Not Found',
                     });
                 }
-                return res.status(200).json(account[0]);
+                console.log(account)
+                return res.status(200).json(account);
             })
             .catch((error) => {
                 console.log(error);

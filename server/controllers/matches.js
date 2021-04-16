@@ -84,7 +84,7 @@ module.exports = {
                         message: 'Match Not Found',
                     });
                 }
-                return res.status(200).json(match[0]);
+                return res.status(200).json(match);
             })
             .catch((error) => {
                 console.log(error);
