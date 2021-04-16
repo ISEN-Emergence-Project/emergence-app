@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {Container} from 'react-bootstrap';
 
-import {Login} from '../pages/Login';
-
 const axios = require('axios');
 
-export function Home({ user }) {
+export function Home() {
 
     return (
         <Container className='title py-4'>

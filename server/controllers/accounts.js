@@ -173,8 +173,7 @@ module.exports = {
 
                         return res.status(200).json({
                             message: 'Success',
-                            accountId: account.accountId,
-                            accessTokenExpiresIn: config.accessToken.expiresIn,
+                            accessToken: refreshToken,
                             xsrfToken
                         });
                     })

@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import PropTypes from 'prop-types';
 import { createToast } from "../services/toast";
 
-export function Login({ setUser }) {
+export function Login({ setToken }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState();
@@ -14,12 +15,7 @@ export function Login({ setUser }) {
         // Try login user
         axios.post("//etn-test.herokuapp.com/api/login", { email, password })
             .then((res) => {
-                // Get user infos
-                axios.get("//etn-test.herokuapp.com/api/accounts/" + res.data.accountId)
-                    .then((res) => {
-                        setUser(res.data);
-                    })
-                    .catch((err) => console.log(err));
+                setToken(res.data.accessToken);
             })
             .catch((err) => {
                 console.log(err);
@@ -47,12 +43,10 @@ export function Login({ setUser }) {
                                 <div className='alert alert-warning' role='alert'>Erreur lors de la connexion. [{error}]</div>
                             ) : null }
                             <label htmlFor="email" className="grey-text mt-3">Email</label>
-                            <input type="email" id="email" name="email" className="form-control"
-                                   onChange={({ target }) => setEmail(target.value)}/>
+                            <input type="email" id="email" className="form-control" onChange={({ target }) => setEmail(target.value)}/>
                             <br />
                             <label htmlFor="password" className="grey-text">Mot de passe</label>
-                            <input type="password" id="password" name="password" className="form-control"
-                                   onChange={({ target }) => setPassword(target.value)}/>
+                            <input type="password" id="password" className="form-control" onChange={({ target }) => setPassword(target.value)}/>
                             <div className="text-center mt-4">
                                 <button className='btn btn-primary' type="submit">Connexion</button>
                             </div>
@@ -90,3 +84,6 @@ export function Login({ setUser }) {
     );
 }
 
+Login.propTypes = {
+    setToken: PropTypes.func.isRequired
+}
