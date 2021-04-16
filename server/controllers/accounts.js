@@ -109,6 +109,27 @@ module.exports = {
             });
     },
 
+    getByAccessToken (req, res) {
+        return Account
+            .findAll({
+                where: {
+                    refreshToken: req.params.token
+                }
+            })
+            .then((account) => {
+                if (!account) {
+                    return res.status(404).json({
+                        message: 'Account Not Found',
+                    });
+                }
+                return res.status(200).json(account[0]);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
+            });
+    },
+
     login (req, res) {
         const { email, password } = req.body;
 
