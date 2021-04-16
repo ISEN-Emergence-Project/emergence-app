@@ -15,58 +15,48 @@ import {PlanningV2} from "./pages/PlanningV2"
 import {Rating} from "./pages/Rating"
 import {Timeline} from "./pages/Timeline"
 import {PrettyPlanning} from "./pages/PrettyPlanning"
+import axios from "axios";
 
-export default function App()
-{
+export default function App() {
+    const [user, setUser] = useState();
+
     useEffect(() => {
-        document.title = "Emergence"
-      }, [])
-  const [message, setMessage] = useState(null);
-  const [isFetching, setIsFetching] = useState(false);
-  const [url, setUrl] = useState('/api');
+        document.title = "Emergence";
 
-  const fetchData = useCallback(() => {
-      fetch(url)
-          .then(response => {
-              if (!response.ok) {
-                  throw new Error(`status ${response.status}`);
-              }
-              return response.json();
-          })
-          .then(json => {
-              setMessage(json.message);
-              setIsFetching(false);
-          }).catch(e => {
-          setMessage(`API call failed: ${e}`);
-          setIsFetching(false);
-      })
-  }, [url]);
+        // Get test user infos
+        axios.get("//etn-test.herokuapp.com/api/accounts/8")
+            .then((res) => {
+                setUser(res.data);
+            })
+            .catch((err) => console.log(err));
+    }, [])
 
-  /*useEffect(() => {
-      setIsFetching(true);
-      fetchData();
-  }, [fetchData]);*/
-
-
-  return (
-      <BrowserRouter>
-          <title>Emergence</title>
-          <div>
-              <Navigation />
-              <Switch>
-                  <Route exact path="/" component={Home}/>
-                  <Route path="/Login" component={Login}/>
-                  <Route path="/Form" component={Form}/>
-                  <Route path="/ApplicantList" component={ApplicantList}/>
-                  <Route path="/ManageAccounts" component={ManageAccounts}/>
-                  <Route path="/Rating" component={Rating}/>
-                  <Route path="/ApplicantForm" component={ApplicantForm}/>
-                  <Route path="/Timeline" component={Timeline}/>
-                  <Route path="/PlanningV2" component={PlanningV2}/>
-                  <Route path="/APITest" component={APITest}/>
-                  <Route  path="/PrettyPlanning" component={PrettyPlanning}/>
-              </Switch>
-          </div>
-      </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <title>Emergence</title>
+            <div>
+                <Navigation user={ user } />
+                <Switch>
+                    {user ? (
+                        <Route exact path="/" render={() => (<Home user={ user } setUser={ setUser } />)}/>
+                    ) : (
+                        <Route exact path="/" render={() => (<Login user={ user } setUser={ setUser } />)}/>
+                    )}
+                    {user ? (
+                        <React.Fragment>
+                            <Route path="/Form" component={Form}/>
+                            <Route path="/ApplicantList" component={ApplicantList}/>
+                            <Route path="/ManageAccounts" component={ManageAccounts}/>
+                            <Route path="/Rating" component={Rating}/>
+                            <Route path="/ApplicantForm" component={ApplicantForm}/>
+                            <Route path="/Timeline" component={Timeline}/>
+                            <Route path="/PlanningV2" component={PlanningV2}/>
+                            <Route path="/APITest" component={APITest}/>
+                            <Route path="/PrettyPlanning" component={PrettyPlanning}/>
+                        </React.Fragment>
+                    ) : null}
+                </Switch>
+            </div>
+        </BrowserRouter>
+    );
 }
