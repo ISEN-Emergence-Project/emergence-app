@@ -1,6 +1,5 @@
 import React, {Component, useState} from "react"
 import {useEffect} from "react"
-import {AccountCard} from "../components/AccountCard"
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -28,8 +27,9 @@ export function APITest(){          // permet de faire un test en appelant l'API
                 res.json()
                 .then(res => {
                     return setPerson(res)
-                })
+                }) 
                 setLoading(false)
+              
             })
             
             .catch(error => console.error("There was an error",error)) 
@@ -58,11 +58,11 @@ export function APITest(){          // permet de faire un test en appelant l'API
                                         </Container>
                             }
                         </li>
-                        )}
+                        )} <AddAccount/>
                     </div>
 
                 }
-                <AddAccount/>
+                
                 </div>
         );
     }
