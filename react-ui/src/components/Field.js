@@ -15,28 +15,26 @@ export function Field({id,questionLabel})           // création des champs de t
 
   const handleShow = () => setShow(true);
   const handleExit = () => setExit(true)
-
-  const[editQuestion,setEditQuestion] = useState([])
   const[data,setData] = useState([])
 
 
  
 
 
- useEffect(() => {
-  // PUT request using fetch inside useEffect React hook
-  const putoptions = {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({question:fillValue})
-  };
-  fetch("https://etn-test.herokuapp.com/api/questions/" + id,putoptions)
-      .then(res => {
-        res.json()
-        .then(data => setData(data.id));
-      })
+//  useEffect(() => {
+//   // PUT request using fetch inside useEffect React hook
+//   const putoptions = {
+//       method: 'PUT',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify({question:fillValue})
+//   };
+//   fetch("https://etn-test.herokuapp.com/api/questions/" + id,putoptions)
+//       .then(res => {
+//         res.json()
+//         .then(data => setData(data.id));
+//       })
 
-}, []);
+// }, []);
 
 
  
