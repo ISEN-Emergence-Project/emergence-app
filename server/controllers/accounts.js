@@ -150,7 +150,6 @@ module.exports = {
                         message: 'Account Not Found',
                     });
                 }
-                console.log(account)
                 return res.status(200).json(account);
             })
             .catch((error) => {

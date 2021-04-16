@@ -7,7 +7,6 @@ export function Home() {
 
     useEffect(() => {
         const savedToken = sessionStorage.getItem('accessToken');
-        console.log(savedToken)
 
         axios.get('//etn-test.herokuapp.com/api/accounts/'.concat(savedToken))
             .then((res) => {

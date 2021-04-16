@@ -1,7 +1,6 @@
 import './styles/App.css';
 import React, {useCallback, useEffect, useState } from 'react';
-import {BrowserRouter, Route, Switch } from 'react-router-dom';
-import axios from 'axios';
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 
 // Import components
 import {Navigation} from './navigation/Navigation'
@@ -37,11 +36,12 @@ export default function App() {
                     {token ? (
                         <React.Fragment>
                             <Route exact path='/'>
-                                <Home />
+                                <Redirect to='/Home' />
                             </Route>
                             <Route path='/Logout'>
                                 <Logout setToken={setToken} />
                             </Route>
+                            <Route path='/Home' component={Home}/>
                             <Route path='/Form' component={Form}/>
                             <Route path='/ApplicantList' component={ApplicantList}/>
                             <Route path='/ManageAccounts' component={ManageAccounts}/>
