@@ -17,6 +17,7 @@ import {Rating} from './pages/Rating'
 import {Timeline} from './pages/Timeline'
 import {PrettyPlanning} from './pages/PrettyPlanning'
 import {Logout} from "./pages/Logout";
+import {Preselection} from "./pages/Preselection";
 
 
 export default function App() {
@@ -50,6 +51,7 @@ export default function App() {
                             <Route path='/PlanningV2' component={PlanningV2}/>
                             <Route path='/APITest' component={APITest}/>
                             <Route path='/PrettyPlanning' component={PrettyPlanning}/>
+                            <Route path='/Preselection' component={Preselection}/>
                         </React.Fragment>
                     ) : (
                         <Route exact path='/'>
