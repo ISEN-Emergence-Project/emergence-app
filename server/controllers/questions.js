@@ -30,7 +30,7 @@ module.exports = {
             })
             .catch((error) => {
                 console.log(error);
-                if (error.name === "SequelizeValidationError") {
+                if (["SequelizeValidationError", "SequelizeForeignKeyConstraintError"].includes(error.name)) {
                     return res.status(400).json(error);
                 } else {
                     return res.status(500).json({ message: 'Internal Error' });
