@@ -39,9 +39,6 @@ export function APITest(){          // permet de faire un test en appelant l'API
              
         return(
             <div>
-                <div className="container d-flex justify-content-center mt-5">
-                    <button className="btn btn-success"> Ajouter</button>
-                </div>
                 {
 
                     loading? <div className="d-flex justify-content-center  mt-4">
