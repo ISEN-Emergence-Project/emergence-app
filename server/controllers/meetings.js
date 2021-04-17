@@ -1,4 +1,4 @@
-const { Meeting } = require('../models');
+const { Meeting } = require('../models/Meeting');
 
 const commonsController = require('./commons');
 

@@ -1,4 +1,4 @@
-const { Match } = require('../models');
+const { Match } = require('../models/Match');
 
 const commonsController = require('./commons');
 

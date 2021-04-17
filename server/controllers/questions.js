@@ -1,4 +1,4 @@
-const { Question } = require('../models');
+const { Question } = require('../models/Question');
 
 const commonsController = require('./commons');
 

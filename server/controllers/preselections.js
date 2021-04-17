@@ -1,4 +1,4 @@
-const { Preselection } = require('../models');
+const { Preselection } = require('../models/Preselection');
 
 const commonsController = require('./commons');
 

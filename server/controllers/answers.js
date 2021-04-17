@@ -1,4 +1,4 @@
-const { Answer } = require('../models');
+const { Answer } = require('../models/Answer');
 
 const commonsController = require('./commons');
 
@@ -44,7 +44,8 @@ module.exports = {
                 answer: answer
             }, {
                 where: {
-                    answerId: req.params.id
+                    fkAccountId: req.params.accountId,
+                    fkQuestionId: req.params.questionId
                 }
             })
             .then(([, answer]) => res.status(200).json(answer[0]))
@@ -55,7 +56,8 @@ module.exports = {
         Answer
             .findOne({
                 where: {
-                    answerId: req.params.id
+                    fkAccountId: req.params.accountId,
+                    fkQuestionId: req.params.questionId
                 }
             })
             .then(entity => {
@@ -72,11 +74,12 @@ module.exports = {
             .catch((error) => console.log(error));
     },
 
-    getById (req, res) {
+    getByAccountQuestion (req, res) {
         return Answer
             .findOne({
                 where: {
-                    answerId: req.params.id
+                    fkAccountId: req.params.accountId,
+                    fkQuestionId: req.params.questionId
                 }
             })
             .then((answer) => {

@@ -1,4 +1,5 @@
-const { Form, Question } = require('../models');
+const { Form } = require('../models/Form');
+const { Question } = require('../models/Question');
 
 const commonsController = require('./commons');
 
