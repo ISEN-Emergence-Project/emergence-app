@@ -3,6 +3,7 @@ import  React from "react"
 import {useEffect} from "react"
 import {Button, Modal} from 'react-bootstrap';
 import {Field} from "./Field"
+import {AddQuestionCall} from "../components/AddQuestionCall"
 
 
 export function QuestionField()         
@@ -44,7 +45,7 @@ export function QuestionField()
                           )}
                       
 
-                
+                      <AddQuestionCall/>
         </div>
 </div>
         

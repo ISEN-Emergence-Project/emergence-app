@@ -2,7 +2,7 @@ import { useState } from "react";
 import  React from "react"
 import {useEffect} from "react"
 import {Button, Modal} from 'react-bootstrap';
-import {AddQuestionCall} from "../components/AddQuestionCall"
+
 import {Star} from "./Star"  // permet de répéter l'étoile pour signifier "champ obligatoire"
 import axios from 'axios';
 
@@ -34,7 +34,6 @@ export function Field({id,questionLabel})           // création des champs de t
       <label htmlFor={id}> {exit? fillValue:questionLabel} <Star></Star> </label>
       <input type="text" required placeholder="Votre réponse" id={id} className="form-control mt-3"/>
       <button onClick={handleShow}>Modifier</button>
-      <AddQuestionCall/>
 
      {/* requête update , */}
 
