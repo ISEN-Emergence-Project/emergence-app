@@ -1,13 +1,12 @@
 import {Button, Modal} from 'react-bootstrap';
 import React, {useState} from 'react';
-import {useEffect} from "react"
 import { ApplicantCard } from './ApplicantCards';
 import axios from 'axios';
 
 
 function handleCall()
 {
-                                        // remettre la modif avec handleexit
+                                        // designApplicantCard et checkmail
 
         
         axios.post("https://etn-test.herokuapp.com/api/accounts",{  firstname:firstname.value,
