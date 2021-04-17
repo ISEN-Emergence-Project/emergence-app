@@ -1,4 +1,4 @@
-const { Preselection } = require('../models/Preselection');
+import Preselection from '../models/Preselection';
 
 const commonsController = require('./commons');
 

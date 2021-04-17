@@ -1,5 +1,5 @@
-const { Form } = require('../models/Form');
-const { Question } = require('../models/Question');
+import Form from '../models/Form';
+import Question from '../models/Question';
 
 const commonsController = require('./commons');
 

@@ -1,4 +1,4 @@
-const { Meeting } = require('../models/Meeting');
+import Meeting from '../models/Meeting';
 
 const commonsController = require('./commons');
 
