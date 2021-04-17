@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const config = require('../config');
 
-import Account from '../models/Account';
+const Account = require('../models/Account');
 
 const commonsController = require('./commons');
 

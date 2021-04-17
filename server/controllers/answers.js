@@ -1,5 +1,5 @@
-import Answer from '../models/Answer';
-import Question from '../models/Question';
+const Answer = require('../models/Answer');
+const Question = require('../models/Question');
 
 const { getLatestFormId } = require('../controllers/forms');
 

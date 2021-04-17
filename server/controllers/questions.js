@@ -1,4 +1,4 @@
-import Question from '../models/Question';
+const Question = require('../models/Question');
 
 const { getLatestFormId } = require('../controllers/forms')
 
