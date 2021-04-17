@@ -98,13 +98,13 @@ module.exports = {
             })
             .catch((error) => {
                 console.log(error);
-                res.status(500).json({ message: 'Internal error' });
+                res.status(404).json({ message: 'Meeting not found' });
             });
     },
 
     listByGodfather (req, res) {
         return Meeting
-            .findOne({
+            .findAll({
                 where: {
                     fkGodfatherAccountId: req.params.godfatherId
                 }
@@ -125,7 +125,7 @@ module.exports = {
 
     listByLaureate (req, res) {
         return Meeting
-            .findOne({
+            .findAll({
                 where: {
                     fkLaureateAccountId: req.params.laureateId
                 }

@@ -133,7 +133,7 @@ module.exports = {
             })
             .catch((error) => {
                 console.log(error);
-                res.status(500).json({ message: 'Internal error' });
+                res.status(404).json({ message: 'Account not found' });
             });
     },
 
@@ -154,7 +154,7 @@ module.exports = {
             })
             .catch((error) => {
                 console.log(error);
-                res.status(500).json({ message: 'Internal error' });
+                res.status(404).json({ message: 'Account not found' });
             });
     },
 

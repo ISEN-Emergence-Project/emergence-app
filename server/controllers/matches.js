@@ -73,6 +73,28 @@ module.exports = {
             .catch((error) => console.log(error));
     },
 
+    getByGodfatherLaureate (req, res) {
+        return Match
+            .findOne({
+                where: {
+                    fkGodfatherAccountId: req.params.godfatherId,
+                    fkLaureateAccountId: req.params.laureateId
+                }
+            })
+            .then((match) => {
+                if (!match) {
+                    return res.status(404).json({
+                        message: 'Match Not Found',
+                    });
+                }
+                return res.status(200).json(match);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(404).json({ message: 'Match not found' });
+            });
+    },
+
     listByGodfather (req, res) {
         return Match
             .findAll({
@@ -108,28 +130,6 @@ module.exports = {
                     });
                 }
                 return res.status(200).json(matches);
-            })
-            .catch((error) => {
-                console.log(error);
-                res.status(500).json({ message: 'Internal error' });
-            });
-    },
-
-    getByGodfatherLaureate (req, res) {
-        return Match
-            .findOne({
-                where: {
-                    fkGodfatherAccountId: req.params.godfatherId,
-                    fkLaureateAccountId: req.params.laureateId
-                }
-            })
-            .then((match) => {
-                if (!match) {
-                    return res.status(404).json({
-                        message: 'Match Not Found',
-                    });
-                }
-                return res.status(200).json(match);
             })
             .catch((error) => {
                 console.log(error);

@@ -74,7 +74,7 @@ module.exports = {
 
     getByGodfatherLaureate (req, res) {
         return Preselection
-            .findAll({
+            .findOne({
                 where: {
                     fkGodfatherAccountId: req.params.godfatherId,
                     fkLaureateAccountId: req.params.laureateId
@@ -90,13 +90,13 @@ module.exports = {
             })
             .catch((error) => {
                 console.log(error);
-                res.status(500).json({ message: 'Internal error' });
+                res.status(404).json({ message: 'Preselection not found' });
             });
     },
 
     listByGodfather (req, res) {
         return Preselection
-            .findOne({
+            .findAll({
                 where: {
                     fkGodfatherAccountId: req.params.godfatherId
                 }
@@ -117,7 +117,7 @@ module.exports = {
 
     listByLaureate (req, res) {
         return Preselection
-            .findOne({
+            .findAll({
                 where: {
                     fkLaureateAccountId: req.params.laureateId
                 }

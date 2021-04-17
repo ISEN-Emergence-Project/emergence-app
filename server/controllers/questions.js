@@ -96,13 +96,13 @@ module.exports = {
             })
             .catch((error) => {
                 console.log(error);
-                res.status(500).json({ message: 'Internal error' });
+                res.status(404).json({ message: 'Question not found' });
             });
     },
 
     listByForm (req, res) {
         return Question
-            .findOne({
+            .findAll({
                 where: {
                     fkFormId: req.params.id
                 }
@@ -123,7 +123,7 @@ module.exports = {
 
     listByLatestForm (req, res) {
         return Question
-            .findOne({
+            .findAll({
                 where: {
                     fkFormId: getLatestFormId()
                 }
