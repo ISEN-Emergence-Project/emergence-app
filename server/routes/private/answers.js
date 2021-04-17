@@ -5,6 +5,8 @@ const answersController = require('../../controllers/answers');
 // GET routes
 answers.get('/', answersController.list);
 answers.get('/account/:accountId([0-9]+)/question/:questionId([0-9]+)', answersController.getByAccountQuestion);
+answers.get('/account/:accountId([0-9]+)/form/:formId([0-9]+)', answersController.listByAccountForm);
+answers.get('/account/:accountId([0-9]+)/form/latest', answersController.listByAccountLatestForm);
 
 // POST routes
 answers.post('/', answersController.insert);

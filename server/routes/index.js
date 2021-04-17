@@ -12,7 +12,7 @@ const formsRouter = require('./private/forms');
 const matchesRouter = require('./private/matches');
 const meetingsRouter = require('./private/meetings');
 const preselectionsRouter = require('./private/preselection');
-const questionsRouter = require('./private/question');
+const questionsRouter = require('./private/questions');
 
 const loginRouter = require('./public/login');
 

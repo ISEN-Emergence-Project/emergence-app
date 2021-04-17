@@ -4,15 +4,17 @@ const matchesController = require('../../controllers/matches');
 
 // GET routes
 matches.get('/', matchesController.list);
-matches.get('/:id([0-9]+)', matchesController.getById);
+matches.get('/godfather/:godfatherId([0-9]+)/laureate/:laureateId([0-9]+)', matchesController.getByGodfatherLaureate);
+matches.get('/godfather/:godfatherId([0-9]+)', matchesController.listByGodfather);
+matches.get('/laureate/:laureateId([0-9]+)', matchesController.listByLaureate);
 
 // POST routes
 matches.post('/', matchesController.insert);
 
 // PUT routes
-matches.put('/:id([0-9]+)', matchesController.update);
+matches.put('/godfather/:godfatherId([0-9]+)/laureate/:laureateId([0-9]+)', matchesController.update);
 
 // DELETE routes
-matches.delete('/:id([0-9]+)', matchesController.delete);
+matches.delete('/godfather/:godfatherId([0-9]+)/laureate/:laureateId([0-9]+)', matchesController.delete);
 
 module.exports = matches;

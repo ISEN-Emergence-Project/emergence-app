@@ -1,5 +1,7 @@
 const { Question } = require('../models/Question');
 
+const { getLatestFormId } = require('../controllers/forms')
+
 const commonsController = require('./commons');
 
 /* FUNCTIONS */
@@ -57,7 +59,7 @@ module.exports = {
     },
 
     delete (req, res) {
-        Question
+        return Question
             .findOne({
                 where: {
                     questionId: req.params.id
@@ -82,6 +84,48 @@ module.exports = {
             .findOne({
                 where: {
                     questionId: req.params.id
+                }
+            })
+            .then((question) => {
+                if (!question) {
+                    return res.status(404).json({
+                        message: 'Question Not Found',
+                    });
+                }
+                return res.status(200).json(question);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
+            });
+    },
+
+    listByForm (req, res) {
+        return Question
+            .findOne({
+                where: {
+                    fkFormId: req.params.id
+                }
+            })
+            .then((question) => {
+                if (!question) {
+                    return res.status(404).json({
+                        message: 'Question Not Found',
+                    });
+                }
+                return res.status(200).json(question);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
+            });
+    },
+
+    listByLatestForm (req, res) {
+        return Question
+            .findOne({
+                where: {
+                    fkFormId: getLatestFormId()
                 }
             })
             .then((question) => {

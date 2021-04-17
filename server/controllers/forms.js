@@ -55,7 +55,7 @@ module.exports = {
     },
 
     delete (req, res) {
-        Question
+        return Question
             .findOne({
                 where: {
                     questionId: req.params.id
@@ -96,8 +96,7 @@ module.exports = {
             });
     },
 
-    getLatest(req, res) {
-        console.log('> Get latest form');
+    getLatest (req, res) {
         return Form
             .findAll({
                 limit: 1,
@@ -112,26 +111,31 @@ module.exports = {
             });
     },
 
-    getLatestQuestions(req, res) {
+    getLatestFormId () {
         return Form
             .findAll({
                 limit: 1,
                 order: [['createdAt', 'DESC']]
             })
-            .then((latestForm) => {
-                Question
-                    .findAll({
-                        where: {
-                            fkFormId: latestForm[0].formId
-                        }
-                    })
-                    .then((questions) => {
-                        return res.status(200).json(questions);
-                    });
+            .then((form) => {
+                return form[0].formId;
             })
             .catch((error) => {
                 console.log(error);
-                res.status(500).json({ message: 'Internal error' });
+                return null;
+            });
+    },
+
+    // TO DELETE, obsolete
+    getLatestQuestions (req, res) {
+        return Question
+            .findAll({
+                where: {
+                    fkFormId: this.getLatestFormId()
+                }
+            })
+            .then((questions) => {
+                return res.status(200).json(questions);
             });
     }
 };

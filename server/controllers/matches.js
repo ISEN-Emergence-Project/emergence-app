@@ -42,7 +42,8 @@ module.exports = {
                 fkLaureateAccountId: fkLaureateAccountId
             }, {
                 where: {
-                    matchId: req.params.id
+                    fkGodfatherAccountId: req.params.godfatherId,
+                    fkLaureateAccountId: req.params.laureateId
                 },
                 returning: true
             })
@@ -51,10 +52,11 @@ module.exports = {
     },
 
     delete (req, res) {
-        Match
+        return Match
             .findOne({
                 where: {
-                    matchId: req.params.id
+                    fkGodfatherAccountId: req.params.godfatherId,
+                    fkLaureateAccountId: req.params.laureateId
                 }
             })
             .then(entity => {
@@ -71,11 +73,54 @@ module.exports = {
             .catch((error) => console.log(error));
     },
 
-    getById (req, res) {
+    listByGodfather (req, res) {
+        return Match
+            .findAll({
+                where: {
+                    fkGodfatherAccountId: req.params.godfatherId
+                }
+            })
+            .then((matches) => {
+                if (!matches) {
+                    return res.status(404).json({
+                        message: 'Match Not Found',
+                    });
+                }
+                return res.status(200).json(matches);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
+            });
+    },
+
+    listByLaureate (req, res) {
+        return Match
+            .findAll({
+                where: {
+                    fkLaureateAccountId: req.params.laureateId
+                }
+            })
+            .then((matches) => {
+                if (!matches) {
+                    return res.status(404).json({
+                        message: 'Match Not Found',
+                    });
+                }
+                return res.status(200).json(matches);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
+            });
+    },
+
+    getByGodfatherLaureate (req, res) {
         return Match
             .findOne({
                 where: {
-                    matchId: req.params.id
+                    fkGodfatherAccountId: req.params.godfatherId,
+                    fkLaureateAccountId: req.params.laureateId
                 }
             })
             .then((match) => {

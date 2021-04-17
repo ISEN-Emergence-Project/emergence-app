@@ -24,7 +24,7 @@ module.exports = {
                     role: 'laureate'
                 }
             })
-            .then((entities) => res.status(200).json(entities))
+            .then((laureates) => res.status(200).json(laureates))
             .catch((error) => res.status(400).json(error));
     },
 
@@ -96,7 +96,7 @@ module.exports = {
     },
 
     delete (req, res) {
-        Account
+        return Account
             .findOne({
                 where: {
                     accountId: req.params.id
@@ -238,6 +238,6 @@ module.exports = {
     },
 
     logout (req, res) {
-        return res.json('Not implemented');
+        return res.status(500).json('Not implemented');
     }
 };

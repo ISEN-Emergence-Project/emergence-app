@@ -1,4 +1,7 @@
 const { Answer } = require('../models/Answer');
+const { Question } = require('../models/Question');
+
+const { getLatestFormId } = require('../controllers/forms');
 
 const commonsController = require('./commons');
 
@@ -53,7 +56,7 @@ module.exports = {
     },
 
     delete (req, res) {
-        Answer
+        return Answer
             .findOne({
                 where: {
                     fkAccountId: req.params.accountId,
@@ -80,6 +83,52 @@ module.exports = {
                 where: {
                     fkAccountId: req.params.accountId,
                     fkQuestionId: req.params.questionId
+                }
+            })
+            .then((answer) => {
+                if (!answer) {
+                    return res.status(404).json({
+                        message: 'Answer Not Found',
+                    });
+                }
+                return res.status(200).json(answer);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
+            });
+    },
+
+    listByAccountForm (req, res) {
+        return Answer
+            .findAll({
+                include: Question,
+                where: {
+                    fkAccountId: req.params.accountId,
+                    fkFormId: req.params.formId
+                }
+            })
+            .then((answers) => {
+                if (!answers) {
+                    return res.status(404).json({
+                        message: 'Answer Not Found',
+                    });
+                }
+                return res.status(200).json(answers);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
+            });
+    },
+
+    listByAccountLatestForm (req, res) {
+        return Answer
+            .findAll({
+                include: Question,
+                where: {
+                    fkAccountId: req.params.accountId,
+                    fkFormId: getLatestFormId()
                 }
             })
             .then((answer) => {

@@ -50,7 +50,8 @@ module.exports = {
                 laureateRating: laureateRating
             }, {
                 where: {
-                    meetingId: req.params.id
+                    fkGodfatherAccountId: req.params.godfatherId,
+                    fkLaureateAccountId: req.params.laureateId
                 }
             })
             .then(([, meeting]) => res.status(200).json(meeting[0]))
@@ -58,10 +59,11 @@ module.exports = {
     },
 
     delete (req, res) {
-        Meeting
+        return Meeting
             .findOne({
                 where: {
-                    meetingId: req.params.id
+                    fkGodfatherAccountId: req.params.godfatherId,
+                    fkLaureateAccountId: req.params.laureateId
                 }
             })
             .then(entity => {
@@ -78,11 +80,12 @@ module.exports = {
             .catch((error) => console.log(error));
     },
 
-    getById (req, res) {
+    getByGodfatherLaureate (req, res) {
         return Meeting
             .findOne({
                 where: {
-                    meetingId: req.params.id
+                    fkGodfatherAccountId: req.params.godfatherId,
+                    fkLaureateAccountId: req.params.laureateId
                 }
             })
             .then((meeting) => {
@@ -92,6 +95,48 @@ module.exports = {
                     });
                 }
                 return res.status(200).json(meeting);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
+            });
+    },
+
+    listByGodfather (req, res) {
+        return Meeting
+            .findOne({
+                where: {
+                    fkGodfatherAccountId: req.params.godfatherId
+                }
+            })
+            .then((meetings) => {
+                if (!meetings) {
+                    return res.status(404).json({
+                        message: 'Meeting Not Found',
+                    });
+                }
+                return res.status(200).json(meetings);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
+            });
+    },
+
+    listByLaureate (req, res) {
+        return Meeting
+            .findOne({
+                where: {
+                    fkLaureateAccountId: req.params.laureateId
+                }
+            })
+            .then((meetings) => {
+                if (!meetings) {
+                    return res.status(404).json({
+                        message: 'Meeting Not Found',
+                    });
+                }
+                return res.status(200).json(meetings);
             })
             .catch((error) => {
                 console.log(error);

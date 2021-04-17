@@ -42,7 +42,8 @@ module.exports = {
                 fkLaureateAccountId: fkLaureateAccountId
             }, {
                 where: {
-                    preselectionId: req.params.id
+                    fkGodfatherAccountId: req.params.godfatherId,
+                    fkLaureateAccountId: req.params.laureateId
                 }
             })
             .then(([, preselection]) => res.status(200).json(preselection[0]))
@@ -50,10 +51,11 @@ module.exports = {
     },
 
     delete (req, res) {
-        Preselection
+        return Preselection
             .findOne({
                 where: {
-                    preselectionId: req.params.id
+                    fkGodfatherAccountId: req.params.godfatherId,
+                    fkLaureateAccountId: req.params.laureateId
                 }
             })
             .then(entity => {
@@ -70,11 +72,54 @@ module.exports = {
             .catch((error) => console.log(error));
     },
 
-    getById (req, res) {
+    getByGodfatherLaureate (req, res) {
+        return Preselection
+            .findAll({
+                where: {
+                    fkGodfatherAccountId: req.params.godfatherId,
+                    fkLaureateAccountId: req.params.laureateId
+                }
+            })
+            .then((preselections) => {
+                if (!preselections) {
+                    return res.status(404).json({
+                        message: 'Preselection Not Found',
+                    });
+                }
+                return res.status(200).json(preselections);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
+            });
+    },
+
+    listByGodfather (req, res) {
         return Preselection
             .findOne({
                 where: {
-                    preselectionId: req.params.id
+                    fkGodfatherAccountId: req.params.godfatherId
+                }
+            })
+            .then((preselection) => {
+                if (!preselection) {
+                    return res.status(404).json({
+                        message: 'Preselection Not Found',
+                    });
+                }
+                return res.status(200).json(preselection);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
+            });
+    },
+
+    listByLaureate (req, res) {
+        return Preselection
+            .findOne({
+                where: {
+                    fkLaureateAccountId: req.params.laureateId
                 }
             })
             .then((preselection) => {
