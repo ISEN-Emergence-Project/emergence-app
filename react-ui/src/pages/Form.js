@@ -1,7 +1,7 @@
 import React, { Component, useEffect,useState } from 'react';
 import{HeaderHook} from "../components/HeaderHook"
 import {QuestionField} from "../components/QuestionField"
-import {AddQuestionCall} from "../components/AddQuestionCall"
+
 
 
 export function Form() 
@@ -63,7 +63,7 @@ export function Form()
           <QuestionField/>
           
       </div>
-      <AddQuestionCall/>
+     
         <button onClick={handleClick}> Save information</button>
       </div>
 
