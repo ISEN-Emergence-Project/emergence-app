@@ -14,10 +14,10 @@ module.exports = {
     insert (req, res) {
         const { question, description, fkFormId } = req.body;
 
-        if (!question || !description || !fkFormId) {
+        if (!question || !fkFormId) {
             res.status(400).json({
                 message: 'Missing required parameters',
-                info: 'Requires: question, description, fkFormId'
+                info: 'Requires: question, fkFormId'
             })
         }
         
@@ -68,15 +68,25 @@ module.exports = {
             .then(entity => {
                 if (!entity) {
                     return res.status(400).json({
-                        message: 'Model Not Found',
+                        message: 'Question not found',
                     });
                 }
                 return Question
-                    .destroy()
+                    .destroy({
+                        where: {
+                            questionId: req.params.id
+                        }
+                    })
                     .then(() => res.status(204).json())
-                    .catch((error) => console.log(error));
+                    .catch((error) => {
+                        console.log(error);
+                        return res.status(500).json({ message: 'Internal error' });
+                    });
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log(error);
+                return res.status(500).json({ message: 'Internal error' });
+            });
     },
 
     getById (req, res) {

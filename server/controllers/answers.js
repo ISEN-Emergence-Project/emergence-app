@@ -33,7 +33,7 @@ module.exports = {
             })
             .catch((error) => {
                 console.log(error);
-                res.status(500).json({ message: 'Internal error' });
+                return res.status(500).json({ message: 'Internal error' });
             });
     },
 
@@ -66,15 +66,26 @@ module.exports = {
             .then(entity => {
                 if (!entity) {
                     return res.status(400).json({
-                        message: 'Model Not Found',
+                        message: 'Answer not found',
                     });
                 }
                 return Answer
-                    .destroy()
+                    .destroy({
+                        where: {
+                            fkAccountId: req.params.accountId,
+                            fkQuestionId: req.params.questionId
+                        }
+                    })
                     .then(() => res.status(204).json())
-                    .catch((error) => console.log(error));
+                    .catch((error) => {
+                        console.log(error);
+                        return res.status(500).json({ message: 'Internal error' });
+                    });
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log(error);
+                return res.status(500).json({ message: 'Internal error' });
+            });
     },
 
     getByAccountQuestion (req, res) {
@@ -102,10 +113,14 @@ module.exports = {
     listByAccountForm (req, res) {
         return Answer
             .findAll({
-                include: Question,
                 where: {
-                    fkAccountId: req.params.accountId,
-                    fkFormId: req.params.formId
+                    fkAccountId: req.params.accountId
+                },
+                include: {
+                    model: Question,
+                    where: {
+                        fkFormId: req.params.formId
+                    }
                 }
             })
             .then((answers) => {
@@ -127,10 +142,14 @@ module.exports = {
             .then((latestFormId) => {
                 Answer
                     .findAll({
-                        include: Question,
                         where: {
-                            fkAccountId: req.params.accountId,
-                            fkFormId: latestFormId
+                            fkAccountId: req.params.accountId
+                        },
+                        include: {
+                            model: Question,
+                            where: {
+                                fkFormId: latestFormId
+                            }
                         }
                     })
                     .then((answer) => {

@@ -102,18 +102,28 @@ module.exports = {
                     accountId: req.params.id
                 }
             })
-            .then(entity => {
-                if (!entity) {
+            .then((account) => {
+                if (!account) {
                     return res.status(400).json({
-                        message: 'Model Not Found',
+                        message: 'Account not found',
                     });
                 }
                 return Account
-                    .destroy()
+                    .destroy({
+                        where: {
+                            accountId: req.params.id
+                        }
+                    })
                     .then(() => res.status(204).json())
-                    .catch((error) => console.log(error));
+                    .catch((error) => {
+                        console.log(error);
+                        return res.status(500).json({ message: 'Internal error' });
+                    });
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log(error);
+                return res.status(500).json({ message: 'Internal error' });
+            });
     },
 
     getById (req, res) {

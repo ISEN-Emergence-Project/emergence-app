@@ -1,5 +1,4 @@
 const Form = require('../models/Form');
-const Question = require('../models/Question');
 
 const commonsController = require('./commons');
 
@@ -11,9 +10,9 @@ module.exports = {
     },
 
     insert (req, res) {
-        const { formId, title, description, bannerUrl } = req.body;
+        const { title, description, bannerUrl } = req.body;
 
-        if (!formId || !title || !description || !bannerUrl) {
+        if ( !title || !description || !bannerUrl) {
             res.status(400).json({
                 message: 'Missing required parameters',
                 info: 'Requires: formId, title, description, bannerUrl'
@@ -22,7 +21,6 @@ module.exports = {
         
         return Form
             .create({
-                formId: formId,
                 title: title,
                 description: description,
                 bannerUrl: bannerUrl
@@ -55,24 +53,34 @@ module.exports = {
     },
 
     delete (req, res) {
-        return Question
+        return Form
             .findOne({
                 where: {
-                    questionId: req.params.id
+                    formId: req.params.id
                 }
             })
             .then(entity => {
                 if (!entity) {
                     return res.status(400).json({
-                        message: 'Model Not Found',
+                        message: 'Form not found',
                     });
                 }
-                return Question
-                    .destroy()
+                return Form
+                    .destroy({
+                        where: {
+                            formId: req.params.id
+                        }
+                    })
                     .then(() => res.status(204).json())
-                    .catch((error) => console.log(error));
+                    .catch((error) => {
+                        console.log(error);
+                        return res.status(500).json({ message: 'Internal error' });
+                    });
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log(error);
+                return res.status(500).json({ message: 'Internal error' });
+            });
     },
 
     getById (req, res) {

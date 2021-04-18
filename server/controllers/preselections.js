@@ -61,15 +61,26 @@ module.exports = {
             .then(entity => {
                 if (!entity) {
                     return res.status(400).json({
-                        message: 'Model Not Found',
+                        message: 'Preselection not found',
                     });
                 }
                 return Preselection
-                    .destroy()
+                    .destroy({
+                        where: {
+                            fkGodfatherAccountId: req.params.godfatherId,
+                            fkLaureateAccountId: req.params.laureateId
+                        }
+                    })
                     .then(() => res.status(204).json())
-                    .catch((error) => console.log(error));
+                    .catch((error) => {
+                        console.log(error);
+                        return res.status(500).json({ message: 'Internal error' });
+                    });
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log(error);
+                return res.status(500).json({ message: 'Internal error' });
+            });
     },
 
     getByGodfatherLaureate (req, res) {
