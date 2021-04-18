@@ -122,23 +122,26 @@ module.exports = {
     },
 
     listByLatestForm (req, res) {
-        return Question
-            .findAll({
-                where: {
-                    fkFormId: getLatestFormId()
-                }
-            })
-            .then((question) => {
-                if (!question) {
-                    return res.status(404).json({
-                        message: 'Question Not Found',
+        return getLatestFormId()
+            .then((latestFormId) => {
+                Question
+                    .findAll({
+                        where: {
+                            fkFormId: latestFormId
+                        }
+                    })
+                    .then((question) => {
+                        if (!question) {
+                            return res.status(404).json({
+                                message: 'Question Not Found',
+                            });
+                        }
+                        return res.status(200).json(question);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        res.status(500).json({ message: 'Internal error' });
                     });
-                }
-                return res.status(200).json(question);
-            })
-            .catch((error) => {
-                console.log(error);
-                res.status(500).json({ message: 'Internal error' });
             });
     }
 };

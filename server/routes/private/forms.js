@@ -6,7 +6,6 @@ const formsController = require("../../controllers/forms");
 forms.get('/', formsController.list);
 forms.get('/:id([0-9]+)', formsController.getById);
 forms.get('/latest', formsController.getLatest);
-forms.get('/latest/questions', formsController.getLatestQuestions); // TO DELETE, obsolete
 
 // POST routes
 forms.post('/', formsController.insert);

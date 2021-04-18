@@ -123,25 +123,28 @@ module.exports = {
     },
 
     listByAccountLatestForm (req, res) {
-        return Answer
-            .findAll({
-                include: Question,
-                where: {
-                    fkAccountId: req.params.accountId,
-                    fkFormId: getLatestFormId()
-                }
-            })
-            .then((answer) => {
-                if (!answer) {
-                    return res.status(404).json({
-                        message: 'Answer Not Found',
+        return getLatestFormId()
+            .then((latestFormId) => {
+                Answer
+                    .findAll({
+                        include: Question,
+                        where: {
+                            fkAccountId: req.params.accountId,
+                            fkFormId: latestFormId
+                        }
+                    })
+                    .then((answer) => {
+                        if (!answer) {
+                            return res.status(404).json({
+                                message: 'Answer Not Found',
+                            });
+                        }
+                        return res.status(200).json(answer);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        res.status(500).json({ message: 'Internal error' });
                     });
-                }
-                return res.status(200).json(answer);
-            })
-            .catch((error) => {
-                console.log(error);
-                res.status(500).json({ message: 'Internal error' });
             });
     }
 };

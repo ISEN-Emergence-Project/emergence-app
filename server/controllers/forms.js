@@ -125,17 +125,4 @@ module.exports = {
                 return null;
             });
     },
-
-    // TO DELETE, obsolete
-    getLatestQuestions (req, res) {
-        return Question
-            .findAll({
-                where: {
-                    fkFormId: this.getLatestFormId()
-                }
-            })
-            .then((questions) => {
-                return res.status(200).json(questions);
-            });
-    }
 };
