@@ -2,13 +2,24 @@ import { useState } from "react";
 import  React from "react"
 import {useEffect} from "react"
 import {Button, Modal} from 'react-bootstrap';
-import {AccountCard} from "./AccountCard"
+import axios from 'axios';
 
 
-export function HeaderHook({info,displayInfo})         
+function EditHeader()
+{
+ 
+  axios.put("https://etn-test.herokuapp.com/api/forms/2",{ title:editTitle.value,description:editSubTitle.value}) 
+          .then(res => {
+              console.log(res)  
+           })
+}
+
+
+export function HeaderHook()         
 {
     
-    const [{password}, setFill] = useState("")
+    const [editTitle,setEditTitle] = useState("")
+    const[editSubTitle,setEditSubTitle] = useState("")
 
     const [header,setHeader] = useState([])
     const [show, setShow] = useState(false);
@@ -46,9 +57,9 @@ export function HeaderHook({info,displayInfo})
         <div> 
             <img src={header.bannerUrl} width="100%" height="200px"/>           {/* On récupère les données de l'api  ou le texte modifié*/}
                 <div className="card text-center bg-light mt-5">
-                    {exit? <h1>{document.getElementById("title").value}</h1>:<h1> {header.title} </h1>}
+                    {exit? <h1>{editTitle}</h1>:<h1> {header.title} </h1>}
 
-                    {exit? <p>{document.getElementById("description").value}</p>:<p>{header.description}</p>}
+                    {exit? <p>{editSubTitle}</p>:<p>{header.description}</p>}
                     <p className="text-danger"> * Obligatoire</p>
                 </div>
                 
@@ -58,22 +69,22 @@ export function HeaderHook({info,displayInfo})
         <div className="container">     {/* Pour modifier le header (à faire) */}
             <Button className="btn btn-success d-grid gap-3 col-2  btn-sm mx-auto mt-5" onClick={handleShow}> Modifier </Button>
 
-        <Modal size="lg" show={show} onHide={handleClose}>
+        <Modal size="lg" show={show} onHide={handleClose} onExited={handleExit}>
         <Modal.Header>  
             <Modal.Title>Modifier l'en-tête</Modal.Title>
         </Modal.Header>
       <Modal.Body>
-            <label htmlFor="titre"> Titre </label>
-                <input  className="form-control mt-3" defaultValue={header.title} required onChange={(event) => setFill(event.target.value)}type="text" id="title"/>
+            <label htmlFor="editTitle"> Titre </label>
+                <input  className="form-control mt-3" defaultValue={header.title} required onChange={(event) => setEditTitle(event.target.value)}type="text" id="editTitle"/>
                 
 
-            <label className="mt-3" htmlFor="description"> Description </label>
-                <textarea className="form-control mt-3"  defaultValue={header.description} required onChange={(event) => setFill(event.target.value)}type="text" id="description"/>
+            <label className="mt-3" htmlFor="editSubTitle"> Description </label>
+                <textarea className="form-control mt-3"  defaultValue={header.description} required onChange={(event) => setEditSubTitle(event.target.value)}type="text" id="editSubTitle"/>
                 
       </Modal.Body>
 
       <Modal.Footer>{/* Une fois qu'on a rentré les infos on les affiches avec un document.getElementbyId */}
-        <Button variant="btn btn-success btn-sm" onClick={handleExit}> Enregister</Button>
+        <Button variant="btn btn-success btn-sm" onClick={EditHeader}> Enregister</Button>
             
         <Button variant="btn btn-danger btn-sm" onClick={handleClose}> <i class="me-2 bi-x-square-fill"></i> Fermer</Button>    
 
