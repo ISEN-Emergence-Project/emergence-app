@@ -1,16 +1,12 @@
 import { useState } from "react";
 import  React from "react"
 import {useEffect} from "react"
-import {Button, Modal} from 'react-bootstrap';
 import {Field} from "./Field"
 import {AddQuestionCall} from "../components/AddQuestionCall"
 
 
 export function QuestionField()         
 {
-    
-   
-
     const [question,setQuestion] = useState([])
 
 
@@ -37,7 +33,7 @@ export function QuestionField()
 
     return <div>
         <div> 
-                {question.map(q => <div className="container mt-3" key={q.questionId}> {/* utiliser requete poir sélectionner une question et la modifier */}
+                {question.map(q => <div className="container mt-3" key={q.questionId}>
                               <div>
                                <Field id = {q.questionId} questionLabel = {q.question}/>
                                 </div>
