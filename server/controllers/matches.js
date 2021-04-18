@@ -1,4 +1,4 @@
-const { Match } = require('../models');
+const Match = require('../models/Match');
 
 const commonsController = require('./commons');
 
@@ -10,10 +10,19 @@ module.exports = {
     },
 
     insert (req, res) {
+        const { fkGodfatherAccountId, fkLaureateAccountId } = req.body;
+
+        if (!fkGodfatherAccountId || !fkLaureateAccountId) {
+            res.status(400).json({
+                message: 'Missing required parameters',
+                info: 'Requires: fkGodfatherAccountId, fkLaureateAccountId'
+            })
+        }
+
         return Match
             .create({
-                fkGodfatherAccountId: req.body.fkGodfatherAccountId,
-                fkLaureateAccountId: req.body.fkLaureateAccountId
+                fkGodfatherAccountId: fkGodfatherAccountId,
+                fkLaureateAccountId: fkLaureateAccountId
             })
             .then((Match) => {
                 res.status(201).json(Match);
@@ -25,28 +34,62 @@ module.exports = {
     },
 
     update (req, res) {
+        const { fkGodfatherAccountId, fkLaureateAccountId } = req.body;
+
         return Match
             .update({
-                fkGodfatherAccountId: req.body.fkGodfatherAccountId,
-                fkLaureateAccountId: req.body.fkLaureateAccountId
+                fkGodfatherAccountId: fkGodfatherAccountId,
+                fkLaureateAccountId: fkLaureateAccountId
             }, {
                 where: {
-                    matchId: req.params.id
-                }
+                    fkGodfatherAccountId: req.params.godfatherId,
+                    fkLaureateAccountId: req.params.laureateId
+                },
+                returning: true
             })
             .then(([, match]) => res.status(200).json(match[0]))
             .catch((error) => console.log(error));
     },
 
     delete (req, res) {
-        return commonsController.delete(req, res, Match);
+        return Match
+            .findOne({
+                where: {
+                    fkGodfatherAccountId: req.params.godfatherId,
+                    fkLaureateAccountId: req.params.laureateId
+                }
+            })
+            .then(entity => {
+                if (!entity) {
+                    return res.status(400).json({
+                        message: 'Match not found',
+                    });
+                }
+                return Match
+                    .destroy({
+                        where: {
+                            fkGodfatherAccountId: req.params.godfatherId,
+                            fkLaureateAccountId: req.params.laureateId
+                        }
+                    })
+                    .then(() => res.status(204).json())
+                    .catch((error) => {
+                        console.log(error);
+                        return res.status(500).json({ message: 'Internal error' });
+                    });
+            })
+            .catch((error) => {
+                console.log(error);
+                return res.status(500).json({ message: 'Internal error' });
+            });
     },
 
-    getById (req, res) {
+    getByGodfatherLaureate (req, res) {
         return Match
-            .findAll({
+            .findOne({
                 where: {
-                    matchId: req.params.id
+                    fkGodfatherAccountId: req.params.godfatherId,
+                    fkLaureateAccountId: req.params.laureateId
                 }
             })
             .then((match) => {
@@ -55,7 +98,49 @@ module.exports = {
                         message: 'Match Not Found',
                     });
                 }
-                return res.status(200).json(match[0]);
+                return res.status(200).json(match);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(404).json({ message: 'Match not found' });
+            });
+    },
+
+    listByGodfather (req, res) {
+        return Match
+            .findAll({
+                where: {
+                    fkGodfatherAccountId: req.params.godfatherId
+                }
+            })
+            .then((matches) => {
+                if (!matches) {
+                    return res.status(404).json({
+                        message: 'Match Not Found',
+                    });
+                }
+                return res.status(200).json(matches);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
+            });
+    },
+
+    listByLaureate (req, res) {
+        return Match
+            .findAll({
+                where: {
+                    fkLaureateAccountId: req.params.laureateId
+                }
+            })
+            .then((matches) => {
+                if (!matches) {
+                    return res.status(404).json({
+                        message: 'Match Not Found',
+                    });
+                }
+                return res.status(200).json(matches);
             })
             .catch((error) => {
                 console.log(error);

@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const config = require('../config');
-const { Account } = require("../models");
+const { Account } = require("../models/Account");
 
 const authJwt = (req, res, next) => {
     // temporary auto accept authorization

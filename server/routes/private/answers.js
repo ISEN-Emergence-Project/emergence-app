@@ -4,15 +4,17 @@ const answersController = require('../../controllers/answers');
 
 // GET routes
 answers.get('/', answersController.list);
-answers.get('/:id(\d+)', answersController.getById);
+answers.get('/account/:accountId([0-9]+)/question/:questionId([0-9]+)', answersController.getByAccountQuestion);
+answers.get('/account/:accountId([0-9]+)/form/:formId([0-9]+)', answersController.listByAccountForm);
+answers.get('/account/:accountId([0-9]+)/form/latest', answersController.listByAccountLatestForm);
 
 // POST routes
 answers.post('/', answersController.insert);
 
 // PUT routes
-answers.put('/:id(\d+)', answersController.update);
+answers.put('/account/:accountId([0-9]+)/question/:questionId([0-9]+)', answersController.update);
 
 // DELETE routes
-answers.delete('/:id(\d+)', answersController.delete);
+answers.delete('/account/:accountId([0-9]+)/question/:questionId([0-9]+)', answersController.delete);
 
 module.exports = answers;

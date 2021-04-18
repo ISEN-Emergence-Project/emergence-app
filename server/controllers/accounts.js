@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const config = require('../config');
 
-const { Account } = require('../models');
+const Account = require('../models/Account');
 
 const commonsController = require('./commons');
 
@@ -17,59 +17,118 @@ module.exports = {
         return commonsController.list(req, res, Account);
     },
 
+    listLaureates (req, res) {
+        return Account
+            .findAll({
+                where: {
+                    role: 'laureate'
+                }
+            })
+            .then((laureates) => res.status(200).json(laureates))
+            .catch((error) => res.status(400).json(error));
+    },
+
     insert (req, res) {
-        const hash = bcrypt.hashSync(req.body.password, salt);
+        const { firstname, lastname, username, email, password, role, laureatePromo } = req.body;
+
+        if (!firstname || !lastname || !username || !email || !password || !role || !laureatePromo) {
+            res.status(400).json({
+                message: 'Missing required parameters',
+                info: 'Requires: firstname, lastname, username, email, password, role, laureatePromo'
+            })
+        }
+
+        const hash = bcrypt.hashSync(password, salt);
+        const promo = new Date(parseInt(laureatePromo),1,1);
+
         return Account
             .create({
-                firstname: req.body.firstname,
-                lastname: req.body.lastname,
-                username: req.body.username,
-                email: req.body.email,
+                firstname: firstname,
+                lastname: lastname,
+                username: username,
+                email: email,
                 passwordHash: hash,
-                role: req.body.role,
-                isArchived: req.body.isArchived,
-                laureatePromo: req.body.laureatePromo
+                role: role,
+                laureatePromo: promo
             })
             .then((Account) => {
                 res.status(201).json(Account);
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log(error);
+                if (error.name === "SequelizeUniqueConstraintError") {
+                    return res.status(400).json(error);
+                } else {
+                    return res.status(500).json({ message: 'Internal Error' });
+                }
+            });
     },
 
     update (req, res) {
-        const hash = bcrypt.hashSync(req.body.password, salt);
+        const { firstname, lastname, username, email, password, role, isArchived, resetKey, refreshToken, laureatePromo } = req.body;
+
+        // Create hash, if password not empty
+        const hash = (password) ? bcrypt.hashSync(password, salt) : undefined;
+
         return Account
             .update({
-                firstname: req.body.firstname,
-                lastname: req.body.lastname,
-                username: req.body.username,
-                email: req.body.email,
+                firstname: firstname,
+                lastname: lastname,
+                username: username,
+                email: email,
                 passwordHash: hash,
-                role: req.body.role,
-                isArchived: req.body.isArchived,
-                resetKey: req.body.resetKey,
-                refreshToken: req.body.refreshToken,
-                laureatePromo: req.body.laureatePromo
+                role: role,
+                isArchived: isArchived,
+                resetKey: resetKey,
+                refreshToken: refreshToken,
+                laureatePromo: laureatePromo
             }, {
                 where: {
                     accountId: req.params.id
-                }
+                },
+                returning: true
             })
             .then(([, account]) => res.status(200).json(account[0]))
             .catch((error) => {
                 console.log(error);
                 res.status(500).json({ message: 'Internal error' });
-                res.status(500).json({ message: 'Internal error' });
             });
     },
 
     delete (req, res) {
-        return commonsController.delete(req, res, Account);
+        return Account
+            .findOne({
+                where: {
+                    accountId: req.params.id
+                }
+            })
+            .then((account) => {
+                if (!account) {
+                    return res.status(400).json({
+                        message: 'Account not found',
+                    });
+                }
+                return Account
+                    .destroy({
+                        where: {
+                            accountId: req.params.id
+                        }
+                    })
+                    .then(() => res.status(204).json())
+                    .catch((error) => {
+                        console.log(error);
+                        return res.status(500).json({ message: 'Internal error' });
+                    });
+            })
+            .catch((error) => {
+                console.log(error);
+                return res.status(500).json({ message: 'Internal error' });
+            });
     },
 
     getById (req, res) {
         return Account
-            .findAll({
+            .findOne({
                 where: {
                     accountId: req.params.id
                 }
@@ -80,20 +139,41 @@ module.exports = {
                         message: 'Account Not Found',
                     });
                 }
-                return res.status(200).json(account[0]);
+                return res.status(200).json(account);
             })
             .catch((error) => {
                 console.log(error);
-                res.status(500).json({ message: 'Internal error' });
+                res.status(404).json({ message: 'Account not found' });
+            });
+    },
+
+    getByAccessToken (req, res) {
+        return Account
+            .findOne({
+                where: {
+                    refreshToken: req.params.token
+                }
+            })
+            .then((account) => {
+                if (!account) {
+                    return res.status(404).json({
+                        message: 'Account Not Found',
+                    });
+                }
+                return res.status(200).json(account);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(404).json({ message: 'Account not found' });
             });
     },
 
     login (req, res) {
-        const { username, password } = req.body;
+        const { email, password } = req.body;
 
         // Check required parameters
-        if (!username) {
-            return res.status(400).json({ message: 'missing_required_parameter', info: 'username' });
+        if (!email) {
+            return res.status(400).json({ message: 'missing_required_parameter', info: 'email' });
         }
         if (!password) {
             return res.status(400).json({ message: 'missing_required_parameter', info: 'password' });
@@ -102,14 +182,14 @@ module.exports = {
         const xsrfToken = crypto.randomBytes(64).toString('hex');
 
         Account
-            .findOne({ where: { username: req.body.username } })
+            .findOne({ where: { email } })
             .then((account) => {
                 // Check if account exist
                 if (!account){
                     return res.status(403).json({ message: 'Account not found' });
                 }
 
-                const checkPassword = bcrypt.compareSync(req.body.password, account.passwordHash);
+                const checkPassword = bcrypt.compareSync(password, account.passwordHash);
                 // Check if password match hash
                 if (!checkPassword) {
                     return res.status(403).json({ message: 'Wrong password', });
@@ -152,8 +232,7 @@ module.exports = {
 
                         return res.status(200).json({
                             message: 'Success',
-                            username: account.username,
-                            accessTokenExpiresIn: config.accessToken.expiresIn,
+                            accessToken: refreshToken,
                             xsrfToken
                         });
                     })
@@ -169,6 +248,6 @@ module.exports = {
     },
 
     logout (req, res) {
-        return res.json('Not implemented');
+        return res.status(500).json('Not implemented');
     }
 };
