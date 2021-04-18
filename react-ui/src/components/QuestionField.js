@@ -19,7 +19,7 @@ export function QuestionField()
                 'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTgxNDMxNzIsImV4cCI6MTYxODIyOTU3Mn0.5patB5mX43WUUsCHVPnoAbmz-rEnLwyqRLyAJCl_Ss0'
             }
         }
-        fetch("https://etn-test.herokuapp.com/api/forms/latest/questions",{options})
+        fetch("https://etn-test.herokuapp.com/api/questions/form/latest",{options})
         .then(res => {
             res.json()
              .then(res => setQuestion(res))

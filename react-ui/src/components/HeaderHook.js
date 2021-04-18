@@ -66,7 +66,7 @@ export function HeaderHook()
         </div>
 
 
-        <div className="container">     {/* Pour modifier le header (à faire) */}
+        <div className="container">
             <Button className="btn btn-success d-grid gap-3 col-2  btn-sm mx-auto mt-5" onClick={handleShow}> Modifier </Button>
 
         <Modal size="lg" show={show} onHide={handleClose} onExited={handleExit}>
