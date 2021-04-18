@@ -62,9 +62,6 @@ export function ApplicantList()
         return (
             <Container class="d-flex flex-row">
               
-                  
-             
-
 
                         {person.map(pers => pers.role=="laureate" ?<div key={pers.accountId}>
                             { <ApplicantCard Name = {pers.lastname}
@@ -72,6 +69,8 @@ export function ApplicantList()
                                             Age={answer.map(ans=> pers.accountId==ans.fkAccountId ?(ans.fkQuestionId==18 ?<li key={ans.answerId}>{ans.answer}</li>:false) : false)}
                                             Studies={answer.map(ans=> pers.accountId==ans.fkAccountId ?(ans.fkQuestionId==25 ?<li key={ans.answerId}>{ans.answer}</li>:false) : false)}
                                             Role={pers.role}
+                                            IdPers={pers.accountId}
+                                            //envoyer l'id pour la recuperer en fk
                                             /> 
                             }
                         </div>

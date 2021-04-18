@@ -1,15 +1,64 @@
 import { Button, Modal} from 'react-bootstrap';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Alert from 'react-bootstrap/Alert'
 
 
 
 
-export function ApplicantCard({Name,Firstname,Age,Studies}) {
+export function ApplicantCard({Name,Firstname,Age,Studies,IdPers}) {
     const [show, setShow] = useState(false);
   
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const[answer,setAnswer] = useState([])
+    const[question,setQuestion] = useState([])
+
+
+    useEffect(() => {
+      const options = {
+          method: "GET",
+          header:
+          {
+              'content-type': 'application/json',
+              'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTgxNDMxNzIsImV4cCI6MTYxODIyOTU3Mn0.5patB5mX43WUUsCHVPnoAbmz-rEnLwyqRLyAJCl_Ss0'
+          }
+      }
+      fetch("https://etn-test.herokuapp.com/api/questions",{options})
+      .then(res => {
+          res.json()
+          .then(res => {
+              console.log(res)
+              return setQuestion(res)
+          })
+          setLoading(false)
+      })
+      
+      .catch(error => console.error("There was an error",error)) 
+     
+  },[]);
+
+    useEffect(() => {
+      const options = {
+          method: "GET",
+          header:
+          {
+              'content-type': 'application/json',
+              'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTgxNDMxNzIsImV4cCI6MTYxODIyOTU3Mn0.5patB5mX43WUUsCHVPnoAbmz-rEnLwyqRLyAJCl_Ss0'
+          }
+      }
+      fetch("https://etn-test.herokuapp.com/api/answers",{options})
+      .then(res => {
+          res.json()
+          .then(res => {
+              console.log(res)
+              return setAnswer(res)
+          })
+          setLoading(false)
+      })
+      
+      .catch(error => console.error("There was an error",error)) 
+     
+  },[]);
   
     return (
       <>
@@ -22,6 +71,7 @@ export function ApplicantCard({Name,Firstname,Age,Studies}) {
           <p>
               {Studies}
           </p>
+          <p>{IdPers}</p>
           <hr />
         </Alert>
   
@@ -30,14 +80,12 @@ export function ApplicantCard({Name,Firstname,Age,Studies}) {
                 <Modal.Title> Informations du profil </Modal.Title>
             </Modal.Header>
             <Modal.Body className="container">
-                <h5 classname="mb-3"> Hello everyone</h5>
-                <input readOnly={true} className="form-control mt-3 mb-3" type="text" defaultValue="ok"/>
-
-                <h5> Hello</h5>
-                <p class="overflow-visible">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-
-                <h5> Everyone</h5>
-                <input readOnly={true} className="form-control mt-3 mb-3" type="text" defaultValue="ok"/>
+                {question.map(ques=>  <div key={ques.questionId}><h5 class="font-weight-bold mb-3" >{ques.question} :</h5> {answer.map(ans=> IdPers==ans.fkAccountId ?
+                (ans.fkQuestionId==ques.questionId ?
+                <div class ="font-weight-normal" key={ans.answerId}><input readOnly={true} className="form-control mt-3 mb-3" type="text" defaultValue={ans.answer}/></div>:false) 
+                : false)}</div>)}
+                 
+                
                 
                 
             </Modal.Body>
