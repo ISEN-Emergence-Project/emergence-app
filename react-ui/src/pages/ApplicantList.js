@@ -60,25 +60,32 @@ export function ApplicantList()
     },[]);
     
         return (
-            <Container class="d-flex flex-row">
+            <div class="d-flex  flex-wrap justify-content-center p-2">
               
-
-                        {person.map(pers => pers.role=="laureate" ?<div key={pers.accountId}>
+                
+                {person.map(pers => pers.role=="laureate" ?<div key={pers.accountId}>
                             { <ApplicantCard Name = {pers.lastname}
                                             Firstname={pers.firstname}
-                                            Age={answer.map(ans=> pers.accountId==ans.fkAccountId ?(ans.fkQuestionId==18 ?<li key={ans.answerId}>{ans.answer}</li>:false) : false)}
-                                            Studies={answer.map(ans=> pers.accountId==ans.fkAccountId ?(ans.fkQuestionId==25 ?<li key={ans.answerId}>{ans.answer}</li>:false) : false)}
+                                            Age={answer.map(ans=> pers.accountId==ans.fkAccountId ?(ans.fkQuestionId==18 ?<div key={ans.answerId}>{ans.answer}</div>:false) : false)}
+                                            Studies={answer.map(ans=> pers.accountId==ans.fkAccountId ?(ans.fkQuestionId==25 ?<div key={ans.answerId}>{ans.answer}</div>:false) : false)}
                                             Role={pers.role}
                                             IdPers={pers.accountId}
-                                            //envoyer l'id pour la recuperer en fk
+                                            
                                             /> 
                             }
                         </div>
                         :false)}
                     
+
+
+
+
+
+                
+                       
             
              
-            </Container>
+            </div>
         )
     
     

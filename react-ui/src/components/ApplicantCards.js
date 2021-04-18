@@ -61,19 +61,14 @@ export function ApplicantCard({Name,Firstname,Age,Studies,IdPers}) {
   },[]);
   
     return (
-      <>
+      <div class="">
         
-        <Alert variant="light" onClick={handleShow}>
-          <Alert.Heading>{Name + " " + Firstname}</Alert.Heading>
-          <p>
-          {Age}
-          </p>
-          <p>
-              {Studies}
-          </p>
-          <p>{IdPers}</p>
+        <div onClick={handleShow} class="p-5 border rounded border-secondary m-1 bg-light ">
+          <h3 class="text-capitalize font-weight-bold">{Name + " " + Firstname}</h3>
+          <div class="p-2">{Age}</div>
+          <h5>{Studies}</h5>
           <hr />
-        </Alert>
+        </div>
   
         <Modal show={show} onHide={handleClose}>
         <Modal.Header>
@@ -82,7 +77,7 @@ export function ApplicantCard({Name,Firstname,Age,Studies,IdPers}) {
             <Modal.Body className="container">
                 {question.map(ques=>  <div key={ques.questionId}><h5 class="font-weight-bold mb-3" >{ques.question} :</h5> {answer.map(ans=> IdPers==ans.fkAccountId ?
                 (ans.fkQuestionId==ques.questionId ?
-                <div class ="font-weight-normal" key={ans.answerId}><input readOnly={true} className="form-control mt-3 mb-3" type="text" defaultValue={ans.answer}/></div>:false) 
+                <div class ="font-weight-normal" key={ans.answerId}><div class="bg-light border t p-2 mb-2">{ans.answer}</div></div>:false) 
                 : false)}</div>)}
                  
                 
@@ -95,7 +90,7 @@ export function ApplicantCard({Name,Firstname,Age,Studies,IdPers}) {
             </Button>
           </Modal.Footer>
         </Modal>
-      </>
+      </div>
     );
   }
   
