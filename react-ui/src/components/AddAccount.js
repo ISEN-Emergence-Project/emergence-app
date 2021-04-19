@@ -92,8 +92,7 @@ export function AddAccount()   //Créé la pop-up pour ajouter des comptes
 
             <label className="mt-3" htmlFor="passsword"> Mot de passe </label>
                 <input type ="password" className="form-control mt-3" required onChange={(event) => setPassword(event.target.value)} id = "password"/>
-                <br></br>
-                <p><input className="form-check-input"type="checkbox"/> Montrer le mot de passe </p> 
+                <br></br> 
 
             <label className="mt-5" htmlFor="role"> Type de compte </label>
 
