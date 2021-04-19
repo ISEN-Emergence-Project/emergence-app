@@ -1,4 +1,5 @@
 const { sequelize, Model, DataTypes } = require("../utils/database");
+const Question = require("./Question");
 
 class Answer extends Model {}
 
@@ -29,5 +30,9 @@ Answer.init({
     sequelize,
     modelName: 'Answer'
 })
+
+Answer.belongsTo(Question, {
+    foreignKey: 'fkQuestionId'
+});
 
 module.exports = Answer

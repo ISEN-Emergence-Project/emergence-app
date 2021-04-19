@@ -1,4 +1,4 @@
-const { Form, Question } = require('../models');
+const Form = require('../models/Form');
 
 const commonsController = require('./commons');
 
@@ -10,12 +10,20 @@ module.exports = {
     },
 
     insert (req, res) {
+        const { title, description, bannerUrl } = req.body;
+
+        if ( !title || !description || !bannerUrl) {
+            res.status(400).json({
+                message: 'Missing required parameters',
+                info: 'Requires: formId, title, description, bannerUrl'
+            })
+        }
+        
         return Form
             .create({
-                formId: req.body.formId,
-                title: req.body.title,
-                description: req.body.description,
-                bannerUrl: req.body.bannerUrl
+                title: title,
+                description: description,
+                bannerUrl: bannerUrl
             })
             .then((Form) => {
                 res.status(201).json(Form);
@@ -27,12 +35,14 @@ module.exports = {
     },
 
     update (req, res) {
+        const { formId, title, description, bannerUrl } = req.body;
+
         return Form
             .update({
-                formId: req.body.formId,
-                title: req.body.title,
-                description: req.body.description,
-                bannerUrl: req.body.bannerUrl
+                formId: formId,
+                title: title,
+                description: description,
+                bannerUrl: bannerUrl
             }, {
                 where: {
                     formId: req.params.id
@@ -43,12 +53,39 @@ module.exports = {
     },
 
     delete (req, res) {
-        return commonsController.delete(req, res, Form);
+        return Form
+            .findOne({
+                where: {
+                    formId: req.params.id
+                }
+            })
+            .then(entity => {
+                if (!entity) {
+                    return res.status(400).json({
+                        message: 'Form not found',
+                    });
+                }
+                return Form
+                    .destroy({
+                        where: {
+                            formId: req.params.id
+                        }
+                    })
+                    .then(() => res.status(204).json())
+                    .catch((error) => {
+                        console.log(error);
+                        return res.status(500).json({ message: 'Internal error' });
+                    });
+            })
+            .catch((error) => {
+                console.log(error);
+                return res.status(500).json({ message: 'Internal error' });
+            });
     },
 
     getById (req, res) {
         return Form
-            .findAll({
+            .findOne({
                 where: {
                     formId: req.params.id
                 }
@@ -59,20 +96,18 @@ module.exports = {
                         message: 'Form Not Found',
                     });
                 }
-                return res.status(200).json(form[0]);
+                return res.status(200).json(form);
             })
             .catch((error) => {
                 console.log(error);
-                res.status(500).json({ message: 'Internal error' });
+                res.status(404).json({ message: 'Form not found' });
             });
     },
 
-    getLatest(req, res) {
-        console.log('> Get latest form');
+    getLatest (req, res) {
         return Form
             .findAll({
                 limit: 1,
-                where: {},
                 order: [['createdAt', 'DESC']]
             })
             .then((form) => {
@@ -84,26 +119,18 @@ module.exports = {
             });
     },
 
-    getLatestQuestions(req, res) {
+    getLatestFormId () {
         return Form
             .findAll({
                 limit: 1,
                 order: [['createdAt', 'DESC']]
             })
-            .then((latestForm) => {
-                Question
-                    .findAll({
-                        where: {
-                            fkFormId: latestForm[0].formId
-                        }
-                    })
-                    .then((questions) => {
-                        return res.status(200).json(questions);
-                    });
+            .then((form) => {
+                return form[0].formId;
             })
             .catch((error) => {
                 console.log(error);
-                res.status(500).json({ message: 'Internal error' });
+                return null;
             });
-    }
+    },
 };

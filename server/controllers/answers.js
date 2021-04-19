@@ -1,4 +1,7 @@
-const { Answer } = require('../models');
+const Answer = require('../models/Answer');
+const Question = require('../models/Question');
+
+const { getLatestFormId } = require('../controllers/forms');
 
 const commonsController = require('./commons');
 
@@ -10,30 +13,42 @@ module.exports = {
     },
 
     insert (req, res) {
+        const { fkAccountId, fkQuestionId, answer } = req.body;
+
+        if (!fkAccountId || !fkQuestionId || !answer) {
+            res.status(400).json({
+                message: 'Missing required parameters',
+                info: 'Requires: fkAccountId, fkQuestionId, answer'
+            })
+        }
+
         return Answer
             .create({
-                fkAccountId: req.body.fkAccountId,
-                fkQuestionId: req.body.fkQuestionId,
-                answer: req.body.answer
+                fkAccountId: fkAccountId,
+                fkQuestionId: fkQuestionId,
+                answer: answer
             })
             .then((Answer) => {
                 res.status(201).json(Answer);
             })
             .catch((error) => {
                 console.log(error);
-                res.status(500).json({ message: 'Internal error' });
+                return res.status(500).json({ message: 'Internal error' });
             });
     },
 
     update (req, res) {
+        const { fkAccountId, fkQuestionId, answer } = req.body;
+
         return Answer
             .update({
-                fkAccountId: req.body.fkAccountId,
-                fkQuestionId: req.body.fkQuestionId,
-                answer: req.body.answer
+                fkAccountId: fkAccountId,
+                fkQuestionId: fkQuestionId,
+                answer: answer
             }, {
                 where: {
-                    answerId: req.params.id
+                    fkAccountId: req.params.accountId,
+                    fkQuestionId: req.params.questionId
                 }
             })
             .then(([, answer]) => res.status(200).json(answer[0]))
@@ -41,14 +56,44 @@ module.exports = {
     },
 
     delete (req, res) {
-        return commonsController.delete(req, res, Answer);
+        return Answer
+            .findOne({
+                where: {
+                    fkAccountId: req.params.accountId,
+                    fkQuestionId: req.params.questionId
+                }
+            })
+            .then(entity => {
+                if (!entity) {
+                    return res.status(400).json({
+                        message: 'Answer not found',
+                    });
+                }
+                return Answer
+                    .destroy({
+                        where: {
+                            fkAccountId: req.params.accountId,
+                            fkQuestionId: req.params.questionId
+                        }
+                    })
+                    .then(() => res.status(204).json())
+                    .catch((error) => {
+                        console.log(error);
+                        return res.status(500).json({ message: 'Internal error' });
+                    });
+            })
+            .catch((error) => {
+                console.log(error);
+                return res.status(500).json({ message: 'Internal error' });
+            });
     },
 
-    getById (req, res) {
+    getByAccountQuestion (req, res) {
         return Answer
-            .findAll({
+            .findOne({
                 where: {
-                    answerId: req.params.id
+                    fkAccountId: req.params.accountId,
+                    fkQuestionId: req.params.questionId
                 }
             })
             .then((answer) => {
@@ -57,11 +102,68 @@ module.exports = {
                         message: 'Answer Not Found',
                     });
                 }
-                return res.status(200).json(answer[0]);
+                return res.status(200).json(answer);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(404).json({ message: 'Answer not found' });
+            });
+    },
+
+    listByAccountForm (req, res) {
+        return Answer
+            .findAll({
+                where: {
+                    fkAccountId: req.params.accountId
+                },
+                include: {
+                    model: Question,
+                    where: {
+                        fkFormId: req.params.formId
+                    }
+                }
+            })
+            .then((answers) => {
+                if (!answers) {
+                    return res.status(404).json({
+                        message: 'Answer Not Found',
+                    });
+                }
+                return res.status(200).json(answers);
             })
             .catch((error) => {
                 console.log(error);
                 res.status(500).json({ message: 'Internal error' });
+            });
+    },
+
+    listByAccountLatestForm (req, res) {
+        return getLatestFormId()
+            .then((latestFormId) => {
+                Answer
+                    .findAll({
+                        where: {
+                            fkAccountId: req.params.accountId
+                        },
+                        include: {
+                            model: Question,
+                            where: {
+                                fkFormId: latestFormId
+                            }
+                        }
+                    })
+                    .then((answer) => {
+                        if (!answer) {
+                            return res.status(404).json({
+                                message: 'Answer Not Found',
+                            });
+                        }
+                        return res.status(200).json(answer);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        res.status(500).json({ message: 'Internal error' });
+                    });
             });
     }
 };

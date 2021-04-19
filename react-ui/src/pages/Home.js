@@ -1,12 +1,24 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Container} from 'react-bootstrap';
+import axios from 'axios';
 
 export function Home() {
+    const [ user, setUser ] = useState({});
+
+    useEffect(() => {
+        const savedToken = sessionStorage.getItem('accessToken');
+
+        axios.get('//etn-test.herokuapp.com/api/accounts/'.concat(savedToken))
+            .then((res) => {
+                setUser(res.data)
+            })
+            .catch((err) => console.log(err));
+    }, [])
+
     return (
         <Container className='title py-4'>
-            <h1>Welcome to Emergence App</h1>
             <div className="text-center py-4">
-                <a href="/Login" className="btn btn-primary">Login</a>
+                <h1>Bienvenue {user.firstname + " " + user.lastname} !</h1>
             </div>
         </Container>
     )

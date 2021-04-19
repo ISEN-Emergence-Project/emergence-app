@@ -12,7 +12,7 @@ const formsRouter = require('./private/forms');
 const matchesRouter = require('./private/matches');
 const meetingsRouter = require('./private/meetings');
 const preselectionsRouter = require('./private/preselection');
-const questionsRouter = require('./private/question');
+const questionsRouter = require('./private/questions');
 
 const loginRouter = require('./public/login');
 
@@ -67,10 +67,11 @@ router.use('/questions', authJwt, questionsRouter);
 // Handle other API routes, send Not found
 router.use('*', function (req, res) {
     res.status(404).json({
-        "message": "Not found",
+        "message": "Route not found",
         "originalUrl": req.originalUrl,
         "url": req.url,
         "path": req.path,
+        "params": req.params
     });
 });
 

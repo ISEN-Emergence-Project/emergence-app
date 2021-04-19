@@ -1,4 +1,4 @@
-const { Preselection } = require('../models');
+const Preselection = require('../models/Preselection');
 
 const commonsController = require('./commons');
 
@@ -10,10 +10,19 @@ module.exports = {
     },
 
     insert (req, res) {
+        const { fkGodfatherAccountId, fkLaureateAccountId } = req.body;
+
+        if (!fkGodfatherAccountId || !fkLaureateAccountId) {
+            res.status(400).json({
+                message: 'Missing required parameters',
+                info: 'Requires: fkGodfatherAccountId, fkLaureateAccountId'
+            })
+        }
+
         return Preselection
             .create({
-                fkGodfatherAccountId: req.body.fkGodfatherAccountId,
-                fkLaureateAccountId: req.body.fkLaureateAccountId
+                fkGodfatherAccountId: fkGodfatherAccountId,
+                fkLaureateAccountId: fkLaureateAccountId
             })
             .then((Preselection) => {
                 res.status(201).json(Preselection);
@@ -25,13 +34,16 @@ module.exports = {
     },
 
     update (req, res) {
+        const { fkGodfatherAccountId, fkLaureateAccountId } = req.body;
+
         return Preselection
             .update({
-                fkGodfatherAccountId: req.body.fkGodfatherAccountId,
-                fkLaureateAccountId: req.body.fkLaureateAccountId
+                fkGodfatherAccountId: fkGodfatherAccountId,
+                fkLaureateAccountId: fkLaureateAccountId
             }, {
                 where: {
-                    preselectionId: req.params.id
+                    fkGodfatherAccountId: req.params.godfatherId,
+                    fkLaureateAccountId: req.params.laureateId
                 }
             })
             .then(([, preselection]) => res.status(200).json(preselection[0]))
@@ -39,14 +51,65 @@ module.exports = {
     },
 
     delete (req, res) {
-        return commonsController.delete(req, res, Preselection);
+        return Preselection
+            .findOne({
+                where: {
+                    fkGodfatherAccountId: req.params.godfatherId,
+                    fkLaureateAccountId: req.params.laureateId
+                }
+            })
+            .then(entity => {
+                if (!entity) {
+                    return res.status(400).json({
+                        message: 'Preselection not found',
+                    });
+                }
+                return Preselection
+                    .destroy({
+                        where: {
+                            fkGodfatherAccountId: req.params.godfatherId,
+                            fkLaureateAccountId: req.params.laureateId
+                        }
+                    })
+                    .then(() => res.status(204).json())
+                    .catch((error) => {
+                        console.log(error);
+                        return res.status(500).json({ message: 'Internal error' });
+                    });
+            })
+            .catch((error) => {
+                console.log(error);
+                return res.status(500).json({ message: 'Internal error' });
+            });
     },
 
-    getById (req, res) {
+    getByGodfatherLaureate (req, res) {
+        return Preselection
+            .findOne({
+                where: {
+                    fkGodfatherAccountId: req.params.godfatherId,
+                    fkLaureateAccountId: req.params.laureateId
+                }
+            })
+            .then((preselections) => {
+                if (!preselections) {
+                    return res.status(404).json({
+                        message: 'Preselection Not Found',
+                    });
+                }
+                return res.status(200).json(preselections);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(404).json({ message: 'Preselection not found' });
+            });
+    },
+
+    listByGodfather (req, res) {
         return Preselection
             .findAll({
                 where: {
-                    preselectionId: req.params.id
+                    fkGodfatherAccountId: req.params.godfatherId
                 }
             })
             .then((preselection) => {
@@ -55,7 +118,28 @@ module.exports = {
                         message: 'Preselection Not Found',
                     });
                 }
-                return res.status(200).json(preselection[0]);
+                return res.status(200).json(preselection);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
+            });
+    },
+
+    listByLaureate (req, res) {
+        return Preselection
+            .findAll({
+                where: {
+                    fkLaureateAccountId: req.params.laureateId
+                }
+            })
+            .then((preselection) => {
+                if (!preselection) {
+                    return res.status(404).json({
+                        message: 'Preselection Not Found',
+                    });
+                }
+                return res.status(200).json(preselection);
             })
             .catch((error) => {
                 console.log(error);
