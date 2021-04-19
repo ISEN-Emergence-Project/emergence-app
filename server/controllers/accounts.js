@@ -32,7 +32,7 @@ module.exports = {
         const { firstname, lastname, username, email, password, role, laureatePromo } = req.body;
 
         if (!firstname || !lastname || !username || !email || !password || !role || !laureatePromo) {
-            res.status(400).json({
+            return res.status(400).json({
                 message: 'Missing required parameters',
                 info: 'Requires: firstname, lastname, username, email, password, role, laureatePromo'
             })

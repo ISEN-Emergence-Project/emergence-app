@@ -13,7 +13,7 @@ module.exports = {
         const { fkGodfatherAccountId, fkLaureateAccountId } = req.body;
 
         if (!fkGodfatherAccountId || !fkLaureateAccountId) {
-            res.status(400).json({
+            return res.status(400).json({
                 message: 'Missing required parameters',
                 info: 'Requires: fkGodfatherAccountId, fkLaureateAccountId'
             })

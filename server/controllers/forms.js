@@ -13,7 +13,7 @@ module.exports = {
         const { title, description, bannerUrl } = req.body;
 
         if ( !title || !description || !bannerUrl) {
-            res.status(400).json({
+            return res.status(400).json({
                 message: 'Missing required parameters',
                 info: 'Requires: formId, title, description, bannerUrl'
             })

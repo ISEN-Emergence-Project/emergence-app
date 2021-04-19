@@ -15,7 +15,7 @@ module.exports = {
         const { question, description, fkFormId } = req.body;
 
         if (!question || !fkFormId) {
-            res.status(400).json({
+            return res.status(400).json({
                 message: 'Missing required parameters',
                 info: 'Requires: question, fkFormId'
             })
