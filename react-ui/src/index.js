@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/index.css';
 import App from './App';
 
-// Importing the Bootstrap CSS
-import 'bootstrap/dist/css/bootstrap.min.css';
+// Import scss
+import './styles/index.scss';
+import './styles/App.scss';
+
+// Import Bootstrap CSS
+//import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
     <React.StrictMode>

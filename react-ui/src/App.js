@@ -1,4 +1,3 @@
-import './styles/App.css';
 import React, {useCallback, useEffect, useState } from 'react';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 
@@ -17,7 +16,6 @@ import {Timeline} from './pages/Timeline'
 import {PrettyPlanning} from './pages/PrettyPlanning'
 import {Logout} from "./pages/Logout";
 import {Preselection} from "./pages/Preselection";
-
 
 export default function App() {
     const savedToken = sessionStorage.getItem('accessToken');
@@ -41,7 +39,9 @@ export default function App() {
                             <Route path='/Logout'>
                                 <Logout setToken={setToken} />
                             </Route>
-                            <Route path='/Home' component={Home}/>
+                            <Route path='/Home'>
+                                <Home />
+                            </Route>
                             <Route path='/Form' component={Form}/>
                             <Route path='/ApplicantList' component={ApplicantList}/>
                             <Route path='/ManageAccounts' component={ManageAccounts}/>
@@ -54,9 +54,14 @@ export default function App() {
                             <Route path='/Preselection' component={Preselection}/>
                         </React.Fragment>
                     ) : (
-                        <Route exact path='/'>
-                            <Login token={ token } setToken={ setToken } />
-                        </Route>
+                        <>
+                            <Route exact path='/login'>
+                                <Login token={ token } setToken={ setToken } />
+                            </Route>
+                            <Route path='/'>
+                                <Redirect to='/login' />
+                            </Route>
+                        </>
                     )}
                 </Switch>
             </div>
