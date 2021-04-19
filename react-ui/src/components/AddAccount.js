@@ -35,7 +35,6 @@ export function AddAccount()   //Créé la pop-up pour ajouter des comptes
     const [username,setUsername] = useState("")
     const [laureatePromo,setLaureatePromo] = useState("")
     const[exit,setExit] = useState(false)
-    
 
       
 
@@ -50,22 +49,6 @@ export function AddAccount()   //Créé la pop-up pour ajouter des comptes
     const handleShow = () => setShow(true);
 
     const [permission, setPermission] = useState("")
-
-    
-
-
-    const toggleVisibility = () =>
-    {
-        let input = document.getElementById("passwordInput");
-        if (input.type === "password") 
-        {
-            input.type = "text";
-        } 
-        else 
-        {
-            input.type = "password";
-        }
-    }
 
     const checkEmail = (email) =>
     {
@@ -110,7 +93,7 @@ export function AddAccount()   //Créé la pop-up pour ajouter des comptes
             <label className="mt-3" htmlFor="passsword"> Mot de passe </label>
                 <input type ="password" className="form-control mt-3" required onChange={(event) => setPassword(event.target.value)} id = "password"/>
                 <br></br>
-                <p><input className="form-check-input"type="checkbox" onClick={toggleVisibility}/> Montrer le mot de passe </p> 
+                <p><input className="form-check-input"type="checkbox"/> Montrer le mot de passe </p> 
 
             <label className="mt-5" htmlFor="role"> Type de compte </label>
 
