@@ -89,8 +89,9 @@ export function Preselection() {
                                 </ul>
                             </div>
                             <div className='d-flex flex-nowrap align-items-center ml-auto py-2 '>
+                                <p className='m-0 mr-3 text-secondary text-small'>Sélectionnez 4 lauréats</p>
                                 {(selectedLaureates.length !== 4) ? (
-                                    <button className='btn btn-danger' disabled data-toggle="tooltip" data-placement="top" title="Sélectionnez 4 laureats">Valider</button>
+                                    <button className='btn btn-danger cursor-not-allowed' disabled data-toggle="tooltip" data-placement="top" title="Sélectionnez 4 laureats">Valider</button>
                                 ) : (
                                     <button className='btn btn-success' type='submit'>Valider</button>
                                 )}
