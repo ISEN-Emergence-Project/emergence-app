@@ -1,11 +1,11 @@
 import { Button, Modal} from 'react-bootstrap';
 import React, {useState, useEffect} from 'react';
-import Alert from 'react-bootstrap/Alert'
 
 
 
 
-export function ApplicantCard({Name,Firstname,Age,Studies,IdPers}) {
+
+export function ApplicantCard({Name,Firstname,Age,Studies,IdPers,Role}) {
     const [show, setShow] = useState(false);
   
     const handleClose = () => setShow(false);
@@ -27,10 +27,8 @@ export function ApplicantCard({Name,Firstname,Age,Studies,IdPers}) {
       .then(res => {
           res.json()
           .then(res => {
-              console.log(res)
               return setQuestion(res)
           })
-          setLoading(false)
       })
       
       .catch(error => console.error("There was an error",error)) 
@@ -50,10 +48,8 @@ export function ApplicantCard({Name,Firstname,Age,Studies,IdPers}) {
       .then(res => {
           res.json()
           .then(res => {
-              console.log(res)
               return setAnswer(res)
           })
-          setLoading(false)
       })
       
       .catch(error => console.error("There was an error",error)) 
@@ -65,6 +61,7 @@ export function ApplicantCard({Name,Firstname,Age,Studies,IdPers}) {
         
         <div onClick={handleShow} class="p-5 border rounded border-secondary m-1 bg-light ">
           <h3 class="text-capitalize font-weight-bold">{Name + " " + Firstname}</h3>
+          <h5>{Role}</h5>
           <div class="p-2">{Age}</div>
           <h5>{Studies}</h5>
           <hr />
