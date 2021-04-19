@@ -3,7 +3,7 @@ import {Container} from 'react-bootstrap';
 import axios from 'axios';
 
 export function Home() {
-    const [ user, setUser ] = useState({});
+    const [ user, setUser ] = useState({firstname: '', lastname: ''});
 
     useEffect(() => {
         const savedToken = sessionStorage.getItem('accessToken');
