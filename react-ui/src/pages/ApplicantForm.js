@@ -36,7 +36,7 @@ export function ApplicantForm()
       <ApplicantHeader/>
           {question.map(q => <div className="container mt-3" key={q.questionId}>
                         <div>
-                          <ApplicantField id = {q.questionId} questionLabel = {q.question} name={q.question} send={clicked}/>
+                          <ApplicantField id = {q.questionId} questionLabel = {q.question} send={clicked}/>
                           </div>
                     </div>
                     )}
