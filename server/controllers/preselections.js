@@ -79,7 +79,11 @@ module.exports = {
             })
             .catch((error) => {
                 console.log(error);
-                return res.status(500).json({ message: 'Internal error' });
+                if (error.name === "SequelizeUniqueConstraintError") {
+                    return res.status(400).json(error);
+                } else {
+                    return res.status(500).json({ message: 'Internal Error' });
+                }
             });
     },
 
@@ -101,7 +105,11 @@ module.exports = {
             })
             .catch((error) => {
                 console.log(error);
-                res.status(404).json({ message: 'Preselection not found' });
+                if (error.name === "SequelizeUniqueConstraintError") {
+                    return res.status(400).json(error);
+                } else {
+                    return res.status(500).json({ message: 'Internal Error' });
+                }
             });
     },
 

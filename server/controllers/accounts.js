@@ -91,7 +91,11 @@ module.exports = {
             .then(([, account]) => res.status(200).json(account[0]))
             .catch((error) => {
                 console.log(error);
-                res.status(500).json({ message: 'Internal error' });
+                if (error.name === "SequelizeUniqueConstraintError") {
+                    return res.status(400).json(error);
+                } else {
+                    return res.status(500).json({ message: 'Internal Error' });
+                }
             });
     },
 
