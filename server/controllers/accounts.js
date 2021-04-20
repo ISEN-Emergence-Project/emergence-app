@@ -291,9 +291,7 @@ module.exports = {
                     return res.status(403).json({ message: 'Account not found' });
                 }
 
-                console.log(password +' _ '+ account.passwordHash);
                 const checkPassword = bcrypt.compareSync(password, account.passwordHash);
-                console.log(checkPassword);
                 // Check if password match hash
                 if (!checkPassword) {
                     return res.status(403).json({ message: 'Wrong password', });
