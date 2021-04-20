@@ -23,9 +23,12 @@ Form.init({
         allowNull: false
     },
     phase: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
-        defaultValue: 'preparation'
+        references: {
+            model: 'Phase',
+            key: 'phaseId'
+        }
     }
 }, {
     sequelize,
