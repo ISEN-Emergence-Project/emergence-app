@@ -2,34 +2,20 @@ import React, {useCallback, useEffect, useState } from 'react';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 
 // Import components
-import {Navigation} from './navigation/Navigation'
-import {Home} from './pages/Home'
-import {ManageAccounts} from './pages/ManageAccounts'
-import {ApplicantList} from './pages/ApplicantList'
-import {ApplicantForm} from './pages/ApplicantForm'
-import {Form} from './pages/Form'
+import {Home} from './pages/admin/Home'
 import {Login} from './pages/Login'
-import {Rating} from './pages/Rating'
-import {PrettyPlanning} from './pages/PrettyPlanning'
 import {Logout} from "./pages/Logout";
-import {Preselection} from "./pages/Preselection";
-import MeetingList from "./pages/MeetingList";
+
+// Import routers
+import AdminRouter from './routes/AdminRouter';
+import LaureateRouter from './routes/LaureateRouter';
+import GodfatherRouter from './routes/GodfatherRouter';
 import axios from "axios";
 
 export default function App() {
     const savedToken = sessionStorage.getItem('accessToken');
     const [ token, setToken ] = useState(savedToken ? savedToken : "");
-    /*const [ user, setUser ] = useState({});
-
-    if (token) {
-        useEffect(() => {
-            axios.get('//etn-test.herokuapp.com/api/accounts/'.concat(token))
-                .then((res) => {
-                    setUser(res.data)
-                })
-                .catch((err) => console.log(err));
-        }, [])
-    }*/
+    const [ user, setUser ] = useState({firstname: '', lastname: ''});
 
     useEffect(() => {
         sessionStorage.setItem('accessToken', token)
@@ -39,33 +25,33 @@ export default function App() {
         <BrowserRouter>
             <title>Emergence</title>
             <div>
-                <Navigation user={ token } />
                 <Switch>
                     {token ? (
                         <React.Fragment>
                             <Route exact path='/'>
-                                <Redirect to='/Home' />
+                                <div>Root home</div>
                             </Route>
+
+                            <Route path='/admin'>
+                                <AdminRouter />
+                            </Route>
+                            <Route path='/laureate'>
+                                <LaureateRouter />
+                            </Route>
+                            <Route path='/godfather'>
+                                <GodfatherRouter />
+                            </Route>
+
                             <Route path='/logout'>
                                 <Logout setToken={setToken} />
                             </Route>
-                            <Route path='/Home'>
-                                <Home />
-                            </Route>
-                            <Route path='/Form' component={Form}/>
-                            <Route path='/ApplicantList' component={ApplicantList}/>
-                            <Route path='/Rating' component={Rating}/>
-                            <Route path='/ApplicantForm' component={ApplicantForm}/>
-                            <Route path='/ManageAccounts' component={ManageAccounts}/>
-                            <Route path='/PrettyPlanning' component={PrettyPlanning}/>
-                            <Route path='/Preselection' component={Preselection}/>
-                            <Route path='/MeetingList' component={MeetingList}/>
                         </React.Fragment>
                     ) : (
                         <>
                             <Route exact path='/login'>
-                                <Login token={ token } setToken={ setToken } />
+                                <Login setToken={ setToken } />
                             </Route>
+
                             <Route path='/'>
                                 <Redirect to='/login' />
                             </Route>

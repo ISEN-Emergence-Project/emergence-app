@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { Button, Modal} from 'react-bootstrap';
 import axios from "axios";
-import LaureateItem from "../components/preselection/LaureateItem";
+import LaureateItem from "../../components/preselection/LaureateItem";
 import {Redirect} from "react-router-dom";
 
 export function Preselection() {
@@ -62,10 +62,10 @@ export function Preselection() {
             <div className='container'>
                 <form className="py-4" onSubmit={handleSubmit}>
                     <ul className='row row-cols-1 row-cols-md-2 row-cols-xl-2 list-unstyled list'>
-                        {laureates.map(({ accountId, firstname, lastname }) => {
+                        {laureates.map((laureate) => {
                             return (
-                                <div className='col col-md-6 py-2' key={accountId}>
-                                    <LaureateItem accountId={accountId} firstname={firstname} lastname={lastname} updateSelectedLaureates={updateSelectedLaureates} />
+                                <div className='col col-md-6 py-2' key={laureate.accountId}>
+                                    <LaureateItem laureate={laureate} updateSelectedLaureates={updateSelectedLaureates} />
                                 </div>
                             )
                         })}
@@ -91,9 +91,9 @@ export function Preselection() {
                             <div className='d-flex flex-nowrap align-items-center ml-auto py-2 '>
                                 <p className='m-0 mr-3 text-secondary text-small'>Sélectionnez 4 lauréats</p>
                                 {(selectedLaureates.length !== 4) ? (
-                                    <button className='btn btn-danger cursor-not-allowed' disabled data-toggle="tooltip" data-placement="top" title="Sélectionnez 4 laureats">Valider</button>
+                                    <button className='btn btn-danger cursor-not-allowed my-2' disabled data-toggle="tooltip" data-placement="top" title="Sélectionnez 4 laureats">Valider</button>
                                 ) : (
-                                    <button className='btn btn-success' type='submit'>Valider</button>
+                                    <button className='btn btn-success my-2' type='submit'>Valider</button>
                                 )}
                             </div>
                         </div>
