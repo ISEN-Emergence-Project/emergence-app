@@ -30,7 +30,7 @@ sequelize
         console.log('Sequelize: All models were synchronized successfully.\n')
     })
     .catch(err => {
-        console.log('Sequelize: The was an error while synchronizing with database.\n');
+        console.log('Sequelize: The was an error while synchronizing with database:', err);
     })
 
 // Export modules
