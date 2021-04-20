@@ -13,6 +13,7 @@ const matchesRouter = require('./private/matches');
 const meetingsRouter = require('./private/meetings');
 const preselectionsRouter = require('./private/preselection');
 const questionsRouter = require('./private/questions');
+const phasesRouter = require('./private/phases');
 
 const loginRouter = require('./public/login');
 
@@ -62,6 +63,7 @@ router.use('/matches', authJwt, matchesRouter);
 router.use('/meetings', authJwt, meetingsRouter);
 router.use('/preselections', authJwt, preselectionsRouter);
 router.use('/questions', authJwt, questionsRouter);
+router.use('/phases', authJwt, phasesRouter);
 
 
 // Handle other API routes, send Not found
