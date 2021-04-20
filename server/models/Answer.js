@@ -31,7 +31,7 @@ Answer.init({
     modelName: 'Answer'
 })
 
-Answer.belongsTo(Question, {
+Answer.Question = Answer.belongsTo(Question, {
     foreignKey: 'fkQuestionId'
 });
 
