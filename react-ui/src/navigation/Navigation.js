@@ -41,7 +41,7 @@ export function Navigation({ user }) {
                                     <a className="nav-link p-2" href="/Preselection">Preselection</a>
                                 </li>
                             </ul>
-                            <a className="btn btn-outline-light d-lg-inline-block my-2 ml-auto" href="/Logout/">Logout</a>
+                            <a className="btn btn-outline-light d-lg-inline-block my-2 ml-auto" href="/logout/">Logout</a>
                         </>
                     ) : null }
                 </div>

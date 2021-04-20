@@ -250,7 +250,7 @@ module.exports = {
         return Account
             .findOne({
                 where: {
-                    refreshToken: req.params.token
+                    accessToken: req.params.token
                 }
             })
             .then((account) => {
@@ -288,7 +288,9 @@ module.exports = {
                     return res.status(403).json({ message: 'Account not found' });
                 }
 
+                console.log(password +' _ '+ account.passwordHash);
                 const checkPassword = bcrypt.compareSync(password, account.passwordHash);
+                console.log(checkPassword);
                 // Check if password match hash
                 if (!checkPassword) {
                     return res.status(403).json({ message: 'Wrong password', });
@@ -311,7 +313,7 @@ module.exports = {
 
                 Account
                     .update({
-                        refreshToken
+                        accessToken: accessToken
                     }, {
                         where: { accountId: account.accountId }
                     })
@@ -331,7 +333,7 @@ module.exports = {
 
                         return res.status(200).json({
                             message: 'Success',
-                            accessToken: refreshToken,
+                            accessToken: accessToken,
                             xsrfToken
                         });
                     })

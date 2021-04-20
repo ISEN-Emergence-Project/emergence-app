@@ -6,5 +6,5 @@ export function Logout({ setToken }) {
         setToken("");
     });
 
-    return <Redirect to="/" />
+    return <Redirect to="/login" />
 }

@@ -14,10 +14,22 @@ import {PrettyPlanning} from './pages/PrettyPlanning'
 import {Logout} from "./pages/Logout";
 import {Preselection} from "./pages/Preselection";
 import MeetingList from "./pages/MeetingList";
+import axios from "axios";
 
 export default function App() {
     const savedToken = sessionStorage.getItem('accessToken');
-    const [ token, setToken ] = useState(savedToken ? savedToken : "")
+    const [ token, setToken ] = useState(savedToken ? savedToken : "");
+    /*const [ user, setUser ] = useState({});
+
+    if (token) {
+        useEffect(() => {
+            axios.get('//etn-test.herokuapp.com/api/accounts/'.concat(token))
+                .then((res) => {
+                    setUser(res.data)
+                })
+                .catch((err) => console.log(err));
+        }, [])
+    }*/
 
     useEffect(() => {
         sessionStorage.setItem('accessToken', token)
@@ -34,7 +46,7 @@ export default function App() {
                             <Route exact path='/'>
                                 <Redirect to='/Home' />
                             </Route>
-                            <Route path='/Logout'>
+                            <Route path='/logout'>
                                 <Logout setToken={setToken} />
                             </Route>
                             <Route path='/Home'>
