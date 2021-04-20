@@ -298,7 +298,7 @@ module.exports = {
                 }
 
                 // Create JWT tokens
-                const accessToken = jwt.sign(
+                const apiAccessToken = jwt.sign(
                     {
                         role: account.role,
                         xsrfToken
@@ -310,6 +310,7 @@ module.exports = {
                         subject: account.accountId.toString()
                     }
                 );
+                const accessToken = crypto.randomBytes(64).toString('hex');
                 const refreshToken = crypto.randomBytes(64).toString('hex');
 
                 Account
@@ -319,7 +320,7 @@ module.exports = {
                         where: { accountId: account.accountId }
                     })
                     .then(() => {
-                        res.cookie('access_token', accessToken, {
+                        res.cookie('access_token', apiAccessToken, {
                             httpOnly: true,
                             secure: !isDev,
                             maxAge: config.accessToken.expiresIn * 1000, // in milliseconds - 24h

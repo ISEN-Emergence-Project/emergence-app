@@ -44,7 +44,7 @@ Account.init({
         unique: true
     },
     accessToken: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
         unique: true
     },
     refreshToken: {
