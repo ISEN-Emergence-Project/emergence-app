@@ -5,6 +5,7 @@ class Phase extends Model {}
 Phase.init({
     phaseId: {
         type: DataTypes.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
         allowNull: false
     },
