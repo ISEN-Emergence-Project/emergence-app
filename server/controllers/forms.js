@@ -148,5 +148,5 @@ module.exports = {
                 console.log(error);
                 return null;
             });
-    },
+    }
 };

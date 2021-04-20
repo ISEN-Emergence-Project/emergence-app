@@ -22,7 +22,7 @@ Form.init({
         type: DataTypes.STRING,
         allowNull: false
     },
-    phase: {
+    fkPhaseId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
