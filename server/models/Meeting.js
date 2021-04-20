@@ -8,7 +8,7 @@ Meeting.init({
         primaryKey: true,
         allowNull: false,
         references: {
-            model: 'Godfather',
+            model: 'Godfathers',
             key: 'fkAccountId'
         }
     },
@@ -17,7 +17,7 @@ Meeting.init({
         primaryKey: true,
         allowNull: false,
         references: {
-            model: 'Laureate',
+            model: 'Laureates',
             key: 'fkAccountId'
         }
     },

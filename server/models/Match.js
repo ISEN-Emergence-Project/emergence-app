@@ -8,7 +8,7 @@ Match.init({
         primaryKey: true,
         allowNull: false,
         references: {
-            model: 'Godfather',
+            model: 'Godfathers',
             key: 'fkAccountId'
         }
     },
@@ -18,7 +18,7 @@ Match.init({
         allowNull: false,
         unique: true,
         references: {
-            model: 'Laureate',
+            model: 'Laureates',
             key: 'fkAccountId'
         }
     }
