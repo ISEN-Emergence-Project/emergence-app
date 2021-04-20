@@ -149,7 +149,15 @@ module.exports = {
     },
 
     update (req, res) {
-        const { firstname, lastname, username, email, password, role, isArchived, resetKey, refreshToken, promo } = req.body;
+        const { firstname, lastname, username, email, password, role, isArchived, resetKey, accessToken, refreshToken } = req.body;
+
+        // Check if role sent
+        if (role) {
+            return res.status(400).json({
+                message: 'Role can not be changed.',
+                info: 'Delete this account and create a new one to change role.'
+            })
+        }
 
         // Create hash, if password not empty
         const hash = (password) ? bcrypt.hashSync(password, salt) : undefined;
@@ -161,11 +169,10 @@ module.exports = {
                 username: username,
                 email: email,
                 passwordHash: hash,
-                role: role,
                 isArchived: isArchived,
                 resetKey: resetKey,
-                refreshToken: refreshToken,
-                promo: promo
+                accessToken: accessToken,
+                refreshToken: refreshToken
             }, {
                 where: {
                     accountId: req.params.id
