@@ -14,7 +14,7 @@ function handleCall()
     else if (laureatePromo.value.match(/^[0-9]+$/) == null)        // comparer user et mail + gérer les alerts si elle quitte la popup par error
     {
         console.log(typeof laureatePromo.value)
-        alert("La promotion du laureat doit contenir le format suivant 2020-2021")
+        alert("La promotion du laureat doit contenir le format suivant 2020")
     }
 
    
