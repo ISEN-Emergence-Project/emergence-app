@@ -20,6 +20,7 @@ function handleCall()
             console.log(res)
              
          })
+
         
 }
 
@@ -63,14 +64,9 @@ export function AddAccount()   //Créé la pop-up pour ajouter des comptes
 
         <div className="container">
             <Button className="btn btn-success d-grid gap-3 col-2  btn-sm mx-auto mt-5" onClick={handleShow}> <i class="fs-3 bi-plus-circle-fill"></i> Ajouter un compte </Button>
+        
 
-            {exit? <ApplicantCard Name={lastname} Firstname={firstname} Age={email} Studies={password} Role ={
-                                            document.querySelector('input[name="flexRadioDefault"]:checked')===null? alert("Veuillez choisir un type de compte"):
-                                            document.querySelector('input[name="flexRadioDefault"]:checked').value
-                                        }/>
-                                        :""}
-
-        <Modal size="lg" show={show} onHide={handleClose} onExit={handleExit}>
+        <Modal size="lg" show={show} onHide={handleClose} onExit={handleCall}>
         <Modal.Header>  
             <Modal.Title>Ajouter un compte </Modal.Title>
         </Modal.Header>
@@ -92,8 +88,7 @@ export function AddAccount()   //Créé la pop-up pour ajouter des comptes
 
             <label className="mt-3" htmlFor="passsword"> Mot de passe </label>
                 <input type ="password" className="form-control mt-3" required onChange={(event) => setPassword(event.target.value)} id = "password"/>
-                <br></br>
-                <p><input className="form-check-input"type="checkbox"/> Montrer le mot de passe </p> 
+                <br></br> 
 
             <label className="mt-5" htmlFor="role"> Type de compte </label>
 
@@ -118,7 +113,7 @@ export function AddAccount()   //Créé la pop-up pour ajouter des comptes
       </Modal.Body>
 
       <Modal.Footer>{/* Une fois qu'on a rentré les infos on les affiches avec un document.getElementbyId */}
-        <Button variant="btn btn-success btn-sm" onClick={handleCall}> Enregistrer</Button>
+        <Button variant="btn btn-success btn-sm" onClick={<div className="alert alert-success" role="alert"> Modifications enregistrées, veuillez recharger la page</div>}> Enregistrer</Button>
 
         <Button variant="btn btn-danger btn-sm" onClick={handleClose}> <i class="me-2 bi-x-square-fill"></i> Fermer</Button>    
 

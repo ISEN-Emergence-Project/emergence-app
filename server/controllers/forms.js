@@ -39,18 +39,18 @@ module.exports = {
     },
 
     update (req, res) {
-        const { formId, title, description, bannerUrl } = req.body;
+        const { title, description, bannerUrl } = req.body;
 
         return Form
             .update({
-                formId: formId,
                 title: title,
                 description: description,
                 bannerUrl: bannerUrl
             }, {
                 where: {
                     formId: req.params.id
-                }
+                },
+                returning: true
             })
             .then(([, form]) => res.status(200).json(form[0]))
             .catch((error) => {

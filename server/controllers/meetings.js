@@ -56,7 +56,8 @@ module.exports = {
                 where: {
                     fkGodfatherAccountId: req.params.godfatherId,
                     fkLaureateAccountId: req.params.laureateId
-                }
+                },
+                returning: true
             })
             .then(([, meeting]) => res.status(200).json(meeting[0]))
             .catch((error) => {
