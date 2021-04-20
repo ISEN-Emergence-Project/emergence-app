@@ -3,8 +3,8 @@ import {useEffect} from "react"
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import {ApplicantCard} from"../components/ApplicantCards"
-import {AddAccount} from "../components/AddAccount"
+import {ApplicantCard} from "../components/admin/ApplicantCards"
+import {AddAccount} from "../components/admin/AddAccount"
 
 export function ManageAccounts(){          // permet de faire un test en appelant l'API
 {

@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import {LaureateDropDownButton} from"../components/LaureateDropDownButton"
-import GodfatherMeetings from "../components/meetingPlanning/GodfatherMeetings";
+import GodfatherMeetings from "../components/godfather/GodfatherMeetings";
 
 
 export function MeetingPlanning() {

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { Button, Modal} from 'react-bootstrap';
 import axios from "axios";
-import LaureateItem from "../../components/preselection/LaureateItem";
+import LaureateItem from "../../components/godfather/LaureateItem";
 import {Redirect} from "react-router-dom";
 
 export function Preselection() {

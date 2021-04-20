@@ -5,7 +5,7 @@ import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import {Form} from "../pages/Form";
 import {ApplicantList} from "../pages/ApplicantList";
 import {Rating} from "../pages/Rating";
-import {ApplicantForm} from "../pages/ApplicantForm";
+import {ApplicantForm} from "../pages/laureate/ApplicantForm";
 import {ManageAccounts} from "../pages/ManageAccounts";
 import {PrettyPlanning} from "../pages/PrettyPlanning";
 import MeetingList from "../pages/MeetingList";

@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react';
-import { ApplicantHeader } from '../components/ApplicantHeader';
-import {ApplicantField} from "../components/ApplicantField" // On appelle le composant "Field" qui contient un champ pour une question
+import { ApplicantHeader } from '../../components/ApplicantHeader';
+import {ApplicantField} from "../../components/ApplicantField" // On appelle le composant "Field" qui contient un champ pour une question
 
 export function ApplicantForm()
 {
@@ -32,17 +32,24 @@ export function ApplicantForm()
     },[]);
 
 
-    return <div>
-      <ApplicantHeader/>
-          {question.map(q => <div className="container mt-3" key={q.questionId}>
-                        <div>
-                          <ApplicantField id = {q.questionId} questionLabel = {q.question} send={clicked}/>
-                          </div>
+    return (
+        <>
+            <ApplicantHeader/>
+
+            <div className='container py-4'>
+                {question.map(q => (
+                    <div className="mt-4" key={q.questionId}>
+                        <ApplicantField id = {q.questionId} questionLabel = {q.question} send={clicked}/>
                     </div>
-                    )}
-        <button onClick={handleClick}> Envoyer vos réponses </button>
-      
-    </div>
+                ))}
+
+                <div className='my-4 py-4'>
+                    <button className='btn btn-success' onClick={handleClick}>Envoyer vos réponses</button>
+                </div>
+            </div>
+        </>
+
+    )
 
 }
 

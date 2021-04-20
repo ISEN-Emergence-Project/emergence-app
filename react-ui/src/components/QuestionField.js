@@ -2,7 +2,7 @@ import { useState } from "react";
 import  React from "react"
 import {useEffect} from "react"
 import {Field} from "./Field"
-import {AddQuestionCall} from "../components/AddQuestionCall"
+import {AddQuestionCall} from "./admin/AddQuestionCall"
 
 
 export function QuestionField()         
