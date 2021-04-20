@@ -1,7 +1,4 @@
-import React, {Component, useState} from "react";
-import React from "react";
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
+import React, {useState} from "react";
 
 export function Navigation({ user }) {
     const [ navExpanded, setNavExpanded ] = useState(false);
@@ -23,31 +20,22 @@ export function Navigation({ user }) {
                         <>
                             <ul className="navbar-nav flex-row flex-wrap bd-navbar-nav pt-2 py-md-0">
                                 <li className="nav-item col-6 col-md-auto p-0">
-                                    <a className="nav-link p-2 active" aria-current="page" href="/">Home</a>
+                                    <a className="nav-link p-2 active" aria-current="page" href="/">Accueil</a>
                                 </li>
                                 <li className="nav-item col-6 col-md-auto p-0">
-                                    <a className="nav-link p-2" href="/ApplicantList">ApplicantList</a>
+                                    <a className="nav-link p-2" href="/ApplicantList">Liste des lauréats</a>
                                 </li>
                                 <li className="nav-item col-6 col-md-auto p-0">
-                                    <a className="nav-link p-2" href="/Rating">Rating</a>
+                                    <a className="nav-link p-2" href="/Rating">Notes</a>
                                 </li>
                                 <li className="nav-item col-6 col-md-auto p-0">
-                                    <a className="nav-link p-2" href="/PlanningV2">PlanningV2</a>
+                                    <a className="nav-link p-2" href="/ManageAccounts">Gestion des comptes</a>
                                 </li>
                                 <li className="nav-item col-6 col-md-auto p-0">
-                                    <a className="nav-link p-2" href="/APITest">APITest</a>
+                                    <a className="nav-link p-2" href="/Form">Formulaire Admin</a>
                                 </li>
                                 <li className="nav-item col-6 col-md-auto p-0">
-                                    <a className="nav-link p-2" href="/Form">Form</a>
-                                </li>
-                                <li className="nav-item col-6 col-md-auto p-0">
-                                    <a className="nav-link p-2" href="/ApplicantForm">ApplicantForm</a>
-                                </li>
-                                <li className="nav-item col-6 col-md-auto p-0">
-                                    <a className="nav-link p-2" href="/ManageAccounts">ManageAccounts</a>
-                                </li>
-                                <li className="nav-item col-6 col-md-auto p-0">
-                                    <a className="nav-link p-2" href="/PrettyPlanning">PrettyPlanning</a>
+                                    <a className="nav-link p-2" href="/ApplicantForm">Formulaire Lauréat</a>
                                 </li>
                                 <li className="nav-item col-6 col-md-auto p-0">
                                     <a className="nav-link p-2" href="/Preselection">Preselection</a>
@@ -59,22 +47,6 @@ export function Navigation({ user }) {
                 </div>
             </div>
         </header>
-        <Navbar bg="dark" variant="dark">
-            <Navbar.Brand href="/">Emergence</Navbar.Brand>
-            <Nav className="mr-auto">
-                {user ? (
-                    <React.Fragment>
-                        <Nav.Link href="/ApplicantList">Liste des lauréats</Nav.Link>
-                        <Nav.Link href="/Rating">Notes</Nav.Link>
-                        <Nav.Link href="/ManageAccounts">Gestion des comptes</Nav.Link>
-                        <Nav.Link href="/Form">Formulaire administrateur</Nav.Link>
-                        <Nav.Link href="/ApplicantForm">Formulaire lauréats</Nav.Link>
-                        <Nav.Link href="/PrettyPlanning">Planning</Nav.Link>
-                        <Nav.Link href="/Preselection">Presélection</Nav.Link>
-                        <Nav.Link href="/Logout">Déconnexion</Nav.Link>
-                    </React.Fragment>
-                ) : null }
-            </Nav>
-        </Navbar>
+    
     );
 };
