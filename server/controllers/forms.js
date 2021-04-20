@@ -35,21 +35,24 @@ module.exports = {
     },
 
     update (req, res) {
-        const { formId, title, description, bannerUrl } = req.body;
+        const { title, description, bannerUrl } = req.body;
 
         return Form
             .update({
-                formId: formId,
                 title: title,
                 description: description,
                 bannerUrl: bannerUrl
             }, {
                 where: {
                     formId: req.params.id
-                }
+                },
+                returning: true
             })
-            .then(([, form]) => res.status(200).json(form[0]))
-            .catch((error) => console.log(error));
+            .then(([, account]) => res.status(200).json(account[0]))
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
+            });
     },
 
     delete (req, res) {

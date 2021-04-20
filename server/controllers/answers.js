@@ -49,10 +49,14 @@ module.exports = {
                 where: {
                     fkAccountId: req.params.accountId,
                     fkQuestionId: req.params.questionId
-                }
+                    },
+                returning: true
             })
-            .then(([, answer]) => res.status(200).json(answer[0]))
-            .catch((error) => console.log(error));
+            .then(([, account]) => res.status(200).json(account[0]))
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
+            });
     },
 
     delete (req, res) {

@@ -54,8 +54,11 @@ module.exports = {
                 },
                 returning: true
             })
-            .then(([, question]) => res.status(200).json(question[0]))
-            .catch((error) => console.log(error));
+            .then(([, account]) => res.status(200).json(account[0]))
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
+            });
     },
 
     delete (req, res) {
