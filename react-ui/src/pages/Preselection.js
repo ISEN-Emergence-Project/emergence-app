@@ -13,8 +13,6 @@ export function Preselection() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        console.log(e);
     }
 
     return(
@@ -56,7 +54,6 @@ function Test(props){
         .then(res => {
             res.json()
             .then(res => {
-                console.log(res)
                 return setAnswer(res)
             })
             
@@ -79,10 +76,8 @@ function Test(props){
         .then(res => {
             res.json()
             .then(res => {
-                console.log(res)
                 return setQuestion(res)
             })
-            setLoading(false)
         })
         
         .catch(error => console.error("There was an error",error)) 

@@ -5,15 +5,12 @@ import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 // Import components
 import {Navigation} from './navigation/Navigation'
 import {Home} from './pages/Home'
-import {APITest} from './pages/APITest'
+import {ManageAccounts} from './pages/ManageAccounts'
 import {ApplicantList} from './pages/ApplicantList'
 import {ApplicantForm} from './pages/ApplicantForm'
 import {Form} from './pages/Form'
 import {Login} from './pages/Login'
-import {ManageAccounts} from './pages/ManageAccounts'
-import {PlanningV2} from './pages/PlanningV2'
 import {Rating} from './pages/Rating'
-import {Timeline} from './pages/Timeline'
 import {PrettyPlanning} from './pages/PrettyPlanning'
 import {Logout} from "./pages/Logout";
 import {Preselection} from "./pages/Preselection";
@@ -44,12 +41,9 @@ export default function App() {
                             <Route path='/Home' component={Home}/>
                             <Route path='/Form' component={Form}/>
                             <Route path='/ApplicantList' component={ApplicantList}/>
-                            <Route path='/ManageAccounts' component={ManageAccounts}/>
                             <Route path='/Rating' component={Rating}/>
                             <Route path='/ApplicantForm' component={ApplicantForm}/>
-                            <Route path='/Timeline' component={Timeline}/>
-                            <Route path='/PlanningV2' component={PlanningV2}/>
-                            <Route path='/APITest' component={APITest}/>
+                            <Route path='/ManageAccounts' component={ManageAccounts}/>
                             <Route path='/PrettyPlanning' component={PrettyPlanning}/>
                             <Route path='/Preselection' component={Preselection}/>
                         </React.Fragment>

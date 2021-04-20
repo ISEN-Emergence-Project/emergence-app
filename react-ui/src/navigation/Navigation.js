@@ -1,4 +1,4 @@
-import React, {Component, useState} from "react";
+import React from "react";
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 
@@ -10,17 +10,14 @@ export function Navigation({ user }) {
             <Nav className="mr-auto">
                 {user ? (
                     <React.Fragment>
-                        <Nav.Link href="/ApplicantList">ApplicantList</Nav.Link>
-                        <Nav.Link href="/Rating">Rating</Nav.Link>
-                        <Nav.Link href="/Timeline">Timeline</Nav.Link>
-                        <Nav.Link href="/PlanningV2">PlanningV2</Nav.Link>
-                        <Nav.Link href="/APITest">API</Nav.Link>
-                        <Nav.Link href="/Form"> Admin Form </Nav.Link>
-                        <Nav.Link href="/ApplicantForm">ApplicantForm</Nav.Link>
-                        <Nav.Link href="/ManageAccounts">ManageAccounts</Nav.Link>
-                        <Nav.Link href="/PrettyPlanning">Joli Planning</Nav.Link>
-                        <Nav.Link href="/Preselection">Preselection</Nav.Link>
-                        <Nav.Link href="/Logout">Logout</Nav.Link>
+                        <Nav.Link href="/ApplicantList">Liste des lauréats</Nav.Link>
+                        <Nav.Link href="/Rating">Notes</Nav.Link>
+                        <Nav.Link href="/ManageAccounts">Gestion des comptes</Nav.Link>
+                        <Nav.Link href="/Form">Formulaire administrateur</Nav.Link>
+                        <Nav.Link href="/ApplicantForm">Formulaire lauréats</Nav.Link>
+                        <Nav.Link href="/PrettyPlanning">Planning</Nav.Link>
+                        <Nav.Link href="/Preselection">Presélection</Nav.Link>
+                        <Nav.Link href="/Logout">Déconnexion</Nav.Link>
                     </React.Fragment>
                 ) : null }
             </Nav>

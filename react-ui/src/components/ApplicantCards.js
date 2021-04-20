@@ -1,10 +1,6 @@
 import { Button, Modal} from 'react-bootstrap';
 import React, {useState, useEffect} from 'react';
 
-
-
-
-
 export function ApplicantCard({Name,Firstname,Age,Studies,IdPers,Role}) {
     const [show, setShow] = useState(false);
   
@@ -76,9 +72,6 @@ export function ApplicantCard({Name,Firstname,Age,Studies,IdPers,Role}) {
                 (ans.fkQuestionId==ques.questionId ?
                 <div class ="font-weight-normal" key={ans.answerId}><div class="bg-light border t p-2 mb-2">{ans.answer}</div></div>:false) 
                 : false)}</div>)}
-                 
-                
-                
                 
             </Modal.Body>
           <Modal.Footer>
