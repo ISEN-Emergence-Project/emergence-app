@@ -21,6 +21,11 @@ Form.init({
     bannerUrl: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    phase: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: 'preparation'
     }
 }, {
     sequelize,
