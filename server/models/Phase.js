@@ -13,12 +13,10 @@ Phase.init({
         allowNull: false
     },
     buttonText: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: DataTypes.STRING
     },
     buttonLink: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: DataTypes.STRING
     }
 }, {
     sequelize,
