@@ -4,6 +4,8 @@ const crypto = require('crypto');
 const config = require('../config');
 
 const Account = require('../models/Account');
+const Laureate = require("../models/Laureate");
+const Godfather = require("../models/Godfather");
 
 const commonsController = require('./commons');
 
@@ -18,39 +20,121 @@ module.exports = {
     },
 
     listLaureates (req, res) {
-        return Account
+        return Laureate
             .findAll({
-                where: {
-                    role: 'laureate'
+                include: {
+                    model: Account
                 }
             })
             .then((laureates) => res.status(200).json(laureates))
-            .catch((error) => res.status(400).json(error));
+            .catch((error) => {
+                console.log(error);
+                return res.status(500).json({ message: 'Internal error' });
+            });
+    },
+
+    listGodfathers (req, res) {
+        return Godfather
+            .findAll({
+                include: {
+                    model: Account
+                }
+            })
+            .then((laureates) => res.status(200).json(laureates))
+            .catch((error) => {
+                console.log(error);
+                return res.status(500).json({ message: 'Internal error' });
+            });
     },
 
     insert (req, res) {
-        const { firstname, lastname, username, email, password, role, laureatePromo } = req.body;
+        const { firstname, lastname, username, email, password, role } = req.body;
 
-        if (!firstname || !lastname || !username || !email || !password || !role || !laureatePromo) {
+        // Check general account fields
+        if (!firstname || !lastname || !username || !email || !password || !role) {
             return res.status(400).json({
                 message: 'Missing required parameters',
-                info: 'Requires: firstname, lastname, username, email, password, role, laureatePromo'
+                info: 'Requires: firstname, lastname, username, email, password, role'
+            })
+        }
+
+        // Check valid role
+        if (!['admin', 'laureate', 'godfather'].includes(role)) {
+            return res.status(400).json({
+                message: 'Role is invalid',
+                info: 'Authorized values: admin, laureate, godfather'
             })
         }
 
         const hash = bcrypt.hashSync(password, salt);
-        const promo = new Date(parseInt(laureatePromo),1,1);
+        let values, options, Model;
 
-        return Account
-            .create({
+        // Handle according to role
+        if (role === 'laureate') {
+            const { studies, promo } = req.body;
+
+            // Check laureate fields
+            if (!studies || !promo) {
+                return res.status(400).json({
+                    message: 'Missing required parameters',
+                    info: 'Requires: studies, promo'
+                })
+            }
+
+            Model = Laureate;
+
+            values = {
+                studies: studies,
+                promo: promo,
+                Account: {
+                    firstname: firstname,
+                    lastname: lastname,
+                    username: username,
+                    email: email,
+                    passwordHash: hash,
+                    role: role
+                }
+            }
+            options = {
+                include: [ Account ]
+            }
+        }
+        else if (role === 'godfather') {
+            const { phone } = req.body;
+
+            Model = Godfather;
+
+            values = {
+                phone: phone,
+                Account: {
+                    firstname: firstname,
+                    lastname: lastname,
+                    username: username,
+                    email: email,
+                    passwordHash: hash,
+                    role: role
+                }
+            }
+            options = {
+                include: [ Account ]
+            }
+        }
+        else if (role === 'admin') {
+            Model = Account;
+
+            values = {
                 firstname: firstname,
                 lastname: lastname,
                 username: username,
                 email: email,
                 passwordHash: hash,
-                role: role,
-                laureatePromo: promo
-            })
+                role: role
+            }
+            options = {}
+        }
+
+        return Model
+            .create(values, options)
             .then((Account) => {
                 res.status(201).json(Account);
             })
@@ -65,7 +149,7 @@ module.exports = {
     },
 
     update (req, res) {
-        const { firstname, lastname, username, email, password, role, isArchived, resetKey, refreshToken, laureatePromo } = req.body;
+        const { firstname, lastname, username, email, password, role, isArchived, resetKey, refreshToken, promo } = req.body;
 
         // Create hash, if password not empty
         const hash = (password) ? bcrypt.hashSync(password, salt) : undefined;
@@ -81,14 +165,18 @@ module.exports = {
                 isArchived: isArchived,
                 resetKey: resetKey,
                 refreshToken: refreshToken,
-                laureatePromo: laureatePromo
+                promo: promo
             }, {
                 where: {
                     accountId: req.params.id
                 },
                 returning: true
             })
-            .then(([, account]) => res.status(200).json(account[0]))
+            .then(([, account]) => {
+                // Removed passwordHash from response
+                account[0].passwordHash = undefined;
+                return res.status(200).json(account[0])
+            })
             .catch((error) => {
                 console.log(error);
                 if (error.name === "SequelizeUniqueConstraintError") {
