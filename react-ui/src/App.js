@@ -1,4 +1,3 @@
-import './styles/App.css';
 import React, {useCallback, useEffect, useState } from 'react';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 
@@ -14,7 +13,7 @@ import {Rating} from './pages/Rating'
 import {PrettyPlanning} from './pages/PrettyPlanning'
 import {Logout} from "./pages/Logout";
 import {Preselection} from "./pages/Preselection";
-
+import MeetingList from "./pages/MeetingList";
 
 export default function App() {
     const savedToken = sessionStorage.getItem('accessToken');
@@ -38,7 +37,9 @@ export default function App() {
                             <Route path='/Logout'>
                                 <Logout setToken={setToken} />
                             </Route>
-                            <Route path='/Home' component={Home}/>
+                            <Route path='/Home'>
+                                <Home />
+                            </Route>
                             <Route path='/Form' component={Form}/>
                             <Route path='/ApplicantList' component={ApplicantList}/>
                             <Route path='/Rating' component={Rating}/>
@@ -46,11 +47,17 @@ export default function App() {
                             <Route path='/ManageAccounts' component={ManageAccounts}/>
                             <Route path='/PrettyPlanning' component={PrettyPlanning}/>
                             <Route path='/Preselection' component={Preselection}/>
+                            <Route path='/MeetingList' component={MeetingList}/>
                         </React.Fragment>
                     ) : (
-                        <Route exact path='/'>
-                            <Login token={ token } setToken={ setToken } />
-                        </Route>
+                        <>
+                            <Route exact path='/login'>
+                                <Login token={ token } setToken={ setToken } />
+                            </Route>
+                            <Route path='/'>
+                                <Redirect to='/login' />
+                            </Route>
+                        </>
                     )}
                 </Switch>
             </div>

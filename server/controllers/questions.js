@@ -15,7 +15,7 @@ module.exports = {
         const { question, description, fkFormId } = req.body;
 
         if (!question || !fkFormId) {
-            res.status(400).json({
+            return res.status(400).json({
                 message: 'Missing required parameters',
                 info: 'Requires: question, fkFormId'
             })
@@ -32,7 +32,7 @@ module.exports = {
             })
             .catch((error) => {
                 console.log(error);
-                if (["SequelizeValidationError", "SequelizeForeignKeyConstraintError"].includes(error.name)) {
+                if (error.name === "SequelizeUniqueConstraintError") {
                     return res.status(400).json(error);
                 } else {
                     return res.status(500).json({ message: 'Internal Error' });
@@ -55,7 +55,14 @@ module.exports = {
                 returning: true
             })
             .then(([, question]) => res.status(200).json(question[0]))
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log(error);
+                if (error.name === "SequelizeUniqueConstraintError") {
+                    return res.status(400).json(error);
+                } else {
+                    return res.status(500).json({ message: 'Internal Error' });
+                }
+            });
     },
 
     delete (req, res) {

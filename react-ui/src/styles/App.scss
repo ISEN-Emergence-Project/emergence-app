@@ -1,0 +1,37 @@
+@import "custom";
+
+.custom-control-label {
+    top: -0.2rem
+}
+
+.custom-checkbox .custom-control-label::before {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.custom-control-label::after {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.bd-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.title {
+    text-align: center;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.cursor-not-allowed {
+    cursor: not-allowed;
+}
+
+.text-small {
+    font-size: 0.9rem;
+}

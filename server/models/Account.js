@@ -39,23 +39,20 @@ Account.init({
         type: DataTypes.STRING,
         allowNull: false
     },
-    isArchived: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-        allowNull: false
-    },
     resetKey: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        unique: true
+    },
+    accessToken: {
+        type: DataTypes.STRING,
+        unique: true
     },
     refreshToken: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        unique: true
     },
     lastConnectedAt: {
         type: DataTypes.DATE
-    },
-    laureatePromo: {
-        type: DataTypes.DATEONLY,
-        allowNull: false
     }
 }, {
     sequelize,

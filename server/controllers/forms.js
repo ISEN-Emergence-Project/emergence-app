@@ -13,7 +13,7 @@ module.exports = {
         const { title, description, bannerUrl } = req.body;
 
         if ( !title || !description || !bannerUrl) {
-            res.status(400).json({
+            return res.status(400).json({
                 message: 'Missing required parameters',
                 info: 'Requires: formId, title, description, bannerUrl'
             })
@@ -30,26 +30,37 @@ module.exports = {
             })
             .catch((error) => {
                 console.log(error);
-                res.status(500).json({ message: 'Internal error' });
+                if (error.name === "SequelizeUniqueConstraintError") {
+                    return res.status(400).json(error);
+                } else {
+                    return res.status(500).json({ message: 'Internal Error' });
+                }
             });
     },
 
     update (req, res) {
-        const { formId, title, description, bannerUrl } = req.body;
+        const { title, description, bannerUrl } = req.body;
 
         return Form
             .update({
-                formId: formId,
                 title: title,
                 description: description,
                 bannerUrl: bannerUrl
             }, {
                 where: {
                     formId: req.params.id
-                }
+                },
+                returning: true
             })
             .then(([, form]) => res.status(200).json(form[0]))
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log(error);
+                if (error.name === "SequelizeUniqueConstraintError") {
+                    return res.status(400).json(error);
+                } else {
+                    return res.status(500).json({ message: 'Internal Error' });
+                }
+            });
     },
 
     delete (req, res) {

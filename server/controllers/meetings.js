@@ -13,7 +13,7 @@ module.exports = {
         const { fkGodfatherAccountId, fkLaureateAccountId, beginning, ending, godfatherRating, laureateRating } = req.body;
 
         if (!fkGodfatherAccountId || !fkLaureateAccountId || !beginning || !ending || !godfatherRating || !laureateRating) {
-            res.status(400).json({
+            return res.status(400).json({
                 message: 'Missing required parameters',
                 info: 'Requires: fkGodfatherAccountId, fkLaureateAccountId, beginning, ending, godfatherRating, laureateRating'
             })
@@ -33,7 +33,11 @@ module.exports = {
             })
             .catch((error) => {
                 console.log(error);
-                res.status(500).json({ message: 'Internal error' });
+                if (error.name === "SequelizeUniqueConstraintError") {
+                    return res.status(400).json(error);
+                } else {
+                    return res.status(500).json({ message: 'Internal Error' });
+                }
             });
     },
 
@@ -52,10 +56,18 @@ module.exports = {
                 where: {
                     fkGodfatherAccountId: req.params.godfatherId,
                     fkLaureateAccountId: req.params.laureateId
-                }
+                },
+                returning: true
             })
             .then(([, meeting]) => res.status(200).json(meeting[0]))
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log(error);
+                if (error.name === "SequelizeUniqueConstraintError") {
+                    return res.status(400).json(error);
+                } else {
+                    return res.status(500).json({ message: 'Internal Error' });
+                }
+            });
     },
 
     delete (req, res) {
