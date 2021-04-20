@@ -1,16 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import {useEffect,useState} from "react"
 import {ApplicantCard} from"../components/ApplicantCards"
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 export function ApplicantList()
 {
 
     const[person,setPerson] = useState([])
     const[answer,setAnswer] = useState([])
-    const[loading, setLoading] = useState(true)
     
     useEffect(() => {
         const options = {
@@ -25,10 +21,8 @@ export function ApplicantList()
         .then(res => {
             res.json()
             .then(res => {
-                console.log(res)
                 return setPerson(res)
             })
-            setLoading(false)
         })
         
         .catch(error => console.error("There was an error",error)) 
@@ -49,10 +43,8 @@ export function ApplicantList()
         .then(res => {
             res.json()
             .then(res => {
-                console.log(res)
                 return setAnswer(res)
             })
-            setLoading(false)
         })
         
         .catch(error => console.error("There was an error",error)) 
@@ -61,8 +53,7 @@ export function ApplicantList()
     
         return (
             <div class="d-flex  flex-wrap justify-content-center p-2">
-              
-                
+
                 {person.map(pers => pers.role=="laureate" ?<div key={pers.accountId}>
                             { <ApplicantCard Name = {pers.lastname}
                                             Firstname={pers.firstname}
@@ -75,18 +66,6 @@ export function ApplicantList()
                             }
                         </div>
                         :false)}
-                    
-
-
-
-
-
-                
-                       
-            
-             
             </div>
-        )
-    
-    
+        )  
 }

@@ -1,4 +1,4 @@
-import React, {Component, useState} from "react";
+import React, {useState} from "react";
 
 export function Navigation({ user }) {
     const [ navExpanded, setNavExpanded ] = useState(false);
@@ -20,31 +20,22 @@ export function Navigation({ user }) {
                         <>
                             <ul className="navbar-nav flex-row flex-wrap bd-navbar-nav pt-2 py-md-0">
                                 <li className="nav-item col-6 col-md-auto p-0">
-                                    <a className="nav-link p-2 active" aria-current="page" href="/">Home</a>
+                                    <a className="nav-link p-2 active" aria-current="page" href="/">Accueil</a>
                                 </li>
                                 <li className="nav-item col-6 col-md-auto p-0">
-                                    <a className="nav-link p-2" href="/ApplicantList">ApplicantList</a>
+                                    <a className="nav-link p-2" href="/ApplicantList">Liste des lauréats</a>
                                 </li>
                                 <li className="nav-item col-6 col-md-auto p-0">
-                                    <a className="nav-link p-2" href="/Rating">Rating</a>
+                                    <a className="nav-link p-2" href="/Rating">Notes</a>
                                 </li>
                                 <li className="nav-item col-6 col-md-auto p-0">
-                                    <a className="nav-link p-2" href="/PlanningV2">PlanningV2</a>
+                                    <a className="nav-link p-2" href="/ManageAccounts">Gestion des comptes</a>
                                 </li>
                                 <li className="nav-item col-6 col-md-auto p-0">
-                                    <a className="nav-link p-2" href="/APITest">APITest</a>
+                                    <a className="nav-link p-2" href="/Form">Formulaire Admin</a>
                                 </li>
                                 <li className="nav-item col-6 col-md-auto p-0">
-                                    <a className="nav-link p-2" href="/Form">Form</a>
-                                </li>
-                                <li className="nav-item col-6 col-md-auto p-0">
-                                    <a className="nav-link p-2" href="/ApplicantForm">ApplicantForm</a>
-                                </li>
-                                <li className="nav-item col-6 col-md-auto p-0">
-                                    <a className="nav-link p-2" href="/ManageAccounts">ManageAccounts</a>
-                                </li>
-                                <li className="nav-item col-6 col-md-auto p-0">
-                                    <a className="nav-link p-2" href="/PrettyPlanning">PrettyPlanning</a>
+                                    <a className="nav-link p-2" href="/ApplicantForm">Formulaire Lauréat</a>
                                 </li>
                                 <li className="nav-item col-6 col-md-auto p-0">
                                     <a className="nav-link p-2" href="/Preselection">Preselection</a>
@@ -56,5 +47,6 @@ export function Navigation({ user }) {
                 </div>
             </div>
         </header>
+    
     );
 };

@@ -1,13 +1,10 @@
 import { useState } from "react";
 import  React from "react"
 import {useEffect} from "react"
-import axios from 'axios';
 
 export function ApplicantHeader()         
 {
     const [header,setHeader] = useState([])
-
-
 
     useEffect(() => {
         const options = {
@@ -33,7 +30,7 @@ export function ApplicantHeader()
     return <div>
 
         <div> 
-            <img src={header.bannerUrl} width="100%" height="200px"/>           {/* On récupère les données de l'api  ou le texte modifié*/}
+            <img src={header.bannerUrl} width="100%" height="200px"/>           {/* On récupère les données de l'api*/}
                 <div className="card text-center bg-light mt-5">
                    <h1> {header.title} </h1>
 
@@ -43,8 +40,5 @@ export function ApplicantHeader()
                 
         </div>
 
-</div>
-        
-   
-
+    </div>
 }

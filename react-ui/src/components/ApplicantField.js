@@ -1,14 +1,14 @@
 import { useState } from "react";
 import  React from "react"
 
-import {Star} from "./Star"  // permet de répéter l'étoile pour signifier "champ obligatoire"
+import {Star} from "./Star" 
 import axios from 'axios';
 
 function SubmitAnswer({id,answer})
 {
        
     
-        axios.post("https://etn-test.herokuapp.com/api/answers",{ fkAccountId:3,fkQuestionId:id,answer:answer})  // à voir fillValue et formk?
+        axios.post("https://etn-test.herokuapp.com/api/answers",{ fkAccountId:3,fkQuestionId:id,answer:answer})  // à voir accoutnID
         .then(res => {
             console.log(res)
      

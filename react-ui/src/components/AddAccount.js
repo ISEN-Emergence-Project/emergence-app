@@ -1,13 +1,27 @@
 import {Button, Modal} from 'react-bootstrap';
 import React, {useState} from 'react';
-import { ApplicantCard } from './ApplicantCards';
 import axios from 'axios';
-
 
 function handleCall()
 {
-                                        // designApplicantCard et checkmail
 
+    if(firstname.value == "" || lastname.value == "" || email.value == "" || username.value == "" || password.value == "" || laureatePromo.value == null)
+    {
+        alert("Tous les champs doivent être remplis")
+         
+    }
+
+    else if (laureatePromo.value.match(/^[0-9]+$/) == null)        // comparer user et mail + gérer les alerts si elle quitte la popup par error
+    {
+        console.log(typeof laureatePromo.value)
+        alert("La promotion du laureat doit contenir le format suivant 2020-2021")
+    }
+
+   
+    else
+    {
+     
+    console.log(firstname.value)
         
         axios.post("https://etn-test.herokuapp.com/api/accounts",{  firstname:firstname.value,
                                                                     lastname:lastname.value,
@@ -20,11 +34,9 @@ function handleCall()
             console.log(res)
              
          })
-
-        
+         .catch(error => console.error("There was an error",error))
+        }
 }
-
-
 
 export function AddAccount()   //Créé la pop-up pour ajouter des comptes
 {
@@ -36,37 +48,27 @@ export function AddAccount()   //Créé la pop-up pour ajouter des comptes
     const [username,setUsername] = useState("")
     const [laureatePromo,setLaureatePromo] = useState("")
     const[exit,setExit] = useState(false)
+    const [error,setError] = useState(false)
+    const [permission, setPermission] = useState("")
 
       
 
-    const handleExit = () => {
-            setExit(true)
-        }
-    const handleClose = () => 
-    {
-        setShow(false)  
+    const handleExit = () => setExit(true)
+    
+    const handleClose = () => setShow(false)  
 
-    }
     const handleShow = () => setShow(true);
 
-    const [permission, setPermission] = useState("")
-
-    const checkEmail = (email) =>
-    {
-        let input = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return input.test(email)
-    }
     
-
     return(
-        
-
 
         <div className="container">
             <Button className="btn btn-success d-grid gap-3 col-2  btn-sm mx-auto mt-5" onClick={handleShow}> <i class="fs-3 bi-plus-circle-fill"></i> Ajouter un compte </Button>
-        
 
-        <Modal size="lg" show={show} onHide={handleClose} onExit={handleCall}>
+        {exit? <div className="alert alert-success" role="alert">
+           Vos modifications ont été enregistrées, pour les voir veuillez recharger la page</div>:"" }
+
+        <Modal size="lg" show={show} onHide={handleClose} onExited={handleExit}>
         <Modal.Header>  
             <Modal.Title>Ajouter un compte </Modal.Title>
         </Modal.Header>
@@ -83,7 +85,7 @@ export function AddAccount()   //Créé la pop-up pour ajouter des comptes
             <label className="mt-3" htmlFor="username"> Nom d'utilisateur</label>
                 <input className="form-control mt-3"  required onChange={(event) => setUsername(event.target.value)}type="text" id="username"/>
 
-            <label className="mt-3" htmlFor="lauretePromo"> Promo </label>
+            <label className="mt-3" htmlFor="lauretePromo"> Année de promotion </label>
                 <input className="form-control mt-3"  required onChange={(event) => setLaureatePromo(event.target.value)}type="text" id="laureatePromo"/>
 
             <label className="mt-3" htmlFor="passsword"> Mot de passe </label>
@@ -94,35 +96,30 @@ export function AddAccount()   //Créé la pop-up pour ajouter des comptes
 
             <div>
             <div class="form-check mt-3">
-                <input class="form-check-input" type="radio" value = "Admin" onClick={(permission) => setPermission(permission)} name="flexRadioDefault" id="admin"/>
+                <input class="form-check-input" type="radio" defaultChecked value = "admin" onClick={(permission) => setPermission(permission)} name="flexRadioDefault" id="admin"/>
                 <label class="form-check-label"> Administrateur </label>
             </div>
 
             <div class="form-check mt-3">
-                <input class="form-check-input" type="radio" value="Parrain" onClick={(permission) => setPermission(permission)} name="flexRadioDefault" id="godfather" />
-                
+                <input class="form-check-input" type="radio" value="godfather" onClick={(permission) => setPermission(permission)} name="flexRadioDefault" id="godfather" />
                 <label class="form-check-label"> Parrain </label>
             </div>
 
             <div class="form-check mt-3">
-                <input class="form-check-input" type="radio" value = "Filleul"  name="flexRadioDefault" id="laureate"/>
+                <input class="form-check-input" type="radio" value = "laureate"  name="flexRadioDefault" id="laureate"/>
                 <label class="form-check-label"> Filleul </label>
             </div>
         </div>
-                
       </Modal.Body>
 
       <Modal.Footer>{/* Une fois qu'on a rentré les infos on les affiches avec un document.getElementbyId */}
-        <Button variant="btn btn-success btn-sm" onClick={<div className="alert alert-success" role="alert"> Modifications enregistrées, veuillez recharger la page</div>}> Enregistrer</Button>
-
+      
+        <Button variant="btn btn-success btn-sm" onClick={handleCall}> Enregistrer</Button>
         <Button variant="btn btn-danger btn-sm" onClick={handleClose}> <i class="me-2 bi-x-square-fill"></i> Fermer</Button>    
 
-
-    </Modal.Footer>
+      </Modal.Footer>
 
     </Modal>
 
-  </div>
-
-    )
+  </div>)
 }

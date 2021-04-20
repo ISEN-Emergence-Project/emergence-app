@@ -12,6 +12,7 @@ function EditHeader()
           .then(res => {
               console.log(res)  
            })
+           .catch(error => console.error("There was an error",error)) 
 }
 
 
@@ -20,13 +21,12 @@ export function HeaderHook()
     
     const [editTitle,setEditTitle] = useState("")
     const[editSubTitle,setEditSubTitle] = useState("")
-
     const [header,setHeader] = useState([])
     const [show, setShow] = useState(false);
     const[exit,setExit] = useState(false)
 
-    const handleClose = () =>  setShow(false)  
 
+    const handleClose = () =>  setShow(false)  
     const handleShow = () => setShow(true);
     const handleExit = () => setExit(true)
 
@@ -83,19 +83,13 @@ export function HeaderHook()
                 
       </Modal.Body>
 
-      <Modal.Footer>{/* Une fois qu'on a rentré les infos on les affiches avec un document.getElementbyId */}
+      <Modal.Footer>
         <Button variant="btn btn-success btn-sm" onClick={EditHeader}> Enregister</Button>
-            
         <Button variant="btn btn-danger btn-sm" onClick={handleClose}> <i class="me-2 bi-x-square-fill"></i> Fermer</Button>    
-
     </Modal.Footer>
-
     </Modal>
-
    </div>
 
-</div>
-        
-   
+ </div>
 
 }

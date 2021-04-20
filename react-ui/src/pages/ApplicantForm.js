@@ -41,8 +41,6 @@ export function ApplicantForm()
                     </div>
                     )}
         <button onClick={handleClick}> Envoyer vos réponses </button>
-
-      
       
     </div>
 

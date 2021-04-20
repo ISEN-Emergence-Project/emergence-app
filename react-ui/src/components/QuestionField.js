@@ -39,11 +39,7 @@ export function QuestionField()
                                 </div>
                           </div>
                           )}
-                      
-
-                      <AddQuestionCall/>
+                <AddQuestionCall/>
         </div>
-</div>
-        
-
+    </div>
 }
