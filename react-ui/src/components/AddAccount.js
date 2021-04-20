@@ -4,22 +4,6 @@ import axios from 'axios';
 
 function handleCall()
 {
-
-    if(firstname.value == "" || lastname.value == "" || email.value == "" || username.value == "" || password.value == "" || laureatePromo.value == null)
-    {
-        alert("Tous les champs doivent être remplis")
-         
-    }
-
-    else if (laureatePromo.value.match(/^[0-9]+$/) == null)        // comparer user et mail + gérer les alerts si elle quitte la popup par error
-    {
-        console.log(typeof laureatePromo.value)
-        alert("La promotion du laureat doit contenir le format suivant 2020")
-    }
-
-   
-    else
-    {
         
         axios.post("https://etn-test.herokuapp.com/api/accounts",{  firstname:firstname.value,
                                                                     lastname:lastname.value,
@@ -35,8 +19,8 @@ function handleCall()
              
          })
          .catch(error => console.error("There was an error",error))
-        }
 }
+
 
 export function AddAccount()   //Créé la pop-up pour ajouter des comptes
 {
@@ -55,10 +39,50 @@ export function AddAccount()   //Créé la pop-up pour ajouter des comptes
     const [error,setError] = useState(false)
     const [permission, setPermission] = useState("")
 
+    const resetValues = () => 
+    {
+            setFirstname("")
+            setLastname("")
+            setEmail("")
+            setUsername ("")
+            setPassword ("")
+            setLaureatePromo ("")
+            setPhoneNumber("")
+            setStudies("")
+    }
+
       
 
-    const handleExit = () => setExit(true)
+    const handleExit = () => 
+    {
+        console.log(firstname)
+        setExit(false)
+        if(firstname == "" || lastname == "" || email == "" || username == "" || password == "" || laureatePromo == null || phoneNumber == ""|| studies == "")
+        {
+            alert("Tous les champs doivent être remplis")
+            setExit(false)
+             
+        }
     
+        else if (laureatePromo.match(/^[0-9]+$/) == null)        // comparer user et mail
+        {
+            alert("La promotion du laureat doit contenir le format suivant 2020")
+            setExit(false)
+        }
+
+        else if (phoneNumber.match(/^[0-9]+$/) == null)        // comparer user et mail
+        {
+            alert("Le numéro de téléphone doit être un nombre")
+        }
+
+        else
+        { 
+            setExit(true)
+            resetValues()
+        }
+       
+    }
+
     const handleClose = () => {
         setShow(false)
         setExit(false)
@@ -72,13 +96,14 @@ export function AddAccount()   //Créé la pop-up pour ajouter des comptes
         <div className="container">
             <Button className="btn btn-success d-grid gap-3 col-2  btn-sm mx-auto mt-5" onClick={handleShow}> <i class="fs-3 bi-plus-circle-fill"></i> Ajouter un compte </Button>
 
-        <Modal size="lg" show={show} onHide={handleClose} onExited={handleCall}>
+        <Modal size="lg"show={show} onHide={handleClose} onExited={handleCall}>
         <Modal.Header>  
             <Modal.Title>Ajouter un compte </Modal.Title>
         </Modal.Header>
       <Modal.Body>
+          {console.log(exit)}
             <label htmlFor="firstname"> Prénom</label>
-                <input className="form-control mt-3" required onChange={(event) => setFirstname(event.target.value)}type="text" id="firstname"/>
+                <input className="form-control mt-3" readOnly={false} required onChange={(event) => setFirstname(event.target.value)}type="text" id="firstname"/>
                 
             <label htmlFor="lastname"> Nom </label>
                 <input className="form-control mt-3" required onChange={(event) => setLastname(event.target.value)}type="text" id="lastname"/>
