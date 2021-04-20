@@ -16,6 +16,7 @@ import {Timeline} from './pages/Timeline'
 import {PrettyPlanning} from './pages/PrettyPlanning'
 import {Logout} from "./pages/Logout";
 import {Preselection} from "./pages/Preselection";
+import MeetingList from "./pages/MeetingList";
 
 export default function App() {
     const savedToken = sessionStorage.getItem('accessToken');
@@ -52,6 +53,7 @@ export default function App() {
                             <Route path='/APITest' component={APITest}/>
                             <Route path='/PrettyPlanning' component={PrettyPlanning}/>
                             <Route path='/Preselection' component={Preselection}/>
+                            <Route path='/MeetingList' component={MeetingList}/>
                         </React.Fragment>
                     ) : (
                         <>
