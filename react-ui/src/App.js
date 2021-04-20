@@ -15,7 +15,19 @@ import axios from "axios";
 export default function App() {
     const savedToken = sessionStorage.getItem('accessToken');
     const [ token, setToken ] = useState(savedToken ? savedToken : "");
-    const [ user, setUser ] = useState({firstname: '', lastname: ''});
+    const [ phase, setPhase ] = useState({});
+
+    useEffect(() => {
+        axios.get('//etn-test.herokuapp.com/api/forms/latest')
+            .then((res) => {
+                axios.get('//etn-test.herokuapp.com/api/phases/'+ res.data.fkPhaseId)
+                    .then((res) => {
+                        setPhase(res.data);
+                    })
+                    .catch((err) => console.log(err));
+            })
+            .catch((err) => console.log(err));
+    }, [])
 
     useEffect(() => {
         sessionStorage.setItem('accessToken', token)
@@ -33,13 +45,13 @@ export default function App() {
                             </Route>
 
                             <Route path='/admin'>
-                                <AdminRouter />
+                                <AdminRouter phase={phase} setPhase={setPhase} />
                             </Route>
                             <Route path='/laureate'>
-                                <LaureateRouter />
+                                <LaureateRouter phase={phase} />
                             </Route>
                             <Route path='/godfather'>
-                                <GodfatherRouter />
+                                <GodfatherRouter phase={phase} />
                             </Route>
 
                             <Route path='/logout'>

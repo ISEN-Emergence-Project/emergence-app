@@ -8,12 +8,12 @@ import {Rating} from "../pages/Rating";
 import {ApplicantForm} from "../pages/laureate/ApplicantForm";
 import {ManageAccounts} from "../pages/ManageAccounts";
 import {PrettyPlanning} from "../pages/PrettyPlanning";
-import MeetingList from "../pages/MeetingList";
+import Meetings from "../pages/laureate/Meetings";
 
 import {AdminNav} from "../navigation/AdminNav";
 import {Home} from "../pages/admin/Home";
 
-export default function AdminRouter() {
+export default function AdminRouter({ phase, setPhase}) {
 
     return (
         <BrowserRouter>
@@ -28,7 +28,7 @@ export default function AdminRouter() {
                 <Route path='/admin/ApplicantForm' component={ApplicantForm}/>
                 <Route path='/admin/ManageAccounts' component={ManageAccounts}/>
                 <Route path='/admin/PrettyPlanning' component={PrettyPlanning}/>
-                <Route path='/admin/MeetingList' component={MeetingList}/>
+                <Route path='/admin/Meetings' component={Meetings}/>
             </Switch>
         </BrowserRouter>
     )
