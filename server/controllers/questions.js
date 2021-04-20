@@ -54,7 +54,12 @@ module.exports = {
                 },
                 returning: true
             })
-            .then(([, question]) => res.status(200).json(question[0]))
+            .then(([, question]) => {
+                if (!question[0]) {
+                    return res.status(404).json({ message: 'Question not found' });
+                }
+                return res.status(200).json(question[0])
+            })
             .catch((error) => {
                 console.log(error);
                 if (error.name === "SequelizeUniqueConstraintError") {

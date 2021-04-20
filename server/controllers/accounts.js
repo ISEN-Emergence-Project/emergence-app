@@ -180,7 +180,10 @@ module.exports = {
                 returning: true
             })
             .then(([, account]) => {
-                // Removed passwordHash from response
+                if (!account[0]) {
+                    return res.status(404).json({ message: 'Account not found' });
+                }
+                // Remove passwordHash from response
                 account[0].passwordHash = undefined;
                 return res.status(200).json(account[0])
             })

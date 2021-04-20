@@ -52,7 +52,12 @@ module.exports = {
                 },
                 returning: true
             })
-            .then(([, form]) => res.status(200).json(form[0]))
+            .then(([, form]) => {
+                if (!form[0]) {
+                    return res.status(404).json({ message: 'Form not found' });
+                }
+                return res.status(200).json(form[0])
+            })
             .catch((error) => {
                 console.log(error);
                 if (error.name === "SequelizeUniqueConstraintError") {

@@ -59,7 +59,12 @@ module.exports = {
                 },
                 returning: true
             })
-            .then(([, meeting]) => res.status(200).json(meeting[0]))
+            .then(([, meeting]) => {
+                if (!meeting[0]) {
+                    return res.status(404).json({ message: 'Meeting not found' });
+                }
+                return res.status(200).json(meeting[0])
+            })
             .catch((error) => {
                 console.log(error);
                 if (error.name === "SequelizeUniqueConstraintError") {
