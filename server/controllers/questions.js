@@ -151,7 +151,8 @@ module.exports = {
                     .findAll({
                         where: {
                             fkFormId: latestFormId
-                        }
+                        },
+                        order: [['questionId', 'ASC']]
                     })
                     .then((question) => {
                         if (!question) {
