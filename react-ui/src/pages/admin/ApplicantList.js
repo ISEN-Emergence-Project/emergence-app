@@ -1,6 +1,6 @@
 import React from "react";
 import {useEffect,useState} from "react"
-import {ApplicantCard} from"../components/admin/ApplicantCards"
+import {ApplicantCard} from "../../components/admin/ApplicantCards"
 
 export function ApplicantList()
 {

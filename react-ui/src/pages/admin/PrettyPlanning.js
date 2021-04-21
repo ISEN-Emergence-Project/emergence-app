@@ -1,5 +1,5 @@
 import React from "react"
-import {LaureateDropDownButton} from"../components/LaureateDropDownButton"
+import {LaureateDropDownButton} from "../../components/LaureateDropDownButton"
 
 
 export function PrettyPlanning()
