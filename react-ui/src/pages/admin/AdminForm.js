@@ -6,7 +6,7 @@ import {FormQuestionField} from "../../components/admin/FormQuestionField"
 import {FormAddQuestion} from "../../components/admin/FormAddQuestion";
 import {FormHeader} from "../../components/FormHeader";
 
-export function AdminForm() {
+export function AdminForm({ account }) {
     const [ form, setForm ] = useState({});
     const [ questions, setQuestions ] = useState([]);
     const [ editHeader, setEditHeader ] = useState(false);
