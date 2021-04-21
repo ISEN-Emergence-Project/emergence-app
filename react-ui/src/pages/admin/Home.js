@@ -8,7 +8,7 @@ export function Home({ phase, setPhase, account }) {
 
     useEffect(() => {
         // Check if godfather should interact at this phase
-        if ([1, 4, 6, 7].includes(phase.phaseId)) {
+        if ([1, 2, 3, 4, 5, 6, 7].includes(phase.phaseId)) {
             setBtn(<a className="btn btn-primary btn-lg" href={`${phase.buttonLink}`} role="button">{phase.buttonText.replace('[]', 'parrain/filleul')}</a>);
         } else {
             setBtn();
