@@ -23,10 +23,22 @@ export function AdminForm() {
             .catch((err) => console.log(err));
     }, []);
 
-    function updateQuestion(id, question) {
-        const questionIndex = questions.indexOf((q) => q.questionId === id);
-        questions[questionIndex] = question;
-        setQuestions(questions);
+    function updateQuestions(id, newQuestion) {
+        const index = questions.findIndex((q) => q.questionId === id);
+
+        if (newQuestion === null && index > -1) {
+            // Remove question from list
+            setQuestions([...questions.filter((q) => q.questionId !== id)]);
+        }
+        else if (index > -1) {
+            // Update question from list
+            questions[index] = newQuestion;
+            setQuestions(questions);
+        }
+        else {
+            // Add question to list
+            setQuestions([...questions, newQuestion]);
+        }
     }
 
     function handleHeaderSave() {
@@ -49,18 +61,20 @@ export function AdminForm() {
         <>
             <FormHeader form={form} />
 
-            <div className="container text-center py-3">
-                <Button className="btn btn-success col col-sm-4 col-md-2 mx-auto" onClick={() => setEditHeader(true)}>Modifier</Button>
-            </div>
-
-            {questions.map(question => (
-                <div className="container py-3" key={question.questionId}>
-                    <FormQuestionField question={question} updateQuestion={updateQuestion} />
+            <div className="container py-4">
+                <div className="container text-center pb-3">
+                    <Button className="btn btn-success col col-sm-4 col-md-2" onClick={() => setEditHeader(true)}>Modifier</Button>
                 </div>
-            ))}
 
-            <div className='container'>
-                <FormAddQuestion/>
+                {questions.map(question => (
+                    <div className="py-3" key={question.questionId}>
+                        <FormQuestionField question={question} updateQuestions={updateQuestions} />
+                    </div>
+                ))}
+
+                <div className="py-4">
+                    <FormAddQuestion form={form} updateQuestions={updateQuestions} />
+                </div>
             </div>
 
             <Modal size="lg" show={editHeader}>
