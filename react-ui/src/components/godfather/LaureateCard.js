@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Modal} from "react-bootstrap";
 
-function LaureateItem({ laureate, updateSelectedLaureates }) {
+function LaureateCard({ laureate, updateSelectedLaureates }) {
     const [ checked, setChecked ] = useState(false);
     const [ showProfile, toggleShowProfile ] = useState(false);
     const [ answers, setAnswers ] = useState([]);
@@ -65,4 +65,4 @@ function LaureateItem({ laureate, updateSelectedLaureates }) {
     );
 }
 
-export default LaureateItem
+export default LaureateCard
