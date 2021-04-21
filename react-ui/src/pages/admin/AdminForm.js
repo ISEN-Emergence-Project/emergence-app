@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
+import {Button, Modal} from "react-bootstrap";
 import axios from "axios";
 
-import {QuestionField} from "../../components/QuestionField"
-import {AddQuestionCall} from "../../components/admin/AddQuestionCall";
-import {Button, Modal} from "react-bootstrap";
+import {FormQuestionField} from "../../components/admin/FormQuestionField"
+import {FormAddQuestion} from "../../components/admin/FormAddQuestion";
 import {FormHeader} from "../../components/FormHeader";
 
 export function AdminForm() {
@@ -55,11 +55,13 @@ export function AdminForm() {
 
             {questions.map(question => (
                 <div className="container py-3" key={question.questionId}>
-                    <QuestionField question={question} updateQuestion={updateQuestion} />
+                    <FormQuestionField question={question} updateQuestion={updateQuestion} />
                 </div>
             ))}
 
-            <AddQuestionCall/>
+            <div className='container'>
+                <FormAddQuestion/>
+            </div>
 
             <Modal size="lg" show={editHeader}>
                 <Modal.Header>

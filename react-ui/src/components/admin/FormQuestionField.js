@@ -2,9 +2,9 @@ import  React, { useState } from "react"
 import {Button, Modal} from 'react-bootstrap';
 import axios from 'axios';
 
-import {Star} from "./Star"
+import {Star} from "../Star"
 
-export function QuestionField({ question, updateQuestion }) {
+export function FormQuestionField({ question, updateQuestion }) {
     const [ showEdit, setShowEdit ] = useState(false);
     const [ questionLabel, setQuestionLabel ] = useState(question.question);
 
