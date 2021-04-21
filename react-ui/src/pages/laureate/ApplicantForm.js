@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import axios from "axios";
 
-import { FormHeader } from '../../components/FormHeader';
+import { FormHeader } from '../../components/laureate/FormHeader';
 import {FormField} from "../../components/laureate/FormField"
 
 export function ApplicantForm({ account }) {

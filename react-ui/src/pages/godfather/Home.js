@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Container} from 'react-bootstrap';
 
-import AccountInfos from "../../components/AccountInfos";
+import AccountInfos from "../../components/laureate/AccountInfos";
 
 export function Home({ phase, account }) {
     const [ btn, setBtn ] = useState();

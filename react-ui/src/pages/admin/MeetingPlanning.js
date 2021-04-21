@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import {LaureateDropDownButton} from "../../components/LaureateDropDownButton"
+import {LaureateDropDownButton} from "../../components/admin/LaureateDropDownButton"
 import GodfatherMeetings from "../components/GodfatherMeetings";
 
 

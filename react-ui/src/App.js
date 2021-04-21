@@ -10,7 +10,7 @@ import {Logout} from "./pages/Logout";
 import AdminRouter from './routes/AdminRouter';
 import LaureateRouter from './routes/LaureateRouter';
 import GodfatherRouter from './routes/GodfatherRouter';
-import DevTools from "./components/DevTools";
+import DevTools from "./components/dev/DevTools";
 import {AppNav} from "./navigation/AppNav";
 
 export default function App() {
