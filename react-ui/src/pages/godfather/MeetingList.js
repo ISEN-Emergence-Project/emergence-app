@@ -75,7 +75,7 @@ export default function MeetingList({account}){
         <div className="container">
             
             <h1 className="p-5">Vos meeting : </h1>
-            <div className="p-2 m-2   align-self-center">{meeting.map( meet=> meet.fkGodfatherAccountId==account.accountId?
+            <div className="p-2 m-2 align-self-center">{meeting.map( meet=> meet.fkGodfatherAccountId==account.accountId?
                 <div className="card p-5 d-flex flex-row m-2">
                     <div className="col align-self-center"><div >{aaccount.map(acc=> acc.accountId==meet.fkLaureateAccountId?<h3>{acc.firstname} {acc.lastname}</h3>:false)}</div></div>
                     <div className="col align-self-center"><RadioButtons accountid={account.accountId}  laureateId={meet.fkLaureateAccountId}/></div>

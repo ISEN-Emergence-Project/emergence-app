@@ -7,7 +7,7 @@ import {AdminForm} from "../pages/admin/AdminForm";
 import {ManageAccounts} from "../pages/admin/ManageAccounts";
 import MeetingsList from "../pages/laureate/MeetingsList";
 import {Home} from "../pages/admin/Home";
-import PreselectionsList from "../pages/admin/PreselectionsList";
+import {PreselectionsList} from "../pages/admin/PreselectionsList";
 import MeetingsPlanning from "../pages/admin/MeetingsPlanning";
 import ChooseMatches from "../pages/admin/ChooseMatches";
 import MatchesList from "../pages/admin/MatchesList";
