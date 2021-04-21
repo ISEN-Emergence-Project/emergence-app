@@ -15,7 +15,7 @@ function DevTools({ phase, setPhase }) {
             <div className="container py-2">
                 <b className='mr-4'>DevTools</b>
                 <label className='m-0 mr-2' htmlFor='selectPhase'>Phase selector</label>
-                <select defaultValue={phase} className="form-select" id='selectPhase' onChange={handlePhaseChange}>
+                <select value={phase.phaseId} className="form-select" id='selectPhase' onChange={handlePhaseChange}>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
