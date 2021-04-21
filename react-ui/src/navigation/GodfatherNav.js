@@ -24,7 +24,7 @@ export function GodfatherNav({ phase }) {
                         </li>
                         {phase.phaseId === 3 ? (
                             <li className="nav-item col-6 col-md-auto p-0">
-                                <a className="nav-link p-2" href="/preselection">Préselection</a>
+                                <a className="nav-link p-2" href="/preselections">Préselection</a>
                             </li>
                         ) : null}
                         {phase.phaseId === 5 ? (
@@ -34,7 +34,7 @@ export function GodfatherNav({ phase }) {
                         ) : null}
                         {phase.phaseId === 7 ? (
                             <li className="nav-item col-6 col-md-auto p-0">
-                                <a className="nav-link p-2" href="/match">Filleul</a>
+                                <a className="nav-link p-2" href="/matches">Filleul</a>
                             </li>
                         ) : null}
                     </ul>

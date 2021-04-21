@@ -1,10 +1,10 @@
 import React from "react";
 
-function Meetings() {
+function MeetingsList() {
 
     return (
         <div className='container py-4'>Meeting Not implemented</div>
     )
 }
 
-export default Meetings
+export default MeetingsList

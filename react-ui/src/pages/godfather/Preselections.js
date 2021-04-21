@@ -1,25 +1,16 @@
 import React, {useEffect, useState} from "react";
 import { Button, Modal} from 'react-bootstrap';
-import axios from "axios";
-import LaureateItem from "../../components/godfather/LaureateItem";
 import {Redirect} from "react-router-dom";
+import axios from "axios";
 
-export function Preselection() {
+import LaureateCard from "../../components/godfather/LaureateCard";
+
+export function Preselections({ account }) {
     const [ laureates, setLaureates ] = useState([]);
     const [ selectedLaureates, setSelectedLaureates ] = useState([]);
-    const [ user, setUser ] = useState({});
     const [ redirectTo, setRedirectTo ] = useState();
 
     useEffect(() => {
-        // Get user
-        const savedToken = sessionStorage.getItem('accessToken');
-
-        axios.get('//etn-test.herokuapp.com/api/accounts/'.concat(savedToken))
-            .then((res) => {
-                setUser(res.data)
-            })
-            .catch((err) => console.log(err));
-
         // Get laureates
         axios.get("//etn-test.herokuapp.com/api/accounts/laureates")
             .then((res) => setLaureates(res.data))
@@ -42,7 +33,7 @@ export function Preselection() {
         selectedLaureates.forEach((selectedLaureate) => {
             axios
                 .post("//etn-test.herokuapp.com/api/preselections", {
-                    fkGodfatherAccountId: user.accountId,
+                    fkGodfatherAccountId: account.accountId,
                     fkLaureateAccountId: selectedLaureate.accountId
                 })
                 .then((res) => {
@@ -65,7 +56,7 @@ export function Preselection() {
                         {laureates.map((laureate) => {
                             return (
                                 <div className='col col-md-6 py-2' key={laureate.accountId}>
-                                    <LaureateItem laureate={laureate} updateSelectedLaureates={updateSelectedLaureates} />
+                                    <LaureateCard laureate={laureate} updateSelectedLaureates={updateSelectedLaureates} />
                                 </div>
                             )
                         })}

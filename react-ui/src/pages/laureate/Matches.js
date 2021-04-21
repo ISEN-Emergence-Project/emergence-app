@@ -1,10 +1,10 @@
 import React from "react";
 
-function Match() {
+function Matches() {
 
     return (
         <div className='container py-4'>Match Not implemented</div>
     )
 }
 
-export default Match
+export default Matches

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {RadioButton} from"../../components/RadioButton"
+import {RadioButton} from "../../components/admin/RadioButton"
 
 export class Rating extends Component
 {

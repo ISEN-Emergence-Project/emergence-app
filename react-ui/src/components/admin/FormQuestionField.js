@@ -2,7 +2,7 @@ import  React, { useState } from "react"
 import {Button, Modal} from 'react-bootstrap';
 import axios from 'axios';
 
-import {Star} from "../Star"
+import {Star} from "../commons/Star"
 
 export function FormQuestionField({ question, updateQuestions }) {
     const [ showEdit, setShowEdit ] = useState(false);
@@ -41,7 +41,7 @@ export function FormQuestionField({ question, updateQuestions }) {
             <button className='btn btn-primary btn-sm' onClick={() => setShowEdit(true)}>Modifier</button>
             <button className='btn btn-outline-danger btn-sm ml-2' onClick={handleDelete}>Supprimer</button>
 
-            <Modal size="lg" show={showEdit}>
+            <Modal size="lg" show={showEdit} onHide={() => setShowEdit(false)}>
                 <Modal.Header>
                     <Modal.Title>Modifier la question</Modal.Title>
                 </Modal.Header>
