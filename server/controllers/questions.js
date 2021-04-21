@@ -127,7 +127,8 @@ module.exports = {
             .findAll({
                 where: {
                     fkFormId: req.params.id
-                }
+                },
+                order: [['createdAt', 'DESC']]
             })
             .then((question) => {
                 if (!question) {
