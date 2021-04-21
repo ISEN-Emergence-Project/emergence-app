@@ -16,7 +16,5 @@ meetings.put('/godfather/:godfatherId([0-9]+)/laureate/:laureateId([0-9]+)', mee
 
 // DELETE routes
 meetings.delete('/godfather/:godfatherId([0-9]+)/laureate/:laureateId([0-9]+)', meetingsController.delete);
-//ALGORITHM try
-meetings.post('/algorithm',algorithmController.pythonmatching);
 
 module.exports = meetings;
