@@ -23,7 +23,10 @@ export default function LaureateRouter({ phase, account }) {
                     <Route path='/form' component={ApplicantForm}/>
                 ) : null}
                 {phase.phaseId === 5 ? (
-                    <Route path='/meetings' component={MeetingList}/>
+                    <Route path='/meetings'>
+                        <MeetingList account={account} />
+                    </Route>
+                    
                 ) : null}
                 {phase.phaseId === 7 ? (
                     <Route path='/match' component={Match}/>

@@ -2,12 +2,12 @@ import React, {useEffect, useState} from "react";
 import {Button} from 'react-bootstrap';
 import axios from "axios";
 
-function handleCall(godFatherId,laureateId,rategodfather,ratelaureate)
+function handleCall(godFatherId,laureateId,rategodfather)
 {
         
         axios.put("https://etn-test.herokuapp.com/api/meetings/godfather/"+godFatherId+"/laureate/"+laureateId,{  
-                                                                    godfatherRating:rategodfather,
-                                                                    laureateRating:ratelaureate
+                                                                    godfatherRating:rategodfather
+                                                                    
                                                                     
                                                                     })
         .then(res => {
@@ -19,9 +19,9 @@ function handleCall(godFatherId,laureateId,rategodfather,ratelaureate)
         }
 
 
-export default function MeetingList(){
+export default function MeetingList({account}){
     const[meeting,setMeeting] = useState([])
-    const [account, setAccount] = useState([]);
+    const [aaccount, setAccount] = useState([]);
 
     useEffect(() => {
         const options = {
@@ -75,10 +75,10 @@ export default function MeetingList(){
         <div className="container">
             
             <h1 className="p-5">Vos meeting : </h1>
-            <div className="p-2 m-2   align-self-center">{meeting.map( meet=> meet.fkGodfatherAccountId==56?
+            <div className="p-2 m-2   align-self-center">{meeting.map( meet=> meet.fkGodfatherAccountId==account.accountId?
                 <div className="card p-5 d-flex flex-row m-2">
-                    <div className="col align-self-center"><div >{account.map(acc=> acc.accountId==meet.fkLaureateAccountId?<h3>{acc.firstname} {acc.lastname}</h3>:false)}</div></div>
-                    <div className="col align-self-center"><RadioButtons/></div>
+                    <div className="col align-self-center"><div >{aaccount.map(acc=> acc.accountId==meet.fkLaureateAccountId?<h3>{acc.firstname} {acc.lastname}</h3>:false)}</div></div>
+                    <div className="col align-self-center"><RadioButtons accountid={account.accountId}  laureateId={meet.fkLaureateAccountId}/></div>
                     
                 </div>:false
                 )}
@@ -90,7 +90,7 @@ export default function MeetingList(){
 
 
 
-function RadioButtons(){
+function RadioButtons({accountid,laureateId}){
 
     const[note, setNote] = useState(null);
     return(
@@ -121,7 +121,7 @@ function RadioButtons(){
                 </label></div>
             </div>
 
-            <div><Button className=" align-self-center "  variant="btn btn-success " onClick={()=>handleCall(56,9,note,null)}>Envoyer</Button></div>
+            <div><Button className=" align-self-center "  variant="btn btn-success " onClick={()=>handleCall(accountid,laureateId,note)}>Envoyer</Button></div>
 
         </div>
 
