@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import {Dropdown} from "react-bootstrap"        
-import {LaureateItem} from "../components/LaureateItem"
+import {LaureateItem} from "./LaureateItem"
 
 
 export function LaureateDropDownButton ()
