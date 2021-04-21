@@ -128,7 +128,7 @@ module.exports = {
                 where: {
                     fkFormId: req.params.id
                 },
-                order: [['createdAt', 'DESC']]
+                order: [['questionId', 'ASC']]
             })
             .then((question) => {
                 if (!question) {
