@@ -36,8 +36,11 @@ export function Login({ setToken }) {
         else if (status == 200) {
             setAlert(<div className='alert alert-primary' role='alert'>Connexion réussie. Redirection...</div>);
         }
-        else {
+        else if (Number.isInteger(status)) {
             setAlert(<div className='alert alert-warning' role='alert'>Erreur lors de la connexion. [{status}]</div>);
+        }
+        else {
+            setAlert();
         }
     }, [status])
 

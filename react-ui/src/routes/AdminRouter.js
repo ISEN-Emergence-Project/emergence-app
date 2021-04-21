@@ -7,7 +7,7 @@ import {AdminForm} from "../pages/admin/AdminForm";
 import {ManageAccounts} from "../pages/admin/ManageAccounts";
 import MeetingsList from "../pages/laureate/MeetingsList";
 import {Home} from "../pages/admin/Home";
-import Preselections from "../pages/admin/Preselections";
+import PreselectionsList from "../pages/admin/PreselectionsList";
 import MeetingsPlanning from "../pages/admin/MeetingsPlanning";
 import ChooseMatches from "../pages/admin/ChooseMatches";
 import MatchesList from "../pages/admin/MatchesList";
@@ -31,7 +31,7 @@ export default function AdminRouter({ phase, setPhase, account }) {
                     <AdminForm account={account} />
                 </Route>
                 <Route path='/preselections'>
-                    <Preselections account={account} />
+                    <PreselectionsList account={account} />
                 </Route>
                 <Route path='/meetings-panning'>
                     <MeetingsPlanning account={account} />
