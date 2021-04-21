@@ -2,10 +2,12 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Modal} from "react-bootstrap";
 
-function LaureateItem({ accountId, firstname, lastname, updateSelectedLaureates }) {
+function LaureateItem({ laureate, updateSelectedLaureates }) {
     const [ checked, setChecked ] = useState(false);
     const [ showProfile, toggleShowProfile ] = useState(false);
     const [ answers, setAnswers ] = useState([]);
+
+    const { Account: { accountId, firstname, lastname }, studies } = laureate;
 
     function updateChecked() {
         setChecked(!checked);
@@ -29,8 +31,9 @@ function LaureateItem({ accountId, firstname, lastname, updateSelectedLaureates 
     return (
         <>
             <div className="card d-flex flex-row flex-nowrap align-items-center">
-                <div className="card-body cursor-pointer" onClick={openProfile}>
-                    {firstname} {lastname}
+                <div className="card-body cursor-pointer py-3" onClick={openProfile}>
+                    <h5 className='mb-1'>{firstname} {lastname}</h5>
+                    {studies}
                 </div>
                 <div className="ml-auto mr-3">
                     <div className="custom-control custom-checkbox">

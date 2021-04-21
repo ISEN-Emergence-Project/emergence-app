@@ -8,8 +8,8 @@ Preselection.init({
         primaryKey: true,
         allowNull: false,
         references: {
-            model: 'Accounts',
-            key: 'accountId'
+            model: 'Godfathers',
+            key: 'fkAccountId'
         }
     },
     fkLaureateAccountId: {
@@ -17,8 +17,8 @@ Preselection.init({
         primaryKey: true,
         allowNull: false,
         references: {
-            model: 'Accounts',
-            key: 'accountId'
+            model: 'Laureates',
+            key: 'fkAccountId'
         }
     }
 }, {

@@ -1,59 +1,75 @@
 import React, {useCallback, useEffect, useState } from 'react';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
+import axios from "axios";
 
 // Import components
-import {Navigation} from './navigation/Navigation'
-import {Home} from './pages/Home'
-import {ManageAccounts} from './pages/ManageAccounts'
-import {ApplicantList} from './pages/ApplicantList'
-import {ApplicantForm} from './pages/ApplicantForm'
-import {Form} from './pages/Form'
 import {Login} from './pages/Login'
-import {Rating} from './pages/Rating'
-import {PrettyPlanning} from './pages/PrettyPlanning'
 import {Logout} from "./pages/Logout";
-import {Preselection} from "./pages/Preselection";
-import MeetingList from "./pages/MeetingList";
+
+// Import routers
+import AdminRouter from './routes/AdminRouter';
+import LaureateRouter from './routes/LaureateRouter';
+import GodfatherRouter from './routes/GodfatherRouter';
 
 export default function App() {
     const savedToken = sessionStorage.getItem('accessToken');
-    const [ token, setToken ] = useState(savedToken ? savedToken : "")
+    const [ token, setToken ] = useState(savedToken ? savedToken : "");
+    const [ account, setAccount ] = useState({});
+    const [ phase, setPhase ] = useState({});
 
     useEffect(() => {
-        sessionStorage.setItem('accessToken', token)
+        axios.get('//etn-test.herokuapp.com/api/forms/latest')
+            .then((res) => {
+                axios.get('//etn-test.herokuapp.com/api/phases/'+ res.data.fkPhaseId)
+                    .then((res) => {
+                        setPhase(res.data);
+                    })
+                    .catch((err) => console.log(err));
+            })
+            .catch((err) => console.log(err));
+    }, [])
+
+    useEffect(() => {
+        sessionStorage.setItem('accessToken', token);
+
+        axios.get('//etn-test.herokuapp.com/api/accounts/'+ token)
+            .then((res) => {
+                setAccount(res.data);
+            })
+            .catch((err) => console.log(err));
     }, [token]);
 
     return (
         <BrowserRouter>
             <title>Emergence</title>
             <div>
-                <Navigation user={ token } />
                 <Switch>
                     {token ? (
                         <React.Fragment>
-                            <Route exact path='/'>
-                                <Redirect to='/Home' />
+                            <Route path='/'>
+                                {account.role === 'admin' ? (
+                                    <AdminRouter phase={phase} setPhase={setPhase} account={account} />
+                                ) : null}
+
+                                {account.role === 'laureate' ? (
+                                    <LaureateRouter phase={phase} account={account} />
+                                ) : null}
+
+                                {account.role === 'godfather' ? (
+                                    <GodfatherRouter phase={phase} account={account} />
+                                ) : null}
                             </Route>
-                            <Route path='/Logout'>
+
+                            <Route path='/logout'>
                                 <Logout setToken={setToken} />
                             </Route>
-                            <Route path='/Home'>
-                                <Home />
-                            </Route>
-                            <Route path='/Form' component={Form}/>
-                            <Route path='/ApplicantList' component={ApplicantList}/>
-                            <Route path='/Rating' component={Rating}/>
-                            <Route path='/ApplicantForm' component={ApplicantForm}/>
-                            <Route path='/ManageAccounts' component={ManageAccounts}/>
-                            <Route path='/PrettyPlanning' component={PrettyPlanning}/>
-                            <Route path='/Preselection' component={Preselection}/>
-                            <Route path='/MeetingList' component={MeetingList}/>
                         </React.Fragment>
                     ) : (
                         <>
                             <Route exact path='/login'>
-                                <Login token={ token } setToken={ setToken } />
+                                <Login setToken={ setToken } />
                             </Route>
+
                             <Route path='/'>
                                 <Redirect to='/login' />
                             </Route>

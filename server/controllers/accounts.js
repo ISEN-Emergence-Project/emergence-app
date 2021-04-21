@@ -149,7 +149,15 @@ module.exports = {
     },
 
     update (req, res) {
-        const { firstname, lastname, username, email, password, role, isArchived, resetKey, refreshToken, promo } = req.body;
+        const { firstname, lastname, username, email, password, role, isArchived, resetKey, accessToken, refreshToken } = req.body;
+
+        // Check if role sent
+        if (role) {
+            return res.status(400).json({
+                message: 'Role can not be changed.',
+                info: 'Delete this account and create a new one to change role.'
+            })
+        }
 
         // Create hash, if password not empty
         const hash = (password) ? bcrypt.hashSync(password, salt) : undefined;
@@ -161,11 +169,10 @@ module.exports = {
                 username: username,
                 email: email,
                 passwordHash: hash,
-                role: role,
                 isArchived: isArchived,
                 resetKey: resetKey,
-                refreshToken: refreshToken,
-                promo: promo
+                accessToken: accessToken,
+                refreshToken: refreshToken
             }, {
                 where: {
                     accountId: req.params.id
@@ -173,7 +180,10 @@ module.exports = {
                 returning: true
             })
             .then(([, account]) => {
-                // Removed passwordHash from response
+                if (!account[0]) {
+                    return res.status(404).json({ message: 'Account not found' });
+                }
+                // Remove passwordHash from response
                 account[0].passwordHash = undefined;
                 return res.status(200).json(account[0])
             })
@@ -243,7 +253,7 @@ module.exports = {
         return Account
             .findOne({
                 where: {
-                    refreshToken: req.params.token
+                    accessToken: req.params.token
                 }
             })
             .then((account) => {
@@ -288,7 +298,7 @@ module.exports = {
                 }
 
                 // Create JWT tokens
-                const accessToken = jwt.sign(
+                const apiAccessToken = jwt.sign(
                     {
                         role: account.role,
                         xsrfToken
@@ -300,16 +310,17 @@ module.exports = {
                         subject: account.accountId.toString()
                     }
                 );
+                const accessToken = crypto.randomBytes(64).toString('hex');
                 const refreshToken = crypto.randomBytes(64).toString('hex');
 
                 Account
                     .update({
-                        refreshToken
+                        accessToken: accessToken
                     }, {
                         where: { accountId: account.accountId }
                     })
                     .then(() => {
-                        res.cookie('access_token', accessToken, {
+                        res.cookie('access_token', apiAccessToken, {
                             httpOnly: true,
                             secure: !isDev,
                             maxAge: config.accessToken.expiresIn * 1000, // in milliseconds - 24h
@@ -324,7 +335,7 @@ module.exports = {
 
                         return res.status(200).json({
                             message: 'Success',
-                            accessToken: refreshToken,
+                            accessToken: accessToken,
                             xsrfToken
                         });
                     })

@@ -8,8 +8,8 @@ Match.init({
         primaryKey: true,
         allowNull: false,
         references: {
-            model: 'Accounts',
-            key: 'accountId'
+            model: 'Godfathers',
+            key: 'fkAccountId'
         }
     },
     fkLaureateAccountId: {
@@ -18,8 +18,8 @@ Match.init({
         allowNull: false,
         unique: true,
         references: {
-            model: 'Accounts',
-            key: 'accountId'
+            model: 'Laureates',
+            key: 'fkAccountId'
         }
     }
 }, {

@@ -21,6 +21,14 @@ Form.init({
     bannerUrl: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    fkPhaseId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'Phase',
+            key: 'phaseId'
+        }
     }
 }, {
     sequelize,

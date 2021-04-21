@@ -20,10 +20,6 @@
     z-index: 1000;
 }
 
-.title {
-    text-align: center;
-}
-
 .cursor-pointer {
     cursor: pointer;
 }
@@ -34,4 +30,12 @@
 
 .text-small {
     font-size: 0.9rem;
+}
+
+.form-header-img {
+    display: block;
+    width: 100%;
+    height: 30vh;
+    max-height: 200px;
+    object-fit: cover;
 }
