@@ -1,5 +1,8 @@
 const { sequelize, Model, DataTypes } = require("../utils/database");
 
+const Godfather = require("./Godfather");
+const Laureate = require("./Laureate");
+
 class Preselection extends Model {}
 
 Preselection.init({
@@ -24,6 +27,18 @@ Preselection.init({
 }, {
     sequelize,
     modelName: 'Preselection'
+})
+
+Preselection.GodfatherAccount = Preselection.hasMany(Godfather, {
+    foreignKey: 'fkAccountId',
+    sourceKey: 'fkGodfatherAccountId',
+    as: 'Godfather'
+})
+
+Preselection.LaureateAccount = Preselection.hasMany(Laureate, {
+    foreignKey: 'fkAccountId',
+    sourceKey: 'fkLaureateAccountId',
+    as: 'Laureate'
 })
 
 module.exports = Preselection

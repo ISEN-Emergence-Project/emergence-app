@@ -127,7 +127,8 @@ module.exports = {
             .findAll({
                 where: {
                     fkGodfatherAccountId: req.params.godfatherId
-                }
+                },
+                include: [{ all: true, nested: true }]
             })
             .then((preselection) => {
                 if (!preselection) {
@@ -148,7 +149,8 @@ module.exports = {
             .findAll({
                 where: {
                     fkLaureateAccountId: req.params.laureateId
-                }
+                },
+                include: [{ all: true, nested: true }]
             })
             .then((preselection) => {
                 if (!preselection) {
