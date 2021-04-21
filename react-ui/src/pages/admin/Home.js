@@ -1,45 +1,25 @@
 import React, {useEffect, useState} from "react";
 import {Container} from 'react-bootstrap';
-import axios from 'axios';
+
 import AccountInfos from "../../components/AccountInfos";
 
-export function Home() {
-    const [ user, setUser ] = useState({});
-    const [ phase, setPhase ] = useState({});
+export function Home({ phase, setPhase, account }) {
     const [ btn, setBtn ] = useState();
 
     useEffect(() => {
-        const savedToken = sessionStorage.getItem('accessToken');
-
-        axios.get('//etn-test.herokuapp.com/api/accounts/'.concat(savedToken))
-            .then((res) => {
-                setUser(res.data);
-            })
-            .catch((err) => console.log(err));
-
-        axios.get('//etn-test.herokuapp.com/api/forms/latest')
-            .then((res) => {
-                axios.get('//etn-test.herokuapp.com/api/phases/'+ res.data.fkPhaseId)
-                    .then((res) => {
-                        setPhase(res.data);
-
-                        // Check if admin should interact at this phase
-                        if ([3, 5, 7].includes(res.data.phaseId)) {
-                            setBtn(<a className="btn btn-primary btn-lg" href={`/admin${res.data.buttonLink}`} role="button">{res.data.buttonText}</a>);
-                        }
-                    })
-                    .catch((err) => console.log(err));
-            })
-            .catch((err) => console.log(err));
-    }, [])
+        // Check if godfather should interact at this phase
+        if ([1, 4, 6, 7].includes(phase.phaseId)) {
+            setBtn(<a className="btn btn-primary btn-lg" href={`${phase.buttonLink}`} role="button">{phase.buttonText.replace('[]', 'parrain/filleul')}</a>);
+        }
+    }, [phase])
 
     return (
         <Container className='py-4'>
             <div className="jumbotron">
-                <h1 className="display-4">Bienvenue {user.firstname} !</h1>
+                <h1 className="display-4">Bienvenue {account.firstname} !</h1>
                 {phase.phaseId !== undefined ? (
                     <>
-                        <p className="lead">{ phase.lead }</p>
+                        <p className="lead">{ phase.lead.replace('[]', 'parrain/filleul') }</p>
                         <hr className="my-4"/>
                         { btn }
                     </>
@@ -49,7 +29,7 @@ export function Home() {
             <div className="py-4">
                 <h2>Tableau de bord</h2>
 
-                <AccountInfos user={user} />
+                <AccountInfos account={account} />
             </div>
         </Container>
     )
