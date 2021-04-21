@@ -1,8 +1,8 @@
 import React, {useCallback, useEffect, useState } from 'react';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
+import axios from "axios";
 
 // Import components
-import {Home} from './pages/admin/Home'
 import {Login} from './pages/Login'
 import {Logout} from "./pages/Logout";
 
@@ -10,11 +10,11 @@ import {Logout} from "./pages/Logout";
 import AdminRouter from './routes/AdminRouter';
 import LaureateRouter from './routes/LaureateRouter';
 import GodfatherRouter from './routes/GodfatherRouter';
-import axios from "axios";
 
 export default function App() {
     const savedToken = sessionStorage.getItem('accessToken');
     const [ token, setToken ] = useState(savedToken ? savedToken : "");
+    const [ account, setAccount ] = useState({});
     const [ phase, setPhase ] = useState({});
 
     useEffect(() => {
@@ -30,7 +30,13 @@ export default function App() {
     }, [])
 
     useEffect(() => {
-        sessionStorage.setItem('accessToken', token)
+        sessionStorage.setItem('accessToken', token);
+
+        axios.get('//etn-test.herokuapp.com/api/accounts/'+ token)
+            .then((res) => {
+                setAccount(res.data);
+            })
+            .catch((err) => console.log(err));
     }, [token]);
 
     return (
@@ -40,18 +46,18 @@ export default function App() {
                 <Switch>
                     {token ? (
                         <React.Fragment>
-                            <Route exact path='/'>
-                                <div>Root home</div>
-                            </Route>
+                            <Route path='/'>
+                                {account.role === 'admin' ? (
+                                    <AdminRouter phase={phase} setPhase={setPhase} account={account} />
+                                ) : null}
 
-                            <Route path='/admin'>
-                                <AdminRouter phase={phase} setPhase={setPhase} />
-                            </Route>
-                            <Route path='/laureate'>
-                                <LaureateRouter phase={phase} />
-                            </Route>
-                            <Route path='/godfather'>
-                                <GodfatherRouter phase={phase} />
+                                {account.role === 'laureate' ? (
+                                    <LaureateRouter phase={phase} account={account} />
+                                ) : null}
+
+                                {account.role === 'godfather' ? (
+                                    <GodfatherRouter phase={phase} account={account} />
+                                ) : null}
                             </Route>
 
                             <Route path='/logout'>

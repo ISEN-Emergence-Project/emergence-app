@@ -10,25 +10,25 @@ import NotFound from "../pages/NotFound";
 
 import {LaureateNav} from "../navigation/LaureateNav";
 
-export default function LaureateRouter({ phase }) {
+export default function LaureateRouter({ phase, account }) {
 
     return (
         <BrowserRouter>
             <LaureateNav phase={phase} />
             <Switch>
-                <Route exact path='/laureate/'>
-                    <Home phase={phase} />
+                <Route exact path='/'>
+                    <Home phase={phase} account={account} />
                 </Route>
                 {phase.phaseId === 2 ? (
-                    <Route path='/laureate/form' component={ApplicantForm}/>
+                    <Route path='/form' component={ApplicantForm}/>
                 ) : null}
                 {phase.phaseId === 5 ? (
-                    <Route path='/laureate/meetings' component={Meetings}/>
+                    <Route path='/meetings' component={Meetings}/>
                 ) : null}
                 {phase.phaseId === 7 ? (
-                    <Route path='/laureate/match' component={Match}/>
+                    <Route path='/match' component={Match}/>
                 ) : null}
-                <Route exact path='/laureate/*'>
+                <Route exact path='/*'>
                     <NotFound/>
                 </Route>
             </Switch>

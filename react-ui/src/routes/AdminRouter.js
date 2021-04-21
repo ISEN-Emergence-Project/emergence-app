@@ -2,33 +2,41 @@ import React from "react";
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 
 // Import pages
-import {Form} from "../pages/Form";
-import {ApplicantList} from "../pages/ApplicantList";
-import {Rating} from "../pages/Rating";
+import {AdminForm} from "../pages/admin/AdminForm";
+import {ApplicantList} from "../pages/admin/ApplicantList";
+import {Rating} from "../pages/laureate/Rating";
 import {ApplicantForm} from "../pages/laureate/ApplicantForm";
-import {ManageAccounts} from "../pages/ManageAccounts";
-import {PrettyPlanning} from "../pages/PrettyPlanning";
+import {ManageAccounts} from "../pages/admin/ManageAccounts";
+import {PrettyPlanning} from "../pages/admin/PrettyPlanning";
 import Meetings from "../pages/laureate/Meetings";
-
-import {AdminNav} from "../navigation/AdminNav";
 import {Home} from "../pages/admin/Home";
 
-export default function AdminRouter({ phase, setPhase}) {
+import {AdminNav} from "../navigation/AdminNav";
+import NotFound from "../pages/NotFound";
+
+export default function AdminRouter({ phase, setPhase, account }) {
 
     return (
         <BrowserRouter>
             <AdminNav />
             <Switch>
-                <Route exact path='/admin'>
-                    <Home/>
+                <Route exact path='/'>
+                    <Home phase={phase} setPhase={setPhase} account={account} />
                 </Route>
-                <Route path='/admin/Form' component={Form}/>
-                <Route path='/admin/ApplicantList' component={ApplicantList}/>
-                <Route path='/admin/Rating' component={Rating}/>
-                <Route path='/admin/ApplicantForm' component={ApplicantForm}/>
-                <Route path='/admin/ManageAccounts' component={ManageAccounts}/>
-                <Route path='/admin/PrettyPlanning' component={PrettyPlanning}/>
-                <Route path='/admin/Meetings' component={Meetings}/>
+
+                <Route path='/accounts'>
+                    <ManageAccounts/>
+                </Route>
+                <Route path='/form' component={AdminForm}/>
+                <Route path='/ApplicantList' component={ApplicantList}/>
+                <Route path='/Rating' component={Rating}/>
+                <Route path='/ApplicantForm' component={ApplicantForm}/>
+                <Route path='/PrettyPlanning' component={PrettyPlanning}/>
+                <Route path='/Meetings' component={Meetings}/>
+
+                <Route exact path='/*'>
+                    <NotFound/>
+                </Route>
             </Switch>
         </BrowserRouter>
     )

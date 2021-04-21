@@ -10,25 +10,25 @@ import NotFound from "../pages/NotFound";
 
 import {GodfatherNav} from "../navigation/GodfatherNav";
 
-export default function AdminRouter({ phase }) {
+export default function AdminRouter({ phase, account }) {
 
     return (
         <BrowserRouter>
             <GodfatherNav phase={phase} />
             <Switch>
-                <Route exact path='/godfather/'>
-                    <Home/>
+                <Route exact path='/'>
+                    <Home phase={phase} account={account} />
                 </Route>
                 {phase.phaseId === 3 ? (
-                    <Route path='/godfather/preselection' component={Preselection}/>
+                    <Route path='/preselection' component={Preselection}/>
                 ) : null}
                 {phase.phaseId === 5 ? (
-                    <Route path='/godfather/meetings' component={Meetings}/>
+                    <Route path='/meetings' component={Meetings}/>
                 ) : null}
                 {phase.phaseId === 7 ? (
-                    <Route path='/godfather/match' component={Match}/>
+                    <Route path='/match' component={Match}/>
                 ) : null}
-                <Route exact path='/godfather/*'>
+                <Route exact path='/*'>
                     <NotFound/>
                 </Route>
             </Switch>

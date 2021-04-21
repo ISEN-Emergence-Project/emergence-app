@@ -20,21 +20,21 @@ export function LaureateNav({ phase }) {
                 <div className="container-fluid d-flex flex-nowrap flex-column flex-md-row">
                     <ul className="navbar-nav flex-row flex-wrap bd-navbar-nav pt-2 py-md-0">
                         <li className="nav-item col-6 col-md-auto p-0">
-                            <a className="nav-link p-2 active" aria-current="page" href="/laureate/">Accueil</a>
+                            <a className="nav-link p-2 active" aria-current="page" href="/">Accueil</a>
                         </li>
                         {phase.phaseId === 2 ? (
                             <li className="nav-item col-6 col-md-auto p-0">
-                                <a className="nav-link p-2" href="/laureate/form">Formulaire</a>
+                                <a className="nav-link p-2" href="/form">Formulaire</a>
                             </li>
                         ) : null}
                         {phase.phaseId === 5 ? (
                             <li className="nav-item col-6 col-md-auto p-0">
-                                <a className="nav-link p-2" href="/laureate/meetings">Speed Meetings</a>
+                                <a className="nav-link p-2" href="/meetings">Speed Meetings</a>
                             </li>
                         ) : null}
                         {phase.phaseId === 7 ? (
                             <li className="nav-item col-6 col-md-auto p-0">
-                                <a className="nav-link p-2" href="/laureate/match">Mon parrain</a>
+                                <a className="nav-link p-2" href="/match">Parrain</a>
                             </li>
                         ) : null}
                     </ul>

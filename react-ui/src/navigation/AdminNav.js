@@ -20,22 +20,25 @@ export function AdminNav({ token, user }) {
                 <div className="container-fluid d-flex flex-nowrap flex-column flex-md-row">
                     <ul className="navbar-nav flex-row flex-wrap bd-navbar-nav pt-2 py-md-0">
                         <li className="nav-item col-6 col-md-auto p-0">
-                            <a className="nav-link p-2 active" aria-current="page" href="/admin/">Accueil</a>
+                            <a className="nav-link p-2 active" aria-current="page" href="/">Accueil</a>
+                        </li>
+
+                        <li className="nav-item col-6 col-md-auto p-0">
+                            <a className="nav-link p-2" href="/accounts">Comptes</a>
+                        </li>
+
+                        <li className="nav-item col-6 col-md-auto p-0">
+                            <a className="nav-link p-2" href="/form">Formulaire</a>
+                        </li>
+
+                        <li className="nav-item col-6 col-md-auto p-0">
+                            <a className="nav-link p-2" href="/ApplicantList">Liste des lauréats</a>
                         </li>
                         <li className="nav-item col-6 col-md-auto p-0">
-                            <a className="nav-link p-2" href="/admin/ApplicantList">Liste des lauréats</a>
+                            <a className="nav-link p-2" href="/Rating">Notes</a>
                         </li>
                         <li className="nav-item col-6 col-md-auto p-0">
-                            <a className="nav-link p-2" href="/admin/Rating">Notes</a>
-                        </li>
-                        <li className="nav-item col-6 col-md-auto p-0">
-                            <a className="nav-link p-2" href="/admin/ManageAccounts">Gestion des comptes</a>
-                        </li>
-                        <li className="nav-item col-6 col-md-auto p-0">
-                            <a className="nav-link p-2" href="/admin/Form">Formulaire Admin</a>
-                        </li>
-                        <li className="nav-item col-6 col-md-auto p-0">
-                            <a className="nav-link p-2" href="/admin/ApplicantForm">Formulaire Lauréat</a>
+                            <a className="nav-link p-2" href="/ApplicantForm">Formulaire Lauréat</a>
                         </li>
                     </ul>
                     <a className="btn btn-outline-light d-lg-inline-block my-2 ml-auto" href="/logout/">Déconnexion</a>
