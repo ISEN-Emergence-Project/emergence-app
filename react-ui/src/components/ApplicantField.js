@@ -21,7 +21,7 @@ export function ApplicantField({ id, questionLabel, send }) {
 
     return (
         <div className='py-2'>
-            <label className='m-0' htmlFor={id}> {questionLabel} <Star></Star> </label>
+            <label className='m-0' htmlFor={id}> {questionLabel} <Star/> </label>
             <input type="text"  placeholder="Votre réponse" id={id} onChange={(event) => setAnswer(event.target.value)} className="form-control"/>
             {send? <SubmitAnswer id={id} answer={answer}/>:""}
         </div>

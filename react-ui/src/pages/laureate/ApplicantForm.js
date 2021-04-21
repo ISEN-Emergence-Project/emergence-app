@@ -1,45 +1,37 @@
 import React, { useState,useEffect } from 'react';
-import { ApplicantHeader } from '../../components/ApplicantHeader';
-import {ApplicantField} from "../../components/ApplicantField" // On appelle le composant "Field" qui contient un champ pour une question
+import axios from "axios";
 
-export function ApplicantForm()
-{
-  const [question,setQuestion] = useState([])
-  const [clicked,setClicked] = useState(false)
+import { FormHeader } from '../../components/FormHeader';
+import {ApplicantField} from "../../components/ApplicantField"
 
-  const handleClick = () => setClicked(true)
+export function ApplicantForm() {
+    const [ form, setForm ] = useState({});
+    const [ questions, setQuestions ] = useState([]);
+    const [ clicked, setClicked ] = useState(false);
 
+    const handleClick = () => setClicked(true)
 
-  useEffect(() => {
-    const options = {
-        method: "GET",
-        header:
-        {
-            'content-type': 'application/json',
-            'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTgxNDMxNzIsImV4cCI6MTYxODIyOTU3Mn0.5patB5mX43WUUsCHVPnoAbmz-rEnLwyqRLyAJCl_Ss0'
-        }
-    }
-    fetch("https://etn-test.herokuapp.com/api/questions/form/latest",{options})
-    .then(res => {
-        res.json()
-         .then(res => setQuestion(res))
-         
-        
-    })
-    
-    .catch(error => console.error("There was an error",error)) 
-  
-    },[]);
+    useEffect(() => {
+        axios.get('//etn-test.herokuapp.com/api/questions/form/latest')
+            .then((res) => setQuestions(res.data))
+            .catch((err) => console.log(err));
+
+        axios.get('//etn-test.herokuapp.com/api/forms/latest')
+            .then((res) => {
+                setForm(res.data);
+            })
+            .catch((err) => console.log(err));
+    }, []);
 
 
     return (
         <>
-            <ApplicantHeader/>
+            <FormHeader form={form} />
 
             <div className='container py-4'>
-                {question.map(q => (
-                    <div className="mt-4" key={q.questionId}>
-                        <ApplicantField id = {q.questionId} questionLabel = {q.question} send={clicked}/>
+                {questions.map(question => (
+                    <div className="mt-4" key={question.questionId}>
+                        <ApplicantField id = {question.questionId} questionLabel = {question.question} send={clicked}/>
                     </div>
                 ))}
 
@@ -48,7 +40,6 @@ export function ApplicantForm()
                 </div>
             </div>
         </>
-
     )
 
 }

@@ -1,45 +1,56 @@
-import { useState } from "react";
-import  React from "react"
-import {useEffect} from "react"
-import {Field} from "./Field"
-import {AddQuestionCall} from "./admin/AddQuestionCall"
+import  React, { useState } from "react"
+import {Button, Modal} from 'react-bootstrap';
+import axios from 'axios';
 
+import {Star} from "./Star"
 
-export function QuestionField()         
-{
-    const [question,setQuestion] = useState([])
+export function QuestionField({ question, updateQuestion }) {
+    const [ showEdit, setShowEdit ] = useState(false);
+    const [ questionLabel, setQuestionLabel ] = useState(question.question);
 
+    function handleSave() {
+        // Update local question label
+        question.question = questionLabel
+        updateQuestion(question.questionId, question);
 
-    useEffect(() => {
-        const options = {
-            method: "GET",
-            header:
-            {
-                'content-type': 'application/json',
-                'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTgxNDMxNzIsImV4cCI6MTYxODIyOTU3Mn0.5patB5mX43WUUsCHVPnoAbmz-rEnLwyqRLyAJCl_Ss0'
-            }
-        }
-        fetch("https://etn-test.herokuapp.com/api/questions/form/latest",{options})
-        .then(res => {
-            res.json()
-             .then(res => setQuestion(res))
-             
-         })
-         
-         .catch(error => console.error("There was an error",error)) 
-       
-     },[]);
+        axios.put('//etn-test.herokuapp.com/api/questions/'+ question.questionId, {
+            question: questionLabel
+        })
+            .then((res) => {
+                setShowEdit(false);
+            })
+            .catch((err) => console.error(err));
+    }
 
+    return (
+        <>
+            <label className='m-0' htmlFor={question.questionId}>
+                {question.question} <Star/>
+            </label>
 
-    return <div>
-        <div> 
-                {question.map(q => <div className="container mt-3" key={q.questionId}>
-                              <div>
-                               <Field id = {q.questionId} questionLabel = {q.question}/>
-                                </div>
-                          </div>
-                          )}
-                <AddQuestionCall/>
-        </div>
-    </div>
+            <input type="text" required placeholder="Votre réponse" id={question.questionId} className="form-control mb-2"/>
+            <button className='btn btn-primary' onClick={() => setShowEdit(true)}>Modifier</button>
+
+            <Modal size="lg" show={showEdit}>
+                <Modal.Header>
+                    <Modal.Title>Modifier la question</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <label htmlFor="editQuestion">Question</label>
+                    <input  className="form-control mt-3" defaultValue={question.question} required type="text" id="editQuestion"
+                            onChange={(e) => setQuestionLabel(e.target.value)} />
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="btn btn-success btn-sm" onClick={handleSave}>Enregister</Button>
+
+                    <Button variant="btn btn-danger btn-sm" onClick={() => setShowEdit(false)}>
+                        <i class="me-2 bi-x-square-fill"/> Fermer
+                    </Button>
+
+                </Modal.Footer>
+            </Modal>
+        </>
+    )
 }
