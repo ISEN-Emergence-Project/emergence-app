@@ -36,7 +36,6 @@ export function AddAccount()   //Créé la pop-up pour ajouter des comptes
 
 
     const[exit,setExit] = useState(false)
-    const [error,setError] = useState(false)
     const [permission, setPermission] = useState("")
 
     const resetValues = () => 
