@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-export function AdminNav({ token, user }) {
+export function AdminNav({ phase }) {
     const [ navExpanded, setNavExpanded ] = useState(false);
 
     function toggleNav() {
@@ -32,13 +32,23 @@ export function AdminNav({ token, user }) {
                         </li>
 
                         <li className="nav-item col-6 col-md-auto p-0">
-                            <a className="nav-link p-2" href="/ApplicantList">Liste des lauréats</a>
+                            <a className="nav-link p-2" href="/preselections">Préselections</a>
                         </li>
+
                         <li className="nav-item col-6 col-md-auto p-0">
-                            <a className="nav-link p-2" href="/Rating">Notes</a>
+                            <a className="nav-link p-2" href="/meetings-panning">Planning des meetings</a>
                         </li>
+
                         <li className="nav-item col-6 col-md-auto p-0">
-                            <a className="nav-link p-2" href="/ApplicantForm">Formulaire Lauréat</a>
+                            <a className="nav-link p-2" href="/meetings">Speed meetings</a>
+                        </li>
+
+                        <li className="nav-item col-6 col-md-auto p-0">
+                            <a className="nav-link p-2" href="/choose-matches">Choose matches</a>
+                        </li>
+
+                        <li className="nav-item col-6 col-md-auto p-0">
+                            <a className="nav-link p-2" href="/matches">Final matches</a>
                         </li>
                     </ul>
                     <a className="btn btn-outline-light d-lg-inline-block my-2 ml-auto" href="/logout/">Déconnexion</a>

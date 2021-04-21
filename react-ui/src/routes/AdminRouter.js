@@ -2,37 +2,49 @@ import React from "react";
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 
 // Import pages
+import NotFound from "../pages/NotFound";
 import {AdminForm} from "../pages/admin/AdminForm";
-import {ApplicantList} from "../pages/admin/ApplicantList";
-import {Rating} from "../pages/laureate/Rating";
-import {ApplicantForm} from "../pages/laureate/ApplicantForm";
 import {ManageAccounts} from "../pages/admin/ManageAccounts";
-import {PrettyPlanning} from "../pages/admin/PrettyPlanning";
-import Meetings from "../pages/laureate/Meetings";
+import MeetingsList from "../pages/laureate/MeetingsList";
 import {Home} from "../pages/admin/Home";
+import Preselections from "../pages/admin/Preselections";
+import MeetingsPlanning from "../pages/admin/MeetingsPlanning";
+import ChooseMatches from "../pages/admin/ChooseMatches";
+import MatchesList from "../pages/admin/MatchesList";
 
 import {AdminNav} from "../navigation/AdminNav";
-import NotFound from "../pages/NotFound";
 
 export default function AdminRouter({ phase, setPhase, account }) {
 
     return (
         <BrowserRouter>
-            <AdminNav />
+            <AdminNav phase={phase} />
             <Switch>
                 <Route exact path='/'>
                     <Home phase={phase} setPhase={setPhase} account={account} />
                 </Route>
 
                 <Route path='/accounts'>
-                    <ManageAccounts/>
+                    <ManageAccounts account={account} />
                 </Route>
-                <Route path='/form' component={AdminForm}/>
-                <Route path='/ApplicantList' component={ApplicantList}/>
-                <Route path='/Rating' component={Rating}/>
-                <Route path='/ApplicantForm' component={ApplicantForm}/>
-                <Route path='/PrettyPlanning' component={PrettyPlanning}/>
-                <Route path='/Meetings' component={Meetings}/>
+                <Route path='/form'>
+                    <AdminForm account={account} />
+                </Route>
+                <Route path='/preselections'>
+                    <Preselections account={account} />
+                </Route>
+                <Route path='/meetings-panning'>
+                    <MeetingsPlanning account={account} />
+                </Route>
+                <Route path='/meetings'>
+                    <MeetingsList account={account} />
+                </Route>
+                <Route path='/choose-matches'>
+                    <ChooseMatches account={account} />
+                </Route>
+                <Route path='/matches'>
+                    <MatchesList account={account} />
+                </Route>
 
                 <Route exact path='/*'>
                     <NotFound/>
