@@ -1,11 +1,14 @@
 import React, {useState} from "react"
-import {LaureateDropDownButton} from "../../components/admin/LaureateDropDownButton"
+
+import {LaureateDropdown} from "../../components/admin/LaureateDropdown"
 import GodfatherMeetings from "../components/GodfatherMeetings";
 
 
 export function MeetingPlanning() {
     const [ godfathers, setGodfathers ] = useState([]);
-    
+
+
+
     return (
         <>
             <div className='container py-4'>
@@ -30,27 +33,27 @@ export function MeetingPlanning() {
             <div>
                 <div className="container d-flex flex-direction-row justify-content-between">
                     <p className="mt-5 btn btn-primary "> <strong>Godfather</strong></p>
-                    <LaureateDropDownButton name = "Bibo huinej"/>
-                    <LaureateDropDownButton name = "OK letsgo"/>
-                    <LaureateDropDownButton name = "hello everyone"/>
-                    <LaureateDropDownButton name = "everyone what'sup"/>
+                    <LaureateDropdown name = "Bibo huinej"/>
+                    <LaureateDropdown name = "OK letsgo"/>
+                    <LaureateDropdown name = "hello everyone"/>
+                    <LaureateDropdown name = "everyone what'sup"/>
                 </div>
 
                 <div className="container d-flex flex-direction-row justify-content-between">
                     <p className="mt-5 btn btn-primary "> <strong>Godfather</strong></p>
-                    <LaureateDropDownButton name = "Bibo huinej"/>
-                    <LaureateDropDownButton name = "OK letsgo"/>
-                    <LaureateDropDownButton name = "hello everyone"/>
-                    <LaureateDropDownButton name = "everyone what'sup"/>
+                    <LaureateDropdown name = "Bibo huinej"/>
+                    <LaureateDropdown name = "OK letsgo"/>
+                    <LaureateDropdown name = "hello everyone"/>
+                    <LaureateDropdown name = "everyone what'sup"/>
                 </div>
 
 
                 <div className="container d-flex flex-direction-row justify-content-between">
                     <p className="mt-5 btn btn-primary "> <strong>Godfather</strong></p>
-                    <LaureateDropDownButton name = "Bibo huinej"/>
-                    <LaureateDropDownButton name = "OK letsgo"/>
-                    <LaureateDropDownButton name = "hello everyone"/>
-                    <LaureateDropDownButton name = "everyone what'sup"/>
+                    <LaureateDropdown name = "Bibo huinej"/>
+                    <LaureateDropdown name = "OK letsgo"/>
+                    <LaureateDropdown name = "hello everyone"/>
+                    <LaureateDropdown name = "everyone what'sup"/>
                 </div>
             </div>
             <div className="container-fluid fixed-bottom bg-light shadow border-top">
