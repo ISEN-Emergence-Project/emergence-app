@@ -29,13 +29,13 @@ Preselection.init({
     modelName: 'Preselection'
 })
 
-Preselection.GodfatherAccount = Preselection.hasMany(Godfather, {
+Preselection.GodfatherAccount = Preselection.hasOne(Godfather, {
     foreignKey: 'fkAccountId',
     sourceKey: 'fkGodfatherAccountId',
     as: 'Godfather'
 })
 
-Preselection.LaureateAccount = Preselection.hasMany(Laureate, {
+Preselection.LaureateAccount = Preselection.hasOne(Laureate, {
     foreignKey: 'fkAccountId',
     sourceKey: 'fkLaureateAccountId',
     as: 'Laureate'
