@@ -1,6 +1,6 @@
 import  React from "react"
 
-import {Star} from "../Star"
+import {Star} from "../commons/Star"
 
 export function FormField({ question, addAnswer }) {
     return (

@@ -2,7 +2,7 @@ import  React, { useState } from "react"
 import {Button, Modal} from 'react-bootstrap';
 import axios from 'axios';
 
-import {Star} from "./Star"
+import {Star} from "../commons/Star"
 
 export function FormQuestionField({ question, updateQuestions }) {
     const [ showEdit, setShowEdit ] = useState(false);

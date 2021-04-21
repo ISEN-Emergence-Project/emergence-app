@@ -4,7 +4,7 @@ import axios from "axios";
 
 import {FormQuestionField} from "../../components/admin/FormQuestionField"
 import {FormAddQuestion} from "../../components/admin/FormAddQuestion";
-import {FormHeader} from "../../components/laureate/FormHeader";
+import {FormHeader} from "../../components/commons/FormHeader";
 
 export function AdminForm({ account }) {
     const [ form, setForm ] = useState({});
