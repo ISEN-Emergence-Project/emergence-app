@@ -10,6 +10,8 @@ export function Home({ phase, account }) {
         // Check if godfather should interact at this phase
         if ([3, 5, 7].includes(phase.phaseId)) {
             setBtn(<a className="btn btn-primary btn-lg" href={`${phase.buttonLink}`} role="button">{phase.buttonText.replace('[]', 'filleul')}</a>);
+        } else {
+            setBtn();
         }
     }, [phase])
 

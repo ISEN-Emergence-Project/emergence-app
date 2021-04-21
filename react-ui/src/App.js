@@ -10,6 +10,7 @@ import {Logout} from "./pages/Logout";
 import AdminRouter from './routes/AdminRouter';
 import LaureateRouter from './routes/LaureateRouter';
 import GodfatherRouter from './routes/GodfatherRouter';
+import DevTools from "./components/DevTools";
 
 export default function App() {
     const savedToken = sessionStorage.getItem('accessToken');
@@ -41,42 +42,40 @@ export default function App() {
 
     return (
         <BrowserRouter>
-            <title>Emergence</title>
-            <div>
-                <Switch>
-                    {token ? (
-                        <React.Fragment>
-                            <Route path='/'>
-                                {account.role === 'admin' ? (
-                                    <AdminRouter phase={phase} setPhase={setPhase} account={account} />
-                                ) : null}
+            <DevTools phase={phase} setPhase={setPhase} />
+            <Switch>
+                {token ? (
+                    <React.Fragment>
+                        <Route path='/'>
+                            {account.role === 'admin' ? (
+                                <AdminRouter phase={phase} setPhase={setPhase} account={account} />
+                            ) : null}
 
-                                {account.role === 'laureate' ? (
-                                    <LaureateRouter phase={phase} account={account} />
-                                ) : null}
+                            {account.role === 'laureate' ? (
+                                <LaureateRouter phase={phase} account={account} />
+                            ) : null}
 
-                                {account.role === 'godfather' ? (
-                                    <GodfatherRouter phase={phase} account={account} />
-                                ) : null}
-                            </Route>
+                            {account.role === 'godfather' ? (
+                                <GodfatherRouter phase={phase} account={account} />
+                            ) : null}
+                        </Route>
 
-                            <Route path='/logout'>
-                                <Logout setToken={setToken} />
-                            </Route>
-                        </React.Fragment>
-                    ) : (
-                        <>
-                            <Route exact path='/login'>
-                                <Login setToken={ setToken } />
-                            </Route>
+                        <Route path='/logout'>
+                            <Logout setToken={setToken} />
+                        </Route>
+                    </React.Fragment>
+                ) : (
+                    <>
+                        <Route exact path='/login'>
+                            <Login setToken={ setToken } />
+                        </Route>
 
-                            <Route path='/'>
-                                <Redirect to='/login' />
-                            </Route>
-                        </>
-                    )}
-                </Switch>
-            </div>
+                        <Route path='/'>
+                            <Redirect to='/login' />
+                        </Route>
+                    </>
+                )}
+            </Switch>
         </BrowserRouter>
     );
 }

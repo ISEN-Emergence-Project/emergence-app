@@ -10,6 +10,8 @@ export function Home({ phase, account }) {
         // Check if laureate should interact at this phase
         if ([2, 5, 7].includes(phase.phaseId)) {
             setBtn(<a className="btn btn-primary btn-lg" href={`${phase.buttonLink}`} role="button">{phase.buttonText.replace('[]', 'parrain')}</a>);
+        } else {
+            setBtn();
         }
     }, [phase])
 

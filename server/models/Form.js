@@ -26,7 +26,7 @@ Form.init({
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Phase',
+            model: 'Phases',
             key: 'phaseId'
         }
     }
