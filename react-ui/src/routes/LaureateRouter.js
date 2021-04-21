@@ -3,7 +3,7 @@ import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 
 // Import pages
 import {ApplicantForm} from "../pages/laureate/ApplicantForm";
-import Meetings from "../pages/laureate/Meetings";
+import MeetingList from "../pages/laureate/MeetingList";
 import {Home} from "../pages/laureate/Home";
 import Match from "../pages/laureate/Match";
 import NotFound from "../pages/NotFound";
@@ -23,7 +23,7 @@ export default function LaureateRouter({ phase, account }) {
                     <Route path='/form' component={ApplicantForm}/>
                 ) : null}
                 {phase.phaseId === 5 ? (
-                    <Route path='/meetings' component={Meetings}/>
+                    <Route path='/meetings' component={MeetingList}/>
                 ) : null}
                 {phase.phaseId === 7 ? (
                     <Route path='/match' component={Match}/>
