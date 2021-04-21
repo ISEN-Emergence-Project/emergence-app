@@ -8,6 +8,7 @@ export function ApplicantForm({ account }) {
     const [ form, setForm ] = useState({});
     const [ questions, setQuestions ] = useState([]);
     const [ alert, setAlert ] = useState(false);
+    const [ formAnswered, setFormAnswered ] = useState(false);
 
     useEffect(() => {
         axios.get('//etn-test.herokuapp.com/api/questions/form/latest')
@@ -19,6 +20,14 @@ export function ApplicantForm({ account }) {
                 setForm(res.data);
             })
             .catch((err) => console.log(err));
+
+        axios.get('//etn-test.herokuapp.com/api/answers/account/'+ account.accountId +'/form/latest')
+            .then((res) => {
+                setFormAnswered(true);
+            })
+            .catch((err) => {
+                setFormAnswered(false);
+            });
     }, []);
 
     function addAnswer(questionId, answer) {
@@ -71,27 +80,35 @@ export function ApplicantForm({ account }) {
         window.scroll(0, 0);
     }
 
-    return (
-        <>
-            <FormHeader form={form} />
+    if (formAnswered) {
+        return (
+            <div className="container py-4">
+                <div className='alert alert-warning my-4' role='alert'>Vous avez déjà répondu à ce formulaire. Patientez jusqu'aux Speed Meetings !</div>
+                <a className='btn btn-primary' href="/">Retour à l'accueil</a>
+            </div>
+        )
+    } else {
+        return (
+            <>
+                <FormHeader form={form} />
 
-            <form action='#' onSubmit={handleSubmit}>
-                <div className='container py-4'>
-                    { alert }
+                <form action='#' onSubmit={handleSubmit}>
+                    <div className='container py-4'>
+                        { alert }
 
-                    {questions.map(question => (
-                        <div className="mt-4" key={question.questionId}>
-                            <FormField question={question} addAnswer={addAnswer} />
+                        {questions.map(question => (
+                            <div className="mt-4" key={question.questionId}>
+                                <FormField question={question} addAnswer={addAnswer} />
+                            </div>
+                        ))}
+
+                        <div className='my-4 py-4'>
+                            <button className='btn btn-success' type='submit'>Envoyer vos réponses</button>
                         </div>
-                    ))}
-
-                    <div className='my-4 py-4'>
-                        <button className='btn btn-success' type='submit'>Envoyer vos réponses</button>
                     </div>
-                </div>
-            </form>
-        </>
-    )
-
+                </form>
+            </>
+        )
+    }
 }
 
