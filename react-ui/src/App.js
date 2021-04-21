@@ -11,6 +11,7 @@ import AdminRouter from './routes/AdminRouter';
 import LaureateRouter from './routes/LaureateRouter';
 import GodfatherRouter from './routes/GodfatherRouter';
 import DevTools from "./components/DevTools";
+import {AppNav} from "./navigation/AppNav";
 
 export default function App() {
     const savedToken = sessionStorage.getItem('accessToken');
@@ -37,12 +38,19 @@ export default function App() {
             .then((res) => {
                 setAccount(res.data);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                setToken('');
+            });
     }, [token]);
 
     return (
         <BrowserRouter>
-            <DevTools phase={phase} setPhase={setPhase} />
+            {!token ? (
+                <AppNav />
+            ) : (
+                <DevTools phase={phase} setPhase={setPhase} />
+            )}
             <Switch>
                 {token ? (
                     <React.Fragment>
