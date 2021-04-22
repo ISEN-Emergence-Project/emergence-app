@@ -48,7 +48,7 @@ function AccountCard({ account }) {
                     })}
                 </div>
                 <div className="modal-footer">
-                    <button className="btn btn-outline-danger btn-sm ml-2">Fermer</button>
+                    <button className="btn btn-outline-danger btn-sm ml-2" onClick={() => setShowProfile(false)}>Fermer</button>
                 </div>
             </Modal>
         </>

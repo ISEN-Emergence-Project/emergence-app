@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Button, Modal} from "react-bootstrap";
 import axios from "axios";
+import {Star} from "../../components/commons/Star"
 
 import {FormQuestionField} from "../../components/admin/FormQuestionField"
 import {FormAddQuestion} from "../../components/admin/FormAddQuestion";
