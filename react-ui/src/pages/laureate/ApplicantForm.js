@@ -10,6 +10,8 @@ export function ApplicantForm({ account }) {
     const [ alert, setAlert ] = useState(false);
     const [ formAnswered, setFormAnswered ] = useState(false);
 
+    const [studies,setStudies] = useState("")
+
     useEffect(() => {
         axios.get('//etn-test.herokuapp.com/api/questions/form/latest')
             .then((res) => setQuestions(res.data))
@@ -53,6 +55,10 @@ export function ApplicantForm({ account }) {
             }
         })
 
+        if (!studies) {
+            answersValid = false
+        }
+
         if (answersValid) {
             let answersSaved = false;
             // Save answers in database
@@ -68,6 +74,8 @@ export function ApplicantForm({ account }) {
                         answersSaved = false;
                     });
             })
+
+            axios.put("//etn-test.herokuapp.com/api/accounts/" + account.accountId,{studies:studies})
 
             // Check that answers were saved
             if (answersSaved) {
@@ -97,6 +105,15 @@ export function ApplicantForm({ account }) {
                 <form action='#' onSubmit={handleSubmit}>
                     <div className='container py-4'>
                         { alert }
+
+                        <div className="mt-4">
+                            <div className='py-2'>
+                                <label className='m-0' htmlFor="studies">
+                                    Quelles sont vos études ? <Star/>
+                                </label>
+                                <input type="text" placeholder="Votre réponse" id={"studies"} onChange={(e) => setStudies(e.target.value)} className="form-control"/>
+                            </div>
+                        </div>
 
                         {questions.map(question => (
                             <div className="mt-4" key={question.questionId}>
