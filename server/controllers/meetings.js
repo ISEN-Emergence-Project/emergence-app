@@ -12,10 +12,10 @@ module.exports = {
     insert (req, res) {
         const { fkGodfatherAccountId, fkLaureateAccountId, beginning, ending, godfatherRating, laureateRating } = req.body;
 
-        if (!fkGodfatherAccountId || !fkLaureateAccountId || !beginning || !ending || !godfatherRating || !laureateRating) {
+        if (!fkGodfatherAccountId || !fkLaureateAccountId || !godfatherRating || !laureateRating) {
             return res.status(400).json({
                 message: 'Missing required parameters',
-                info: 'Requires: fkGodfatherAccountId, fkLaureateAccountId, beginning, ending, godfatherRating, laureateRating'
+                info: 'Requires: fkGodfatherAccountId, fkLaureateAccountId, godfatherRating, laureateRating'
             })
         }
         
