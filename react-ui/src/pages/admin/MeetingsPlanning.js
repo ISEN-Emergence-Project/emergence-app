@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 
-import GodfatherMeetings from "../../components/admin/GodfatherMeetings";
+import GodfatherMeetingsPlanning from "../../components/admin/GodfatherMeetingsPlanning";
+import {Redirect} from "react-router-dom";
 
 function MeetingsPlanning() {
     const today = new Date();
@@ -11,6 +12,8 @@ function MeetingsPlanning() {
     const [ godfatherMeetings, setGodfatherMeetings ] = useState([]);
     const [ godfatherPreselections, setGodfatherPreselections ] = useState([]);
     const [ meetingsValid, setMeetingsValid ] = useState(false);
+    const [ redirectTo, setRedirectTo ] = useState();
+
     const [ meetingDate, setMeetingDate ] = useState(date);
     const [ meetingBegin, setMeetingBegin ] = useState('20:00');
     const [ meetingEnd, setMeetingEnd ] = useState('21:00');
@@ -24,29 +27,32 @@ function MeetingsPlanning() {
 
         axios.get('//etn-test.herokuapp.com/api/preselections')
             .then((res) => {
+                let tempGodfatherPreselections = []
+
                 res.data.forEach((preselection) => {
                     // Format godfather preselections
-                    const index = godfatherPreselections.findIndex((m) => m.godfatherId === preselection.fkGodfatherAccountId);
+                    const existingPreselection = godfatherPreselections.find((p) => p.godfatherId === preselection.fkGodfatherAccountId);
 
-                    if (index > -1) {
+                    if (existingPreselection) {
+                        const filteredPreselections = godfatherPreselections.filter((p) => p.godfatherId !== preselection.fkGodfatherAccountId);
                         // Add a meeting to godfather meetings
-                        godfatherPreselections[index].meetings.push({
-                            laureateId: preselection.fkLaureateAccountId,
-                            duplicated: false
-                        })
+                        tempGodfatherPreselections = [...filteredPreselections, {
+                            godfatherId: preselection.fkGodfatherAccountId,
+                            meetings: [...existingPreselection.meetings, {
+                                laureateId: preselection.fkLaureateAccountId
+                            }]
+                        }];
                     } else {
                         // Create godfather meetings
-                        godfatherPreselections.push({
+                        tempGodfatherPreselections = [...tempGodfatherPreselections, {
                             godfatherId: preselection.fkGodfatherAccountId,
                             meetings: [{
-                                laureateId: preselection.fkLaureateAccountId,
-                                duplicated: false
+                                laureateId: preselection.fkLaureateAccountId
                             }]
-                        })
+                        }];
                     }
                 })
-
-                setGodfatherPreselections(godfatherPreselections);
+                setGodfatherPreselections(tempGodfatherPreselections);
             })
             .catch((err) => console.error(err));
     }, [])
@@ -61,7 +67,9 @@ function MeetingsPlanning() {
                         beginning: meetingDate,
                         ending: meetingDate
                     })
-                        .then((res) => console.log(res))
+                        .then((res) => {
+                            setRedirectTo('/');
+                        })
                         .catch((err) => console.error(err));
                 })
             })
@@ -115,7 +123,15 @@ function MeetingsPlanning() {
         godfatherMeetings.forEach((godfatherMeeting) => {
             if (godfatherMeeting.meetings.length !== 4) isValid = false;
         })
+
+        // Check if number of godfathers and number of godfatherMeeting object match
+        if (godfathers.length !== godfatherMeetings.length) isValid = false;
+
         setMeetingsValid(isValid);
+    }
+
+    if (redirectTo) {
+        return <Redirect to={redirectTo} />
     }
 
     return (
@@ -156,7 +172,7 @@ function MeetingsPlanning() {
 
                 {godfathers.map((godfather) => (
                     <div className='' key={godfather.fkAccountId}>
-                        <GodfatherMeetings godfather={godfather} godfatherPreselections={godfatherPreselections} godfatherMeetings={godfatherMeetings} updateGodfatherMeetings={updateGodfatherMeetings} />
+                        <GodfatherMeetingsPlanning godfather={godfather} godfatherPreselections={godfatherPreselections} godfatherMeetings={godfatherMeetings} updateGodfatherMeetings={updateGodfatherMeetings} />
                     </div>
                 ))}
 
