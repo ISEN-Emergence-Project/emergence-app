@@ -25,7 +25,6 @@ function AccountCard({ account }) {
             <div className="card d-flex flex-row flex-nowrap align-items-center">
                 <div className="card-body cursor-pointer py-3" onClick={openProfile}>
                     <h5 className='mb-1'>{account.firstname} {account.lastname}</h5>
-                    {account.studies}
                 </div>
             </div>
 
@@ -37,7 +36,8 @@ function AccountCard({ account }) {
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div className="modal-body">
+                <div className="modal-body">{account.email}
+                    <hr></hr>
                     {answers.map(({fkAccountId, fkQuestionId, answer, Question : {question, description}}) => {
                         return (
                             <div className='py-2' key={fkQuestionId}>
@@ -48,8 +48,7 @@ function AccountCard({ account }) {
                     })}
                 </div>
                 <div className="modal-footer">
-                    <button className="btn btn-primary btn-sm">Modifier</button>
-                    <button className="btn btn-outline-danger btn-sm ml-2">Supprimer</button>
+                    <button className="btn btn-outline-danger btn-sm ml-2">Fermer</button>
                 </div>
             </Modal>
         </>

@@ -66,6 +66,13 @@ export function AdminForm({ account }) {
                     <Button className="btn btn-success col col-sm-4 col-md-2" onClick={() => setEditHeader(true)}>Modifier</Button>
                 </div>
 
+                <div className="py-3">
+                    <label className='m-0' htmlFor='studies'>
+                        Quelle sont vos études ? <Star/>
+                    </label>
+                    <input type="text" required placeholder="Votre réponse" id='studies' className="form-control mb-2"/>
+                </div>
+
                 {questions.map(question => (
                     <div className="py-3" key={question.questionId}>
                         <FormQuestionField question={question} updateQuestions={updateQuestions} />
