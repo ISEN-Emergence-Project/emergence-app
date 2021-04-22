@@ -4,7 +4,7 @@ import axios from "axios";
 import LaureateDropdown from "./LaureateDropdown";
 import LaureateMeetingCard from "./LaureateMeetingCard";
 
-function GodfatherMeetings({ godfather, godfatherPreselections, godfatherMeetings, updateGodfatherMeetings }) {
+function GodfatherMeetingsPlanning({ godfather, godfatherPreselections, godfatherMeetings, updateGodfatherMeetings }) {
     const [ preselections, setPreselections ] = useState([]);
     const [ show, setShow ] = useState(false);
 
@@ -76,4 +76,4 @@ function GodfatherMeetings({ godfather, godfatherPreselections, godfatherMeeting
     )
 }
 
-export default GodfatherMeetings
+export default GodfatherMeetingsPlanning
