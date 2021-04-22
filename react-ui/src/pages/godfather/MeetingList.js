@@ -81,7 +81,7 @@ export default function MeetingList({account}){
             <div className="p-2 m-2 align-self-center">{meeting.map( meet=> meet.fkGodfatherAccountId==account.accountId?
                 <div className="card p-5 d-flex flex-row m-2">
                     
-                    <div className="col align-self-center"><div >{aaccount.map(acc=> acc.accountId==meet.fkLaureateAccountId?<div><h3>{acc.firstname} {acc.lastname}</h3><div><Time value={meet.beginning} format="HH:mm" />-<Time value={meet.ending} format="HH:mm" /></div></div>:false)}</div></div>
+                    <div className="col align-self-center"><div>{aaccount.map(acc=> acc.accountId==meet.fkLaureateAccountId?<div><h3>{acc.firstname} {acc.lastname}</h3><div><Time value={meet.beginning} format="HH:mm" />-<Time value={meet.ending} format="HH:mm" /></div></div>:false)}</div></div>
                     <div className="col align-self-center"><RadioButtons accountid={account.accountId}  laureateId={meet.fkLaureateAccountId}/></div>
                     
                 </div>:false
@@ -126,7 +126,7 @@ function RadioButtons({accountid,laureateId}){
                     </label></div>
                 </div>
             </div>
-            <div><Button className=" align-self-center col "  variant="btn btn-success " onClick={()=>handleCall(accountid,laureateId,note),()=>setSend(true)}>Envoyer</Button><div>{issend==true?<div className="text-success align-self-center">envoyé</div>:false}</div></div>
+            <div><Button className=" align-self-center col "  variant="btn btn-success " onClick={()=>handleCall(accountid,laureateId,note)}>Envoyer</Button><div>{issend==true?<div className="text-success align-self-center">envoyé</div>:false}</div></div>
             
 
         </div>

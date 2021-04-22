@@ -98,7 +98,7 @@ function RadioButtons({godfatherId,accountid}){
     return(
         
         
-        <div className="d-flex flex-row ">
+        <div className="d-flex flex-row">
             <div className="d-flex flex-row col">
             <div className="form-check align-self-center d-flex flex-column">
                 <div><input type="radio" name="exampleRadios" id="exampleRadios1" value="1" onChange={(e) => setNote(e.target.value)}></input></div>
@@ -123,8 +123,7 @@ function RadioButtons({godfatherId,accountid}){
                 </label></div>
             </div>
             </div>
-            <div><Button className=" align-self-center col"  variant="btn btn-success " onClick={()=>handleCall(godfatherId,accountid,note),()=>setSend(true)}>Envoyer</Button><div>{issend==true?<div className="text-success align-self-center">envoyé</div>:false}</div></div>
-
+            <div><Button className=" align-self-center col"  variant="btn btn-success " onClick={()=>handleCall(godfatherId,accountid,note)}>Envoyer</Button><div>{issend==true?<div className="text-success align-self-center">envoyé</div>:false}</div></div>
         </div>
 
 
