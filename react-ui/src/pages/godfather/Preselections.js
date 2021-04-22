@@ -38,7 +38,7 @@ export function Preselections({ account }) {
                 })
                 .then((res) => {
                     console.log(res);
-                    setRedirectTo('/Home')
+                    setRedirectTo('/')
                 })
                 .catch((err) => {
                     console.log(err);
