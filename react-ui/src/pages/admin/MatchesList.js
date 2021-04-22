@@ -27,7 +27,7 @@ function MatchesList() {
     return (
         
         <div className='container py-4 '>
-            <h1 className="p-2 m-5">Binomes finaux : </h1>
+            <h1 className="p-2 m-5">Binômes finaux : </h1>
             {matches.map(matches=> 
             <div className="d-flex flex-row border-bottom border-top p-2">
                 <h5 className="col">

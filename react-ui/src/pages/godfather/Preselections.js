@@ -155,14 +155,13 @@ function Test(props){
                     <div className="column d-flex flex-row">
                         <div onClick={handleShow}>
                         <div className="col">
-                            <h5>{props.firstname} {props.lastname}</h5>
-                            
+                            <h5>{props.firstname} {props.lastname}</h5>    
                         </div>
                         <div className="col">{answer.map(ans=> props.accountId==ans.fkAccountId ?(ans.fkQuestionId==18 ?<div key={ans.answerId}>{ans.answer}</div>:false) : false)}</div>
                         <div className="col">{answer.map(ans=> props.accountId==ans.fkAccountId ?(ans.fkQuestionId==25 ?<div key={ans.answerId}>{ans.answer}</div>:false) : false)}</div>
-                        </div>   
+                        </div>
                         <div className="col text-right align-self-center">
-                            <input type='checkbox' name={props.accountId} />
+                            <input type='checkbox' name={props.accountId}/>
                         </div>
                     </div>
                 </div>
