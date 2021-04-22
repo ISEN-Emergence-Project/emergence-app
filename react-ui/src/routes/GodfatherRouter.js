@@ -5,7 +5,7 @@ import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import {Preselections} from "../pages/godfather/Preselections";
 import {Home} from "../pages/godfather/Home";
 import MeetingList from "../pages/godfather/MeetingList";
-import Matches from "../pages/laureate/Matches";
+import Matches from "../pages/godfather/Matches";
 import NotFound from "../pages/NotFound";
 
 import {GodfatherNav} from "../navigation/GodfatherNav";

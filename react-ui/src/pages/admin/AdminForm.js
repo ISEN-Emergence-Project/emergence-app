@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Button, Modal} from "react-bootstrap";
 import axios from "axios";
+import {Star} from "../../components/commons/Star"
 
 import {FormQuestionField} from "../../components/admin/FormQuestionField"
 import {FormAddQuestion} from "../../components/admin/FormAddQuestion";
@@ -64,6 +65,13 @@ export function AdminForm({ account }) {
             <div className="container py-4">
                 <div className="container text-center pb-3">
                     <Button className="btn btn-success col col-sm-4 col-md-2" onClick={() => setEditHeader(true)}>Modifier</Button>
+                </div>
+
+                <div className="py-3">
+                    <label className='m-0' htmlFor='studies'>
+                        Quelle sont vos études ? <Star/>
+                    </label>
+                    <input type="text" required placeholder="Votre réponse" id='studies' className="form-control mb-2"/>
                 </div>
 
                 {questions.map(question => (

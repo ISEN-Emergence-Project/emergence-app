@@ -23,7 +23,7 @@ function Matches({account}) {
         
        <div className="container">
            <div className="card m-5 p-5 justify-content-center align-self-center">
-                {result.map(res=>res.fkLaureateAccountId==account.accountId?<div><Test aaccountId={res.fkGodfatherAccountId}/></div>:false)}
+                {result.map(res=>res.fkGodfatherAccountId==account.accountId?<div><Test aaccountId={res.fkLaureateAccountId}/></div>:false)}
             </div>
     
         </div>
@@ -47,7 +47,7 @@ function Test(aaccountId){
 
     return(
         <div>
-            <h1 className="p-5">Votre parrain/marraine a été choisi : </h1>
+            <h1 className="p-5">Votre filleul(e) a été choisi : </h1>
             <div className="">
                 {aacount.map(acc=>acc.accountId==aaccountId.aaccountId?
                 <div className="d-flex flex-row">
