@@ -23,6 +23,8 @@ export function ApplicantForm({ account }) {
 
         axios.get('//etn-test.herokuapp.com/api/answers/account/'+ account.accountId +'/form/latest')
             .then((res) => {
+                console.log(res.data)
+                if(res.data.length > 0)
                 setFormAnswered(true);
             })
             .catch((err) => {
