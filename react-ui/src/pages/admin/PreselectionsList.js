@@ -40,7 +40,7 @@ export function PreselectionsList({account}) {
                     <div className="">
                         <div className="">
                         {aacount.map(acc=> acc.accountId==pres.fkLaureateAccountId?
-                            <div className="p-1">{acc.firstname}{acc.lastname}</div>
+                            <div className="p-1">{acc.firstname} {acc.lastname}</div>
                         :false)}
                         </div>
                     </div>
