@@ -1,27 +1,69 @@
-import React, { useState } from "react"
+import React, {useEffect, useState} from "react"
 import {Dropdown} from "react-bootstrap"
 
-import DropdownItem from "react-bootstrap/DropdownItem";
+import LaureateDropdownItem from "./LaureateDropdownItem";
 
-export function LaureateDropdown ({ preselections }) {
-    const [ selected, setSelected ] = useState();
-    const [name,setName] = useState("");
+function LaureateDropdown ({ godfather, pos, preselections, godfatherPreselections, godfatherMeetings, updateSelection }) {
+    const [ selectedLaureate, setSelectedLaureate ] = useState({});
+    const [ color, setColor ] = useState('outline-success');
 
-    const changeName = (e) => {
-        console.log(e)
+    useEffect(() => {
+        if (isDuplicated(godfather.godfatherId, selectedLaureate.accountId, pos)) {
+            setColor('danger');
+        } else {
+            setColor('outline-success');
+        }
+    }, [])
+
+    function handleSelect(e) {
+        const selectedLaureate = preselections.filter((p) => p.fkLaureateAccountId === Number.parseInt(e))[0];
+        const laureateAccount = selectedLaureate.Laureate.Account;
+
+        setSelectedLaureate(laureateAccount);
+        // Update selection globally
+        updateSelection(laureateAccount.fkLaureateAccountId);
     }
-    
+
+    function isDuplicated(godfatherId, laureateId, pos) {
+        let duplicated = false;
+
+        if (godfatherMeetings[godfatherId]) {
+            // Check duplicate for same godfather
+            godfatherMeetings[godfatherId]
+                .filter((gM, index) => index !== pos)
+                .forEach((meeting) => {
+                    if (meeting.laureateId === laureateId) {
+                        duplicated = true;
+                    }
+                })
+        }
+
+        // Check duplicate for same meeting hour
+        godfatherMeetings.forEach((meetings) => {
+            if (meetings && meetings[pos] && meetings[pos].laureateId === laureateId) {
+                duplicated = true;
+            }
+        })
+        return duplicated;
+    }
+
     return (
         <div className='col'>
-            <Dropdown onSelect={(e) => setSelected(e)}>
-                <Dropdown.Toggle className="btn container-fluid" variant="outline-success">{selected ? selected : 'Choisir'} </Dropdown.Toggle>
+            <Dropdown onSelect={handleSelect}>
+                <Dropdown.Toggle className="btn container-fluid py-2" variant={color}>
+                    {selectedLaureate.accountId ? selectedLaureate.firstname +' '+ selectedLaureate.lastname : 'Choisir'}&nbsp;
+                </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    <DropdownItem eventKey='Michel'> Michel <span className="badge bg-success ms-4">{4}</span> </DropdownItem>
-                    <DropdownItem eventKey='Jean'> Jean <span className="badge bg-warning ms-4">{3}</span> </DropdownItem>
-                    <DropdownItem eventKey='Pierre'> Pierre <span className="badge bg-warning ms-4">{4}</span> </DropdownItem>
+                    {preselections.map((preselection) => (
+                        <div className='' key={`${preselection.fkGodfatherAccountId}-${preselection.fkLaureateAccountId}`}>
+                            <LaureateDropdownItem laureate={preselection} godfatherMeetings={godfatherMeetings} />
+                        </div>
+                    ))}
                 </Dropdown.Menu>
             </Dropdown>
         </div>
     )
 }
+
+export default LaureateDropdown
