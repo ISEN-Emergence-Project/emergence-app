@@ -17,7 +17,7 @@ function handleCall(godFatherId,laureateId,rategodfather)
              
          })
          .catch(error => console.error("There was an error",error))   
-         return issend
+        
 
         }
 
