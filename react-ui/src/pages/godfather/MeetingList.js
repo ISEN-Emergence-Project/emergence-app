@@ -85,7 +85,7 @@ export default function MeetingList({account}){
                 <div className="card p-5 d-flex flex-row m-2">
                     
                     <div className="col align-self-center"><div>{aaccount.map(acc=> acc.accountId==meet.fkLaureateAccountId?<div><h3>{acc.firstname} {acc.lastname}</h3><div><Time value={meet.beginning} format="HH:mm" />-<Time value={meet.ending} format="HH:mm" /></div></div>:false)}</div></div>
-                    <div className="col align-self-center"><RadioButtons accountid={account.accountId} name={meet.fkGodfatherAccountId} laureateId={meet.fkLaureateAccountId}/></div>
+                    <div className="col align-self-center"><RadioButtons meeting={meet} accountid={account.accountId} name={meet.fkLaureateAccountId} laureateId={meet.fkLaureateAccountId}/></div>
                     
                 </div>:false
                 )}
@@ -97,9 +97,10 @@ export default function MeetingList({account}){
 
 
 
-function RadioButtons({accountid,laureateId,name}){
-    const[isSend, setSend] = useState(false);
+function RadioButtons({accountid,laureateId,name,meeting}){
+    
     const[note, setNote] = useState(null);
+    const[isSend, setSend] = useState(false);
     
     return(
         
@@ -107,31 +108,32 @@ function RadioButtons({accountid,laureateId,name}){
         <div className="d-flex flex-row ">
             <div className="d-flex flex-row col">
                 <div className="form-check align-self-center d-flex flex-column">
-                    <div><input type="radio" name="radio" id="exampleRadios1" value="1" onChange={(e) => setNote(e.target.value)}></input></div>
-                    <div><label htmlFor="exampleRadios1">1</label></div>
+                    <div><input type="radio" name={name} id="Radios1" value="1" onChange={(e) => setNote(e.target.value)}></input></div>
+                    <div><label htmlFor="Radios1">1</label></div>
                 </div>
                 <div className="form-check align-self-center d-flex flex-column">
-                    <div><input type="radio" name="radio" id="exampleRadios2" value="2" onChange={(e) => setNote(e.target.value)}></input></div>
-                    <div><label htmlFor="exampleRadios2">
+                    <div><input type="radio" name={name} id="Radios2" value="2" onChange={(e) => setNote(e.target.value)}></input></div>
+                    <div><label htmlFor="Radios2">
                         2
                     </label></div>
                 </div>
                 <div className="form-check align-self-center d-flex flex-column">
-                    <div><input type="radio" name="radio" id="exampleRadios3" value="3" onChange={(e) => setNote(e.target.value)}></input></div>
-                    <div><label htmlFor="exampleRadios3">
+                    <div><input type="radio" name={name} id="Radios3" value="3" onChange={(e) => setNote(e.target.value)}></input></div>
+                    <div><label htmlFor="Radios3">
                     
                         3</label></div>
                 </div>
                 <div className="form-check align-self-center d-flex flex-column">
-                    <div><input type="radio" name="radio" id="exampleRadios4" value="4" onChange={(e) => setNote(e.target.value)}></input></div>
-                    <div><label htmlFor="exampleRadios4">
+                    <div><input type="radio" name={name} id="Radios4" value="4" onChange={(e) => setNote(e.target.value)}></input></div>
+                    <div><label htmlFor="Radios4">
                         4
                     </label></div>
                 </div>
                 
             </div>
-            <div><Button className=" align-self-center col "  variant="btn btn-success " onClick={()=>handleCall(accountid,laureateId,note)}>Envoyer</Button><div>{isSend==true?<div className="text-success align-self-center">envoyé</div>:false}</div></div>
+            <div><div>{meeting.godfatherRating==null?<Button className=" align-self-center col "  variant="btn btn-success " onClick={()=>handleCall(accountid,laureateId,note)}>Envoyer</Button>:<div><Button className=" align-self-center col "  variant="btn btn-success " disabled>Envoyer</Button><div className="text-success align-self-center mt-3">envoyé</div></div>}</div></div>
         </div>
+        
 
 
         
