@@ -149,7 +149,7 @@ module.exports = {
     },
 
     update (req, res) {
-        const { firstname, lastname, username, email, password, role, isArchived, resetKey, accessToken, refreshToken } = req.body;
+        const { firstname, lastname, username, email, password, role, resetKey, accessToken, refreshToken, studies, promo, isArchived } = req.body;
 
         // Check if role sent
         if (role) {
@@ -180,12 +180,25 @@ module.exports = {
                 returning: true
             })
             .then(([, account]) => {
-                if (!account[0]) {
-                    return res.status(404).json({ message: 'Account not found' });
+                if (account) {
+                    if (!account[0]) {
+                        return res.status(404).json({ message: 'Account not found' });
+                    }
                 }
-                // Remove passwordHash from response
-                account[0].passwordHash = undefined;
-                return res.status(200).json(account[0])
+
+                Laureate
+                    .update({
+                        studies: studies,
+                        promo: promo,
+                        isArchived: isArchived
+                    }, {
+                        where: {
+                            fkAccountId: req.params.id
+                        }
+                    })
+                    .then((laureate) => {
+                        return res.status(200).json();
+                    })
             })
             .catch((error) => {
                 console.log(error);
