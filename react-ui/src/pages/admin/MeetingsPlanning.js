@@ -18,6 +18,7 @@ function MeetingsPlanning() {
         axios.get('//etn-test.herokuapp.com/api/preselections')
             .then((res) => {
                 res.data.forEach((preselection) => {
+                    // Format godfather preselections
                     const index = godfatherPreselections.findIndex((m) => m.godfatherId === preselection.fkGodfatherAccountId);
 
                     if (index > -1) {
@@ -45,45 +46,45 @@ function MeetingsPlanning() {
     }, [])
 
     function updateGodfatherMeetings(godfatherId, laureateId, pos) {
-        console.log(godfatherMeetings);
+        console.log('UpdateGodfatherMeetings : ', godfatherId, laureateId, pos);
 
-        const duplicated = false;//checkDuplicated(godfatherId, laureateId, pos);
+        let tempGodfatherMeetings = godfatherMeetings
 
-        let tempGodfatherMeetings = [...godfatherMeetings];
-        // Create godfather array if not exists
-        if (!tempGodfatherMeetings[godfatherId]) {
-            tempGodfatherMeetings[godfatherId] = [];
-        }
-        // Create or replace godfatherMeeting
-        tempGodfatherMeetings[godfatherId][pos] = {
-            laureateId: laureateId,
-            duplicated: duplicated
+        // Find meeting in list
+        const existingGodfatherMeeting = tempGodfatherMeetings.find((m) => m.godfatherId === godfatherId);
+
+        if (existingGodfatherMeeting) {
+            // Get other godfatherMeetings
+            const godfatherMeetingsFiltered = godfatherMeetings.filter((m) => m.godfatherId !== godfatherId);
+
+            let meetingsFiltered = [];
+            // Get existing meetings for godfather
+            if (existingGodfatherMeeting.meetings) {
+                meetingsFiltered = existingGodfatherMeeting.meetings.filter((m) => m.pos !== pos);
+            }
+
+            const updatedMeeting = {
+                godfatherId: godfatherId,
+                meetings: [...meetingsFiltered, {
+                    laureateId: laureateId,
+                    pos: pos
+                }]
+            }
+
+            tempGodfatherMeetings = [...godfatherMeetingsFiltered, updatedMeeting]
+        } else {
+            // Create godfather meetings
+            const newMeeting = {
+                godfatherId: godfatherId,
+                meetings: [{
+                    laureateId: laureateId,
+                    pos: pos
+                }]
+            }
+            tempGodfatherMeetings = [...tempGodfatherMeetings, newMeeting]
+            console.log('new: ', tempGodfatherMeetings)
         }
         setGodfatherMeetings(tempGodfatherMeetings);
-    }
-
-    function checkDuplicated(godfatherId, laureateId, pos) {
-        let duplicated = false;
-
-        console.log(godfatherMeetings)
-        if (godfatherMeetings[godfatherId]) {
-            // Check duplicate for same godfather
-            godfatherMeetings[godfatherId]
-                .filter((gM, index) => index !== pos)
-                .forEach((meeting) => {
-                    if (meeting.laureateId === laureateId) {
-                        duplicated = true;
-                    }
-                })
-        }
-        console.log(godfatherMeetings)
-        // Check duplicate for same meeting hour
-        godfatherMeetings.forEach((meetings) => {
-            if (meetings && meetings[pos] && meetings[pos].laureateId === laureateId) {
-                duplicated = true;
-            }
-        })
-        return duplicated;
     }
 
     return (

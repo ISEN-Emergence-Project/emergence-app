@@ -6,7 +6,13 @@ function LaureateMeetingCard({ laureate, godfatherMeetings }) {
 
     useEffect(() => {
         if (godfatherMeetings) {
-            const timesSelected = godfatherMeetings.filter((m, index) => index === laureate.accountId).length;
+            let timesSelected = 0;
+            // Count number of selections
+            godfatherMeetings.forEach((godfatherMeeting) => {
+                if (godfatherMeeting.meetings) {
+                    timesSelected = godfatherMeeting.meetings.filter((m) => m.laureateId === laureate.accountId).length;
+                }
+            })
             setTimesSelected(timesSelected);
 
             if (timesSelected === 4) {

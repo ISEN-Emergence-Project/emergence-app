@@ -29,25 +29,25 @@ function GodfatherMeetings({ godfather, godfatherPreselections, godfatherMeeting
                                           godfatherPreselections={godfatherPreselections}
                                           godfatherMeetings={godfatherMeetings}
                                           pos={0}
-                                          updateSelection={(laureateId) => updateGodfatherMeetings(godfather.fkAccountId, laureateId, 0)} />
+                                          updateGodfatherMeetings={updateGodfatherMeetings} />
                         <LaureateDropdown godfather={godfather}
                                           preselections={preselections}
                                           godfatherPreselections={godfatherPreselections}
                                           godfatherMeetings={godfatherMeetings}
                                           pos={1}
-                                          updateSelection={(laureateId) => updateGodfatherMeetings(godfather.fkAccountId, laureateId, 1)} />
+                                          updateGodfatherMeetings={updateGodfatherMeetings} />
                         <LaureateDropdown godfather={godfather}
                                           preselections={preselections}
                                           godfatherPreselections={godfatherPreselections}
                                           godfatherMeetings={godfatherMeetings}
                                           pos={2}
-                                          updateSelection={(laureateId) => updateGodfatherMeetings(godfather.fkAccountId, laureateId, 2)} />
+                                          updateGodfatherMeetings={updateGodfatherMeetings} />
                         <LaureateDropdown godfather={godfather}
                                           preselections={preselections}
                                           godfatherPreselections={godfatherPreselections}
                                           godfatherMeetings={godfatherMeetings}
                                           pos={3}
-                                          updateSelection={(laureateId) => updateGodfatherMeetings(godfather.fkAccountId, laureateId, 3)} />
+                                          updateGodfatherMeetings={updateGodfatherMeetings} />
                     </div>
                 </div>
             </div>

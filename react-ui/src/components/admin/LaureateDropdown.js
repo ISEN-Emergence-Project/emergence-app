@@ -3,17 +3,19 @@ import {Dropdown} from "react-bootstrap"
 
 import LaureateDropdownItem from "./LaureateDropdownItem";
 
-function LaureateDropdown ({ godfather, pos, preselections, godfatherPreselections, godfatherMeetings, updateSelection }) {
+function LaureateDropdown ({ godfather, pos, preselections, godfatherPreselections, godfatherMeetings, updateGodfatherMeetings }) {
     const [ selectedLaureate, setSelectedLaureate ] = useState({});
     const [ color, setColor ] = useState('outline-success');
 
     useEffect(() => {
-        if (isDuplicated(godfather.godfatherId, selectedLaureate.accountId, pos)) {
-            setColor('danger');
-        } else {
-            setColor('outline-success');
+        if (selectedLaureate.accountId !== undefined) {
+            if (isDuplicated(godfather.fkAccountId, selectedLaureate.accountId, pos)) {
+                setColor('danger');
+            } else {
+                setColor('outline-success');
+            }
         }
-    }, [])
+    }, [godfatherMeetings])
 
     function handleSelect(e) {
         const selectedLaureate = preselections.filter((p) => p.fkLaureateAccountId === Number.parseInt(e))[0];
@@ -21,35 +23,45 @@ function LaureateDropdown ({ godfather, pos, preselections, godfatherPreselectio
 
         setSelectedLaureate(laureateAccount);
         // Update selection globally
-        updateSelection(laureateAccount.fkLaureateAccountId);
+        updateGodfatherMeetings(godfather.fkAccountId, laureateAccount.accountId, pos);
     }
 
     function isDuplicated(godfatherId, laureateId, pos) {
+        console.log('isDuplicated: ', godfatherId, laureateId, pos, godfatherMeetings);
         let duplicated = false;
 
-        if (godfatherMeetings[godfatherId]) {
-            // Check duplicate for same godfather
-            godfatherMeetings[godfatherId]
-                .filter((gM, index) => index !== pos)
-                .forEach((meeting) => {
-                    if (meeting.laureateId === laureateId) {
-                        duplicated = true;
-                    }
-                })
-        }
+        // Check for duplicate in godfather lines (except same position
+        let duplicatedMeetings = godfatherMeetings
+            .filter((godfatherMeeting) => {
+                const findDuplicate = godfatherMeeting.meetings.filter((m) => m.laureateId === laureateId && m.pos !== pos);
 
-        // Check duplicate for same meeting hour
-        godfatherMeetings.forEach((meetings) => {
-            if (meetings && meetings[pos] && meetings[pos].laureateId === laureateId) {
-                duplicated = true;
-            }
-        })
+                return (godfatherMeeting.godfatherId === godfatherId) && !!findDuplicate.length
+            })
+
+        if (duplicatedMeetings.length) duplicated = true;
+
+        console.log('duplicatedMeeting row:', duplicatedMeetings)
+
+        // Check for duplicates in column (same position for other godfathers)
+        duplicatedMeetings = godfatherMeetings
+            .filter((godfatherMeeting) => {
+                const findDuplicate = godfatherMeeting.meetings.filter((m) => m.laureateId === laureateId && m.pos === pos);
+
+                return (godfatherMeeting.godfatherId !== godfatherId) && !!findDuplicate.length;
+            })
+
+        if (duplicatedMeetings.length) duplicated = true;
+
+        console.log('duplicatedMeeting column:', duplicatedMeetings)
+
+        console.log('> duplicated: '+duplicated)
+
         return duplicated;
     }
 
     return (
         <div className='col'>
-            <Dropdown onSelect={handleSelect}>
+            <Dropdown onSelect={handleSelect} className='shadow-sm'>
                 <Dropdown.Toggle className="btn container-fluid py-2" variant={color}>
                     {selectedLaureate.accountId ? selectedLaureate.firstname +' '+ selectedLaureate.lastname : 'Choisir'}&nbsp;
                 </Dropdown.Toggle>
