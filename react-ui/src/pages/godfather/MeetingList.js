@@ -12,14 +12,17 @@ function handleCall(godFatherId,laureateId,rategodfather)
                                                                     
                                                                     })
         .then(res => {
-            console.log(res)
             
+            console.log(res)
+        
              
          })
          .catch(error => console.error("There was an error",error))   
         
 
-        }
+}
+
+
 
 
 export default function MeetingList({account}){
@@ -39,7 +42,7 @@ export default function MeetingList({account}){
         .then(res => {
             res.json()
             .then(res => {
-                console.log(res)
+               
                 return setAccount(res)
             })
             
@@ -62,7 +65,7 @@ export default function MeetingList({account}){
         .then(res => {
             res.json()
             .then(res => {
-                console.log(res)
+                
                 return setMeeting(res)
             })
             
@@ -82,7 +85,7 @@ export default function MeetingList({account}){
                 <div className="card p-5 d-flex flex-row m-2">
                     
                     <div className="col align-self-center"><div>{aaccount.map(acc=> acc.accountId==meet.fkLaureateAccountId?<div><h3>{acc.firstname} {acc.lastname}</h3><div><Time value={meet.beginning} format="HH:mm" />-<Time value={meet.ending} format="HH:mm" /></div></div>:false)}</div></div>
-                    <div className="col align-self-center"><RadioButtons accountid={account.accountId}  laureateId={meet.fkLaureateAccountId}/></div>
+                    <div className="col align-self-center"><RadioButtons accountid={account.accountId} name={meet.fkGodfatherAccountId} laureateId={meet.fkLaureateAccountId}/></div>
                     
                 </div>:false
                 )}
@@ -94,41 +97,40 @@ export default function MeetingList({account}){
 
 
 
-function RadioButtons({accountid,laureateId}){
-
+function RadioButtons({accountid,laureateId,name}){
+    const[isSend, setSend] = useState(false);
     const[note, setNote] = useState(null);
-    const[issend, setSend] = useState(false);
+    
     return(
         
         
         <div className="d-flex flex-row ">
             <div className="d-flex flex-row col">
                 <div className="form-check align-self-center d-flex flex-column">
-                    <div><input type="radio" name="exampleRadios" id="exampleRadios1" value="1" onChange={(e) => setNote(e.target.value)}></input></div>
+                    <div><input type="radio" name="radio" id="exampleRadios1" value="1" onChange={(e) => setNote(e.target.value)}></input></div>
                     <div><label htmlFor="exampleRadios1">1</label></div>
                 </div>
                 <div className="form-check align-self-center d-flex flex-column">
-                    <div><input type="radio" name="exampleRadios" id="exampleRadios2" value="2" onChange={(e) => setNote(e.target.value)}></input></div>
+                    <div><input type="radio" name="radio" id="exampleRadios2" value="2" onChange={(e) => setNote(e.target.value)}></input></div>
                     <div><label htmlFor="exampleRadios2">
                         2
                     </label></div>
                 </div>
                 <div className="form-check align-self-center d-flex flex-column">
-                    <div><input type="radio" name="exampleRadios" id="exampleRadios3" value="3" onChange={(e) => setNote(e.target.value)}></input></div>
+                    <div><input type="radio" name="radio" id="exampleRadios3" value="3" onChange={(e) => setNote(e.target.value)}></input></div>
                     <div><label htmlFor="exampleRadios3">
                     
                         3</label></div>
                 </div>
                 <div className="form-check align-self-center d-flex flex-column">
-                    <div><input type="radio" name="exampleRadios" id="exampleRadios4" value="4" onChange={(e) => setNote(e.target.value)}></input></div>
+                    <div><input type="radio" name="radio" id="exampleRadios4" value="4" onChange={(e) => setNote(e.target.value)}></input></div>
                     <div><label htmlFor="exampleRadios4">
                         4
                     </label></div>
                 </div>
+                
             </div>
-            <div><Button className=" align-self-center col "  variant="btn btn-success " onClick={()=>handleCall(accountid,laureateId,note)}>Envoyer</Button><div>{issend==true?<div className="text-success align-self-center">envoyé</div>:false}</div></div>
-            
-
+            <div><Button className=" align-self-center col "  variant="btn btn-success " onClick={()=>handleCall(accountid,laureateId,note)}>Envoyer</Button><div>{isSend==true?<div className="text-success align-self-center">envoyé</div>:false}</div></div>
         </div>
 
 
