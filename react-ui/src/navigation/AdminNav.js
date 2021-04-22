@@ -36,7 +36,7 @@ export function AdminNav({ phase }) {
                         </li>
 
                         <li className="nav-item col-6 col-md-auto p-0">
-                            <a className="nav-link p-2" href="/meetings-panning">Planning des meetings</a>
+                            <a className="nav-link p-2" href="/meetings-planning">Planning des meetings</a>
                         </li>
 
                         <li className="nav-item col-6 col-md-auto p-0">

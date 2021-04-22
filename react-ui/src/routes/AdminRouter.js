@@ -33,7 +33,7 @@ export default function AdminRouter({ phase, setPhase, account }) {
                 <Route path='/preselections'>
                     <PreselectionsList account={account} />
                 </Route>
-                <Route path='/meetings-panning'>
+                <Route path='/meetings-planning'>
                     <MeetingsPlanning account={account} />
                 </Route>
                 <Route path='/meetings'>
