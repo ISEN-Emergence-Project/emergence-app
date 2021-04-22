@@ -5,7 +5,7 @@ import LaureateDropdownItem from "./LaureateDropdownItem";
 
 function LaureateDropdown ({ godfather, pos, preselections, godfatherPreselections, godfatherMeetings, updateGodfatherMeetings }) {
     const [ selectedLaureate, setSelectedLaureate ] = useState({});
-    const [ color, setColor ] = useState('outline-success');
+    const [ color, setColor ] = useState('outline-secondary');
 
     useEffect(() => {
         if (selectedLaureate.accountId !== undefined) {
@@ -27,36 +27,27 @@ function LaureateDropdown ({ godfather, pos, preselections, godfatherPreselectio
     }
 
     function isDuplicated(godfatherId, laureateId, pos) {
-        console.log('isDuplicated: ', godfatherId, laureateId, pos, godfatherMeetings);
-        let duplicated = false;
 
-        // Check for duplicate in godfather lines (except same position
         let duplicatedMeetings = godfatherMeetings
             .filter((godfatherMeeting) => {
+                // Check for duplicate in row meetings
                 const findDuplicate = godfatherMeeting.meetings.filter((m) => m.laureateId === laureateId && m.pos !== pos);
-
+                // For this godfather
                 return (godfatherMeeting.godfatherId === godfatherId) && !!findDuplicate.length
             })
 
-        if (duplicatedMeetings.length) duplicated = true;
+        if (duplicatedMeetings.length) return true;
 
-        console.log('duplicatedMeeting row:', duplicatedMeetings)
 
-        // Check for duplicates in column (same position for other godfathers)
         duplicatedMeetings = godfatherMeetings
             .filter((godfatherMeeting) => {
+                // Check for duplicates in column meetings
                 const findDuplicate = godfatherMeeting.meetings.filter((m) => m.laureateId === laureateId && m.pos === pos);
-
+                // For the others godfathers
                 return (godfatherMeeting.godfatherId !== godfatherId) && !!findDuplicate.length;
             })
 
-        if (duplicatedMeetings.length) duplicated = true;
-
-        console.log('duplicatedMeeting column:', duplicatedMeetings)
-
-        console.log('> duplicated: '+duplicated)
-
-        return duplicated;
+        return !!duplicatedMeetings.length;
     }
 
     return (
