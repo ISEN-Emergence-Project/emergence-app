@@ -62,7 +62,7 @@ export function Preselections({ account }) {
                         })}
                     </ul>
 
-                    <div className="container-fluid fixed-bottom bg-light shadow border-top">
+                    <div className="container-fluid fixed-bottom bg-light shadow border-top px-4">
                         <div className="d-flex flex-nowrap flex-column flex-sm-row">
                             <div className="flex-row flex-wrap">
                                 <ul className="row list-unstyled list py-2 m-0">
@@ -79,7 +79,7 @@ export function Preselections({ account }) {
                                     })}
                                 </ul>
                             </div>
-                            <div className='d-flex flex-nowrap align-items-center ml-auto py-2 '>
+                            <div className='d-flex flex-nowrap align-items-center ml-auto py-2'>
                                 <p className='m-0 mr-3 text-secondary text-small'>Sélectionnez 6 lauréats</p>
                                 {(selectedLaureates.length !== 6) ? (
                                     <button className='btn btn-danger cursor-not-allowed my-2' disabled data-toggle="tooltip" data-placement="top" title="Sélectionnez 6 laureats">Valider</button>
