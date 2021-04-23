@@ -51,7 +51,7 @@ function LaureateDropdown ({ godfather, pos, preselections, godfatherPreselectio
     }
 
     return (
-        <div className='col'>
+        <div className='col-3'>
             <Dropdown onSelect={handleSelect} className='shadow-sm'>
                 <Dropdown.Toggle className="btn container-fluid py-2" variant={color}>
                     {selectedLaureate.accountId ? selectedLaureate.firstname +' '+ selectedLaureate.lastname : 'Choisir'}&nbsp;

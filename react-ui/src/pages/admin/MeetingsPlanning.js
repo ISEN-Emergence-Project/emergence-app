@@ -143,7 +143,7 @@ function MeetingsPlanning() {
                     <div className="d-flex justify-content-between">
                         <div>
                             <label className='m-0 mr-3 mt-4 mb-1' htmlFor="meetingDate"><span>Date du Speed Meeting :</span></label>
-                            <input className='form-control' type="date" name="meetingDate" value={date} min={date} onChange={(e) => setMeetingDate(e.target.value)} />
+                            <input className='form-control' type="date" name="meetingDate" onChange={(e) => setMeetingDate(e.target.value)} />
                         </div>
                         <div>
                             <label className='m-0 mr-3 mt-4 mb-1' htmlFor="meetingDate"><span>Heure de début :</span></label>

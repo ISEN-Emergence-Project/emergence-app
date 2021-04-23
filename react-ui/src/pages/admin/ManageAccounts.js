@@ -1,9 +1,5 @@
 import React, {useState} from "react"
 import {useEffect} from "react"
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import {Button, Modal} from "react-bootstrap";
 import axios from "axios";
 
 // Import components

@@ -39,7 +39,7 @@ function GodfatherMeetingsResults({ godfather, selectedMeetings, updateMeetings 
                         {meetings.map((meeting) => {
                             const meetingId = meeting.fkGodfatherAccountId +'-'+ meeting.fkLaureateAccountId;
                             return (
-                                <div className="col cursor-pointer" key={`${meetingId}`}
+                                <div className="col-3 cursor-pointer" key={`${meetingId}`}
                                      onClick={() => handleSelect(meeting.fkGodfatherAccountId, meeting.fkLaureateAccountId)}>
                                     <LaureateMeetingResultCard meeting={meeting} selectedLaureate={selectedLaureate} selectedMeetings={selectedMeetings} showDetails={showDetails} />
                                 </div>

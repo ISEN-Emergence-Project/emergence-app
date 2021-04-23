@@ -5,7 +5,7 @@ import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import NotFound from "../pages/NotFound";
 import {AdminForm} from "../pages/admin/AdminForm";
 import {ManageAccounts} from "../pages/admin/ManageAccounts";
-import MeetingsList from "../pages/laureate/MeetingsList";
+import MeetingsList from "../pages/admin/MeetingsList";
 import {Home} from "../pages/admin/Home";
 import {PreselectionsList} from "../pages/admin/PreselectionsList";
 import MeetingsPlanning from "../pages/admin/MeetingsPlanning";
