@@ -12,6 +12,7 @@ forms.post('/', formsController.insert);
 
 // PUT routes
 forms.put('/:id([0-9]+)', formsController.update);
+forms.put('/latest', formsController.updateLatest);
 
 // DELETE routes
 forms.delete('/:id([0-9]+)', formsController.delete);

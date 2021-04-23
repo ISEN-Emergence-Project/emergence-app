@@ -70,6 +70,48 @@ module.exports = {
             });
     },
 
+    updateLatest (req, res) {
+        const { title, description, bannerUrl, fkPhaseId } = req.body;
+
+        return Form
+            .findAll({
+                limit: 1,
+                order: [['createdAt', 'DESC']]
+            })
+            .then((lastestForm) => {
+                return Form
+                    .update({
+                        title: title,
+                        description: description,
+                        bannerUrl: bannerUrl,
+                        fkPhaseId: fkPhaseId
+                    }, {
+                        where: {
+                            formId: lastestForm[0].formId
+                        },
+                        returning: true
+                    })
+                    .then(([, form]) => {
+                        if (!form[0]) {
+                            return res.status(404).json({ message: 'Form not found' });
+                        }
+                        return res.status(200).json(form[0])
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        if (error.name === "SequelizeUniqueConstraintError") {
+                            return res.status(400).json(error);
+                        } else {
+                            return res.status(500).json({ message: 'Internal Error' });
+                        }
+                    });
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ message: 'Internal error' });
+            });
+    },
+
     delete (req, res) {
         return Form
             .findOne({
