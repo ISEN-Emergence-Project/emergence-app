@@ -14,14 +14,14 @@ function MeetingsList() {
     const [ meetingEnd, setMeetingEnd ] = useState('21:00');
 
     useEffect(() => {
-        axios.get('//etn-test.herokuapp.com/api/meetings/')
+        axios.get(process.env.REACT_APP_API_HOST +'/api/meetings/')
             .then((res) => {
                 setMeetings(res.data);
                 setLoading(false);
             })
             .catch((err) => console.error(err));
 
-        axios.get('//etn-test.herokuapp.com/api/accounts/godfathers')
+        axios.get(process.env.REACT_APP_API_HOST +'/api/accounts/godfathers')
             .then((res) => {
                 setGodfathers(res.data);
                 setLoading(false);

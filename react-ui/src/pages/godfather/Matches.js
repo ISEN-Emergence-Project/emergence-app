@@ -8,7 +8,7 @@ function Matches({account}) {
     
 
     useEffect(()=>{
-        axios.get("https://etn-test.herokuapp.com/api/matches")                           
+        axios.get(process.env.REACT_APP_API_HOST +"/api/matches")                           
     .then(res => {
     console.log(res.data)
     setResult(res.data)
@@ -33,7 +33,7 @@ function Matches({account}) {
 function Test(aaccountId){
     const[aacount,setAccount]=useState([])
     useEffect(()=>{
-        axios.get("https://etn-test.herokuapp.com/api/accounts")                         
+        axios.get(process.env.REACT_APP_API_HOST +"/api/accounts")                         
     .then(res => {
         
     console.log(res.data)

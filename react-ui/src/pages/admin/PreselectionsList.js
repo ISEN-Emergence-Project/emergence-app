@@ -7,13 +7,13 @@ export function PreselectionsList({ account }) {
     const [accounts,setAccounts]=useState([])
     
     useEffect(() => {
-        axios.get("https://etn-test.herokuapp.com/api/preselections")
+        axios.get(process.env.REACT_APP_API_HOST +"/api/preselections")
             .then(res => {
                 setPreselection(res.data)
             })
             .catch(error => console.error("There was an error",error))
 
-        axios.get("https://etn-test.herokuapp.com/api/accounts")
+        axios.get(process.env.REACT_APP_API_HOST +"/api/accounts")
             .then(res => {
                 setAccounts(res.data)
             })

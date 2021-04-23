@@ -12,7 +12,7 @@ export function ManageAccounts() {
     const [ loading, setLoading ] = useState(true)
 
     useEffect(() => {
-        axios.get('//etn-test.herokuapp.com/api/accounts/')
+        axios.get(process.env.REACT_APP_API_HOST +'/api/accounts/')
             .then((res) => {
                 setAccounts(res.data);
                 setLoading(false);

@@ -9,7 +9,7 @@ export function FormQuestionField({ question, updateQuestions }) {
     const [ questionLabel, setQuestionLabel ] = useState(question.question);
 
     function handleSave() {
-        axios.put('//etn-test.herokuapp.com/api/questions/'+ question.questionId, {
+        axios.put(process.env.REACT_APP_API_HOST +'/api/questions/'+ question.questionId, {
             question: questionLabel
         })
             .then((res) => {
@@ -23,7 +23,7 @@ export function FormQuestionField({ question, updateQuestions }) {
     }
 
     function handleDelete() {
-        axios.delete('//etn-test.herokuapp.com/api/questions/'+ question.questionId)
+        axios.delete(process.env.REACT_APP_API_HOST +'/api/questions/'+ question.questionId)
             .then((res) => {
                 // Update local questions
                 updateQuestions(question.questionId, null);

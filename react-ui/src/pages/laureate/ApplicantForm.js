@@ -13,17 +13,17 @@ export function ApplicantForm({ account }) {
     const [studies,setStudies] = useState("")
 
     useEffect(() => {
-        axios.get('//etn-test.herokuapp.com/api/questions/form/latest')
+        axios.get(process.env.REACT_APP_API_HOST +'/api/questions/form/latest')
             .then((res) => setQuestions(res.data))
             .catch((err) => console.log(err));
 
-        axios.get('//etn-test.herokuapp.com/api/forms/latest')
+        axios.get(process.env.REACT_APP_API_HOST +'/api/forms/latest')
             .then((res) => {
                 setForm(res.data);
             })
             .catch((err) => console.log(err));
 
-        axios.get('//etn-test.herokuapp.com/api/answers/account/'+ account.accountId +'/form/latest')
+        axios.get(process.env.REACT_APP_API_HOST +'/api/answers/account/'+ account.accountId +'/form/latest')
             .then((res) => {
                 console.log(res.data)
                 if(res.data.length > 0)
@@ -63,7 +63,7 @@ export function ApplicantForm({ account }) {
             let answersSaved = false;
             // Save answers in database
             questions.forEach((question) => {
-                axios.post('//etn-test.herokuapp.com/api/answers/', {
+                axios.post(process.env.REACT_APP_API_HOST +'/api/answers/', {
                     fkAccountId: account.accountId,
                     fkQuestionId: question.questionId,
                     answer: question.answer
@@ -75,7 +75,7 @@ export function ApplicantForm({ account }) {
                     });
             })
 
-            axios.put("//etn-test.herokuapp.com/api/accounts/" + account.accountId,{studies:studies})
+            axios.put(process.env.REACT_APP_API_HOST +"/api/accounts/" + account.accountId,{studies:studies})
 
             // Check that answers were saved
             if (answersSaved) {

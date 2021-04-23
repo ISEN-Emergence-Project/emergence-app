@@ -1,14 +1,16 @@
+/**
+ * REACT APP ENTRY POINT
+ */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
-// Import scss
+// Import custom SCSS
 import './styles/index.scss';
 import './styles/App.scss';
 
-// Import Bootstrap CSS
-//import 'bootstrap/dist/css/bootstrap.min.css';
-
+// Render the React App, include <App/> component in div '#root'
 ReactDOM.render(
     <React.StrictMode>
         <App/>

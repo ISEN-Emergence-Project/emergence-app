@@ -19,13 +19,13 @@ function MeetingsPlanning() {
     const [ meetingEnd, setMeetingEnd ] = useState('21:00');
 
     useEffect(() => {
-        axios.get('//etn-test.herokuapp.com/api/accounts/godfathers')
+        axios.get(process.env.REACT_APP_API_HOST +'/api/accounts/godfathers')
             .then((res) => {
                 setGodfathers(res.data);
             })
             .catch((err) => console.error(err));
 
-        axios.get('//etn-test.herokuapp.com/api/preselections')
+        axios.get(process.env.REACT_APP_API_HOST +'/api/preselections')
             .then((res) => {
                 let tempGodfatherPreselections = []
 
@@ -61,7 +61,7 @@ function MeetingsPlanning() {
         if (isMeetingsValid()) {
             godfatherMeetings.forEach((godfatherMeeting) => {
                 godfatherMeeting.meetings.forEach((meeting) => {
-                    axios.post('//etn-test.herokuapp.com/api/meetings', {
+                    axios.post(process.env.REACT_APP_API_HOST +'/api/meetings', {
                         fkGodfatherAccountId: godfatherMeeting.godfatherId,
                         fkLaureateAccountId: meeting.laureateId,
                         beginning: meetingDate,

@@ -7,7 +7,7 @@ function MatchesList() {
     const [account,setAccounts]=useState([])
     
 
-    axios.get("https://etn-test.herokuapp.com/api/matches")
+    axios.get(process.env.REACT_APP_API_HOST +"/api/matches")
             .then(res => {
             
             setMatches(res.data)
@@ -16,7 +16,7 @@ function MatchesList() {
     .catch(error => console.error("There was an error",error)) 
 
 
-    axios.get("https://etn-test.herokuapp.com/api/accounts")
+    axios.get(process.env.REACT_APP_API_HOST +"/api/accounts")
             .then(res => {
             
             setAccounts(res.data)

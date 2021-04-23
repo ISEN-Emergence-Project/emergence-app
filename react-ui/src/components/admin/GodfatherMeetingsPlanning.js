@@ -9,7 +9,7 @@ function GodfatherMeetingsPlanning({ godfather, godfatherPreselections, godfathe
     const [ show, setShow ] = useState(false);
 
     useEffect(() => {
-        axios.get('//etn-test.herokuapp.com/api/preselections/godfather/'+ godfather.fkAccountId)
+        axios.get(process.env.REACT_APP_API_HOST +'/api/preselections/godfather/'+ godfather.fkAccountId)
             .then((res) => {
                 setPreselections(res.data);
             })

@@ -8,7 +8,7 @@ export function FormAddQuestion({ form, updateQuestions }) {
     const [ description, setDescription ] = useState("")
 
     function handleAddQuestion() {
-        axios.post("https://etn-test.herokuapp.com/api/questions",{
+        axios.post(process.env.REACT_APP_API_HOST +"/api/questions",{
             question: question,
             description: description,
             fkFormId: form.formId

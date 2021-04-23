@@ -5,7 +5,7 @@ function MeetingCard({ meeting, godfather }) {
     const [ laureate, setLaureate ] = useState([]);
 
     useEffect(() => {
-        axios.get('//etn-test.herokuapp.com/api/accounts/'+ meeting.fkLaureateAccountId)
+        axios.get(process.env.REACT_APP_API_HOST +'/api/accounts/'+ meeting.fkLaureateAccountId)
             .then((res) => {
                 setLaureate(res.data);
             })

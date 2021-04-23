@@ -1,4 +1,10 @@
-import React, {useCallback, useEffect, useState } from 'react';
+/**
+ * REACT APP ROOT COMPONENT
+ * Authenticate user with token, get account infos and phase
+ * Basic routing according to connected account.role
+ */
+
+import React, {useEffect, useState} from 'react';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import axios from "axios";
 
@@ -6,12 +12,14 @@ import axios from "axios";
 import {Login} from './pages/Login'
 import {Logout} from "./pages/Logout";
 
+import DevTools from "./components/dev/DevTools";
+import {AppNav} from "./navigation/AppNav";
+
 // Import routers
 import AdminRouter from './routes/AdminRouter';
 import LaureateRouter from './routes/LaureateRouter';
 import GodfatherRouter from './routes/GodfatherRouter';
-import DevTools from "./components/dev/DevTools";
-import {AppNav} from "./navigation/AppNav";
+
 
 export default function App() {
     const savedToken = sessionStorage.getItem('accessToken');
@@ -20,9 +28,9 @@ export default function App() {
     const [ phase, setPhase ] = useState({});
 
     useEffect(() => {
-        axios.get('//etn-test.herokuapp.com/api/forms/latest')
+        axios.get(process.env.REACT_APP_API_HOST +'/api/forms/latest')
             .then((res) => {
-                axios.get('//etn-test.herokuapp.com/api/phases/'+ res.data.fkPhaseId)
+                axios.get(process.env.REACT_APP_API_HOST +'/api/phases/'+ res.data.fkPhaseId)
                     .then((res) => {
                         setPhase(res.data);
                     })
@@ -34,7 +42,7 @@ export default function App() {
     useEffect(() => {
         sessionStorage.setItem('accessToken', token);
 
-        axios.get('//etn-test.herokuapp.com/api/accounts/'+ token)
+        axios.get(process.env.REACT_APP_API_HOST +'/api/accounts/'+ token)
             .then((res) => {
                 setAccount(res.data);
             })
@@ -44,6 +52,7 @@ export default function App() {
             });
     }, [token]);
 
+    // Include the correct router according to user role, and if connected
     return (
         <BrowserRouter>
             {!token ? (

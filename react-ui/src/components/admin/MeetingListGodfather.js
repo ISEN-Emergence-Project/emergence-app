@@ -6,7 +6,7 @@ function MeetingListGodfather({ godfather }) {
     const [ meetings, setMeetings ] = useState([]);
 
     useEffect(() => {
-        axios.get('//etn-test.herokuapp.com/api/meetings/godfather/'+ godfather.fkAccountId)
+        axios.get(process.env.REACT_APP_API_HOST +'/api/meetings/godfather/'+ godfather.fkAccountId)
             .then((res) => {
                 setMeetings(res.data);
             })

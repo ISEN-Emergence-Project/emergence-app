@@ -12,7 +12,7 @@ export function Preselections({ account }) {
 
     useEffect(() => {
         // Get laureates
-        axios.get("//etn-test.herokuapp.com/api/accounts/laureates")
+        axios.get(process.env.REACT_APP_API_HOST +"/api/accounts/laureates")
             .then((res) => setLaureates(res.data))
             .catch((err) => console.log(err));
     }, [])
@@ -32,7 +32,7 @@ export function Preselections({ account }) {
         e.preventDefault();
         selectedLaureates.forEach((selectedLaureate) => {
             axios
-                .post("//etn-test.herokuapp.com/api/preselections", {
+                .post(process.env.REACT_APP_API_HOST +"/api/preselections", {
                     fkGodfatherAccountId: account.accountId,
                     fkLaureateAccountId: selectedLaureate.accountId
                 })

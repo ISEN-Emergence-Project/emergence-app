@@ -3,13 +3,13 @@ import axios from "axios";
 
 function DevTools({ phase, setPhase }) {
     function handlePhaseChange(e) {
-        axios.get('//etn-test.herokuapp.com/api/phases/'+ e.target.value)
+        axios.get(process.env.REACT_APP_API_HOST +'/api/phases/'+ e.target.value)
             .then((res) => {
                 setPhase(res.data);
             })
             .catch((err) => console.log(err));
 
-        axios.put('//etn-test.herokuapp.com/api/forms/latest', {
+        axios.put(process.env.REACT_APP_API_HOST +'/api/forms/latest', {
             fkPhaseId: e.target.value
         })
             .then((res) => {

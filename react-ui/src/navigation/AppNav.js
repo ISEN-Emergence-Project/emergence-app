@@ -1,3 +1,9 @@
+/**
+ * APP BASIC NAVIGATION
+ * For not logged in users
+ * Show basic navigation links
+ */
+
 import React, {useState} from "react";
 
 export function AppNav() {

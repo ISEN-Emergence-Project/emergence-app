@@ -6,7 +6,7 @@ import axios from 'axios';
 
 function SubmitAnswer({id,answer})
 {
-    axios.post("https://etn-test.herokuapp.com/api/answers",{ fkAccountId:3,fkQuestionId:id,answer:answer})  // à voir accoutnID
+    axios.post(process.env.REACT_APP_API_HOST +"/api/answers",{ fkAccountId:3,fkQuestionId:id,answer:answer})  // à voir accoutnID
     .then(res => {
         console.log(res)
 

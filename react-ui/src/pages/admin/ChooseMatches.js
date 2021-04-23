@@ -14,7 +14,7 @@ function ChooseMatches() {
     const [ meetingEnd, setMeetingEnd ] = useState('21:00');
 
     useEffect(() => {
-        axios.get('//etn-test.herokuapp.com/api/accounts/godfathers')
+        axios.get(process.env.REACT_APP_API_HOST +'/api/accounts/godfathers')
             .then((res) => {
                 setGodfathers(res.data);
             })
@@ -23,7 +23,7 @@ function ChooseMatches() {
 
     function handleSubmit() {
         selectedMeetings.forEach((match) => {
-            axios.post('//etn-test.herokuapp.com/api/matches', {
+            axios.post(process.env.REACT_APP_API_HOST +'/api/matches', {
                 fkGodfatherAccountId: match.godfatherId,
                 fkLaureateAccountId: match.laureateId
             })

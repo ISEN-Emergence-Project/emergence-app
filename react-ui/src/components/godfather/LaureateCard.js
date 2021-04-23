@@ -17,7 +17,7 @@ function LaureateCard({ laureate, updateSelectedLaureates }) {
     function openProfile () {
         if (answers.length < 1) {
             // Get all questions and answers
-            axios.get("//etn-test.herokuapp.com/api/answers/account/"+ accountId +"/form/latest")
+            axios.get(process.env.REACT_APP_API_HOST +"/api/answers/account/"+ accountId +"/form/latest")
                 .then((res) => {
                     setAnswers(res.data);
                     toggleShowProfile(true);

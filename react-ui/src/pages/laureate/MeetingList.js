@@ -6,7 +6,7 @@ import Time from 'react-time';
 function handleCall(godFatherId,laureateId,ratelaureate)
 {
         
-        axios.put("https://etn-test.herokuapp.com/api/meetings/godfather/"+godFatherId+"/laureate/"+laureateId,{  
+        axios.put(process.env.REACT_APP_API_HOST +"/api/meetings/godfather/"+godFatherId+"/laureate/"+laureateId,{  
                                                                     
                                                                     laureateRating:ratelaureate
                                                                     
@@ -33,7 +33,7 @@ export default function MeetingList({account}){
                 'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTgxNDMxNzIsImV4cCI6MTYxODIyOTU3Mn0.5patB5mX43WUUsCHVPnoAbmz-rEnLwyqRLyAJCl_Ss0'
             }
         }
-        fetch("https://etn-test.herokuapp.com/api/accounts",{options})
+        fetch(process.env.REACT_APP_API_HOST +"/api/accounts",{options})
         .then(res => {
             res.json()
             .then(res => {
@@ -56,7 +56,7 @@ export default function MeetingList({account}){
                 'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTgxNDMxNzIsImV4cCI6MTYxODIyOTU3Mn0.5patB5mX43WUUsCHVPnoAbmz-rEnLwyqRLyAJCl_Ss0'
             }
         }
-        fetch("https://etn-test.herokuapp.com/api/meetings",{options})
+        fetch(process.env.REACT_APP_API_HOST +"/api/meetings",{options})
         .then(res => {
             res.json()
             .then(res => {

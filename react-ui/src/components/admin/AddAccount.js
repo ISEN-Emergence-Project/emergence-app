@@ -5,7 +5,7 @@ import axios from 'axios';
 function handleCall()
 {
         
-        axios.post("https://etn-test.herokuapp.com/api/accounts",{  firstname:firstname.value,
+        axios.post(process.env.REACT_APP_API_HOST +"/api/accounts",{  firstname:firstname.value,
                                                                     lastname:lastname.value,
                                                                     username:username.value,
                                                                     email:email.value,

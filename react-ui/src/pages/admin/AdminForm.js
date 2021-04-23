@@ -13,11 +13,11 @@ export function AdminForm({ account }) {
     const [ editHeader, setEditHeader ] = useState(false);
 
     useEffect(() => {
-        axios.get('//etn-test.herokuapp.com/api/questions/form/latest')
+        axios.get(process.env.REACT_APP_API_HOST +'/api/questions/form/latest')
             .then((res) => setQuestions(res.data))
             .catch((err) => console.log(err));
 
-        axios.get('//etn-test.herokuapp.com/api/forms/latest')
+        axios.get(process.env.REACT_APP_API_HOST +'/api/forms/latest')
             .then((res) => {
                 setForm(res.data);
             })
@@ -48,7 +48,7 @@ export function AdminForm({ account }) {
         form.description = document.querySelector('#editDesc').value;
         setForm(form);
 
-        axios.put("https://etn-test.herokuapp.com/api/forms/"+ form.formId,{
+        axios.put(process.env.REACT_APP_API_HOST +"/api/forms/"+ form.formId,{
             title: form.title,
             description: form.description
         })

@@ -15,7 +15,7 @@ export function Login({ setToken }) {
         setStatus();
 
         // Try login user
-        axios.post("//etn-test.herokuapp.com/api/login", { email, password })
+        axios.post(process.env.REACT_APP_API_HOST +"/api/login", { email, password })
             .then((res) => {
                 setStatus(res.status);
                 setRedirectTo('/');
