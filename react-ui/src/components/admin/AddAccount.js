@@ -22,8 +22,7 @@ function handleCall()
 }
 
 
-export function AddAccount()   //Créé la pop-up pour ajouter des comptes
-{
+export function AddAccount() {
     const [show, setShow] = useState(false);
     const [firstname, setFirstname] = useState("")
     const [lastname, setLastname] = useState("")
@@ -50,17 +49,14 @@ export function AddAccount()   //Créé la pop-up pour ajouter des comptes
             setStudies("")
     }
 
-      
-
     const handleExit = () => 
     {
         console.log(firstname)
         setExit(false)
-        if(firstname == "" || lastname == "" || email == "" || username == "" || password == "" || laureatePromo == null || phoneNumber == ""|| studies == "")
+        if(firstname === "" || lastname === "" || email === "" || username === "" || password === "" || laureatePromo == null || phoneNumber === ""|| studies === "")
         {
             alert("Tous les champs doivent être remplis")
             setExit(false)
-             
         }
     
         else if (laureatePromo.match(/^[0-9]+$/) == null)        // comparer user et mail
@@ -92,70 +88,83 @@ export function AddAccount()   //Créé la pop-up pour ajouter des comptes
     
     return(
 
-        <div className="container">
-            <Button className="btn btn-success d-grid gap-3 col-2  btn-sm mx-auto mt-5" onClick={handleShow}> <i className="fs-3 bi-plus-circle-fill"></i> Ajouter un compte </Button>
+        <div className="align-items-center">
+            <Button className="btn btn-success btn mx-auto" onClick={handleShow}> <i className="fs-3 bi-plus-circle-fill"></i> Ajouter un compte </Button>
 
-        <Modal size="lg"show={show} onHide={handleClose} onExited={handleCall}>
-        <Modal.Header>  
-            <Modal.Title>Ajouter un compte </Modal.Title>
-        </Modal.Header>
-      <Modal.Body>
-          {console.log(exit)}
-            <label htmlFor="firstname"> Prénom</label>
-                <input className="form-control mt-3" readOnly={false} required onChange={(event) => setFirstname(event.target.value)}type="text" id="firstname"/>
-                
-            <label htmlFor="lastname"> Nom </label>
-                <input className="form-control mt-3" required onChange={(event) => setLastname(event.target.value)}type="text" id="lastname"/>
+            <Modal size="lg"show={show} onHide={handleClose} onExited={handleCall}>
+                <Modal.Header>
+                    <Modal.Title>Ajouter un compte </Modal.Title>
+                </Modal.Header>
 
-            <label className="mt-3" htmlFor="email"> Adresse e-mail</label>
-                <input className="form-control mt-3"  required onChange={(event) => setEmail(event.target.value)}type="text" id="email"/>
+                <Modal.Body>
+                    <div className="py-2">
+                        <label className='m-0' htmlFor="firstname"> Prénom</label>
+                        <input className="form-control mt-1" readOnly={false} required onChange={(event) => setFirstname(event.target.value)}type="text" id="firstname"/>
+                    </div>
 
-            <label className="mt-3" htmlFor="username"> Nom d'utilisateur</label>
-                <input className="form-control mt-3"  required onChange={(event) => setUsername(event.target.value)}type="text" id="username"/>
+                    <div className="py-2">
+                        <label className='m-0' htmlFor="lastname"> Nom </label>
+                        <input className="form-control mt-1" required onChange={(event) => setLastname(event.target.value)}type="text" id="lastname"/>
+                    </div>
 
-            <label className="mt-3" htmlFor="lauretePromo"> Année de promotion </label>
-                <input className="form-control mt-3"  required onChange={(event) => setLaureatePromo(event.target.value)}type="text" id="laureatePromo"/>
+                    <div className="py-2">
+                        <label className="m-0" htmlFor="email"> Adresse e-mail</label>
+                        <input className="form-control mt-1"  required onChange={(event) => setEmail(event.target.value)}type="text" id="email"/>
+                    </div>
 
-            <label className="mt-3" htmlFor="passsword"> Mot de passe </label>
-                <input type ="password" className="form-control mt-3" required onChange={(event) => setPassword(event.target.value)} id = "password"/>
+                    <div className="py-2">
+                        <label className="m-0" htmlFor="username"> Nom d'utilisateur</label>
+                        <input className="form-control mt-1"  required onChange={(event) => setUsername(event.target.value)}type="text" id="username"/>
+                    </div>
 
-            <label className="mt-3" htmlFor="phoneNumber"> Numéro de téléphone </label>
-                <input className="form-control mt-3"  required onChange={(event) => setPhoneNumber(event.target.value)}type="text" id="phoneNumber"/>
+                    <div className="py-2">
+                        <label className="m-0" htmlFor="lauretePromo"> Année de promotion </label>
+                        <input className="form-control mt-1"  required onChange={(event) => setLaureatePromo(event.target.value)}type="text" id="laureatePromo"/>
+                    </div>
 
-            <label className="mt-3" htmlFor="studies"> Ecole </label>
-                <input className="form-control mt-3"  required onChange={(event) => setStudies(event.target.value)}type="text" id="studies"/>
-                <br></br> 
+                    <div className="py-2">
+                        <label className="m-0" htmlFor="passsword"> Mot de passe </label>
+                        <input type ="password" className="form-control mt-1" required onChange={(event) => setPassword(event.target.value)} id = "password"/>
+                    </div>
 
-            <label className="mt-5" htmlFor="role"> Type de compte </label>
+                    <div className="py-2">
+                        <label className="m-0" htmlFor="phoneNumber"> Numéro de téléphone </label>
+                        <input className="form-control mt-1"  required onChange={(event) => setPhoneNumber(event.target.value)}type="text" id="phoneNumber"/>
+                    </div>
 
-            <div>
-            <div className="form-check mt-3">
-                <input className="form-check-input" type="radio" defaultChecked value = "admin" onClick={(permission) => setPermission(permission)} name="flexRadioDefault" id="admin"/>
-                <label className="form-check-label"> Administrateur </label>
-            </div>
+                    <div className="py-2">
+                        <label className="m-0" htmlFor="studies"> Ecole </label>
+                        <input className="form-control mt-1"  required onChange={(event) => setStudies(event.target.value)}type="text" id="studies"/>
+                    </div>
+                    <br/>
 
-            <div className="form-check mt-3">
-                <input className="form-check-input" type="radio" value="godfather" onClick={(permission) => setPermission(permission)} name="flexRadioDefault" id="godfather" />
-                <label className="form-check-label"> Parrain </label>
-            </div>
+                    <div className="py-2">
+                        <h5 className="m-0 mb-2" htmlFor="role"> Type de compte </h5>
 
-            <div className="form-check mt-3">
-                <input className="form-check-input" type="radio" value = "laureate"  name="flexRadioDefault" id="laureate"/>
-                <label className="form-check-label"> Lauréat </label>
-            </div>
+                        <div className="form-check mt-1">
+                            <input className="form-check-input" type="radio" defaultChecked value = "admin" onClick={(permission) => setPermission(permission)} name="flexRadioDefault" id="admin"/>
+                            <label className="form-check-label" htmlFor='admin'> Administrateur </label>
+                        </div>
+
+                        <div className="form-check mt-1">
+                            <input className="form-check-input" type="radio" value="godfather" onClick={(permission) => setPermission(permission)} name="flexRadioDefault" id="godfather" />
+                            <label className="form-check-label" htmlFor='godfather'> Parrain </label>
+                        </div>
+
+                        <div className="form-check mt-1">
+                            <input className="form-check-input" type="radio" value = "laureate"  name="flexRadioDefault" id="laureate"/>
+                            <label className="form-check-label" htmlFor='laureate'> Lauréat </label>
+                        </div>
+                    </div>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="btn btn-success btn-sm" onClick={handleExit}> Enregistrer</Button>
+                    <Button variant="btn btn-danger btn-sm" onClick={handleClose}> <i className="me-2 bi-x-square-fill"/> Fermer</Button>
+
+                    {exit? <div className="alert alert-success" > Modifications enregistrées </div>:""}
+                </Modal.Footer>
+            </Modal>
         </div>
-      </Modal.Body>
-
-      <Modal.Footer>{/* Une fois qu'on a rentré les infos on les affiches avec un document.getElementbyId */}
-      
-        <Button variant="btn btn-success btn-sm" onClick={handleExit}> Enregistrer</Button>
-        <Button variant="btn btn-danger btn-sm" onClick={handleClose}> <i className="me-2 bi-x-square-fill"></i> Fermer</Button>
-
-        {exit? <div className="alert alert-success" > Modifications enregistrées </div>:""}
-
-      </Modal.Footer>
-
-    </Modal>
-
-  </div>)
+    )
 }

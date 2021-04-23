@@ -33,32 +33,60 @@ export function ManageAccounts() {
                 </div>
             ) : (
                 <div className='container py-4'>
-                    <ul className='row row-cols-1 row-cols-md-2 row-cols-xl-2 list-unstyled list'>
-                        {accounts.map((account) => {
-                            return (
-                                <div className='col col-md-6 py-2' key={account.accountId}>
-                                    <AccountCard account={account} />
-                                </div>
-                            )
-                        })}
-                    </ul>
+                    <div className="py-4">
+                        <h1>Liste des comptes</h1>
+                        <hr/>
+                    </div>
 
-                    <div className='container'>
-                        <AddAccount/>
-                        {accounts.map(account => (
-                                <li key={account.accountId}>
-                                    <Container>
-                                        <Row>
-                                            <Col>
-                                                <div className="">
+                    <div className="py-2">
+                        <h3>Administrateurs</h3>
+                        <ul className='row row-cols-1 row-cols-md-2 row-cols-xl-2 list-unstyled list'>
+                            {accounts.filter((a => a.role === 'admin')).map((account) => {
+                                return (
+                                    <div className='col col-md-6 py-2' key={account.accountId}>
+                                        <AccountCard account={account} />
+                                    </div>
+                                )
+                            })}
+                        </ul>
+                    </div>
 
-                                                </div>
-                                            </Col>
-                                        </Row>
-                                    </Container>
-                                </li>
-                            )
-                        )}
+                    <div className="py-2">
+                        <h3>Lauréats</h3>
+                        <ul className='row row-cols-1 row-cols-md-2 row-cols-xl-2 list-unstyled list'>
+                            {accounts.filter((a => a.role === 'laureate')).map((account) => {
+                                return (
+                                    <div className='col col-md-6 py-2' key={account.accountId}>
+                                        <AccountCard account={account} />
+                                    </div>
+                                )
+                            })}
+                        </ul>
+                    </div>
+
+                    <div className="py-2">
+                        <h3>Parrains</h3>
+                        <ul className='row row-cols-1 row-cols-md-2 row-cols-xl-2 list-unstyled list'>
+                            {accounts.filter((a => a.role === 'godfather')).map((account) => {
+                                return (
+                                    <div className='col col-md-6 py-2' key={account.accountId}>
+                                        <AccountCard account={account} />
+                                    </div>
+                                )
+                            })}
+                        </ul>
+                    </div>
+
+                    <div className="py-4"/>
+
+                    <div className="container-fluid fixed-bottom bg-light shadow border-top">
+                        <div className="d-flex flex-nowrap flex-column flex-sm-row px-4">
+                            <div className="flex-row flex-wrap">
+                            </div>
+                            <div className='d-flex flex-nowrap align-items-center ml-auto py-3'>
+                                <AddAccount/>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

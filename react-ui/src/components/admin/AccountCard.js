@@ -6,6 +6,13 @@ function AccountCard({ account }) {
     const [ showProfile, setShowProfile ] = useState(false);
     const [ answers, setAnswers ] = useState([]);
 
+    const roleLabel = {
+        admin: 'Administrateur',
+        godfather: 'Parrain',
+        laureate: 'Lauréat'
+    }
+
+
     function openProfile () {
         if (answers.length < 1) {
             // Get all questions and answers
@@ -24,7 +31,14 @@ function AccountCard({ account }) {
         <>
             <div className="card d-flex flex-row flex-nowrap align-items-center">
                 <div className="card-body cursor-pointer py-3" onClick={openProfile}>
-                    <h5 className='mb-1'>{account.firstname} {account.lastname}</h5>
+                    <div className="d-flex">
+                        <h5 className='mb-1'>{account.firstname} {account.lastname}</h5>
+
+                        <h6 className="ml-auto">
+                            <span className='px-2 badge badge- badge-light'>{roleLabel[account.role]}</span>
+                        </h6>
+                    </div>
+                    <p className='m-0'>{account.email}</p>
                 </div>
             </div>
 
