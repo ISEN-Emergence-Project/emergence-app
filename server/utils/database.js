@@ -1,3 +1,9 @@
+/**
+ * DATABASE CONFIGURATION AND CONNECTION
+ * Connects to database
+ * Synchronize models with database
+ */
+
 const { Sequelize, Model, DataTypes, Deferrable } = require('sequelize');
 
 // Connexion to database

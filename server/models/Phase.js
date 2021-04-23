@@ -1,3 +1,8 @@
+/**
+ * PHASE MODEL
+ * Create a Phase model with its attributes
+ */
+
 const { sequelize, Model, DataTypes } = require("../utils/database");
 
 class Phase extends Model {}

@@ -1,3 +1,9 @@
+/**
+ * ANSWER MODEL
+ * Create an Answer model with its attributes
+ * Create association with Question model
+ */
+
 const { sequelize, Model, DataTypes } = require("../utils/database");
 const Question = require("./Question");
 
@@ -31,6 +37,7 @@ Answer.init({
     modelName: 'Answer'
 })
 
+// Create an association with Question, an Answer is linked to a Question
 Answer.Question = Answer.belongsTo(Question, {
     foreignKey: 'fkQuestionId'
 });

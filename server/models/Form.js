@@ -1,3 +1,8 @@
+/**
+ * FORM MODEL
+ * Create a Form model with its attributes
+ */
+
 const { sequelize, Model, DataTypes } = require("../utils/database");
 
 class Form extends Model {}

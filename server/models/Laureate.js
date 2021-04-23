@@ -1,3 +1,9 @@
+/**
+ * LAUREATE MODEL
+ * Create a Laureate model with its attributes
+ * Create association with Account model
+ */
+
 const Account = require("./Account");
 const { sequelize, Model, DataTypes } = require("../utils/database");
 
@@ -31,6 +37,7 @@ Laureate.init({
     modelName: 'Laureate'
 })
 
+// Create association with Laureate, a Laureate extends an Account
 Laureate.Account = Laureate.belongsTo(Account, {
     foreignKey: 'fkAccountId'
 })

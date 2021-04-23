@@ -1,3 +1,9 @@
+/**
+ * GODFATHER MODEL
+ * Create a Godfather model with its attributes
+ * Create association with Account model
+ */
+
 const Account = require("./Account");
 const { sequelize, Model, DataTypes } = require("../utils/database");
 
@@ -26,6 +32,7 @@ Godfather.init({
     modelName: 'Godfather'
 })
 
+// Create association with Account, a Godfather extends an Account
 Godfather.Account = Godfather.belongsTo(Account, {
     foreignKey: 'fkAccountId'
 })
