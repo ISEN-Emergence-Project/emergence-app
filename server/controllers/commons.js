@@ -1,3 +1,9 @@
+/**
+ * COMMON CONTROLLER
+ * Regroup common API controllers
+ * Called by other controllers
+ */
+
 /* FUNCTIONS */
 
 module.exports = {

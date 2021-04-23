@@ -1,3 +1,8 @@
+/**
+ * FORMS CONTROLLER
+ * Answers to API requests from /forms router
+ */
+
 const Form = require('../models/Form');
 
 const commonsController = require('./commons');
@@ -5,10 +10,12 @@ const commonsController = require('./commons');
 /* FUNCTIONS */
 
 module.exports = {
+    // List all forms
     list (req, res) {
         return commonsController.list(req, res, Form);
     },
 
+    // Insert a new form
     insert (req, res) {
         const { title, description, bannerUrl, fkPhaseId } = req.body;
 
@@ -39,6 +46,7 @@ module.exports = {
             });
     },
 
+    // Update an existing form
     update (req, res) {
         const { title, description, bannerUrl, fkPhaseId } = req.body;
 
@@ -70,6 +78,7 @@ module.exports = {
             });
     },
 
+    // Update latest form
     updateLatest (req, res) {
         const { title, description, bannerUrl, fkPhaseId } = req.body;
 
@@ -112,6 +121,7 @@ module.exports = {
             });
     },
 
+    // Delete a form
     delete (req, res) {
         return Form
             .findOne({
@@ -143,6 +153,7 @@ module.exports = {
             });
     },
 
+    // Get a form by formId
     getById (req, res) {
         return Form
             .findOne({
@@ -164,6 +175,7 @@ module.exports = {
             });
     },
 
+    // Get latest form
     getLatest (req, res) {
         return Form
             .findAll({
@@ -179,6 +191,8 @@ module.exports = {
             });
     },
 
+    // Get latest formId
+    // Internal function for other controllers
     getLatestFormId () {
         return Form
             .findAll({

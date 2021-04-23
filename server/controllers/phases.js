@@ -1,3 +1,8 @@
+/**
+ * PHASES CONTROLLER
+ * Answers to API requests from /phases router
+ */
+
 const Phase = require('../models/Phase');
 
 const commonsController = require('./commons');
@@ -5,10 +10,12 @@ const commonsController = require('./commons');
 /* FUNCTIONS */
 
 module.exports = {
+    // List all phases
     list (req, res) {
         return commonsController.list(req, res, Phase);
     },
 
+    // Get a phase by phaseId
     getById (req, res) {
         return Phase
             .findOne({
@@ -30,6 +37,7 @@ module.exports = {
             });
     },
 
+    // Update a phase
     update (req, res) {
         const { lead, buttonText, buttonLink } = req.body;
 

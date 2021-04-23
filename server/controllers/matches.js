@@ -1,3 +1,8 @@
+/**
+ * MATCHES CONTROLLER
+ * Answers to API requests from /matches router
+ */
+
 const Match = require('../models/Match');
 
 const commonsController = require('./commons');
@@ -5,10 +10,12 @@ const commonsController = require('./commons');
 /* FUNCTIONS */
 
 module.exports = {
+    // List all matches
     list (req, res) {
         return commonsController.list(req, res, Match);
     },
 
+    // Insert a new match
     insert (req, res) {
         const { fkGodfatherAccountId, fkLaureateAccountId } = req.body;
 
@@ -37,6 +44,7 @@ module.exports = {
             });
     },
 
+    // Update an existing match
     update (req, res) {
         const { fkGodfatherAccountId, fkLaureateAccountId } = req.body;
 
@@ -67,6 +75,7 @@ module.exports = {
             });
     },
 
+    // Delete a match
     delete (req, res) {
         return Match
             .findOne({
@@ -100,6 +109,7 @@ module.exports = {
             });
     },
 
+    // Get a match by fkGodfatherAccountId and fkLaureateAccountId
     getByGodfatherLaureate (req, res) {
         return Match
             .findOne({
@@ -122,6 +132,7 @@ module.exports = {
             });
     },
 
+    // List matches by fkGodfatherAccountId
     listByGodfather (req, res) {
         return Match
             .findAll({
@@ -143,6 +154,7 @@ module.exports = {
             });
     },
 
+    // List matches by fkLaureateAccountId
     listByLaureate (req, res) {
         return Match
             .findAll({

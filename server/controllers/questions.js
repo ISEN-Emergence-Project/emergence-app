@@ -1,3 +1,8 @@
+/**
+ * QUESTIONS CONTROLLER
+ * Answers to API requests from /questions router
+ */
+
 const Question = require('../models/Question');
 
 const { getLatestFormId } = require('../controllers/forms')
@@ -7,13 +12,16 @@ const commonsController = require('./commons');
 /* FUNCTIONS */
 
 module.exports = {
+    // List all questions
     list (req, res) {
         return commonsController.list(req, res, Question);
     },
 
+    // Insert a new question
     insert (req, res) {
         const { question, description, fkFormId } = req.body;
 
+        // Check required fields
         if (!question || !fkFormId) {
             return res.status(400).json({
                 message: 'Missing required parameters',
@@ -40,6 +48,7 @@ module.exports = {
             });
     },
 
+    // Update an existing question
     update (req, res) {
         const { question, description, fkFormId } = req.body;
 
@@ -70,6 +79,7 @@ module.exports = {
             });
     },
 
+    // Delete a question
     delete (req, res) {
         return Question
             .findOne({
@@ -101,6 +111,7 @@ module.exports = {
             });
     },
 
+    // Get a question by questionId
     getById (req, res) {
         return Question
             .findOne({
@@ -122,6 +133,7 @@ module.exports = {
             });
     },
 
+    // List all questions by fkFormId
     listByForm (req, res) {
         return Question
             .findAll({
@@ -144,6 +156,7 @@ module.exports = {
             });
     },
 
+    // List all questions for the latest form
     listByLatestForm (req, res) {
         return getLatestFormId()
             .then((latestFormId) => {
