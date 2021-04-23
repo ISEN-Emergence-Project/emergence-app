@@ -9,7 +9,7 @@ function DevTools({ phase, setPhase }) {
             })
             .catch((err) => console.log(err));
 
-        axios.put('//etn-test.herokuapp.com/api/forms/1', {
+        axios.put('//etn-test.herokuapp.com/api/forms/latest', {
             fkPhaseId: e.target.value
         })
             .then((res) => {
