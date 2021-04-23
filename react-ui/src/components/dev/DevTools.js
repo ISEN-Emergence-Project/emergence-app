@@ -8,6 +8,14 @@ function DevTools({ phase, setPhase }) {
                 setPhase(res.data);
             })
             .catch((err) => console.log(err));
+
+        axios.put('//etn-test.herokuapp.com/api/forms/1', {
+            fkPhaseId: e.target.value
+        })
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((err) => console.log(err));
     }
 
     return (

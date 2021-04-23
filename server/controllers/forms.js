@@ -10,12 +10,12 @@ module.exports = {
     },
 
     insert (req, res) {
-        const { title, description, bannerUrl } = req.body;
+        const { title, description, bannerUrl, fkPhaseId } = req.body;
 
-        if ( !title || !description || !bannerUrl) {
+        if ( !title || !description || !bannerUrl || !fkPhaseId) {
             return res.status(400).json({
                 message: 'Missing required parameters',
-                info: 'Requires: formId, title, description, bannerUrl'
+                info: 'Requires: formId, title, description, bannerUrl, fkPhaseId'
             })
         }
         
@@ -23,7 +23,8 @@ module.exports = {
             .create({
                 title: title,
                 description: description,
-                bannerUrl: bannerUrl
+                bannerUrl: bannerUrl,
+                fkPhaseId: fkPhaseId
             })
             .then((Form) => {
                 res.status(201).json(Form);
@@ -39,13 +40,14 @@ module.exports = {
     },
 
     update (req, res) {
-        const { title, description, bannerUrl } = req.body;
+        const { title, description, bannerUrl, fkPhaseId } = req.body;
 
         return Form
             .update({
                 title: title,
                 description: description,
-                bannerUrl: bannerUrl
+                bannerUrl: bannerUrl,
+                fkPhaseId: fkPhaseId
             }, {
                 where: {
                     formId: req.params.id
