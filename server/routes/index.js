@@ -1,3 +1,9 @@
+/**
+ * API MAIN ROUTING
+ * Handle all API calls, route requests to corresponding specific routers
+ */
+
+// Include libraries
 const express = require('express')
 const router = express.Router();
 const bodyParser = require('body-parser');
@@ -35,12 +41,12 @@ router.use(upload.array());
 router.use(express.static('public'));
 
 
-/* ----------------------- */
-/* ----- API ROUTING ----- */
-/* ----------------------- */
+/** ----------------------- */
+/** ----- API ROUTING ----- */
+/** ----------------------- */
 
 
-/* ----- Public API Routes ----- */
+/** ----- Public API Routes ----- */
 
 // Handle root
 router.get('/', function (req, res) {
@@ -53,7 +59,7 @@ router.get('/', function (req, res) {
 router.use('/login', loginRouter);
 
 
-/* ----- Private API Routes ----- */
+/** ----- Private API Routes ----- */
 
 // Handle main API routes
 router.use('/accounts', authJwt, accountsRouter);

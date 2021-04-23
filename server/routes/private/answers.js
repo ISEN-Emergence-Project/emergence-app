@@ -1,3 +1,8 @@
+/**
+ * API ANSWERS ROUTER
+ * Handle all /api/answers requests
+ */
+
 const answers = require('express').Router();
 
 const answersController = require('../../controllers/answers');

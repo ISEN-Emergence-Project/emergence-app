@@ -1,3 +1,8 @@
+/**
+ * API FORMS ROUTER
+ * Handle all /api/forms requests
+ */
+
 const forms = require('express').Router();
 
 const formsController = require("../../controllers/forms");

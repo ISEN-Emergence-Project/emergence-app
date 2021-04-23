@@ -1,3 +1,11 @@
+/**
+ * SERVER MAIN
+ * Create a nodejs web server with express framework
+ * Serve static content
+ * API gateway, route API requests to API main router (server/routes/index.js)
+ */
+
+// Include libraries
 const express = require('express');
 const path = require('path');
 const cluster = require('cluster');
@@ -26,9 +34,11 @@ if (!isDev && cluster.isMaster) {
     });
 
 } else {
+    // Create an express server
     const app = express();
     const routes = require('./routes');
 
+    // Allow CORS options
     const corsOptions = {
         origin: '*',
         methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
@@ -42,7 +52,7 @@ if (!isDev && cluster.isMaster) {
     // Priority serve any static files.
     app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
-    // Answer all API requests.
+    // Handle API calls, route all '/api' requests
     app.use('/api', routes);
 
     // All remaining requests return the React app, so it can handle routing.
