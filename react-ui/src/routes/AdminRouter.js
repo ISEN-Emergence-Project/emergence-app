@@ -1,3 +1,9 @@
+/**
+ * ADMIN REACT ROUTER
+ * Include Admin Navigation
+ * Route to targeted page's component
+ */
+
 import React from "react";
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 
@@ -19,6 +25,7 @@ export default function AdminRouter({ phase, setPhase, account }) {
     return (
         <BrowserRouter>
             <AdminNav phase={phase} />
+
             <Switch>
                 <Route exact path='/'>
                     <Home phase={phase} setPhase={setPhase} account={account} />

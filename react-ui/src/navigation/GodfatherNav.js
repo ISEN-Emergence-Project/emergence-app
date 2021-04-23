@@ -1,3 +1,8 @@
+/**
+ * GODFATHER NAVIGATION
+ * Show navigation links according to phase
+ */
+
 import React, {useState} from "react";
 
 export function GodfatherNav({ phase }) {

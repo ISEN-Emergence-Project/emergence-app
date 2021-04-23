@@ -1,3 +1,8 @@
+/**
+ * LAUREATE NAVIGATION
+ * Show navigation links according to phase
+ */
+
 import React, {useState} from "react";
 
 export function LaureateNav({ phase }) {

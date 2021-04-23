@@ -1,3 +1,9 @@
+/**
+ * LAUREATE REACT ROUTER
+ * Include Laureate Navigation
+ * Route to targeted page's component
+ */
+
 import React, {useEffect, useState} from "react";
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 
@@ -15,6 +21,7 @@ export default function LaureateRouter({ phase, account }) {
     return (
         <BrowserRouter>
             <LaureateNav phase={phase} />
+
             <Switch>
                 <Route exact path='/'>
                     <Home phase={phase} account={account} />

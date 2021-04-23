@@ -1,3 +1,8 @@
+/**
+ * ADMIN NAVIGATION
+ * Show all admin navigation links
+ */
+
 import React, {useState} from "react";
 
 export function AdminNav({ phase }) {
