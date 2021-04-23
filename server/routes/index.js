@@ -22,6 +22,7 @@ const questionsRouter = require('./private/questions');
 const phasesRouter = require('./private/phases');
 
 const loginRouter = require('./public/login');
+const logoutRouter = require('./private/logout');
 
 // Include middlewares
 const authJwt = require('../middlewares/authJwt');
@@ -71,6 +72,8 @@ router.use('/preselections', authJwt, preselectionsRouter);
 router.use('/questions', authJwt, questionsRouter);
 router.use('/phases', authJwt, phasesRouter);
 
+// Handle logout
+router.use('/logout', authJwt, logoutRouter);
 
 // Handle other API routes, send Not found
 router.use('*', function (req, res) {

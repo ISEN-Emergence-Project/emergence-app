@@ -1,24 +1,22 @@
+/**
+ * API AUTHENTICATION MIDDLEWARE
+ * Check if a user is connected
+ * Authorize or deny API call
+ */
+
 const jwt = require('jsonwebtoken');
 const config = require('../config');
-const { Account } = require("../models/Account");
+const Account = require("../models/Account");
 
 const authJwt = (req, res, next) => {
-    // temporary auto accept authorization
-    return next()
-
     const { cookies, headers } = req;
 
     // Check valid cookies
     if (!cookies || !cookies.access_token) {
         return res.status(401).json({ message: 'Missing token in cookies' });
     }
-    const accessToken = cookies.access_token;
 
-    // Check valid headers
-    if (!headers || !headers['x-xsrf-token']) {
-        return res.status(401).json({ message: 'Missing XSRF token in headers' });
-    }
-    const xsrfToken = headers['x-xsrf-token'];
+    const accessToken = cookies.access_token;
 
     // JWT verify access token
     jwt.verify(accessToken, config.accessToken.secret, (err, decoded) => {
@@ -28,22 +26,23 @@ const authJwt = (req, res, next) => {
             return res.status(400).json({ message: 'Invalid token', error: err });
         }
 
-        // Check if xsrfToken correspond to JWT payload
-        if (xsrfToken !== decoded.xsrfToken) {
-            return res.status(401).json({ message: 'Bad xsrf token' })
-        }
-
+        // Check if account exists
         Account
-            .findOne({ where: { accountId: decoded.sub } })
+            .findOne({
+                where: {
+                    accountId: decoded.sub
+                }
+            })
             .then((account) => {
                 // Check account exists
                 if (!account) {
                     return res.status(401).send({ message: 'Account not found' });
                 }
-                // Save account in request
+
+                // Save account in request for future use in controllers
                 req.account = account;
 
-                console.log('> Authorized access to: ' + req.originalUrl);
+                console.log('> Authorized access to: ' + req.originalUrl +' to accountId: '+ account.accountId);
                 return next();
             })
             .catch((err) => res.status(401).json({ message: 'Unauthorized', err }));
