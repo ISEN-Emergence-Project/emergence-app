@@ -1,3 +1,8 @@
+/**
+ * ACCOUNT MODEL
+ * Create an Account model with its attributes
+ */
+
 const { sequelize, Model, DataTypes } = require("../utils/database");
 
 class Account extends Model {

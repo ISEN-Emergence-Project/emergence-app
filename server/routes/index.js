@@ -1,3 +1,9 @@
+/**
+ * API MAIN ROUTING
+ * Handle all API calls, route requests to corresponding specific routers
+ */
+
+// Include libraries
 const express = require('express')
 const router = express.Router();
 const bodyParser = require('body-parser');
@@ -16,6 +22,7 @@ const questionsRouter = require('./private/questions');
 const phasesRouter = require('./private/phases');
 
 const loginRouter = require('./public/login');
+const logoutRouter = require('./private/logout');
 
 // Include middlewares
 const authJwt = require('../middlewares/authJwt');
@@ -35,12 +42,12 @@ router.use(upload.array());
 router.use(express.static('public'));
 
 
-/* ----------------------- */
-/* ----- API ROUTING ----- */
-/* ----------------------- */
+/** ----------------------- */
+/** ----- API ROUTING ----- */
+/** ----------------------- */
 
 
-/* ----- Public API Routes ----- */
+/** ----- Public API Routes ----- */
 
 // Handle root
 router.get('/', function (req, res) {
@@ -53,7 +60,7 @@ router.get('/', function (req, res) {
 router.use('/login', loginRouter);
 
 
-/* ----- Private API Routes ----- */
+/** ----- Private API Routes ----- */
 
 // Handle main API routes
 router.use('/accounts', authJwt, accountsRouter);
@@ -65,6 +72,8 @@ router.use('/preselections', authJwt, preselectionsRouter);
 router.use('/questions', authJwt, questionsRouter);
 router.use('/phases', authJwt, phasesRouter);
 
+// Handle logout
+router.use('/logout', authJwt, logoutRouter);
 
 // Handle other API routes, send Not found
 router.use('*', function (req, res) {

@@ -8,7 +8,7 @@ export function FormAddQuestion({ form, updateQuestions }) {
     const [ description, setDescription ] = useState("")
 
     function handleAddQuestion() {
-        axios.post("https://etn-test.herokuapp.com/api/questions",{
+        axios.post(process.env.REACT_APP_API_HOST +"/api/questions",{
             question: question,
             description: description,
             fkFormId: form.formId
@@ -28,7 +28,7 @@ export function FormAddQuestion({ form, updateQuestions }) {
                 <button className='btn btn-success col col-sm-4 col-md-2' onClick={() => setShow(true)}>Ajouter une question</button>
             </div>
 
-            <Modal size="lg" show={show}>
+            <Modal size="lg" show={show} onHide={() => setShow(false)}>
                 <Modal.Header>
                     <Modal.Title>Ajouter une question</Modal.Title>
                 </Modal.Header>

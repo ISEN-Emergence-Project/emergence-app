@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import {Redirect} from "react-router-dom";
 
 export function Login({ setToken }) {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [status, setStatus] = useState();
+    const [ email, setEmail ] = useState("");
+    const [ password, setPassword ] = useState("");
+    const [ status, setStatus ] = useState();
+    const [ alert, setAlert ] = useState(null);
     const [ redirectTo, setRedirectTo ] = useState();
 
     const handleSubmit = async (e) => {
@@ -14,7 +15,7 @@ export function Login({ setToken }) {
         setStatus();
 
         // Try login user
-        axios.post("//etn-test.herokuapp.com/api/login", { email, password })
+        axios.post(process.env.REACT_APP_API_HOST +"/api/login", { email, password })
             .then((res) => {
                 setStatus(res.status);
                 setRedirectTo('/');
@@ -27,6 +28,21 @@ export function Login({ setToken }) {
                 }
             })
     }
+
+    useEffect(() => {
+        if (status === 403) {
+            setAlert(<div className='alert alert-danger' role='alert'>Email ou mot de passe incorrect</div>);
+        }
+        else if (status == 200) {
+            setAlert(<div className='alert alert-primary' role='alert'>Connexion réussie. Redirection...</div>);
+        }
+        else if (Number.isInteger(status)) {
+            setAlert(<div className='alert alert-warning' role='alert'>Erreur lors de la connexion. [{status}]</div>);
+        }
+        else {
+            setAlert();
+        }
+    }, [status])
 
     if (redirectTo) {
         return <Redirect to={redirectTo} />
@@ -41,19 +57,10 @@ export function Login({ setToken }) {
                     </div>
                     <div className='row justify-content-center'>
                         <div className="col-5 text-center">
+
+                            { alert }
+
                             <form onSubmit={handleSubmit}>
-                                {(status === 403) ? (
-                                    <div className='alert alert-danger' role='alert'>Email ou mot de passe
-                                        incorrect</div>
-                                ) : null}
-                                {(status === 200) ? (
-                                    <div className='alert alert-primary' role='alert'>Connexion réussie.
-                                        Redirection...</div>
-                                ) : null}
-                                {(status === 400) ? (
-                                    <div className='alert alert-warning' role='alert'>Erreur lors de la connexion.
-                                        [{status}]</div>
-                                ) : null}
                                 <label htmlFor="email" className="grey-text mt-3">Email</label>
                                 <input type="email" id="email" className="form-control"
                                        onChange={({target}) => setEmail(target.value)}/>

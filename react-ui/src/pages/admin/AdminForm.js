@@ -1,22 +1,23 @@
 import React, {useEffect, useState} from "react";
 import {Button, Modal} from "react-bootstrap";
 import axios from "axios";
+import {Star} from "../../components/commons/Star"
 
 import {FormQuestionField} from "../../components/admin/FormQuestionField"
 import {FormAddQuestion} from "../../components/admin/FormAddQuestion";
-import {FormHeader} from "../../components/FormHeader";
+import {FormHeader} from "../../components/commons/FormHeader";
 
-export function AdminForm() {
+export function AdminForm({ account }) {
     const [ form, setForm ] = useState({});
     const [ questions, setQuestions ] = useState([]);
     const [ editHeader, setEditHeader ] = useState(false);
 
     useEffect(() => {
-        axios.get('//etn-test.herokuapp.com/api/questions/form/latest')
+        axios.get(process.env.REACT_APP_API_HOST +'/api/questions/form/latest')
             .then((res) => setQuestions(res.data))
             .catch((err) => console.log(err));
 
-        axios.get('//etn-test.herokuapp.com/api/forms/latest')
+        axios.get(process.env.REACT_APP_API_HOST +'/api/forms/latest')
             .then((res) => {
                 setForm(res.data);
             })
@@ -47,7 +48,7 @@ export function AdminForm() {
         form.description = document.querySelector('#editDesc').value;
         setForm(form);
 
-        axios.put("https://etn-test.herokuapp.com/api/forms/"+ form.formId,{
+        axios.put(process.env.REACT_APP_API_HOST +"/api/forms/"+ form.formId,{
             title: form.title,
             description: form.description
         })
@@ -64,6 +65,13 @@ export function AdminForm() {
             <div className="container py-4">
                 <div className="container text-center pb-3">
                     <Button className="btn btn-success col col-sm-4 col-md-2" onClick={() => setEditHeader(true)}>Modifier</Button>
+                </div>
+
+                <div className="py-3">
+                    <label className='m-0' htmlFor='studies'>
+                        Quelle sont vos études ? <Star/>
+                    </label>
+                    <input type="text" required placeholder="Votre réponse" id='studies' className="form-control mb-2"/>
                 </div>
 
                 {questions.map(question => (

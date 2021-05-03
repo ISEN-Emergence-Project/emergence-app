@@ -1,3 +1,8 @@
+/**
+ * MEETING MODEL
+ * Create a Meeting model with its attributes
+ */
+
 const { sequelize, Model, DataTypes } = require("../utils/database");
 
 class Meeting extends Model {}

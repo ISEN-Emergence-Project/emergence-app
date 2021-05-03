@@ -1,3 +1,8 @@
+/**
+ * MEETINGS CONTROLLER
+ * Answers to API requests from /meetings router
+ */
+
 const Meeting = require('../models/Meeting');
 
 const commonsController = require('./commons');
@@ -5,17 +10,19 @@ const commonsController = require('./commons');
 /* FUNCTIONS */
 
 module.exports = {
+    // List all meetings
     list (req, res) {
         return commonsController.list(req, res, Meeting);
     },
 
+    // Insert a new meeting
     insert (req, res) {
         const { fkGodfatherAccountId, fkLaureateAccountId, beginning, ending, godfatherRating, laureateRating } = req.body;
 
-        if (!fkGodfatherAccountId || !fkLaureateAccountId || !beginning || !ending || !godfatherRating || !laureateRating) {
+        if (!fkGodfatherAccountId || !fkLaureateAccountId || !godfatherRating || !laureateRating) {
             return res.status(400).json({
                 message: 'Missing required parameters',
-                info: 'Requires: fkGodfatherAccountId, fkLaureateAccountId, beginning, ending, godfatherRating, laureateRating'
+                info: 'Requires: fkGodfatherAccountId, fkLaureateAccountId, godfatherRating, laureateRating'
             })
         }
         
@@ -41,6 +48,7 @@ module.exports = {
             });
     },
 
+    // Update an existing meeting
     update (req, res) {
         const { fkGodfatherAccountId, fkLaureateAccountId, beginning, ending, godfatherRating, laureateRating } = req.body;
 
@@ -75,6 +83,7 @@ module.exports = {
             });
     },
 
+    // Delete a meeting
     delete (req, res) {
         return Meeting
             .findOne({
@@ -108,6 +117,7 @@ module.exports = {
             });
     },
 
+    // Get a meeting by fkGodfatherAccountId and fkLaureateAccountId
     getByGodfatherLaureate (req, res) {
         return Meeting
             .findOne({
@@ -130,6 +140,7 @@ module.exports = {
             });
     },
 
+    // List meetings by fkGodfatherAccountId
     listByGodfather (req, res) {
         return Meeting
             .findAll({
@@ -151,6 +162,7 @@ module.exports = {
             });
     },
 
+    // List meetings by fkLaureateAccountId
     listByLaureate (req, res) {
         return Meeting
             .findAll({

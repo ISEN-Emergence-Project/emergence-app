@@ -1,3 +1,8 @@
+/**
+ * API MEETINGS ROUTER
+ * Handle all /api/meetings requests
+ */
+
 const meetings = require('express').Router();
 
 const meetingsController = require('../../controllers/meetings');

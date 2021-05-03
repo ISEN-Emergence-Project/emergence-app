@@ -1,3 +1,8 @@
+/**
+ * FORM MODEL
+ * Create a Form model with its attributes
+ */
+
 const { sequelize, Model, DataTypes } = require("../utils/database");
 
 class Form extends Model {}
@@ -26,7 +31,7 @@ Form.init({
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Phase',
+            model: 'Phases',
             key: 'phaseId'
         }
     }

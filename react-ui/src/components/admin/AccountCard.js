@@ -2,29 +2,28 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Modal} from "react-bootstrap";
 
-function LaureateItem({ laureate, updateSelectedLaureates }) {
-    const [ checked, setChecked ] = useState(false);
-    const [ showProfile, toggleShowProfile ] = useState(false);
+function AccountCard({ account }) {
+    const [ showProfile, setShowProfile ] = useState(false);
     const [ answers, setAnswers ] = useState([]);
 
-    const { Account: { accountId, firstname, lastname }, studies } = laureate;
-
-    function updateChecked() {
-        setChecked(!checked);
-        updateSelectedLaureates(accountId, firstname, lastname);
+    const roleLabel = {
+        admin: 'Administrateur',
+        godfather: 'Parrain',
+        laureate: 'Lauréat'
     }
+
 
     function openProfile () {
         if (answers.length < 1) {
             // Get all questions and answers
-            axios.get("//etn-test.herokuapp.com/api/answers/account/"+ accountId +"/form/latest")
+            axios.get(process.env.REACT_APP_API_HOST +"/api/answers/account/"+ account.accountId +"/form/latest")
                 .then((res) => {
                     setAnswers(res.data);
-                    toggleShowProfile(true);
+                    setShowProfile(true);
                 })
                 .catch(error => console.error("There was an error",error))
         } else {
-            toggleShowProfile(true);
+            setShowProfile(true);
         }
     }
 
@@ -32,25 +31,27 @@ function LaureateItem({ laureate, updateSelectedLaureates }) {
         <>
             <div className="card d-flex flex-row flex-nowrap align-items-center">
                 <div className="card-body cursor-pointer py-3" onClick={openProfile}>
-                    <h5 className='mb-1'>{firstname} {lastname}</h5>
-                    {studies}
-                </div>
-                <div className="ml-auto mr-3">
-                    <div className="custom-control custom-checkbox">
-                        <input className='custom-control-input' type='checkbox' name={accountId} id={accountId} onChange={updateChecked}/>
-                        <label className="custom-control-label" htmlFor={accountId} />
+                    <div className="d-flex">
+                        <h5 className='mb-1'>{account.firstname} {account.lastname}</h5>
+
+                        <h6 className="ml-auto">
+                            <span className='px-2 badge badge- badge-light'>{roleLabel[account.role]}</span>
+                        </h6>
                     </div>
+                    <p className='m-0'>{account.email}</p>
                 </div>
             </div>
 
-            <Modal show={showProfile} onHide={() => toggleShowProfile(false)}>
+            <Modal show={showProfile} onHide={() => setShowProfile(false)}>
                 <div className="modal-header">
-                    <h5 className="modal-title">{firstname} {lastname}</h5>
-                    <button type="button" className="close" onClick={() => toggleShowProfile(false)}>
+                    <h5 className="modal-title">{account.firstname} {account.firstname}</h5>
+
+                    <button type="button" className="close" onClick={() => setShowProfile(false)}>
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div className="modal-body">
+                <div className="modal-body">{account.email}
+                    <hr></hr>
                     {answers.map(({fkAccountId, fkQuestionId, answer, Question : {question, description}}) => {
                         return (
                             <div className='py-2' key={fkQuestionId}>
@@ -60,9 +61,12 @@ function LaureateItem({ laureate, updateSelectedLaureates }) {
                         )
                     })}
                 </div>
+                <div className="modal-footer">
+                    <button className="btn btn-outline-danger btn-sm ml-2" onClick={() => setShowProfile(false)}>Fermer</button>
+                </div>
             </Modal>
         </>
     );
 }
 
-export default LaureateItem
+export default AccountCard

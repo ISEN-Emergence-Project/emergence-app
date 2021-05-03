@@ -1,3 +1,8 @@
+/**
+ * ANSWERS CONTROLLER
+ * Answers to API requests from /answers router
+ */
+
 const Answer = require('../models/Answer');
 const Question = require('../models/Question');
 
@@ -8,10 +13,12 @@ const commonsController = require('./commons');
 /* FUNCTIONS */
 
 module.exports = {
+    // List all answers
     list (req, res) {
         return commonsController.list(req, res, Answer);
     },
 
+    // Insert a new answer
     insert (req, res) {
         const { fkAccountId, fkQuestionId, answer } = req.body;
 
@@ -41,6 +48,7 @@ module.exports = {
             });
     },
 
+    // Update an existing answer
     update (req, res) {
         const { fkAccountId, fkQuestionId, answer } = req.body;
 
@@ -72,6 +80,7 @@ module.exports = {
             });
     },
 
+    // Delete an answer
     delete (req, res) {
         return Answer
             .findOne({
@@ -105,6 +114,7 @@ module.exports = {
             });
     },
 
+    // Get an answer by fkAccountId and fkQuestionId
     getByAccountQuestion (req, res) {
         return Answer
             .findOne({
@@ -127,6 +137,7 @@ module.exports = {
             });
     },
 
+    // Get an answer by fkAccountId
     listByAccountForm (req, res) {
         return Answer
             .findAll({
@@ -154,6 +165,7 @@ module.exports = {
             });
     },
 
+    // Get an answer by fkQuestionId
     listByAccountLatestForm (req, res) {
         return getLatestFormId()
             .then((latestFormId) => {

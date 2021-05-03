@@ -1,3 +1,8 @@
+/**
+ * QUESTIONS MODEL
+ * Create a Question model with its attributes
+ */
+
 const { sequelize, Model, DataTypes } = require("../utils/database");
 
 class Question extends Model {}

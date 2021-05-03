@@ -1,3 +1,8 @@
+/**
+ * PRESELECTIONS CONTROLLER
+ * Answers to API requests from /preselections router
+ */
+
 const Preselection = require('../models/Preselection');
 
 const commonsController = require('./commons');
@@ -5,10 +10,12 @@ const commonsController = require('./commons');
 /* FUNCTIONS */
 
 module.exports = {
+    // List all preselections
     list (req, res) {
         return commonsController.list(req, res, Preselection);
     },
 
+    // Insert a new preselection
     insert (req, res) {
         const { fkGodfatherAccountId, fkLaureateAccountId } = req.body;
 
@@ -33,6 +40,7 @@ module.exports = {
             });
     },
 
+    // Update an  existing preselection
     update (req, res) {
         const { fkGodfatherAccountId, fkLaureateAccountId } = req.body;
 
@@ -59,6 +67,7 @@ module.exports = {
             });
     },
 
+    // Delete a preselection
     delete (req, res) {
         return Preselection
             .findOne({
@@ -96,6 +105,7 @@ module.exports = {
             });
     },
 
+    // Get a preselection by fkGodfatherAccountId and fkLaureateAccountId
     getByGodfatherLaureate (req, res) {
         return Preselection
             .findOne({
@@ -122,12 +132,14 @@ module.exports = {
             });
     },
 
+    // List all preselections by fkGodfatherAccountId
     listByGodfather (req, res) {
         return Preselection
             .findAll({
                 where: {
                     fkGodfatherAccountId: req.params.godfatherId
-                }
+                },
+                include: [{ all: true, nested: true }]
             })
             .then((preselection) => {
                 if (!preselection) {
@@ -143,12 +155,14 @@ module.exports = {
             });
     },
 
+    // List all preselections by fkLaureateAccountId
     listByLaureate (req, res) {
         return Preselection
             .findAll({
                 where: {
                     fkLaureateAccountId: req.params.laureateId
-                }
+                },
+                include: [{ all: true, nested: true }]
             })
             .then((preselection) => {
                 if (!preselection) {

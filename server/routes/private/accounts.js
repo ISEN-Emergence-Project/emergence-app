@@ -1,3 +1,8 @@
+/**
+ * API ACCOUNTS ROUTER
+ * Handle all /api/accounts requests
+ */
+
 const accounts = require('express').Router();
 
 const accountsController = require('../../controllers/accounts');

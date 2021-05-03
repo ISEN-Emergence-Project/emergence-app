@@ -1,3 +1,8 @@
+/**
+ * API LOGOUT ROUTER
+ * Handle all /api/logout requests
+ */
+
 const logout = require('express').Router();
 
 const accountController = require('../../controllers/accounts');

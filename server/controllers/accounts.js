@@ -1,3 +1,8 @@
+/**
+ * ACCOUNTS CONTROLLER
+ * Answers to API requests from /accounts router
+ */
+
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
@@ -15,10 +20,12 @@ const isDev = process.env.NODE_ENV !== 'production';
 /* FUNCTIONS */
 
 module.exports = {
+    // List all accounts
     list (req, res) {
         return commonsController.list(req, res, Account);
     },
 
+    // List all accounts with role 'laureate'
     listLaureates (req, res) {
         return Laureate
             .findAll({
@@ -33,6 +40,7 @@ module.exports = {
             });
     },
 
+    // List all accounts with role 'godfather'
     listGodfathers (req, res) {
         return Godfather
             .findAll({
@@ -47,6 +55,7 @@ module.exports = {
             });
     },
 
+    // Insert a new account
     insert (req, res) {
         const { firstname, lastname, username, email, password, role } = req.body;
 
@@ -66,6 +75,7 @@ module.exports = {
             })
         }
 
+        // Hash password
         const hash = bcrypt.hashSync(password, salt);
         let values, options, Model;
 
@@ -148,8 +158,9 @@ module.exports = {
             });
     },
 
+    // Update an existing account
     update (req, res) {
-        const { firstname, lastname, username, email, password, role, isArchived, resetKey, accessToken, refreshToken } = req.body;
+        const { firstname, lastname, username, email, password, role, resetKey, accessToken, refreshToken, studies, promo, isArchived, phone } = req.body;
 
         // Check if role sent
         if (role) {
@@ -180,12 +191,44 @@ module.exports = {
                 returning: true
             })
             .then(([, account]) => {
-                if (!account[0]) {
-                    return res.status(404).json({ message: 'Account not found' });
+                if (account) {
+                    if (!account[0]) {
+                        return res.status(404).json({ message: 'Account not found' });
+                    }
                 }
-                // Remove passwordHash from response
-                account[0].passwordHash = undefined;
-                return res.status(200).json(account[0])
+                let requestSucceeded = true;
+
+                // Update Laureate
+                Laureate
+                    .update({
+                        studies: studies,
+                        promo: promo,
+                        isArchived: isArchived
+                    }, {
+                        where: {
+                            fkAccountId: req.params.id
+                        }
+                    })
+                    .catch(() => requestSucceeded = false);
+
+                // Update Godfather
+                Godfather
+                    .update({
+                        phone: phone,
+                        isArchived: isArchived
+                    }, {
+                        where: {
+                            fkAccountId: req.params.id
+                        }
+                    })
+                    .catch(() => requestSucceeded = false);
+
+                // Send response according to request success
+                if (requestSucceeded) {
+                    return res.status(200).json();
+                } else {
+                    return res.status(500).json({ message: 'Internal error' });
+                }
             })
             .catch((error) => {
                 console.log(error);
@@ -197,6 +240,7 @@ module.exports = {
             });
     },
 
+    // Delete an account
     delete (req, res) {
         return Account
             .findOne({
@@ -228,6 +272,7 @@ module.exports = {
             });
     },
 
+    // Get an account by accountId
     getById (req, res) {
         return Account
             .findOne({
@@ -249,6 +294,7 @@ module.exports = {
             });
     },
 
+    // Get an account by accessToken
     getByAccessToken (req, res) {
         return Account
             .findOne({
@@ -270,6 +316,7 @@ module.exports = {
             });
     },
 
+    // Login to the API an React front-end
     login (req, res) {
         const { email, password } = req.body;
 
@@ -281,8 +328,7 @@ module.exports = {
             return res.status(400).json({ message: 'missing_required_parameter', info: 'password' });
         }
 
-        const xsrfToken = crypto.randomBytes(64).toString('hex');
-
+        // Find account with provided email
         Account
             .findOne({ where: { email } })
             .then((account) => {
@@ -297,11 +343,10 @@ module.exports = {
                     return res.status(403).json({ message: 'Wrong password', });
                 }
 
-                // Create JWT tokens
+                // Create JWT tokens for back-end
                 const apiAccessToken = jwt.sign(
                     {
-                        role: account.role,
-                        xsrfToken
+                        role: account.role
                     },
                     config.accessToken.secret,
                     {
@@ -310,20 +355,26 @@ module.exports = {
                         subject: account.accountId.toString()
                     }
                 );
+                // Create access token for front-end
                 const accessToken = crypto.randomBytes(64).toString('hex');
+
+                // Create refresh token to refresh JWT token (not used yet)
                 const refreshToken = crypto.randomBytes(64).toString('hex');
 
+                // Update account, save accessToken and refreshToken
                 Account
                     .update({
-                        accessToken: accessToken
+                        accessToken: accessToken,
+                        refreshToken: refreshToken
                     }, {
                         where: { accountId: account.accountId }
                     })
                     .then(() => {
+                        // Send cookies with the tokens for API authentication (JWT apiAccessToken and refreshToken)
                         res.cookie('access_token', apiAccessToken, {
                             httpOnly: true,
                             secure: !isDev,
-                            maxAge: config.accessToken.expiresIn * 1000, // in milliseconds - 24h
+                            maxAge: config.accessToken.expiresIn * 1000, // in milliseconds -> 24h
                             path: '/'
                         });
 
@@ -335,8 +386,7 @@ module.exports = {
 
                         return res.status(200).json({
                             message: 'Success',
-                            accessToken: accessToken,
-                            xsrfToken
+                            accessToken: accessToken
                         });
                     })
                     .catch((err) => {
@@ -350,7 +400,40 @@ module.exports = {
             });
     },
 
+    // Logout from
     logout (req, res) {
-        return res.status(500).json('Not implemented');
+        // Update account, set to NULL accessToken and refreshToken
+        return Account
+            .update({
+                accessToken: null,
+                refreshToken: null
+            }, {
+                where: { accountId: req.account.accountId }
+            })
+            .then(() => {
+                // Unset cookies, send expired cookies
+                res.cookie('access_token', '', {
+                    httpOnly: true,
+                    secure: !isDev,
+                    maxAge: 0, // expired
+                    path: '/'
+                });
+
+                res.cookie('refresh_token', '', {
+                    httpOnly: true,
+                    secure: !isDev,
+                    maxAge: 0, // expired
+                    path: '/'
+                });
+
+                return res.status(200).json({
+                    message: 'Success',
+                    accessToken: ''
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+                return res.status(500).json({message: 'An error occurred', err});
+            });
     }
 };

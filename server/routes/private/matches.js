@@ -1,3 +1,8 @@
+/**
+ * API MATCHES ROUTER
+ * Handle all /api/matches requests
+ */
+
 const matches = require('express').Router();
 
 const matchesController = require('../../controllers/matches');

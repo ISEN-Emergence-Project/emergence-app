@@ -1,3 +1,8 @@
+/**
+ * PHASE MODEL
+ * Create a Phase model with its attributes
+ */
+
 const { sequelize, Model, DataTypes } = require("../utils/database");
 
 class Phase extends Model {}
@@ -5,8 +10,8 @@ class Phase extends Model {}
 Phase.init({
     phaseId: {
         type: DataTypes.INTEGER,
-        autoIncrement: true,
         primaryKey: true,
+        autoIncrement: true,
         allowNull: false
     },
     lead: {
