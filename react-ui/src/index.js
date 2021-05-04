@@ -1,5 +1,6 @@
 /**
  * REACT APP ENTRY POINT
+ * Render the React App
  */
 
 import React from 'react';

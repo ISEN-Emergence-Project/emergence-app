@@ -26,7 +26,25 @@ The *React app* dependencies are located in `react-ui/package.json`
 
 ### Run the project
 
-The following commands need to be run from the root `/`  folder :
+1. Clone this project from GitHub with `git clone`.
+
+2. Add the following environment variables for the *server* :
+
+```.env
+# URI to access database
+DATABASE_URL=postgres://username:password@hostname:5432/database_name
+# SECRET for JWT authentication
+JWT_SECRET=random_64_bits_key
+```
+
+3. Add an `.env` file in the `react-ui/` folder with the following variable :
+
+```
+# API hostname 
+REACT_APP_API_HOST=https://api-hostname.com
+```
+
+4. Start the server with the following commands (run from the root `/`  folder of the project) :
 
 - To install dependencies : `npm install`
 - To build a production app : `npm build`
