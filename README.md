@@ -23,7 +23,7 @@ JWT_SECRET=random_64_bits_key
 
 3. Add an `.env` file in the `react-ui/` folder with the following variable :
 
-```
+```.env
 # API hostname 
 REACT_APP_API_HOST=https://api-hostname.com
 ```
@@ -56,7 +56,7 @@ The *React app* dependencies are located in `react-ui/package.json`
 
 ### Project tree
 
-```bash
+```
 doc : documentation
 react-ui : React App
     |- public : public ressources
