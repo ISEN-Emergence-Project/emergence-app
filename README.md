@@ -2,29 +2,13 @@
 
 
 
-### Original code base
+#### Original code base
 
 This app architecture is inspired by [create-react-app with a Node server on Heroku](https://github.com/mars/heroku-cra-node)
 
 
 
-## Architecture of the App
-
-The app is divided in two parts : the **server** and the **React app**.
-
-
-
-### Dependencies management
-
-The dependencies are managed with `npm`.
-
-The *server* dependencies are located in `package.json` located at the <u>*root*</u> of the project.
-
-The *React app* dependencies are located in `react-ui/package.json` 
-
-
-
-### Run the project
+## Run the App
 
 1. Clone this project from GitHub with `git clone`.
 
@@ -49,6 +33,24 @@ REACT_APP_API_HOST=https://api-hostname.com
 - To install dependencies : `npm install`
 - To build a production app : `npm build`
 - To start the app : `npm start`
+
+
+
+
+
+## Architecture of the App
+
+The app is divided in two parts : the **server** and the **React app**.
+
+
+
+### Dependencies management
+
+The dependencies are managed with `npm`.
+
+The *server* dependencies are located in `package.json` located at the <u>*root*</u> of the project.
+
+The *React app* dependencies are located in `react-ui/package.json` 
 
 
 
