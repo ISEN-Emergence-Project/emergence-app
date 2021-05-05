@@ -1,0 +1,7 @@
+Fichier json test entré : 
+
+[{"Parrain":"Parrain 1","Laureat":"Laureat 2","NoteParrain":4,"NoteLaureat":2}, {"Parrain":"Parrain 1","Laureat":"Laureat 1","NoteParrain":2,"NoteLaureat":2},{"Parrain":"Parrain 2","Laureat":"Laureat 1","NoteParrain":4,"NoteLaureat":1},{"Parrain":"Parrain 2","Laureat":"Laureat 2","NoteParrain":2,"NoteLaureat":3}] 
+
+JSON STRINGIFY :  
+
+"[{\"Parrain\":\"Parrain 1\",\"Laureat\":\"Laureat 2\",\"NoteParrain\":4,\"NoteLaureat\":2}, {\"Parrain\":\"Parrain 1\",\"Laureat\":\"Laureat 1\",\"NoteParrain\":2,\"NoteLaureat\":2},{\"Parrain\":\"Parrain 2\",\"Laureat\":\"Laureat 1\",\"NoteParrain\":4,\"NoteLaureat\":1},{\"Parrain\":\"Parrain 2\",\"Laureat\":\"Laureat 2\",\"NoteParrain\":2,\"NoteLaureat\":3}]" 

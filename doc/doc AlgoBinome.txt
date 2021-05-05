@@ -1,0 +1,23 @@
+					Algo Binome
+
+Fichier : AlgoBinome.py
+
+command line : python AlgoBinome.py (stringify json)
+
+
+exemple de fichier d'entrée (stringify json):
+
+"[{\"Parrain\":\"Parrain 1\",\"Laureat\":\"Laureat 2\",\"NoteParrain\":4,\"NoteLaureat\":2}, {\"Parrain\":\"Parrain 1\",\"Laureat\":\"Laureat 1\",\"NoteParrain\":2,\"NoteLaureat\":2},{\"Parrain\":\"Parrain 2\",\"Laureat\":\"Laureat 1\",\"NoteParrain\":4,\"NoteLaureat\":1},{\"Parrain\":\"Parrain 2\",\"Laureat\":\"Laureat 2\",\"NoteParrain\":2,\"NoteLaureat\":3}]" 
+
+Exemple de sortie avec ces données :  
+
+{"Parrain 1": "Laureat 2", "Parrain 2": "Laureat 1"}
+
+Sortie : fichier json {"Parrain" : "Laureat", "Parrain" : "Laureat", "Parrain" : "Laureat", ...}
+
+Erreur possibles : - error : couldn't find a result with those data
+			!! Aucune solution trouvé avec les données envoyées !!
+			!! Il est possible que le nombre de parrains soit différent du nombre de lauréats !!
+
+
+Taux de satisfaction moyen des binomes : 3.07/4 testé avec des notes des parrains et des lauréats aléatoires avec 40 lauréats et 40 parrains
