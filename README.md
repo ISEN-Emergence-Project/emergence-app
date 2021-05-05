@@ -57,7 +57,8 @@ The *React app* dependencies are located in `react-ui/package.json`
 ### Project tree
 
 ```bash
-react-ui
+doc : documentation
+react-ui : React App
     |- public : public ressources
     |- src : react app source code
         |- assets : ressources
@@ -82,7 +83,8 @@ react-ui
         |- index.js : React app entry point
     |- .env : [optional] .env file with react app .env variables
     |- package.json : React app package
-server
+server : Node.js server
+	|- algorithms : python algorithms
     |- config :
         |- index.js : config variables (secrets...)
     |- controllers : api controllers that interract with the database
