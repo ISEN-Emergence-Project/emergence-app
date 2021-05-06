@@ -10,7 +10,7 @@ import {FormHeader} from "../../components/commons/FormHeader";
 export function AdminForm({ account }) {
     const [ form, setForm ] = useState({});
     const [ questions, setQuestions ] = useState([]);
-    const [ editHeader, setEditHeader ] = useState(false);
+    const [ editHeader, setEditHeader ] = useState(false); // display a popup to change the header // true if the admin click on the modify button of the header 
 
     useEffect(() => {
         axios.get(process.env.REACT_APP_API_HOST +'/api/questions/form/latest')
@@ -65,11 +65,13 @@ export function AdminForm({ account }) {
             <div className="container py-4">
                 <div className="container text-center pb-3">
                     <Button className="btn btn-success col col-sm-4 col-md-2" onClick={() => setEditHeader(true)}>Modifier</Button>
-                </div>
+                    {/* button to modify the header */}
+                </div> 
 
                 <div className="py-3">
                     <label className='m-0' htmlFor='studies'>
                         Quelle sont vos études ? <Star/>
+                        {/* default question */}
                     </label>
                     <input type="text" required placeholder="Votre réponse" id='studies' className="form-control mb-2"/>
                 </div>
@@ -77,11 +79,13 @@ export function AdminForm({ account }) {
                 {questions.map(question => (
                     <div className="py-3" key={question.questionId}>
                         <FormQuestionField question={question} updateQuestions={updateQuestions} />
+                        {/* for each questions, call the FormQuestionField component that contain the question, an input field and 2 buttons to delete and modify the question */}
                     </div>
                 ))}
 
                 <div className="py-4">
                     <FormAddQuestion form={form} updateQuestions={updateQuestions} />
+                    {/* call the FormAddQuestion component that contain a button to add a question in the form */}
                 </div>
             </div>
 
@@ -98,8 +102,8 @@ export function AdminForm({ account }) {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="btn btn-success btn-sm" onClick={handleHeaderSave}>Enregister</Button>
-                    <Button variant="btn btn-danger btn-sm" onClick={() => setEditHeader(false)}>
+                    <Button variant="btn btn-success btn-sm" onClick={handleHeaderSave /*save in database and update the form*/}>Enregister</Button>
+                    <Button variant="btn btn-danger btn-sm" onClick={() => setEditHeader(false)/*Close the popup window*/}>
                         <i className="me-2 bi-x-square-fill"/> Annuler
                     </Button>
                 </Modal.Footer>

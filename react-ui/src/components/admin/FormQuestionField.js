@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import {Star} from "../commons/Star"
 
-export function FormQuestionField({ question, updateQuestions }) {
+export function FormQuestionField({ question, updateQuestions }) {  //return a question with an input field, a delete button and a modify button  
     const [ showEdit, setShowEdit ] = useState(false);
     const [ questionLabel, setQuestionLabel ] = useState(question.question);
 

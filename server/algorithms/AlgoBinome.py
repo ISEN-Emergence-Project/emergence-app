@@ -1,3 +1,35 @@
+
+#This algorithms create final pairs godfather-laureate according to the marks each godfathers and laureates gives at the end of their meetings
+#
+#The aim of this algorithms is to maximize the satisfaction rate of the pairS (average of all the marks godfathers and laureates give to their associated pair)
+
+
+
+
+# input file example (stringify json):
+# "[{\"Parrain\":\"Parrain 1\",\"Laureat\":\"Laureat 2\",\"NoteParrain\":4,\"NoteLaureat\":2}, {\"Parrain\":\"Parrain 1\",\"Laureat\":\"Laureat 1\",\"NoteParrain\":2,\"NoteLaureat\":2},{\"Parrain\":\"Parrain 2\",\"Laureat\":\"Laureat 1\",\"NoteParrain\":4,\"NoteLaureat\":1},{\"Parrain\":\"Parrain 2\",\"Laureat\":\"Laureat 2\",\"NoteParrain\":2,\"NoteLaureat\":3}]" 
+
+# Output with those data :
+# {"Parrain 1": "Laureat 2", "Parrain 2": "Laureat 1"}
+
+
+
+# Output : json file {"Parrain" : "Laureat", "Parrain" : "Laureat", "Parrain" : "Laureat", ...}
+
+
+
+# Errors : - error : couldn't find a result with those data
+#			
+# 			!! Maybe the number of godfather and laureates are not the same ? !!
+
+
+
+
+# Average satisfaction rate : 3.07/4 test with random marks for 40 laureates and 40 godfathers
+
+
+
+
 from ortools.sat.python import cp_model
 import random
 import json

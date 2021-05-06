@@ -33,12 +33,15 @@ export function PreselectionsList({ account }) {
                         <div className="card m-2">
                             <h3 className="card-header">{acc.firstname} {acc.lastname}</h3>
                             <div className="p-4 ">
+                            {/* for each godfather, a bootstrap card is created with their name */}
                                 {preselection.map(pres=> acc.accountId === pres.fkGodfatherAccountId?
                                     <div className="">
                                         <div className="">
-                                            {accounts.map(acc=> acc.accountId === pres.fkLaureateAccountId?
+                                            {/* select all line in the preselection table of database that belong to the godfather */}
+                                            {accounts.map(acc=> acc.accountId === pres.fkLaureateAccountId?// need to travel the account table to catch the name
                                                 <div className="p-1">{acc.firstname} {acc.lastname}</div>
                                                 :false)}
+                                                {/* Display the name of the laureates in the godfather boostrap card  */}
                                         </div>
                                     </div>
                                     :false)}
