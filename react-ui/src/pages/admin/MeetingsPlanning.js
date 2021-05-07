@@ -140,32 +140,18 @@ function MeetingsPlanning() {
                 <div className='py-4 mb-2'>
                     <h1>Planning des Speed Meetings</h1>
                     <hr/>
-                    <div className="d-flex justify-content-between">
-                        <div>
-                            <label className='m-0 mr-3 mt-4 mb-1' htmlFor="meetingDate"><span>Date du Speed Meeting :</span></label>
-                            <input className='form-control' type="date" name="meetingDate" onChange={(e) => setMeetingDate(e.target.value)} />
-                        </div>
-                        <div>
-                            <label className='m-0 mr-3 mt-4 mb-1' htmlFor="meetingDate"><span>Heure de début :</span></label>
-                            <input className='form-control' type="time" name="meetingDate" onInput={(e) => setMeetingBegin(e.target.value)} />
-                        </div>
-                        <div>
-                            <label className='m-0 mr-3 mt-4 mb-1' htmlFor="meetingDate"><span>Heure de fin :</span></label>
-                            <input className='form-control' type="time" name="meetingDate" onChange={(e) => setMeetingEnd(e.target.value)} />
-                        </div>
-                    </div>
                 </div>
 
                 <div className="row py-2 my-4 border-bottom bg-light">
                     <div className="col-2">
-                        Parrains
+                        Speed Meeting
                     </div>
                     <div className="col-10">
                         <div className="row">
-                            <div className="col border-left">{meetingBegin.replace(':', 'h')}</div>
-                            <div className="col border-left">{}</div>
-                            <div className="col border-left">20h40</div>
-                            <div className="col border-left">{meetingEnd.replace(':', 'h')}</div>
+                            <div className="col border-left">1</div>
+                            <div className="col border-left">2</div>
+                            <div className="col border-left">3</div>
+                            <div className="col border-left">4</div>
                         </div>
                     </div>
                 </div>

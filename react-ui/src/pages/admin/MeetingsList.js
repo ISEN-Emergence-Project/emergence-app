@@ -45,14 +45,14 @@ function MeetingsList() {
 
                     <div className="row py-2 border-bottom bg-light">
                         <div className="col-2">
-                            Parrains
+                            Speed Meeting
                         </div>
                         <div className="col-10">
                             <div className="row">
-                                <div className="col border-left">{meetingBegin.replace(':', 'h')}</div>
-                                <div className="col border-left">{}</div>
-                                <div className="col border-left">20h40</div>
-                                <div className="col border-left">{meetingEnd.replace(':', 'h')}</div>
+                                <div className="col border-left">1</div>
+                                <div className="col border-left">2</div>
+                                <div className="col border-left">3</div>
+                                <div className="col border-left">4</div>
                             </div>
                         </div>
                     </div>

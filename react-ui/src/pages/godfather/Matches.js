@@ -23,7 +23,9 @@ function Matches({account}) {
         
        <div className="container">
            <div className="card m-5 p-5 justify-content-center align-self-center">
-                {result.map(res=>res.fkGodfatherAccountId==account.accountId?<div><Test aaccountId={res.fkLaureateAccountId}/></div>:false)}
+                {result.map((res) => res.fkGodfatherAccountId === account.accountId ? (
+                    <div><Test aaccountId={res.fkLaureateAccountId}/></div>
+                ) : false)}
             </div>
     
         </div>
