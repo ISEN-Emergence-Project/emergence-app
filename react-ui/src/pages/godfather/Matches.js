@@ -26,13 +26,15 @@ function Matches({account}) {
                 {result.map((res) => res.fkGodfatherAccountId === account.accountId ? (
                     <div><Test aaccountId={res.fkLaureateAccountId}/></div>
                 ) : false)}
+            {/* find the laureate he is associate to */}
             </div>
+
     
         </div>
     )
 }
 
-function Test(aaccountId){
+function Test(aaccountId){  //display the name of the laureate and his email address
     const[aacount,setAccount]=useState([])
     useEffect(()=>{
         axios.get(process.env.REACT_APP_API_HOST +"/api/accounts")                         

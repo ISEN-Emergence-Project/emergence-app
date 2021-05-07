@@ -2,7 +2,7 @@ import  React, {useState} from "react"
 import {Button, Modal} from 'react-bootstrap';
 import axios from 'axios';
 
-export function FormAddQuestion({ form, updateQuestions }) {
+export function FormAddQuestion({ form, updateQuestions }) {   // Return a button  if the admin click on it, it shows a popup window where the admin can add his question in database and update the form
     const [ show, setShow ] = useState(false);
     const [ question, setQuestion ] = useState("")
     const [ description, setDescription ] = useState("")
