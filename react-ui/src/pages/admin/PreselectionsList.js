@@ -27,21 +27,31 @@ export function PreselectionsList({ account }) {
                 <h1>Liste des choix des parrains</h1>
                 <hr/>
             </div>
-            <div className='row'>
+            <div className='py-2'>
                 {accounts.map((acc) => (acc.role === "godfather") ? (
-                    <div className="col-6 col-md-3">
-                        <div className="card m-2">
-                            <h3 className="card-header">{acc.firstname} {acc.lastname}</h3>
-                            <div className="p-4 ">
-                                {preselection.map(pres=> acc.accountId === pres.fkGodfatherAccountId?
-                                    <div className="">
-                                        <div className="">
-                                            {accounts.map(acc=> acc.accountId === pres.fkLaureateAccountId?
-                                                <div className="p-1">{acc.firstname} {acc.lastname}</div>
-                                                :false)}
-                                        </div>
+                    <div className="card my-2">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-2 py-2 px-3 bg-light">
+                                    {acc.firstname} {acc.lastname}
+                                </div>
+                                <div className="col-10 px-3 py-2">
+                                    <div className="row">
+                                        {preselection.map(pres => acc.accountId === pres.fkGodfatherAccountId?
+                                            <div className="col-3 my-1 p-0" key={`${pres.fkGodfatherAccountId}-${pres.fkLaureateAccountId}`}>
+                                                <div className="">
+                                                    {accounts.map(acc=> acc.accountId === pres.fkLaureateAccountId?
+                                                        <div className='card mx-2 shadow-sm'>
+                                                            <div className="card-body py-2 px-3">
+                                                                {acc.firstname} {acc.lastname}
+                                                            </div>
+                                                        </div>
+                                                        :false)}
+                                                </div>
+                                            </div>
+                                            :false)}
                                     </div>
-                                    :false)}
+                                </div>
                             </div>
                         </div>
                     </div>

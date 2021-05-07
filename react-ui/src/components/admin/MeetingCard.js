@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 
-function MeetingCard({ meeting, godfather }) {
+function MeetingCard({ meeting }) {
     const [ laureate, setLaureate ] = useState([]);
 
     useEffect(() => {
@@ -13,7 +13,7 @@ function MeetingCard({ meeting, godfather }) {
     }, [])
 
     return (
-        <div className='card mx-2'>
+        <div className='card mx-2 shadow-sm'>
             <div className="card-body py-2 px-3">
                 {laureate.firstname} {laureate.lastname}
             </div>

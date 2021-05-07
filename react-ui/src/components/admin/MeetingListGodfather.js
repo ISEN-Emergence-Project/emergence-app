@@ -27,7 +27,7 @@ function MeetingListGodfather({ godfather }) {
                 <div className="row">
                     {meetings.map((meeting) => (
                         <div className="col-3" key={`${meeting.fkGodfatherAccountId}-${meeting.fkLaureateAccountId}`}>
-                            <MeetingCard meeting={meeting} godfather={godfather}/>
+                            <MeetingCard meeting={meeting} />
                         </div>
                     ))}
                 </div>
