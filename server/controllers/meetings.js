@@ -3,7 +3,11 @@
  * Answers to API requests from /meetings router
  */
 
+
+const spawn = require('child_process').spawn;
+
 const Meeting = require('../models/Meeting');
+const Preselection = require('../models/Preselection');
 
 const commonsController = require('./commons');
 
@@ -182,5 +186,60 @@ module.exports = {
                 console.log(error);
                 res.status(500).json({ message: 'Internal error' });
             });
+    },
+
+    algorithmMeetings(req, res) {
+        return Preselection
+            .findAll()
+            .then((preselections) => {
+                let inputPreselections = [];
+
+                // Format inputPreselection, add godfather's preselections
+                preselections.forEach((preselection) => {
+                    const existingInputPreselections = inputPreselections.find((p) => p.godfatherId === preselection.fkGodfatherAccountId);
+
+                    if (existingInputPreselections) {
+                        const filteredInputPreselections = inputPreselections.filter((p) => p.godfatherId !== preselection.fkGodfatherAccountId);
+
+                        inputPreselections = [...filteredInputPreselections, {
+                            godfatherId: preselection.fkGodfatherAccountId,
+                            preselections: [...existingInputPreselections.preselections, {
+                                laureateId: preselection.fkLaureateAccountId
+                            }]
+                        }]
+                    } else {
+                        inputPreselections = [...inputPreselections, {
+                            godfatherId: preselection.fkGodfatherAccountId,
+                            preselections : [{
+                                laureateId: preselection.fkLaureateAccountId
+                            }]
+                        }]
+                    }
+                })
+
+                console.log('input: ' + inputPreselections);
+
+                // TODO format input, then get python script result
+
+                // spawn new child process to call the python script
+                const process = spawn('python', ['../algorithms/algorithm.py', inputPreselections]);
+                let outputMeetings = [];
+
+                // collect data from script
+                process.stdout.on('data',(data) => {
+                    console.log(data.toString());
+
+                    // save output
+                    outputMeetings = data;
+                });
+
+                // in close event we are sure that stream is from child process is closed
+                process.on('close', code => {
+                    console.log(`child process close all stdio with code ${code}`);
+
+                    // send data to browser
+                    res.status(200).send(outputMeetings);
+                });
+            })
     }
 };

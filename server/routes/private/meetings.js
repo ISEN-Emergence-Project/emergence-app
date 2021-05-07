@@ -12,6 +12,7 @@ meetings.get('/', meetingsController.list);
 meetings.get('/godfather/:godfatherId([0-9]+)/laureate/:laureateId([0-9]+)', meetingsController.getByGodfatherLaureate);
 meetings.get('/godfather/:godfatherId([0-9]+)', meetingsController.listByGodfather);
 meetings.get('/laureate/:laureateId([0-9]+)', meetingsController.listByLaureate);
+meetings.get('/algorithm', meetingsController.algorithmMeetings);
 
 // POST routes
 meetings.post('/', meetingsController.insert);
