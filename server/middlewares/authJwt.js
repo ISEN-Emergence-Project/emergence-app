@@ -8,8 +8,16 @@ const jwt = require('jsonwebtoken');
 const config = require('../config');
 const Account = require("../models/Account");
 
+const isDev = process.env.NODE_ENV !== 'production';
+
+// Authenticate a user with cookies
 const authJwt = (req, res, next) => {
     const { cookies, headers } = req;
+
+    // TEMP auto auth
+    if (isDev) {
+        return next();
+    }
 
     // Check valid cookies
     if (!cookies || !cookies.access_token) {

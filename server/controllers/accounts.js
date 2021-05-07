@@ -17,6 +17,7 @@ const commonsController = require('./commons');
 const salt = bcrypt.genSaltSync(10);
 const isDev = process.env.NODE_ENV !== 'production';
 
+
 /* FUNCTIONS */
 
 module.exports = {
