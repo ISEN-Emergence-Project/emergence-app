@@ -28,28 +28,34 @@ export default function App() {
     const [ phase, setPhase ] = useState({});
 
     useEffect(() => {
-        axios.get(process.env.REACT_APP_API_HOST +'/api/forms/latest')
-            .then((res) => {
-                axios.get(process.env.REACT_APP_API_HOST +'/api/phases/'+ res.data.fkPhaseId)
-                    .then((res) => {
-                        setPhase(res.data);
-                    })
-                    .catch((err) => console.log(err));
-            })
-            .catch((err) => console.log(err));
+        if (token) {
+            axios.get(process.env.REACT_APP_API_HOST +'/api/forms/latest')
+                .then((res) => {
+                    axios.get(process.env.REACT_APP_API_HOST +'/api/phases/'+ res.data.fkPhaseId)
+                        .then((res) => {
+                            setPhase(res.data);
+                        })
+                        .catch((err) => console.log(err));
+                })
+                .catch((err) => console.log(err));
+        }
     }, [])
 
     useEffect(() => {
-        sessionStorage.setItem('accessToken', token);
+        if (token) {
+            sessionStorage.setItem('accessToken', token);
 
-        axios.get(process.env.REACT_APP_API_HOST +'/api/accounts/'+ token)
-            .then((res) => {
-                setAccount(res.data);
-            })
-            .catch((err) => {
-                console.log(err);
-                setToken('');
-            });
+            axios.get(process.env.REACT_APP_API_HOST +'/api/accounts/'+ token)
+                .then((res) => {
+                    setAccount(res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    // reset session related variables
+                    sessionStorage.removeItem('accessToken');
+                    setToken('');
+                });
+        }
     }, [token]);
 
     // Include the correct router according to user role, and if connected
