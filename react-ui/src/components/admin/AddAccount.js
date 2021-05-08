@@ -2,25 +2,6 @@ import {Button, Modal} from 'react-bootstrap';
 import React, {useState} from 'react';
 import axios from 'axios';
 
-function handleCall()
-{
-        
-        axios.post(process.env.REACT_APP_API_HOST +"/api/accounts",{  firstname:firstname.value,
-                                                                    lastname:lastname.value,
-                                                                    username:username.value,
-                                                                    email:email.value,
-                                                                    password:password.value,
-                                                                    role:document.querySelector('input[name="flexRadioDefault"]:checked').value,
-                                                                    promo:laureatePromo.value,
-                                                                    studies:studies.value,
-                                                                    phone:phoneNumber.value})
-        .then(res => {
-            console.log(res)
-             
-         })
-         .catch(error => console.error("There was an error",error))
-}
-
 
 export function AddAccount() {
     const [show, setShow] = useState(false);
@@ -36,6 +17,25 @@ export function AddAccount() {
 
     const[exit,setExit] = useState(false)
     const [permission, setPermission] = useState("")
+
+    function handleCall()
+    {
+
+        axios.post(process.env.REACT_APP_API_HOST +"/api/accounts",{  firstname:firstname.value,
+            lastname:lastname.value,
+            username:username.value,
+            email:email.value,
+            password:password.value,
+            role:document.querySelector('input[name="flexRadioDefault"]:checked').value,
+            promo:laureatePromo.value,
+            studies:studies.value,
+            phone:phoneNumber.value})
+            .then(res => {
+                console.log(res)
+
+            })
+            .catch(error => console.error("There was an error",error))
+    }
 
     const resetValues = () => 
     {
