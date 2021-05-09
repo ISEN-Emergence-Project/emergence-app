@@ -12,7 +12,7 @@ This app architecture is inspired by [create-react-app with a Node server on Her
 
 1. Clone this project from GitHub with `git clone`.
 
-2. Add the following environment variables for the *server* :
+2. Add the following environment variables for the *server* `/` folder :
 
 ```.env
 # URI to access database
@@ -21,7 +21,7 @@ DATABASE_URL=postgres://username:password@hostname:5432/database_name
 JWT_SECRET=random_64_bits_key
 ```
 
-3. Add an `.env` file in the `react-ui/` folder with the following variable :
+3. Add the following environment variables for the React `react-ui/` folder with the following variable :
 
 ```.env
 # API hostname 
@@ -33,8 +33,6 @@ REACT_APP_API_HOST=https://api-hostname.com
 - To install dependencies : `npm install`
 - To build a production app : `npm build`
 - To start the app : `npm start`
-
-
 
 
 
