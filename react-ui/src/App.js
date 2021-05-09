@@ -56,20 +56,30 @@ export default function App() {
         }
     }, [token]);
 
+    function updatePhase(phaseId) {
+        axios.put(process.env.REACT_APP_API_HOST +'/api/forms/latest', {
+            fkPhaseId: phaseId
+        })
+            .then(() => {
+                setPhase(phaseId);
+            })
+            .catch((err) => console.log(err));
+    }
+
     // Include the correct router according to user role, and if connected
     return (
         <BrowserRouter>
             {!token ? (
                 <AppNav />
             ) : (
-                <DevTools phase={phase} setPhase={setPhase} />
+                <DevTools phase={phase} updatePhase={updatePhase} />
             )}
             <Switch>
                 {token ? (
                     <React.Fragment>
                         <Route path='/'>
                             {account.role === 'admin' ? (
-                                <AdminRouter phase={phase} setPhase={setPhase} account={account} />
+                                <AdminRouter phase={phase} updatePhase={updatePhase} account={account} />
                             ) : null}
 
                             {account.role === 'laureate' ? (

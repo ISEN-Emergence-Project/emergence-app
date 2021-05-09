@@ -3,7 +3,7 @@ import {Container} from 'react-bootstrap';
 
 import AccountInfos from "../../components/commons/AccountInfos";
 
-export function Home({ phase, setPhase, account }) {
+export function Home({ phase, updatePhase, account }) {
     const [ btn, setBtn ] = useState();
 
     useEffect(() => {
@@ -21,9 +21,12 @@ export function Home({ phase, setPhase, account }) {
                 <h1 className="display-4">Bienvenue {account.firstname} !</h1>
                 {phase.phaseId !== undefined ? (
                     <>
-                        <p className="lead">{ phase.lead.replace('[]', 'parrain/filleul') }</p>
+                        <p className="lead"><span className='badge badge-primary'>Phase {phase.phaseId}</span> { phase.lead.replace('[]', 'parrain/filleul') }</p>
                         <hr className="my-4"/>
-                        { btn }
+                        <div className='d-flex justify-content-between'>
+                            { btn }
+                            <button className='btn btn-secondary' onClick={() => updatePhase(phase.phaseId + 1)}>Phase suivante &rsaquo;</button>
+                        </div>
                     </>
                 ) : null}
             </div>

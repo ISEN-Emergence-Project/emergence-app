@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 // Import pages
 import NotFound from "../pages/NotFound";
@@ -20,7 +20,7 @@ import MatchesList from "../pages/admin/MatchesList";
 
 import {AdminNav} from "../navigation/AdminNav";
 
-export default function AdminRouter({ phase, setPhase, account }) {
+export default function AdminRouter({ phase, updatePhase, account }) {
 
     return (
         <BrowserRouter>
@@ -28,7 +28,7 @@ export default function AdminRouter({ phase, setPhase, account }) {
 
             <Switch>
                 <Route exact path='/'>
-                    <Home phase={phase} setPhase={setPhase} account={account} />
+                    <Home phase={phase} updatePhase={updatePhase} account={account} />
                 </Route>
 
                 <Route path='/accounts'>
