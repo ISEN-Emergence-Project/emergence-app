@@ -26,12 +26,8 @@ Meeting.init({
             key: 'fkAccountId'
         }
     },
-    beginning: {
-        type: DataTypes.DATE,
-        allowNull: false
-    },
-    ending: {
-        type: DataTypes.DATE,
+    timeSlot: {
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     godfatherRating: {
