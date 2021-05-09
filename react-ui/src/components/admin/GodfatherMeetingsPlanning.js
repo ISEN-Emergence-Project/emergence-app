@@ -14,7 +14,7 @@ function GodfatherMeetingsPlanning({ godfather, godfatherPreselections, godfathe
                 setPreselections(res.data);
             })
             .catch((err) => console.log(err));
-    }, [])
+    }, [godfather.fkAccountId])
 
     return (
         <>
@@ -58,7 +58,7 @@ function GodfatherMeetingsPlanning({ godfather, godfatherPreselections, godfathe
                 </div>
             </div>
             <div className={`row py-2 border-bottom bg-light ${show ? null : 'd-none'}`}>
-                <div className="col-2 text-secondary text-small">
+                <div className="col-2 text-muted text-small">
                     Lauréats<br/>présélectionnés
                 </div>
 

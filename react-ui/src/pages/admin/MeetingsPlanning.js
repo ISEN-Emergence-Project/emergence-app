@@ -5,18 +5,11 @@ import GodfatherMeetingsPlanning from "../../components/admin/GodfatherMeetingsP
 import {Redirect} from "react-router-dom";
 
 function MeetingsPlanning() {
-    const today = new Date();
-    const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-
     const [ godfathers, setGodfathers ] = useState([]);
     const [ godfatherMeetings, setGodfatherMeetings ] = useState([]);
     const [ godfatherPreselections, setGodfatherPreselections ] = useState([]);
     const [ meetingsValid, setMeetingsValid ] = useState(false);
     const [ redirectTo, setRedirectTo ] = useState();
-
-    const [ meetingDate, setMeetingDate ] = useState(date);
-    const [ meetingBegin, setMeetingBegin ] = useState('20:00');
-    const [ meetingEnd, setMeetingEnd ] = useState('21:00');
 
     useEffect(() => {
         axios.get(process.env.REACT_APP_API_HOST +'/api/accounts/godfathers')
@@ -60,12 +53,11 @@ function MeetingsPlanning() {
     function handleSubmit() {
         if (isMeetingsValid()) {
             godfatherMeetings.forEach((godfatherMeeting) => {
-                godfatherMeeting.meetings.forEach((meeting) => {
+                godfatherMeeting.meetings.forEach((meeting, timeSlot) => {
                     axios.post(process.env.REACT_APP_API_HOST +'/api/meetings', {
                         fkGodfatherAccountId: godfatherMeeting.godfatherId,
                         fkLaureateAccountId: meeting.laureateId,
-                        beginning: meetingDate,
-                        ending: meetingDate
+                        timeSlot: timeSlot
                     })
                         .then((res) => {
                             setRedirectTo('/');
@@ -142,7 +134,7 @@ function MeetingsPlanning() {
                     <hr/>
                 </div>
 
-                <div className="row py-2 my-4 border-bottom bg-light">
+                <div className="row py-2 border-bottom bg-light">
                     <div className="col-2">
                         Speed Meeting
                     </div>
@@ -170,7 +162,7 @@ function MeetingsPlanning() {
                     <div className="flex-row flex-wrap">
                     </div>
                     <div className='d-flex flex-nowrap align-items-center ml-auto py-2 '>
-                        <p className='m-0 mr-3 text-secondary text-small'></p>
+                        <p className='m-0 mr-3 text-muted text-small'></p>
                         {meetingsValid ? (
                             <button className='btn btn-success my-2' onClick={handleSubmit}>Valider</button>
                         ) : (

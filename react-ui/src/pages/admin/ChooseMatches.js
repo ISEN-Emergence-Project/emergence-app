@@ -10,9 +10,6 @@ function ChooseMatches() {
     const [ meetingsValid, setMeetingsValid ] = useState(false);
     const [ redirectTo, setRedirectTo ] = useState();
 
-    const [ meetingBegin, setMeetingBegin ] = useState('20:00');
-    const [ meetingEnd, setMeetingEnd ] = useState('21:00');
-
     useEffect(() => {
         axios.get(process.env.REACT_APP_API_HOST +'/api/accounts/godfathers')
             .then((res) => {
@@ -37,7 +34,7 @@ function ChooseMatches() {
     function updateMeetings(godfatherId, laureateId) {
         const existingMeeting = selectedMeetings.find((m) => m.godfatherId === godfatherId);
 
-        let tempSelectedMeetings = selectedMeetings;
+        let tempSelectedMeetings;
         // Check if meeting associated with godfather already exists
         if (existingMeeting) {
             const filteredMeetings = selectedMeetings.filter((m) => m.godfatherId !== godfatherId);
@@ -60,10 +57,6 @@ function ChooseMatches() {
     function isMeetingsValid() {
         let isValid = true;
 
-        selectedMeetings.forEach((selectedMeeting) => {
-            if (selectedMeeting.meetings.length !== 4) isValid = false;
-        })
-
         // Check if number of godfathers and number of selectedMeetings object match
         if (godfathers.length !== selectedMeetings.length) isValid = false;
 
@@ -82,16 +75,16 @@ function ChooseMatches() {
                     <hr/>
                 </div>
 
-                <div className="row py-2 my-4 border-bottom bg-light">
+                <div className="row py-2 border-bottom bg-light">
                     <div className="col-2">
-                        Parrains
+                        Speed Meeting
                     </div>
                     <div className="col-10">
                         <div className="row">
-                            <div className="col border-left">{meetingBegin.replace(':', 'h')}</div>
-                            <div className="col border-left">{}</div>
-                            <div className="col border-left">20h40</div>
-                            <div className="col border-left">{meetingEnd.replace(':', 'h')}</div>
+                            <div className="col border-left">1</div>
+                            <div className="col border-left">2</div>
+                            <div className="col border-left">3</div>
+                            <div className="col border-left">4</div>
                         </div>
                     </div>
                 </div>
@@ -110,7 +103,7 @@ function ChooseMatches() {
                     <div className="flex-row flex-wrap">
                     </div>
                     <div className='d-flex flex-nowrap align-items-center ml-auto py-2 '>
-                        <p className='m-0 mr-3 text-secondary text-small'></p>
+                        <p className='m-0 mr-3 text-muted text-small'/>
                         {meetingsValid ? (
                             <button className='btn btn-success my-2' onClick={handleSubmit}>Valider</button>
                         ) : (

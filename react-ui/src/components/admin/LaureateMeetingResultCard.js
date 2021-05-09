@@ -41,6 +41,7 @@ function LaureateMeetingResultCard({ meeting, selectedLaureate, selectedMeetings
         // Find meeting with other godfather and same laureate
         return selectedMeetings.find((meeting) => meeting.godfatherId !== godfatherId && meeting.laureateId === laureateId);
     }
+    let i;
 
     return (
         <>
@@ -52,17 +53,17 @@ function LaureateMeetingResultCard({ meeting, selectedLaureate, selectedMeetings
                 <div className={`container py-2 bg-light ${showDetails ? null : 'd-none'}`}>
                     <div className="row">
                         <div className="col">
-                            <p className="text-secondary text-xs m-0">Parrain</p>
-                            {[...Array(meeting.godfatherRating)].map(() => (
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffc107" className="bi bi-star-fill" viewBox="0 0 16 16">
+                            <p className="text-muted text-xs m-0">Parrain</p>
+                            {[...Array(meeting.godfatherRating)].map((e, i) => (
+                                <svg key={i} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffc107" className="bi bi-star-fill" viewBox="0 0 16 16">
                                     <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
                                 </svg>
                             ))}
                         </div>
                         <div className="col">
-                            <p className="text-secondary text-xs m-0">Lauréat</p>
-                            {[...Array(meeting.laureateRating)].map(() => (
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffc107" className="bi bi-star-fill" viewBox="0 0 16 16">
+                            <p className="text-muted text-xs m-0">Lauréat</p>
+                            {[...Array(meeting.laureateRating)].map((e, i) => (
+                                <svg key={i} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffc107" className="bi bi-star-fill" viewBox="0 0 16 16">
                                     <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
                                 </svg>
                             ))}
