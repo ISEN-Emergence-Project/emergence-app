@@ -54,15 +54,12 @@ export default function App() {
                 })
                 .catch((err) => console.log(err));
         }
-    }, [token]);
+    }, [token, phase]);
 
     function updatePhase(phaseId) {
         axios.put(process.env.REACT_APP_API_HOST +'/api/forms/latest', {
             fkPhaseId: phaseId
         })
-            .then(() => {
-                setPhase(phaseId);
-            })
             .catch((err) => console.log(err));
     }
 

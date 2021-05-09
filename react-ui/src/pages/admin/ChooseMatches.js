@@ -5,7 +5,6 @@ import {Redirect} from "react-router-dom";
 
 function ChooseMatches() {
     const [ godfathers, setGodfathers ] = useState([]);
-    const [ meetings, setMeetings ] = useState([]);
     const [ selectedMeetings, setSelectedMeetings ] = useState([]);
     const [ meetingsValid, setMeetingsValid ] = useState(false);
     const [ redirectTo, setRedirectTo ] = useState();
@@ -24,7 +23,7 @@ function ChooseMatches() {
                 fkGodfatherAccountId: match.godfatherId,
                 fkLaureateAccountId: match.laureateId
             })
-                .then((res) => {
+                .then(() => {
                     setRedirectTo('/')
                 })
                 .catch((err) => console.error(err));
