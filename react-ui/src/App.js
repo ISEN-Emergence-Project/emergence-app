@@ -29,22 +29,9 @@ export default function App() {
 
     useEffect(() => {
         if (token) {
-            axios.get(process.env.REACT_APP_API_HOST +'/api/forms/latest')
-                .then((res) => {
-                    axios.get(process.env.REACT_APP_API_HOST +'/api/phases/'+ res.data.fkPhaseId)
-                        .then((res) => {
-                            setPhase(res.data);
-                        })
-                        .catch((err) => console.log(err));
-                })
-                .catch((err) => console.log(err));
-        }
-    }, [])
-
-    useEffect(() => {
-        if (token) {
             sessionStorage.setItem('accessToken', token);
 
+            // get account infos
             axios.get(process.env.REACT_APP_API_HOST +'/api/accounts/'+ token)
                 .then((res) => {
                     setAccount(res.data);
@@ -55,6 +42,17 @@ export default function App() {
                     sessionStorage.removeItem('accessToken');
                     setToken('');
                 });
+
+            // get latest form infos
+            axios.get(process.env.REACT_APP_API_HOST +'/api/forms/latest')
+                .then((res) => {
+                    axios.get(process.env.REACT_APP_API_HOST +'/api/phases/'+ res.data.fkPhaseId)
+                        .then((res) => {
+                            setPhase(res.data);
+                        })
+                        .catch((err) => console.log(err));
+                })
+                .catch((err) => console.log(err));
         }
     }, [token]);
 

@@ -1,26 +1,13 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import MeetingCard from "../../components/admin/MeetingCard";
-import LaureateDropdown from "../../components/admin/LaureateDropdown";
-import LaureateMeetingCard from "../../components/admin/LaureateMeetingCard";
+
 import MeetingListGodfather from "../../components/admin/MeetingListGodfather";
 
 function MeetingsList() {
-    const [ meetings, setMeetings ] = useState([]);
     const [ godfathers, setGodfathers ] = useState([]);
     const [ loading, setLoading ] = useState(true);
 
-    const [ meetingBegin, setMeetingBegin ] = useState('20:00');
-    const [ meetingEnd, setMeetingEnd ] = useState('21:00');
-
     useEffect(() => {
-        axios.get(process.env.REACT_APP_API_HOST +'/api/meetings/')
-            .then((res) => {
-                setMeetings(res.data);
-                setLoading(false);
-            })
-            .catch((err) => console.error(err));
-
         axios.get(process.env.REACT_APP_API_HOST +'/api/accounts/godfathers')
             .then((res) => {
                 setGodfathers(res.data);
