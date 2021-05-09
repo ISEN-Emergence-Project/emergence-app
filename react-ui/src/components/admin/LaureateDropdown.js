@@ -5,7 +5,7 @@ import LaureateDropdownItem from "./LaureateDropdownItem";
 
 function LaureateDropdown ({ godfather, pos, preselections, godfatherPreselections, godfatherMeetings, updateGodfatherMeetings }) {
     const [ selectedLaureate, setSelectedLaureate ] = useState({});
-    const [ color, setColor ] = useState('outline-secondary');
+    const [ color, setColor ] = useState('light');
 
     useEffect(() => {
         if (selectedLaureate.accountId !== undefined) {
@@ -15,7 +15,31 @@ function LaureateDropdown ({ godfather, pos, preselections, godfatherPreselectio
                 setColor('outline-success');
             }
         }
-    }, [godfatherMeetings])
+
+        function isDuplicated(godfatherId, laureateId, pos) {
+
+            let duplicatedMeetings = godfatherMeetings
+                .filter((godfatherMeeting) => {
+                    // Check for duplicate in row meetings
+                    const findDuplicate = godfatherMeeting.meetings.filter((m) => m.laureateId === laureateId && m.pos !== pos);
+                    // For this godfather
+                    return (godfatherMeeting.godfatherId === godfatherId) && !!findDuplicate.length
+                })
+
+            if (duplicatedMeetings.length) return true;
+
+
+            duplicatedMeetings = godfatherMeetings
+                .filter((godfatherMeeting) => {
+                    // Check for duplicates in column meetings
+                    const findDuplicate = godfatherMeeting.meetings.filter((m) => m.laureateId === laureateId && m.pos === pos);
+                    // For the others godfathers
+                    return (godfatherMeeting.godfatherId !== godfatherId) && !!findDuplicate.length;
+                })
+
+            return !!duplicatedMeetings.length;
+        }
+    }, [godfather.fkAccountId, godfatherMeetings, pos, selectedLaureate.accountId])
 
     function handleSelect(e) {
         const selectedLaureate = preselections.filter((p) => p.fkLaureateAccountId === Number.parseInt(e))[0];
@@ -24,30 +48,6 @@ function LaureateDropdown ({ godfather, pos, preselections, godfatherPreselectio
         setSelectedLaureate(laureateAccount);
         // Update selection globally
         updateGodfatherMeetings(godfather.fkAccountId, laureateAccount.accountId, pos);
-    }
-
-    function isDuplicated(godfatherId, laureateId, pos) {
-
-        let duplicatedMeetings = godfatherMeetings
-            .filter((godfatherMeeting) => {
-                // Check for duplicate in row meetings
-                const findDuplicate = godfatherMeeting.meetings.filter((m) => m.laureateId === laureateId && m.pos !== pos);
-                // For this godfather
-                return (godfatherMeeting.godfatherId === godfatherId) && !!findDuplicate.length
-            })
-
-        if (duplicatedMeetings.length) return true;
-
-
-        duplicatedMeetings = godfatherMeetings
-            .filter((godfatherMeeting) => {
-                // Check for duplicates in column meetings
-                const findDuplicate = godfatherMeeting.meetings.filter((m) => m.laureateId === laureateId && m.pos === pos);
-                // For the others godfathers
-                return (godfatherMeeting.godfatherId !== godfatherId) && !!findDuplicate.length;
-            })
-
-        return !!duplicatedMeetings.length;
     }
 
     return (
