@@ -10,7 +10,7 @@ import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 // Import pages
 import {Preselections} from "../pages/godfather/Preselections";
 import {Home} from "../pages/godfather/Home";
-import MeetingList from "../pages/godfather/MeetingList";
+import MeetingsList from "../pages/godfather/MeetingsList";
 import Matches from "../pages/godfather/Matches";
 import NotFound from "../pages/NotFound";
 
@@ -33,7 +33,7 @@ export default function AdminRouter({ phase, account }) {
                 ) : null}
                 {phase.phaseId === 5 ? (
                     <Route path='/meetings'>
-                        <MeetingList account={account} />
+                        <MeetingsList account={account} />
                     </Route>
                 ) : null}
                 {phase.phaseId === 7 ? (
