@@ -45,7 +45,7 @@ function LaureateMeetingResultCard({ meeting, selectedLaureate, selectedMeetings
 
     return (
         <>
-            <div className={`card mx-2 ${selectedStyle}`}>
+            <div className={`card mx-2 ${selectedStyle} shadow-sm`}>
                 <div className="py-2 px-3">
                     {laureate.firstname} {laureate.lastname} <span className={`badge badge-${badgeStyle}`}>{matchScore}</span>
                 </div>

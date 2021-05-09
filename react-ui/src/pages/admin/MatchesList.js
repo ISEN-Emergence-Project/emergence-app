@@ -1,46 +1,34 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios"
+import FinalMatch from "../../components/admin/FinalMatch";
 
 function MatchesList() {
-
     const [matches,setMatches]=useState([])
-    const [account,setAccounts]=useState([])
     
-
-    axios.get(process.env.REACT_APP_API_HOST +"/api/matches")
+    useEffect(() => {
+        axios.get(process.env.REACT_APP_API_HOST +"/api/matches")
             .then(res => {
-            
-            setMatches(res.data)
 
-    })
-    .catch(error => console.error("There was an error",error)) 
+                setMatches(res.data)
 
-
-    axios.get(process.env.REACT_APP_API_HOST +"/api/accounts")
-            .then(res => {
-            
-            setAccounts(res.data)
-
-    })
-    .catch(error => console.error("There was an error",error)) 
+            })
+            .catch(error => console.error("There was an error",error))
+    }, [])
 
     return (
         
         <div className='container py-4 '>
-            <h1 className="p-2 m-5">Binômes finaux : </h1>
-            {matches.map(matches=> 
-            <div className="d-flex flex-row border-bottom border-top p-2">
-                <h5 className="col">
-                    {account.map(acc=>acc.accountId==matches.fkGodfatherAccountId?
-                    <div className="p-2">{acc.firstname + " "+ acc.lastname}</div>
-                    :false)}
-                </h5>
-                <h5 className="col">
-                    {account.map(acc=>acc.accountId==matches.fkLaureateAccountId?
-                        <div className="p-2">{acc.firstname + " "+ acc.lastname}</div>
-                        :false)}
-                </h5>
-            </div>)}
+            <div className='py-4 mb-2'>
+                <h1>Binômes finaux :</h1>
+                <hr/>
+            </div>
+            {matches.map((match) => (
+                <>
+                    <div key={`${match.fkGodfatherAccountId}-${match.fkLaureateAccountId}`} className="d-flex justify-content-center py-2">
+                        <FinalMatch match={match} />
+                    </div>
+                </>
+            ))}
         </div>
     )
 }
