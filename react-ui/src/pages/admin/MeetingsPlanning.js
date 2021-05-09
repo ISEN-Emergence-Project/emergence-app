@@ -48,18 +48,18 @@ function MeetingsPlanning() {
                 setGodfatherPreselections(tempGodfatherPreselections);
             })
             .catch((err) => console.error(err));
-    }, [])
+    }, [godfatherPreselections])
 
     function handleSubmit() {
-        if (isMeetingsValid()) {
+        if (meetingsValid) {
             godfatherMeetings.forEach((godfatherMeeting) => {
-                godfatherMeeting.meetings.forEach((meeting, timeSlot) => {
+                godfatherMeeting.meetings.forEach((meeting) => {
                     axios.post(process.env.REACT_APP_API_HOST +'/api/meetings', {
                         fkGodfatherAccountId: godfatherMeeting.godfatherId,
                         fkLaureateAccountId: meeting.laureateId,
-                        timeSlot: timeSlot
+                        timeSlot: meeting.pos
                     })
-                        .then((res) => {
+                        .then(() => {
                             setRedirectTo('/');
                         })
                         .catch((err) => console.error(err));
@@ -162,7 +162,7 @@ function MeetingsPlanning() {
                     <div className="flex-row flex-wrap">
                     </div>
                     <div className='d-flex flex-nowrap align-items-center ml-auto py-2 '>
-                        <p className='m-0 mr-3 text-muted text-small'></p>
+                        <p className='m-0 mr-3 text-muted text-small'/>
                         {meetingsValid ? (
                             <button className='btn btn-success my-2' onClick={handleSubmit}>Valider</button>
                         ) : (

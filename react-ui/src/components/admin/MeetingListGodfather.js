@@ -11,7 +11,7 @@ function MeetingListGodfather({ godfather }) {
                 setMeetings(res.data);
             })
             .catch((err) => console.error(err));
-    }, [])
+    }, [godfather.fkAccountId])
 
     return (
         <div className="row py-3 border-bottom">
