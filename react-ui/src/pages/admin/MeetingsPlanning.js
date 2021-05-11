@@ -64,8 +64,7 @@ function MeetingsPlanning() {
                     axios.post(process.env.REACT_APP_API_HOST +'/api/meetings', {
                         fkGodfatherAccountId: godfatherMeeting.godfatherId,
                         fkLaureateAccountId: meeting.laureateId,
-                        beginning: meetingDate,
-                        ending: meetingDate
+                        timeSlot: meeting.pos
                     })
                         .then((res) => {
                             setRedirectTo('/');

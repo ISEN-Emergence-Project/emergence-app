@@ -28,8 +28,8 @@ export function PreselectionsList({ account }) {
                 <hr/>
             </div>
             <div className='py-2'>
+                {/* for each godfather, a bootstrap card is created with their name */}
                 {accounts.map((acc) => (acc.role === "godfather") ? (
-                            {/* for each godfather, a bootstrap card is created with their name */}
                     <div className="card my-2">
                         <div className="container">
                             <div className="row">

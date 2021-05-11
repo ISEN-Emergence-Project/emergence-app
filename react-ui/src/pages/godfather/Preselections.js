@@ -1,5 +1,9 @@
+/**
+ * GODFATHER PRESELECTIONS PAGE
+ * Allow godfather to preselect the laureates he wants to meet
+ */
+
 import React, {useEffect, useState} from "react";
-import { Button, Modal} from 'react-bootstrap';
 import {Redirect} from "react-router-dom";
 import axios from "axios";
 
