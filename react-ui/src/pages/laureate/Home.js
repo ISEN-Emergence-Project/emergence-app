@@ -1,6 +1,10 @@
+/**
+ * APPLICANT HOME PAGE
+ * Dashboard for the applicant
+ */
+
 import React, {useEffect, useState} from "react";
 import {Container} from 'react-bootstrap';
-import axios from 'axios';
 import AccountInfos from "../../components/commons/AccountInfos";
 
 export function Home({ phase, account }) {

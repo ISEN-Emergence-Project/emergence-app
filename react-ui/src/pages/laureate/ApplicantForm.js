@@ -1,3 +1,8 @@
+/**
+ * APPLICANT FORM PAGE
+ * Form with questions that laureates answer
+ */
+
 import React, { useState,useEffect } from 'react';
 import axios from "axios";
 import {Star} from '../../components/commons/Star'
@@ -29,7 +34,7 @@ export function ApplicantForm({ account }) {
                 if(res.data.length > 0)
                 setFormAnswered(true);
             })
-            .catch((err) => {
+            .catch(() => {
                 setFormAnswered(false);
             });
     }, []);
