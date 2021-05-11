@@ -1,3 +1,8 @@
+/**
+ * NOT FOUND PAGE
+ * Show a not found error (404)
+ */
+
 import React from "react";
 
 function NotFound() {

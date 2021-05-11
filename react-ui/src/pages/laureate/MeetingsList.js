@@ -1,3 +1,8 @@
+/**
+ * APPLICANT MEETINGS LIST
+ * Show his meetings to the applicant
+ */
+
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 
@@ -11,12 +16,7 @@ function MeetingsList({ account }){
             .then((res) => {
                 setMeetings(res.data)
             })
-            
-        })
-        
-        .catch(error => console.error("There was an error",error)) 
-       
-    },[]);
+            .catch((err) => console.error(err));
 
     },[account.accountId]);
 
@@ -44,3 +44,4 @@ function MeetingsList({ account }){
     )
 }
 
+export default MeetingsList;
