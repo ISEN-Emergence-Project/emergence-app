@@ -11,6 +11,6 @@ module.exports = {
         Model
             .findAll()
             .then((entities) => res.status(200).json(entities))
-            .catch((error) => res.status(400).json(error));
+            .catch((error) => res.status(500).json(error));
     }
 };
