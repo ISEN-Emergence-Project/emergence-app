@@ -1,3 +1,8 @@
+/**
+ * GODFATHER MEETINGS PLANNING <- ADMIN MEETING PLANNING PAGE
+ * Show meetings slots for a godfather
+ */
+
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 

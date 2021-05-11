@@ -1,3 +1,8 @@
+/**
+ * ADD ACCOUNT COMPONENT <- MANAGE ACCOUNTS ADMIN PAGE
+ * Allow admin to add an account
+ */
+
 import {Button, Modal} from 'react-bootstrap';
 import React, {useState} from 'react';
 import axios from 'axios';

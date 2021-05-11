@@ -1,3 +1,8 @@
+/**
+ * ACCOUNT CARD COMPONENT <- MANAGE ACCOUNTS PAGE
+ * Show an account card with details on click
+ */
+
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Modal} from "react-bootstrap";

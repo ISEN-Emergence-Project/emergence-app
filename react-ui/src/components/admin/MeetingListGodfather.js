@@ -1,3 +1,8 @@
+/**
+ * MEETING LIST GODFATHER <- ADMIN MEETINGS LIST PAGE
+ * Show meetings of a godfather and the laureates to meet
+ */
+
 import React, {useEffect, useState} from "react";
 import MeetingCard from "./MeetingCard";
 import axios from "axios";

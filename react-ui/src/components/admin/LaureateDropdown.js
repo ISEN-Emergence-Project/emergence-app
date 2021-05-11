@@ -1,3 +1,8 @@
+/**
+ * LAUREATE DROPDOWN <- GODFATHER MEETINGS PLANNING <- ADMIN MEETINGS PLANNING
+ * Allow to choose a laureate to meet at a specific slotTime (position)
+ */
+
 import React, {useEffect, useState} from "react"
 import {Dropdown} from "react-bootstrap"
 

@@ -1,3 +1,9 @@
+/**
+ * DEVELOPER TOOLS MENU BAR
+ * Usefull tools for development
+ * Only for testing, should be removed in production
+ */
+
 import React from "react";
 import axios from "axios";
 

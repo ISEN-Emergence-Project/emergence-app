@@ -1,3 +1,8 @@
+/**
+ * FORM HEADER COMPONENT
+ * Header of the applicant form
+ */
+
 import  React from "react";
 
 export function FormHeader({ form }) {

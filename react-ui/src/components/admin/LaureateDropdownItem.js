@@ -1,3 +1,8 @@
+/**
+ * LAUREATE DROPDOWN ITEM <- LAUREATE DROPDOWN <- GODFATHER MEETINGS PLANNING <- ADMIN MEETINGS PLANNING
+ * Item for the laureate dropdown with laureate's name
+ */
+
 import React, {useEffect, useState} from "react"
 import DropdownItem from "react-bootstrap/DropdownItem";
 

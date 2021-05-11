@@ -1,3 +1,8 @@
+/**
+ * FORM QUESTION FIELD <- ADMIN FORM PAGE
+ * Show a question field for admin form with edit buttons
+ */
+
 import  React, { useState } from "react"
 import {Button, Modal} from 'react-bootstrap';
 import axios from 'axios';

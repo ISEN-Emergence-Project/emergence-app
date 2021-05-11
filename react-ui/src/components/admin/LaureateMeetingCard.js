@@ -1,3 +1,8 @@
+/**
+ * LAUREATE MEETING CARD <- GODFATHER MEETINGS PLANNING <- ADMIN MEETINGS PLANNING
+ * Show information about a preselected laureate
+ */
+
 import React, {useEffect, useState} from "react";
 
 function LaureateMeetingCard({ laureate, godfatherMeetings }) {
