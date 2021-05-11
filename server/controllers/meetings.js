@@ -21,7 +21,7 @@ module.exports = {
 
     // Insert a new meeting
     insert (req, res) {
-        const { fkGodfatherAccountId, fkLaureateAccountId, beginning, ending, godfatherRating, laureateRating } = req.body;
+        const { fkGodfatherAccountId, fkLaureateAccountId, timeSlot, godfatherRating, laureateRating } = req.body;
 
         if (!fkGodfatherAccountId || !fkLaureateAccountId || !godfatherRating || !laureateRating) {
             return res.status(400).json({
@@ -34,8 +34,7 @@ module.exports = {
             .create({
                 fkGodfatherAccountId: fkGodfatherAccountId,
                 fkLaureateAccountId: fkLaureateAccountId,
-                beginning: beginning,
-                ending: ending,
+                timeSlot: timeSlot,
                 godfatherRating: godfatherRating,
                 laureateRating: laureateRating
             })
@@ -54,14 +53,13 @@ module.exports = {
 
     // Update an existing meeting
     update (req, res) {
-        const { fkGodfatherAccountId, fkLaureateAccountId, beginning, ending, godfatherRating, laureateRating } = req.body;
+        const { fkGodfatherAccountId, fkLaureateAccountId, timeSlot, godfatherRating, laureateRating } = req.body;
 
         return Meeting
             .update({
                 fkGodfatherAccountId: fkGodfatherAccountId,
                 fkLaureateAccountId: fkLaureateAccountId,
-                beginning: beginning,
-                ending: ending,
+                timeSlot: timeSlot,
                 godfatherRating: godfatherRating,
                 laureateRating: laureateRating
             }, {
