@@ -1,3 +1,8 @@
+/**
+ * LAUREATE MEETING RESULT CARD <- GODFATHER MEETINGS PLANNING <- ADMIN MEETINGS PLANNING
+ * Show the results of meetings, ratings of godfather and laureate
+ */
+
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 

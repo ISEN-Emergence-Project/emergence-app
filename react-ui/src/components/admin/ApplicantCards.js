@@ -53,12 +53,12 @@ export function ApplicantCard({Name,Firstname,Age,Studies,IdPers,Role}) {
   },[]);
   
     return (
-      <div className="">
+      <div class="">
         
-        <div onClick={handleShow} className="p-5 border rounded border-secondary m-1 bg-light ">
-          <h3 className="text-capitalize font-weight-bold">{Name + " " + Firstname}</h3>
+        <div onClick={handleShow} class="p-5 border rounded border-secondary m-1 bg-light ">
+          <h3 class="text-capitalize font-weight-bold">{Name + " " + Firstname}</h3>
           <h5>{Role}</h5>
-          <div className="p-2">{Age}</div>
+          <div class="p-2">{Age}</div>
           <h5>{Studies}</h5>
           <hr />
         </div>
@@ -68,9 +68,9 @@ export function ApplicantCard({Name,Firstname,Age,Studies,IdPers,Role}) {
                 <Modal.Title> Informations du profil </Modal.Title>
             </Modal.Header>
             <Modal.Body className="container">
-                {question.map(ques=>  <div key={ques.questionId}><h5 className="font-weight-bold mb-3" >{ques.question} :</h5> {answer.map(ans=> IdPers===ans.fkAccountId ?
-                (ans.fkQuestionId===ques.questionId ?
-                <div className="font-weight-normal" key={ans.answerId}><div className="bg-light border t p-2 mb-2">{ans.answer}</div></div>:false)
+                {question.map(ques=>  <div key={ques.questionId}><h5 class="font-weight-bold mb-3" >{ques.question} :</h5> {answer.map(ans=> IdPers==ans.fkAccountId ?
+                (ans.fkQuestionId==ques.questionId ?
+                <div class ="font-weight-normal" key={ans.answerId}><div class="bg-light border t p-2 mb-2">{ans.answer}</div></div>:false) 
                 : false)}</div>)}
                 
             </Modal.Body>

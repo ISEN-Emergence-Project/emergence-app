@@ -1,3 +1,8 @@
+/**
+ * FORM ADD QUESTION COMPONENT <- ADMIN FORM PAGE
+ * Allow admin to add a question to applicant form
+ */
+
 import  React, {useState} from "react"
 import {Button, Modal} from 'react-bootstrap';
 import axios from 'axios';

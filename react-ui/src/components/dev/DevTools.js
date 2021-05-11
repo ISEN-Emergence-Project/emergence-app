@@ -1,3 +1,9 @@
+/**
+ * DEVELOPER TOOLS MENU BAR
+ * Usefull tools for development
+ * Only for testing, should be removed in production
+ */
+
 import React from "react";
 
 function DevTools({ phase, updatePhase }) {

@@ -1,3 +1,8 @@
+/**
+ * GODFATHER MEETINGS RESULTS
+ * Show meetings for a godfather
+ */
+
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import LaureateMeetingResultCard from "./LaureateMeetingResultCard";

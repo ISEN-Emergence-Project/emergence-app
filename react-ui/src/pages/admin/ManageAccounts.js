@@ -9,7 +9,6 @@ import {useEffect} from "react"
 import axios from "axios";
 
 // Import components
-import {ApplicantCard} from "../../components/admin/ApplicantCards"
 import {AddAccount} from "../../components/admin/AddAccount"
 import AccountCard from "../../components/admin/AccountCard";
 

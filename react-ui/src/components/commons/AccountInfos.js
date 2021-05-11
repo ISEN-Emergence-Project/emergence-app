@@ -1,3 +1,8 @@
+/**
+ * ACCOUNTS INFOS COMPONENTS
+ * Show a card with basic account informations
+ */
+
 import React from "react";
 
 function AccountInfos({ account }) {
