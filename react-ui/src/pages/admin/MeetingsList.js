@@ -1,3 +1,8 @@
+/**
+ * MEETINGS LIST ADMIN PAGE
+ * Show a list of all the godfathers and their meetings
+ */
+
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 

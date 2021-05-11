@@ -1,4 +1,9 @@
-import React, {useEffect, useState} from "react";
+/**
+ * MATCHES LIST PAGE
+ * Show a list of the final matches
+ */
+
+import React, { useState } from "react";
 import axios from "axios"
 import FinalMatch from "../../components/admin/FinalMatch";
 

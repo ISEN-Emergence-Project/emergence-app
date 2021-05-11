@@ -1,3 +1,8 @@
+/**
+ * PRESELECTIONS LIST ADMIN PAGE
+ * Show the godfathers and their preselections
+ */
+
 import React, {useEffect, useState} from "react";
 import axios from "axios"
 

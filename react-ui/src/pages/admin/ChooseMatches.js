@@ -1,3 +1,9 @@
+/**
+ * CHOOSE MATCHES PAGE
+ * Show the meetings results and ratings,
+ * allow admin to choose the final matches
+ */
+
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import GodfatherMeetingsResults from "../../components/admin/GodfatherMeetingsResults";

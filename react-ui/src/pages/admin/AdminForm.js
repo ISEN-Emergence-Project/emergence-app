@@ -1,3 +1,8 @@
+/**
+ * ADMIN FORM PAGE
+ * Allow admin to edit the applicant form
+ */
+
 import React, {useEffect, useState} from "react";
 import {Button, Modal} from "react-bootstrap";
 import axios from "axios";
