@@ -1,3 +1,8 @@
+/**
+ * ADMIN HOME PAGE
+ * Show a dashboard for the admin with actions
+ */
+
 import React, {useEffect, useState} from "react";
 import {Container} from 'react-bootstrap';
 

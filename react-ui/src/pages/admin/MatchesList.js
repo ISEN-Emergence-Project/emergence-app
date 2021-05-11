@@ -1,3 +1,8 @@
+/**
+ * MATCHES LIST PAGE
+ * Show a list of the final matches
+ */
+
 import React, { useState } from "react";
 import axios from "axios"
 

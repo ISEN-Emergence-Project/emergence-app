@@ -1,8 +1,11 @@
+/**
+ * MEETINGS LIST ADMIN PAGE
+ * Show a list of all the godfathers and their meetings
+ */
+
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import MeetingCard from "../../components/admin/MeetingCard";
-import LaureateDropdown from "../../components/admin/LaureateDropdown";
-import LaureateMeetingCard from "../../components/admin/LaureateMeetingCard";
+
 import MeetingListGodfather from "../../components/admin/MeetingListGodfather";
 
 function MeetingsList() {

@@ -1,3 +1,8 @@
+/**
+ * MEETING PLANNING PAGE
+ * Allow admin to plan meetings according to godfathers preselections
+ */
+
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 

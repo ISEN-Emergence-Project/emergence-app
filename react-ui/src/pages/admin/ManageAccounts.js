@@ -1,3 +1,9 @@
+/**
+ * MANAGE ACCOUNTS ADMIN PAGE
+ * Show a list of all the accounts
+ * TODO : edit accounts
+ */
+
 import React, {useState} from "react"
 import {useEffect} from "react"
 import axios from "axios";
