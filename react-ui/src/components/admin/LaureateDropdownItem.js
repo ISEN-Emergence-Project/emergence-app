@@ -33,7 +33,7 @@ function LaureateDropdownItem ({ laureate, godfatherMeetings }) {
                 setStyle('warning');
             }
         }
-    }, [godfatherMeetings])
+    }, [godfatherMeetings, laureate.accountId])
 
     return (
         <DropdownItem eventKey={laureate.Laureate.fkAccountId}>

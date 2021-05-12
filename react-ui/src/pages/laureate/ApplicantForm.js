@@ -37,7 +37,7 @@ export function ApplicantForm({ account }) {
             .catch(() => {
                 setFormAnswered(false);
             });
-    }, []);
+    }, [account.accountId]);
 
     function addAnswer(questionId, answer) {
         const index = questions.findIndex((q) => q.questionId === questionId);

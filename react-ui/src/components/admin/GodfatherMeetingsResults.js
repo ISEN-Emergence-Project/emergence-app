@@ -19,7 +19,7 @@ function GodfatherMeetingsResults({ godfather, selectedMeetings, updateMeetings 
                 setMeetings(res.data);
             })
             .catch((err) => console.error(err));
-    }, [])
+    }, [godfather.fkAccountId])
 
     function handleSelect(godfatherId, laureateId) {
         updateMeetings(godfatherId, laureateId);

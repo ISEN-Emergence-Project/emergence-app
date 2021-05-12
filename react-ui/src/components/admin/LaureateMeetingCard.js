@@ -30,7 +30,7 @@ function LaureateMeetingCard({ laureate, godfatherMeetings }) {
                 setStyle('warning');
             }
         }
-    }, [godfatherMeetings])
+    }, [godfatherMeetings, laureate.accountId])
 
 
     return (

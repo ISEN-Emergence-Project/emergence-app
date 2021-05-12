@@ -15,7 +15,7 @@ function MeetingCard({ meeting }) {
                 setLaureate(res.data);
             })
             .catch((err) => console.error(err));
-    }, [])
+    }, [meeting.fkLaureateAccountId])
 
     return (
         <div className='card mx-2 shadow-sm'>

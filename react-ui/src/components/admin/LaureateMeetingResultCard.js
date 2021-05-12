@@ -27,10 +27,15 @@ function LaureateMeetingResultCard({ meeting, selectedLaureate, selectedMeetings
                 setLaureate(res.data);
             })
             .catch((err) => console.error(err));
-    }, [])
+    }, [meeting.fkLaureateAccountId])
 
 
     useEffect(() => {
+        function isDuplicated(godfatherId, laureateId) {
+            // Find meeting with other godfather and same laureate
+            return selectedMeetings.find((meeting) => meeting.godfatherId !== godfatherId && meeting.laureateId === laureateId);
+        }
+
         if (selectedLaureate === meeting.fkLaureateAccountId) {
             if (isDuplicated(meeting.fkGodfatherAccountId, meeting.fkLaureateAccountId)) {
                 setSelectedStyle('border-danger border-lg');
@@ -40,13 +45,7 @@ function LaureateMeetingResultCard({ meeting, selectedLaureate, selectedMeetings
         } else {
             setSelectedStyle('');
         }
-    }, [selectedMeetings])
-
-    function isDuplicated(godfatherId, laureateId) {
-        // Find meeting with other godfather and same laureate
-        return selectedMeetings.find((meeting) => meeting.godfatherId !== godfatherId && meeting.laureateId === laureateId);
-    }
-    let i;
+    }, [selectedMeetings, meeting.fkGodfatherAccountId, meeting.fkLaureateAccountId, selectedLaureate])
 
     return (
         <>
