@@ -46,6 +46,7 @@ export default function App() {
             // get latest form infos
             axios.get(process.env.REACT_APP_API_HOST +'/api/forms/latest')
                 .then((res) => {
+                    // get phase infos
                     axios.get(process.env.REACT_APP_API_HOST +'/api/phases/'+ res.data.fkPhaseId)
                         .then((res) => {
                             setPhase(res.data);
@@ -54,12 +55,20 @@ export default function App() {
                 })
                 .catch((err) => console.log(err));
         }
-    }, [token, phase]);
+    }, [token]);
 
     function updatePhase(phaseId) {
         axios.put(process.env.REACT_APP_API_HOST +'/api/forms/latest', {
             fkPhaseId: phaseId
         })
+            .then(() => {
+                // get phase infos
+                axios.get(process.env.REACT_APP_API_HOST +'/api/phases/'+ phaseId)
+                    .then((res) => {
+                        setPhase(res.data);
+                    })
+                    .catch((err) => console.log(err));
+            })
             .catch((err) => console.log(err));
     }
 

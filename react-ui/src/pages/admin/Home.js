@@ -22,7 +22,7 @@ export function Home({ phase, updatePhase, account }) {
                             <a className="btn btn-primary btn-lg" href={`${phase.buttonLink}`} role="button">{phase.buttonText.replace('[]', 'parrain/filleul')}</a>
 
                             {phase.phaseId === 7 ? (
-                                <button className='btn btn-secondary' onClick={() => updatePhase(1)}>Réinitialiser &#10799;</button>
+                                <button className='btn btn-secondary' onClick={() => updatePhase(1)}>Réinitialiser &rsaquo; 1</button>
                             ) : (
                                 <button className='btn btn-secondary' onClick={() => updatePhase(phase.phaseId + 1)}>Phase suivante &rsaquo; {phase.phaseId + 1}</button>
                             )}
