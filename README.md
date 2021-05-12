@@ -8,6 +8,12 @@ This app architecture is inspired by [create-react-app with a Node server on Her
 
 
 
+## Documentation
+
+Documentation is located in `doc` folder.
+
+
+
 ## Run the App
 
 1. Clone this project from GitHub with `git clone`.
