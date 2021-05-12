@@ -9,16 +9,6 @@ import {Container} from 'react-bootstrap';
 import AccountInfos from "../../components/commons/AccountInfos";
 
 export function Home({ phase, updatePhase, account }) {
-    const [ btn, setBtn ] = useState();
-
-    useEffect(() => {
-        // Check if godfather should interact at this phase
-        if ([1, 2, 3, 4, 5, 6, 7].includes(phase.phaseId)) {
-            setBtn(<a className="btn btn-primary btn-lg" href={`${phase.buttonLink}`} role="button">{phase.buttonText.replace('[]', 'parrain/filleul')}</a>);
-        } else {
-            setBtn();
-        }
-    }, [phase])
 
     return (
         <Container className='py-4'>
@@ -29,8 +19,13 @@ export function Home({ phase, updatePhase, account }) {
                         <p className="lead"><span className='badge badge-primary'>Phase {phase.phaseId}</span> { phase.lead.replace('[]', 'parrain/filleul') }</p>
                         <hr className="my-4"/>
                         <div className='d-flex justify-content-between'>
-                            { btn }
-                            <button className='btn btn-secondary' onClick={() => updatePhase(phase.phaseId + 1)}>Phase suivante &rsaquo;</button>
+                            <a className="btn btn-primary btn-lg" href={`${phase.buttonLink}`} role="button">{phase.buttonText.replace('[]', 'parrain/filleul')}</a>
+
+                            {phase.phaseId === 7 ? (
+                                <button className='btn btn-secondary' onClick={() => updatePhase(1)}>Réinitialiser &#10799;</button>
+                            ) : (
+                                <button className='btn btn-secondary' onClick={() => updatePhase(phase.phaseId + 1)}>Phase suivante &rsaquo; {phase.phaseId + 1}</button>
+                            )}
                         </div>
                     </>
                 ) : null}
