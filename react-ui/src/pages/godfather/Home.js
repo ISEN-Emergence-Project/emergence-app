@@ -9,16 +9,6 @@ import {Container} from 'react-bootstrap';
 import AccountInfos from "../../components/commons/AccountInfos";
 
 export function Home({ phase, account }) {
-    const [ btn, setBtn ] = useState();
-
-    useEffect(() => {
-        // Check if godfather should interact at this phase
-        if ([3, 5, 7].includes(phase.phaseId)) {
-            setBtn(<a className="btn btn-primary btn-lg" href={`${phase.buttonLink}`} role="button">{phase.buttonText.replace('[]', 'filleul')}</a>);
-        } else {
-            setBtn();
-        }
-    }, [phase])
 
     return (
         <Container className='py-4'>
@@ -28,7 +18,9 @@ export function Home({ phase, account }) {
                     <>
                         <p className="lead">{ phase.lead.replace('[]', 'filleul') }</p>
                         <hr className="my-4"/>
-                        { btn }
+                        {[3, 5, 7].includes(phase.phaseId) ? (
+                            <a className="btn btn-primary btn-lg" href={`${phase.buttonLink}`} role="button">{phase.buttonText.replace('[]', 'filleul')}</a>
+                        ) : null}
                     </>
                 ) : null}
             </div>
