@@ -56,12 +56,12 @@ export function Login({ setToken }) {
             <div className='position-relative'>
                 <div className='container'>
                     <div className="row justify-content-center py-4">
-                        <div className='col-8'>
+                        <div className='col col-lg-8'>
                             <h1 className="h1 text-center">Bienvenue sur le Speed meeting du programme Emergence</h1>
                         </div>
                     </div>
                     <div className='row justify-content-center'>
-                        <div className="col-5 text-center">
+                        <div className="col-10 col-sm-8 col-md-6 col-lg-4 text-center">
 
                             { alert }
 
