@@ -41,9 +41,12 @@ export default function AdminRouter({ phase, account }) {
                         <Matches account={account} />
                     </Route>
                 ) : null}
-                <Route exact path='/*'>
-                    <NotFound/>
-                </Route>
+
+                {phase.phaseId !== undefined ? (
+                    <Route path='/*'>
+                        <NotFound/>
+                    </Route>
+                ): null}
             </Switch>
         </BrowserRouter>
     )

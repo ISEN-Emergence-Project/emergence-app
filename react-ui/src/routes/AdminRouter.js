@@ -53,7 +53,7 @@ export default function AdminRouter({ phase, updatePhase, account }) {
                     <MatchesList account={account} />
                 </Route>
 
-                <Route exact path='/*'>
+                <Route path='/*'>
                     <NotFound/>
                 </Route>
             </Switch>
