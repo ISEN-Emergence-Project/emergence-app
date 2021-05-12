@@ -18,7 +18,9 @@ Documentation is located in `doc` folder.
 
 1. Clone this project from GitHub with `git clone`.
 
-2. Add the following environment variables for the *server* `/` folder :
+2. Create an empty PostgreSQL database
+
+3. Add the following environment variables for the *server* `/` folder :
 
 ```.env
 # URI to access database
@@ -27,18 +29,29 @@ DATABASE_URL=postgres://username:password@hostname:5432/database_name
 JWT_SECRET=random_64_bits_key
 ```
 
-3. Add the following environment variables for the React `react-ui/` folder with the following variable :
+4. Add the following environment variables for the React `react-ui/` folder with the following variable :
 
 ```.env
 # API hostname 
 REACT_APP_API_HOST=https://api-hostname.com
 ```
 
-4. Start the server with the following commands (run from the root `/`  folder of the project) :
+5. Start the server with the following commands (run from the root `/`  folder of the project) :
 
 - To install dependencies : `npm install`
 - To build a production app : `npm build`
 - To start the app : `npm start`
+
+6. Add default admin account in database with SQL command :
+
+```SQL
+-- Add default admin account
+INSERT INTO Accounts (firstname, lastname, username, email, passwordHash, role, createdAt, updatedAt)
+VALUES (Firstname, Lastname, test, test@test.io, $2b$10$ay5fHt6mbS/SySafWNh/EuUROBAw8Ph9yOzRBUvA43Fuq49ic1flC, admin, NOW(), NOW())
+```
+Default credentials :
+- email : test@test.io
+- password : test
 
 
 
