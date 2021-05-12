@@ -42,14 +42,18 @@ REACT_APP_API_HOST=https://api-hostname.com
 - To build a production app : `npm build`
 - To start the app : `npm start`
 
-6. Add default admin account in database with SQL command :
+6. Add default values in database with SQL command :
 
 ```SQL
 -- Add default admin account
-INSERT INTO Accounts (firstname, lastname, username, email, passwordHash, role, createdAt, updatedAt)
-VALUES (Firstname, Lastname, test, test@test.io, $2b$10$ay5fHt6mbS/SySafWNh/EuUROBAw8Ph9yOzRBUvA43Fuq49ic1flC, admin, NOW(), NOW())
+INSERT INTO "Accounts" ("firstname", "lastname", "username", "email", "passwordHash", "role", "createdAt", "updatedAt")
+VALUES ("Firstname", "Lastname", "test", "test@test.io", "$2b$10$ay5fHt6mbS/SySafWNh/EuUROBAw8Ph9yOzRBUvA43Fuq49ic1flC", "admin", NOW(), NOW());
+
+-- Add default form
+INSERT INTO "Forms" ("title", "description", "bannerUrl", "fkPhaseId", "createdAt", "updatedAt")
+VALUES ('Programme Emergence 2021', 'Formulaire pour le programme emergence 2021', 'https://img.freepik.com/photos-gratuite/silhouette-regardant-vers-avenir_1134-399.jpg?size=626&ext=jpg', 1, NOW(), NOW());
 ```
-Default credentials :
+Default credentials for admin account :
 - email : test@test.io
 - password : test
 
