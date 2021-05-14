@@ -12,9 +12,7 @@ const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 
 // HTTPS redirect
-const redirector = require("redirect-https")({
-    body: "<!-- Hello Developer! Please use HTTPS instead: {{ URL }} -->"
-});
+const httpsRedirect = require('express-https-redirect');
 
 // CORS support
 const cors = require('cors');
@@ -44,7 +42,7 @@ if (!isDev && cluster.isMaster) {
     const app = express();
     const routes = require('./routes');
 
-    app.use("/", redirector);
+    app.use('/', httpsRedirect());
 
     // Allow CORS options
     const corsOptions = {
