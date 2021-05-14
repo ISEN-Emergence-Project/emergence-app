@@ -11,6 +11,12 @@ const path = require('path');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 
+// HTTPS redirect
+const redirector = require("redirect-https")({
+    body: "<!-- Hello Developer! Please use HTTPS instead: {{ URL }} -->"
+});
+
+// CORS support
 const cors = require('cors');
 const dotenv = require("dotenv");
 
@@ -37,6 +43,8 @@ if (!isDev && cluster.isMaster) {
     // Create an express server
     const app = express();
     const routes = require('./routes');
+
+    app.use("/", redirector);
 
     // Allow CORS options
     const corsOptions = {
