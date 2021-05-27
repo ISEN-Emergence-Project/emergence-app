@@ -3,7 +3,7 @@
  * Dashboard for the godfather
  */
 
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {Container} from 'react-bootstrap';
 
 import AccountInfos from "../../components/commons/AccountInfos";

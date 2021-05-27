@@ -3,7 +3,7 @@
  * Show a dashboard for the admin with actions
  */
 
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {Container} from 'react-bootstrap';
 
 import AccountInfos from "../../components/commons/AccountInfos";

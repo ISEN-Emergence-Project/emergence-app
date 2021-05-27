@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import axios from "axios";
 import {Modal} from "react-bootstrap";
 
@@ -51,7 +51,7 @@ function LaureateCard({ laureate, updateSelectedLaureates }) {
                     </button>
                 </div>
                 <div className="modal-body">
-                    {answers.map(({fkAccountId, fkQuestionId, answer, Question : {question, description}}) => {
+                    {answers.map(({fkQuestionId, answer, Question : {question}}) => {
                         return (
                             <div className='py-2' key={fkQuestionId}>
                                 <b>{question}</b><br/>

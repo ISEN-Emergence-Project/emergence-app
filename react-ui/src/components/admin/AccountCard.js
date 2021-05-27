@@ -3,7 +3,7 @@
  * Show an account card with details on click
  */
 
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import axios from "axios";
 import {Modal} from "react-bootstrap";
 
@@ -56,8 +56,8 @@ function AccountCard({ account }) {
                     </button>
                 </div>
                 <div className="modal-body">{account.email}
-                    <hr></hr>
-                    {answers.map(({fkAccountId, fkQuestionId, answer, Question : {question, description}}) => {
+                    <hr/>
+                    {answers.map(({fkQuestionId, answer, Question : {question}}) => {
                         return (
                             <div className='py-2' key={fkQuestionId}>
                                 <b>{question}</b><br/>

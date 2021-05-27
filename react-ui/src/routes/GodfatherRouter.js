@@ -4,8 +4,8 @@
  * Route to targeted page's component
  */
 
-import React, {useEffect, useState} from "react";
-import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
+import React from "react";
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 // Import pages
 import {Preselections} from "../pages/godfather/Preselections";
