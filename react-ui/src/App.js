@@ -16,9 +16,9 @@ import DevTools from "./components/dev/DevTools";
 import {AppNav} from "./navigation/AppNav";
 
 // Import routers
-import AdminRouter from './routes/AdminRouter';
-import LaureateRouter from './routes/LaureateRouter';
-import GodfatherRouter from './routes/GodfatherRouter';
+import AdminRouter from './routers/AdminRouter';
+import LaureateRouter from './routers/LaureateRouter';
+import GodfatherRouter from './routers/GodfatherRouter';
 
 
 export default function App() {
