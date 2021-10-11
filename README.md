@@ -7,11 +7,17 @@
 This app architecture is inspired by [create-react-app with a Node server on Heroku](https://github.com/mars/heroku-cra-node)
 
 
+## Technical environment
+
+This app uses :
+- React front-end
+- NodeJS back-end with Express
+- PostgreSQL database
+
 
 ## Documentation
 
 Documentation is located in `doc` folder.
-
 
 
 ## Run the App
@@ -44,25 +50,16 @@ REACT_APP_API_HOST=https://api-hostname.com
 
 6. Add default values in database with SQL command :
 
-```SQL
--- Add default admin account
-INSERT INTO "Accounts" ("firstname", "lastname", "username", "email", "passwordHash", "role", "createdAt", "updatedAt")
-VALUES ("Firstname", "Lastname", "test", "test@test.io", "$2b$10$ay5fHt6mbS/SySafWNh/EuUROBAw8Ph9yOzRBUvA43Fuq49ic1flC", "admin", NOW(), NOW());
+Execute SQL statements in [`doc/first_setup.sql`](doc/first_setup.sql) to populate database.
 
--- Add default form
-INSERT INTO "Forms" ("title", "description", "bannerUrl", "fkPhaseId", "createdAt", "updatedAt")
-VALUES ('Programme Emergence 2021', 'Formulaire pour le programme emergence 2021', 'https://img.freepik.com/photos-gratuite/silhouette-regardant-vers-avenir_1134-399.jpg?size=626&ext=jpg', 1, NOW(), NOW());
-```
 Default credentials for admin account :
 - email : test@test.io
 - password : test
 
 
-
 ## Architecture of the App
 
 The app is divided in two parts : the **server** and the **React app**.
-
 
 
 ### Dependencies management
@@ -72,7 +69,6 @@ The dependencies are managed with `npm`.
 The *server* dependencies are located in `package.json` located at the <u>*root*</u> of the project.
 
 The *React app* dependencies are located in `react-ui/package.json` 
-
 
 
 ### Project tree
