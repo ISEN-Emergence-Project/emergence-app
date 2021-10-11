@@ -37,6 +37,6 @@
   ],
   "proxy": "http://localhost:5000",
   "devDependencies": {
-    "react-styleguidist": "^11.1.6"
+    "react-styleguidist": "^11.1.7"
   }
 }
