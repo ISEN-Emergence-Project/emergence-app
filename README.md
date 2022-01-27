@@ -35,7 +35,7 @@ DATABASE_URL=postgres://username:password@hostname:5432/database_name
 JWT_SECRET=random_64_bits_key
 ```
 
-4. Add the following environment variables for the React `react-ui/` folder with the following variable :
+4. Add the following environment variables for the React `/react-ui/` folder with the following variable :
 
 ```.env
 # API hostname 
