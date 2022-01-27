@@ -34,7 +34,7 @@ DATABASE_URL=postgres://username:password@hostname:5432/database_name
 # SECRET for JWT authentication
 JWT_SECRET=random_64_bits_key
 # For development only, add:
-# NODE_ENV=development
+# NODE_ENV=dev
 ```
 
 4. Add the following environment variables for the React `/react-ui/` folder with the following variable :
