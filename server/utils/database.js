@@ -4,7 +4,11 @@
  * Synchronize models with database
  */
 
-const { Sequelize, Model, DataTypes, Deferrable } = require('sequelize');
+const { Sequelize, Model, DataTypes, Deferrable, ConnectionError} = require('sequelize');
+
+if (!process.env.DATABASE_URL) {
+    throw new ConnectionError("Error: DATABASE_URL is undefined. Check that you have 'DATABASE_URL' env variable exists.")
+}
 
 // Connexion to database
 const sequelize = new Sequelize(
