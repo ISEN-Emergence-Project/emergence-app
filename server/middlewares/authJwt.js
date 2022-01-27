@@ -4,15 +4,20 @@
  * Authorize or deny API call
  */
 
+const dotenv = require("dotenv");
+
+// Configure .env file support
+dotenv.config()
+
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 const Account = require("../models/Account");
 
-const isDev = process.env.NODE_ENV !== 'production';
+const isDev = process.env.NODE_ENV && process.env.NODE_ENV !== 'production';
 
 // Authenticate a user with cookies
 const authJwt = (req, res, next) => {
-    const { cookies, headers } = req;
+    const { cookies } = req;
 
     // TEMP auto auth
     if (isDev) {
