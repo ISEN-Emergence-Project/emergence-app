@@ -13,7 +13,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config');
 const Account = require("../models/Account");
 
-const isDev = process.env.NODE_ENV && process.env.NODE_ENV !== 'production';
+const isDev = process.env.DEV === 'true';
 
 // Authenticate a user with cookies
 const authJwt = (req, res, next) => {
